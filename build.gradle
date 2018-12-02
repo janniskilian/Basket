@@ -1,0 +1,102 @@
+buildscript {
+	apply from: "util.gradle"
+	apply from: "dependencies.gradle"
+
+	addRepos(repositories)
+	dependencies {
+		classpath deps.plugins.kotlin
+		classpath deps.plugins.android
+		classpath deps.plugins.nav_safe_args
+	}
+}
+
+plugins {
+	id "com.github.ben-manes.versions" version "0.20.0"
+	id "io.gitlab.arturbosch.detekt" version "1.0.0-RC11"
+}
+
+allprojects {
+	addRepos(repositories)
+}
+
+task clean(type: Delete) {
+	delete rootProject.buildDir
+}
+
+subprojects {
+	if (name == "main") {
+		apply plugin: "com.android.application"
+	} else {
+		apply plugin: "com.android.library"
+	}
+	apply plugin: "kotlin-android"
+	apply plugin: "kotlin-android-extensions"
+
+	android {
+		buildToolsVersion build_version.build_tools
+		compileSdkVersion build_version.target_sdk
+		defaultConfig {
+			minSdkVersion build_version.min_sdk
+			targetSdkVersion build_version.target_sdk
+			versionCode build_version.version_code
+			versionName build_version.version_name
+			testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+		}
+		buildTypes {
+			debug {
+				multiDexEnabled true
+			}
+			release {
+				minifyEnabled true
+				if (name == "main") {
+					shrinkResources true
+				}
+				proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+			}
+		}
+		compileOptions {
+			sourceCompatibility 1.8
+			targetCompatibility 1.8
+		}
+		testOptions {
+			unitTests {
+				includeAndroidResources = true
+			}
+		}
+	}
+
+	androidExtensions {
+		experimental = true
+	}
+
+	dependencies {
+		implementation fileTree(dir: "libs", include: ["*.jar"])
+
+		implementation deps.kotlin.stdlib
+		implementation deps.kotlin.coroutines
+		implementation deps.kotlin.coroutines_android
+
+		implementation deps.androidx.nav_fragment
+		implementation deps.androidx.nav_ui
+
+		implementation deps.timber
+
+		testImplementation deps.testing.junit
+		testImplementation deps.testing.kotlin_test
+		testImplementation deps.testing.mockito
+		testImplementation deps.testing.robolectric
+		/*testImplementation deps.testing.livedata
+		testImplementation deps.testing.room*/
+
+		if (name != "core") {
+			implementation project(path: ":core")
+		}
+	}
+}
+
+detekt {
+	input = files("$projectDir")
+	config = files("$projectDir/detektConfig.yml")
+	parallel = true
+	filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+}

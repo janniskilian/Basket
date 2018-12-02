@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="AppTheme.ExtendedFAB" parent="Widget.MaterialComponents.Button.Icon">
+		<item name="android:theme">@style/ThemeOverlay.MaterialComponents.Light</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">@dimen/increment</item>
+		<item name="cornerRadius">28dp</item>
+		<item name="backgroundTint">?attr/colorAccent</item>
+		<item name="android:textColor">?android:attr/textColorPrimary</item>
+		<item name="iconTint">?android:attr/textColorPrimary</item>
+		<item name="rippleColor">?attr/colorControlHighlight</item>
+	</style>
+
+</resources>

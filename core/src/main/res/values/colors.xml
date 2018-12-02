@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<color name="primary">#388e3c</color>
+	<color name="primary_dark">#00600f</color>
+	<color name="secondary">#ffc400</color>
+	<color name="secondary_dark">#c79400</color>
+
+	<color name="white">#ffffff</color>
+	<color name="black">#000000</color>
+	<color name="transparent">#00000000</color>
+
+	<color name="background">#fafafa</color>
+	<color name="shade_primary">#1f388e3c</color>
+	<color name="icon_light">#737373</color>
+	<color name="icon_dark">@color/white</color>
+	<color name="empty_image">#eeeeee</color>
+	<color name="divider">#1f000000</color>
+
+	<color name="orange">#e65100</color>
+	<color name="red">#b71c1c</color>
+	<color name="pink">#880E4F</color>
+	<color name="purple">#4a148c</color>
+	<color name="indigo">#1a237e</color>
+	<color name="cyan">#006064</color>
+	<color name="green">#1B5E20</color>
+	<color name="blue_grey">#263238</color>
+	<color name="brown">#3e2723</color>
+	<color name="grey">#212121</color>
+
+</resources>

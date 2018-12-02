@@ -1,0 +1,124 @@
+<resources>
+
+	<style name="Theme.App" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
+		<item name="android:windowBackground">@color/background</item>
+		<item name="android:statusBarColor">@color/background</item>
+		<item name="android:windowLightStatusBar">true</item>
+
+		<item name="colorPrimary">@color/primary</item>
+		<item name="colorPrimaryDark">@color/primary_dark</item>
+		<item name="colorSecondary">@color/secondary</item>
+		<item name="colorIcon">@color/icon_light</item>
+
+		<item name="actionOverflowButtonStyle">@style/actionOverflowButtonStyle</item>
+	</style>
+
+	<style name="ThemeOverlay.App.Dark" parent="ThemeOverlay.MaterialComponents.Dark">
+		<item name="colorIcon">@color/icon_dark</item>
+	</style>
+
+	<style name="actionOverflowButtonStyle" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+		<item name="android:tint">?attr/colorIcon</item>
+	</style>
+
+	<style name="Widget.App" parent="android:Widget"/>
+
+	<style name="Widget.App.AppBarLayout">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:background">@color/transparent</item>
+		<item name="elevation">0dp</item>
+	</style>
+
+	<style name="Widget.App.Toolbar">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">?attr/actionBarSize</item>
+		<item name="layout_scrollFlags">scroll|enterAlways</item>
+	</style>
+
+	<style name="Widget.App.ToolbarTitle" parent="TextAppearance.App.Headline">
+		<item name="android:gravity">center_horizontal</item>
+	</style>
+
+	<style name="TextAppearance.App.Headline" parent="TextAppearance.MaterialComponents.Headline5">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:fontFamily">@font/merriweather_bold</item>
+		<item name="fontFamily">@font/merriweather_bold</item>
+		<item name="android:textColor">?android:attr/textColorPrimary</item>
+		<item name="android:letterSpacing">0.025</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:ellipsize">end</item>
+	</style>
+
+	<style name="Widget.App.BottomSheetDialog" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+		<item name="colorPrimary">@color/primary</item>
+		<item name="colorPrimaryDark">@color/primary_dark</item>
+		<item name="colorAccent">@color/secondary</item>
+
+		<item name="android:statusBarColor">@color/transparent</item>
+
+		<item name="android:windowIsFloating">false</item>
+		<item name="android:windowSoftInputMode">adjustResize</item>
+	</style>
+
+	<style name="Widget.App.FullHeightDialog" parent="Theme.MaterialComponents.Light.DialogWhenLarge">
+		<item name="colorPrimary">@color/primary</item>
+		<item name="colorPrimaryDark">@color/primary_dark</item>
+		<item name="colorAccent">@color/secondary</item>
+
+		<item name="android:statusBarColor">@color/transparent</item>
+
+		<item name="android:windowIsFloating">false</item>
+		<item name="android:windowSoftInputMode">adjustResize</item>
+	</style>
+
+	<style name="Widget.App.EmptyImage">
+		<item name="android:layout_width">@dimen/empty_image_size</item>
+		<item name="android:layout_height">@dimen/empty_image_size</item>
+		<item name="android:contentDescription">@string/empty_image_desc</item>
+		<item name="android:tint">@color/empty_image</item>
+	</style>
+
+	<style name="Widget.App.EmptyHeadline">
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginTop">@dimen/three</item>
+		<item name="android:layout_marginStart">@dimen/two</item>
+		<item name="android:layout_marginEnd">@dimen/two</item>
+		<item name="android:gravity">center_horizontal</item>
+		<item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body1</item>
+		<item name="android:textColor">?android:attr/textColorSecondary</item>
+		<item name="layout_constraintWidth_max">@dimen/empty_text_max_width</item>
+	</style>
+
+	<style name="Widget.App.EmptyInfo">
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginTop">@dimen/one</item>
+		<item name="android:layout_marginStart">@dimen/two</item>
+		<item name="android:layout_marginEnd">@dimen/two</item>
+		<item name="android:gravity">center_horizontal</item>
+		<item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body2</item>
+		<item name="android:textColor">?android:attr/textColorSecondary</item>
+		<item name="layout_constraintWidth_max">@dimen/empty_text_max_width</item>
+	</style>
+
+	<style name="Widget.App.Button" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+		<item name="android:theme">@style/ThemeOverlay.MaterialComponents.Light</item>
+		<item name="cornerRadius">6dp</item>
+		<item name="rippleColor">?attr/colorControlHighlight</item>
+		<item name="android:textColor">?android:attr/textColorPrimary</item>
+	</style>
+
+	<style name="Widget.App.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+		<item name="android:textColor">?android:attr/textColorPrimary</item>
+	</style>
+
+	<style name="Widget.App.IconButton" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+		<item name="android:layout_width">@dimen/increment</item>
+		<item name="android:layout_height">@dimen/increment</item>
+		<item name="android:tint">?attr/colorIcon</item>
+	</style>
+
+</resources>

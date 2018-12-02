@@ -1,0 +1,686 @@
+[
+  {
+    "name": "Apfelsaft",
+    "categoryId": 2
+  },
+  {
+    "name": "Äpfel",
+    "categoryId": 7
+  },
+  {
+    "name": "Bananen",
+    "categoryId": 7
+  },
+  {
+    "name": "Butter",
+    "categoryId": 5
+  },
+  {
+    "name": "Karotten",
+    "categoryId": 7
+  },
+  {
+    "name": "Müsli",
+    "categoryId": 3
+  },
+  {
+    "name": "Schokolade",
+    "categoryId": 10
+  },
+  {
+    "name": "Frischkäse",
+    "categoryId": 4
+  },
+  {
+    "name": "Gurke",
+    "categoryId": 7
+  },
+  {
+    "name": "Quark",
+    "categoryId": 5
+  },
+  {
+    "name": "Eier",
+    "categoryId": 5
+  },
+  {
+    "name": "Emmentaler",
+    "categoryId": 4
+  },
+  {
+    "name": "Mehl",
+    "categoryId": 1
+  },
+  {
+    "name": "Gruyère",
+    "categoryId": 4
+  },
+  {
+    "name": "Margarine",
+    "categoryId": 5
+  },
+  {
+    "name": "Milch",
+    "categoryId": 5
+  },
+  {
+    "name": "Haferflocken",
+    "categoryId": 3
+  },
+  {
+    "name": "Oliven-Öl",
+    "categoryId": 8
+  },
+  {
+    "name": "Orangen",
+    "categoryId": 7
+  },
+  {
+    "name": "Kartoffeln",
+    "categoryId": 7
+  },
+  {
+    "name": "Radischen",
+    "categoryId": 7
+  },
+  {
+    "name": "Soja-Milch",
+    "categoryId": 9
+  },
+  {
+    "name": "Toast",
+    "categoryId": 6
+  },
+  {
+    "name": "Tomaten",
+    "categoryId": 7
+  },
+  {
+    "name": "Wasser",
+    "categoryId": 2
+  },
+  {
+    "name": "Joghurt",
+    "categoryId": 5
+  },
+  {
+    "name": "Soja-Joghurt",
+    "categoryId": 9
+  },
+  {
+    "name": "Mangold",
+    "categoryId": 7
+  },
+  {
+    "name": "Paprika",
+    "categoryId": 7
+  },
+  {
+    "name": "Weintrauben",
+    "categoryId": 7
+  },
+  {
+    "name": "Pflaumen",
+    "categoryId": 7
+  },
+  {
+    "name": "Pfirsich",
+    "categoryId": 7
+  },
+  {
+    "name": "Nectarinen",
+    "categoryId": 7
+  },
+  {
+    "name": "Salat",
+    "categoryId": 7
+  },
+  {
+    "name": "Romanasalat",
+    "categoryId": 7
+  },
+  {
+    "name": "Kopfsalat",
+    "categoryId": 7
+  },
+  {
+    "name": "Feldsalat",
+    "categoryId": 7
+  },
+  {
+    "name": "Kiwi",
+    "categoryId": 7
+  },
+  {
+    "name": "Aubergine",
+    "categoryId": 7
+  },
+  {
+    "name": "Petersilie",
+    "categoryId": 20
+  },
+  {
+    "name": "Basilikum",
+    "categoryId": 20
+  },
+  {
+    "name": "Lauch",
+    "categoryId": 7
+  },
+  {
+    "name": "Frühlingszwiebeln",
+    "categoryId": 7
+  },
+  {
+    "name": "Schalotten",
+    "categoryId": 7
+  },
+  {
+    "name": "Zwiebeln",
+    "categoryId": 7
+  },
+  {
+    "name": "Knoblauch",
+    "categoryId": 7
+  },
+  {
+    "name": "Bohnen",
+    "categoryId": 7
+  },
+  {
+    "name": "Grüne Bohnen",
+    "categoryId": 7
+  },
+  {
+    "name": "Erbsen",
+    "categoryId": 7
+  },
+  {
+    "name": "Erbsen (TK)",
+    "categoryId": 13
+  },
+  {
+    "name": "Dicke Bohnen",
+    "categoryId": 7
+  },
+  {
+    "name": "Kekse",
+    "categoryId": 10
+  },
+  {
+    "name": "Spinat",
+    "categoryId": 7
+  },
+  {
+    "name": "Eis",
+    "categoryId": 10
+  },
+  {
+    "name": "Orangensaft",
+    "categoryId": 2
+  },
+  {
+    "name": "Knäckebrot",
+    "categoryId": 6
+  },
+  {
+    "name": "Zwieback",
+    "categoryId": 6
+  },
+  {
+    "name": "Sonnenblumenöl",
+    "categoryId": 8
+  },
+  {
+    "name": "Tomatenmark",
+    "categoryId": 15
+  },
+  {
+    "name": "Tomatensugo",
+    "categoryId": 15
+  },
+  {
+    "name": "Tomaten (Dose)",
+    "categoryId": 15
+  },
+  {
+    "name": "Gestückte Tomaten",
+    "categoryId": 15
+  },
+  {
+    "name": "Apfelmus",
+    "categoryId": 15
+  },
+  {
+    "name": "Mandeln",
+    "categoryId": 10
+  },
+  {
+    "name": "Aprikosen",
+    "categoryId": 7
+  },
+  {
+    "name": "Avocados",
+    "categoryId": 7
+  },
+  {
+    "name": "Brokkoli",
+    "categoryId": 7
+  },
+  {
+    "name": "Brokkoli (TK)",
+    "categoryId": 13
+  },
+  {
+    "name": "Brot",
+    "categoryId": 6
+  },
+  {
+    "name": "Bulgur",
+    "categoryId": 14
+  },
+  {
+    "name": "Cola",
+    "categoryId": 2
+  },
+  {
+    "name": "Mais",
+    "categoryId": 7
+  },
+  {
+    "name": "Kartoffelchips",
+    "categoryId": 10
+  },
+  {
+    "name": "Kakaopulver",
+    "categoryId": 10
+  },
+  {
+    "name": "Cumin",
+    "categoryId": 20
+  },
+  {
+    "name": "Kaviar",
+    "categoryId": 12
+  },
+  {
+    "name": "Sellerie",
+    "categoryId": 7
+  },
+  {
+    "name": "Kaffe",
+    "categoryId": 3
+  },
+  {
+    "name": "Kohl",
+    "categoryId": 7
+  },
+  {
+    "name": "Kerzen",
+    "categoryId": 21
+  },
+  {
+    "name": "Katzenfutter",
+    "categoryId": 22
+  },
+  {
+    "name": "Hundefutter",
+    "categoryId": 22
+  },
+  {
+    "name": "Shampoo",
+    "categoryId": 18
+  },
+  {
+    "name": "Deodorant",
+    "categoryId": 18
+  },
+  {
+    "name": "Windeln",
+    "categoryId": 17
+  },
+  {
+    "name": "Edamer",
+    "categoryId": 4
+  },
+  {
+    "name": "Feigen",
+    "categoryId": 7
+  },
+  {
+    "name": "Zuckerguss",
+    "categoryId": 1
+  },
+  {
+    "name": "Kuvertüre",
+    "categoryId": 1
+  },
+  {
+    "name": "Babynahrung",
+    "categoryId": 17
+  },
+  {
+    "name": "Kaugummi",
+    "categoryId": 10
+  },
+  {
+    "name": "Essig",
+    "categoryId": 8
+  },
+  {
+    "name": "Ingwer",
+    "categoryId": 7
+  },
+  {
+    "name": "Gnocchi",
+    "categoryId": 14
+  },
+  {
+    "name": "Penne",
+    "categoryId": 14
+  },
+  {
+    "name": "Farfalle",
+    "categoryId": 14
+  },
+  {
+    "name": "Spaghetti",
+    "categoryId": 14
+  },
+  {
+    "name": "Maccheroni",
+    "categoryId": 14
+  },
+  {
+    "name": "Fusilli",
+    "categoryId": 14
+  },
+  {
+    "name": "Girandole",
+    "categoryId": 14
+  },
+  {
+    "name": "Tagliatelle",
+    "categoryId": 14
+  },
+  {
+    "name": "Lasagneblätter",
+    "categoryId": 14
+  },
+  {
+    "name": "Tee",
+    "categoryId": 9
+  },
+  {
+    "name": "Honig",
+    "categoryId": 3
+  },
+  {
+    "name": "Hamburgerbrötchen",
+    "categoryId": 6
+  },
+  {
+    "name": "Eistee",
+    "categoryId": 2
+  },
+  {
+    "name": "Fertigsuppe",
+    "categoryId": 16
+  },
+  {
+    "name": "Marmelade",
+    "categoryId": 3
+  },
+  {
+    "name": "Erdnussbutter",
+    "categoryId": 3
+  },
+  {
+    "name": "Ketchup",
+    "categoryId": 8
+  },
+  {
+    "name": "Salatsoße",
+    "categoryId": 8
+  },
+  {
+    "name": "Servietten",
+    "categoryId": 21
+  },
+  {
+    "name": "Küchenpapier",
+    "categoryId": 21
+  },
+  {
+    "name": "Limetten",
+    "categoryId": 7
+  },
+  {
+    "name": "Salz",
+    "categoryId": 20
+  },
+  {
+    "name": "Pfeffer",
+    "categoryId": 20
+  },
+  {
+    "name": "Zucker",
+    "categoryId": 1
+  },
+  {
+    "name": "Lachs",
+    "categoryId": 12
+  },
+  {
+    "name": "Schwamm",
+    "categoryId": 21
+  },
+  {
+    "name": "Muskat",
+    "categoryId": 20
+  },
+  {
+    "name": "Cayennepfeffer",
+    "categoryId": 20
+  },
+  {
+    "name": "Kümmel",
+    "categoryId": 20
+  },
+  {
+    "name": "Thymian",
+    "categoryId": 20
+  },
+  {
+    "name": "Rosmarin",
+    "categoryId": 20
+  },
+  {
+    "name": "Tofu",
+    "categoryId": 9
+  },
+  {
+    "name": "Reis",
+    "categoryId": 14
+  },
+  {
+    "name": "Vanillezucker",
+    "categoryId": 1
+  },
+  {
+    "name": "Balsamico",
+    "categoryId": 8
+  },
+  {
+    "name": "Wein",
+    "categoryId": 2
+  },
+  {
+    "name": "Bier",
+    "categoryId": 2
+  },
+  {
+    "name": "Walnüsse",
+    "categoryId": 10
+  },
+  {
+    "name": "Haselnüsse",
+    "categoryId": 10
+  },
+  {
+    "name": "Hefe",
+    "categoryId": 1
+  },
+  {
+    "name": "Champignons",
+    "categoryId": 7
+  },
+  {
+    "name": "Birnen",
+    "categoryId": 7
+  },
+  {
+    "name": "Wirsing",
+    "categoryId": 7
+  },
+  {
+    "name": "Kokosnussmilch",
+    "categoryId": 15
+  },
+  {
+    "name": "Cornflakes",
+    "categoryId": 3
+  },
+  {
+    "name": "Sahne",
+    "categoryId": 5
+  },
+  {
+    "name": "Gouda",
+    "categoryId": 4
+  },
+  {
+    "name": "Crème fraîche",
+    "categoryId": 5
+  },
+  {
+    "name": "Pastinaken",
+    "categoryId": 7
+  },
+  {
+    "name": "Zucchinis",
+    "categoryId": 7
+  },
+  {
+    "name": "Spülmittel",
+    "categoryId": 19
+  },
+  {
+    "name": "Kürbis",
+    "categoryId": 7
+  },
+  {
+    "name": "Tonic water",
+    "categoryId": 2
+  },
+  {
+    "name": "Zahnpasta",
+    "categoryId": 18
+  },
+  {
+    "name": "Mandarinen",
+    "categoryId": 7
+  },
+  {
+    "name": "Mozzarella",
+    "categoryId": 4
+  },
+  {
+    "name": "Feta",
+    "categoryId": 4
+  },
+  {
+    "name": "Rucola",
+    "categoryId": 7
+  },
+  {
+    "name": "Sonnenblumenkerne",
+    "categoryId": 9
+  },
+  {
+    "name": "Cashewnüsse",
+    "categoryId": 9
+  },
+  {
+    "name": "Zitronen",
+    "categoryId": 7
+  },
+  {
+    "name": "Pinienkerne",
+    "categoryId": 9
+  },
+  {
+    "name": "Oliven",
+    "categoryId": 15
+  },
+  {
+    "name": "Backpapier",
+    "categoryId": 21
+  },
+  {
+    "name": "Cornichons",
+    "categoryId": 15
+  },
+  {
+    "name": "Pommes frîtes",
+    "categoryId": 13
+  },
+  {
+    "name": "Waschmittel",
+    "categoryId": 19
+  },
+  {
+    "name": "Gummibänder",
+    "categoryId": 21
+  },
+  {
+    "name": "Pepperoni",
+    "categoryId": 15
+  },
+  {
+    "name": "Artischocken",
+    "categoryId": 15
+  },
+  {
+    "name": "Kapern",
+    "categoryId": 15
+  },
+  {
+    "name": "Lorbeerblätter",
+    "categoryId": 20
+  },
+  {
+    "name": "Kichererbsen",
+    "categoryId": 15
+  },
+  {
+    "name": "Semmelbrösel",
+    "categoryId": 15
+  },
+  {
+    "name": "Cheddar",
+    "categoryId": 4
+  },
+  {
+    "name": "Gewürznelken",
+    "categoryId": 20
+  },
+  {
+    "name": "Weißkohl",
+    "categoryId": 7
+  },
+  {
+    "name": "Spitzkohl",
+    "categoryId": 7
+  }
+]

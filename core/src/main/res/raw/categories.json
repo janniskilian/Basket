@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "name": "Baking"
+  },
+  {
+    "id": 2,
+    "name": "Beverages"
+  },
+  {
+    "id": 3,
+    "name": "Breakfast"
+  },
+  {
+    "id": 4,
+    "name": "Cheese"
+  },
+  {
+    "id": 5,
+    "name": "Dairy and Eggs"
+  },
+  {
+    "id": 6,
+    "name": "Pastry"
+  },
+  {
+    "id": 7,
+    "name": "Produce"
+  },
+  {
+    "id": 8,
+    "name": "Oils and Dressings"
+  },
+  {
+    "id": 9,
+    "name": "Organic Food"
+  },
+  {
+    "id": 10,
+    "name": "Snacks"
+  },
+  {
+    "id": 11,
+    "name": "Meat"
+  },
+  {
+    "id": 12,
+    "name": "Seafood"
+  },
+  {
+    "id": 13,
+    "name": "Frozen Food"
+  },
+  {
+    "id": 14,
+    "name": "Pasta and Side Dishes"
+  },
+  {
+    "id": 15,
+    "name": "Canned Food"
+  },
+  {
+    "id": 16,
+    "name": "Convenience Food"
+  },
+  {
+    "id": 17,
+    "name": "Infant and Childcare"
+  },
+  {
+    "id": 18,
+    "name": "Cosmetics"
+  },
+  {
+    "id": 19,
+    "name": "Cleaning Supplies"
+  },
+  {
+    "id": 20,
+    "name": "Herbs and Spices"
+  },
+  {
+    "id": 21,
+    "name": "Household Goods"
+  },
+  {
+    "id": 22,
+    "name": "Pet Store"
+  },
+  {
+    "id": 23,
+    "name": "Office Supplies"
+  },
+  {
+    "id": 24,
+    "name": "Entertainment"
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "name": "Backzutaten"
+  },
+  {
+    "id": 2,
+    "name": "Getränke"
+  },
+  {
+    "id": 3,
+    "name": "Frühstück"
+  },
+  {
+    "id": 4,
+    "name": "Käse"
+  },
+  {
+    "id": 5,
+    "name": "Milch- und Eiprodukte"
+  },
+  {
+    "id": 6,
+    "name": "Backwaren"
+  },
+  {
+    "id": 7,
+    "name": "Obst und Gemüse"
+  },
+  {
+    "id": 8,
+    "name": "Öle und Dressings"
+  },
+  {
+    "id": 9,
+    "name": "Naturprodukte"
+  },
+  {
+    "id": 10,
+    "name": "Snacks"
+  },
+  {
+    "id": 11,
+    "name": "Fleisch"
+  },
+  {
+    "id": 12,
+    "name": "Fisch"
+  },
+  {
+    "id": 13,
+    "name": "Tiefkühlprodukte"
+  },
+  {
+    "id": 14,
+    "name": "Nudeln und Beilagen"
+  },
+  {
+    "id": 15,
+    "name": "Konserven"
+  },
+  {
+    "id": 16,
+    "name": "Fertignahrung"
+  },
+  {
+    "id": 17,
+    "name": "Kinder- und Babywaren"
+  },
+  {
+    "id": 18,
+    "name": "Kosmetik"
+  },
+  {
+    "id": 19,
+    "name": "Putz- und Waschmittel"
+  },
+  {
+    "id": 20,
+    "name": "Kräuter und Gewürze"
+  },
+  {
+    "id": 21,
+    "name": "Haushaltswaren"
+  },
+  {
+    "id": 22,
+    "name": "Tierbedarf"
+  },
+  {
+    "id": 23,
+    "name": "Bürobedarf"
+  },
+  {
+    "id": 24,
+    "name": "Unterhaltung"
+  }
+]

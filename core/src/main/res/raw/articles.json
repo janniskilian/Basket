@@ -1,0 +1,857 @@
+[
+  {
+    "name": "Apple Juice",
+    "categoryId": 2,
+    "measureId": null
+  },
+  {
+    "name": "Apples",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Bananas",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Butter",
+    "categoryId": 5,
+    "measureId": null
+  },
+  {
+    "name": "Carrots",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Muesli",
+    "categoryId": 3,
+    "measureId": null
+  },
+  {
+    "name": "Chocolate",
+    "categoryId": 10,
+    "measureId": null
+  },
+  {
+    "name": "Cream Cheese",
+    "categoryId": 4,
+    "measureId": null
+  },
+  {
+    "name": "Cucumber",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Curd",
+    "categoryId": 5,
+    "measureId": null
+  },
+  {
+    "name": "Eggs",
+    "categoryId": 5,
+    "measureId": null
+  },
+  {
+    "name": "Emmentaler",
+    "categoryId": 4,
+    "measureId": null
+  },
+  {
+    "name": "Flour",
+    "categoryId": 1,
+    "measureId": null
+  },
+  {
+    "name": "Gruyère",
+    "categoryId": 4,
+    "measureId": null
+  },
+  {
+    "name": "Margarine",
+    "categoryId": 5,
+    "measureId": null
+  },
+  {
+    "name": "Milk",
+    "categoryId": 5,
+    "measureId": null
+  },
+  {
+    "name": "Oat Flakes",
+    "categoryId": 3,
+    "measureId": null
+  },
+  {
+    "name": "Olive Oil",
+    "categoryId": 8,
+    "measureId": null
+  },
+  {
+    "name": "Oranges",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Potatoes",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Radishes",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Soy Milk",
+    "categoryId": 9,
+    "measureId": null
+  },
+  {
+    "name": "Toast",
+    "categoryId": 6,
+    "measureId": null
+  },
+  {
+    "name": "Tomatoes",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Water",
+    "categoryId": 2,
+    "measureId": null
+  },
+  {
+    "name": "Yogurt",
+    "categoryId": 5,
+    "measureId": null
+  },
+  {
+    "name": "Soy Yogurt",
+    "categoryId": 9,
+    "measureId": null
+  },
+  {
+    "name": "Chard",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Peppers",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Grapes",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Plums",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Peaches",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Nectarine",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Lettuce",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Romaine Lettuce",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Cabbage Lettuce",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Corn Salad",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Kiwi",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Egg Plant",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Parsley",
+    "categoryId": 20,
+    "measureId": null
+  },
+  {
+    "name": "Basil",
+    "categoryId": 20,
+    "measureId": null
+  },
+  {
+    "name": "Leek",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Scallions",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Shallots",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Onions",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Garlic",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Beans",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Green Beans",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Peas",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Peas (frozen)",
+    "categoryId": 13,
+    "measureId": null
+  },
+  {
+    "name": "Broad Beans",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Cookies",
+    "categoryId": 10,
+    "measureId": null
+  },
+  {
+    "name": "Spinach",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Ice Cream",
+    "categoryId": 10,
+    "measureId": null
+  },
+  {
+    "name": "Orange Juice",
+    "categoryId": 2,
+    "measureId": null
+  },
+  {
+    "name": "Crisp Bread",
+    "categoryId": 6,
+    "measureId": null
+  },
+  {
+    "name": "Rusk",
+    "categoryId": 6,
+    "measureId": null
+  },
+  {
+    "name": "Sunflower Oil",
+    "categoryId": 8,
+    "measureId": null
+  },
+  {
+    "name": "Tomatoe Paste",
+    "categoryId": 15,
+    "measureId": null
+  },
+  {
+    "name": "Tomatoe Purée",
+    "categoryId": 15,
+    "measureId": null
+  },
+  {
+    "name": "Tomatoes (canned)",
+    "categoryId": 15,
+    "measureId": null
+  },
+  {
+    "name": "Chopped Tomatoes",
+    "categoryId": 15,
+    "measureId": null
+  },
+  {
+    "name": "Applesauce",
+    "categoryId": 15,
+    "measureId": null
+  },
+  {
+    "name": "Almonds",
+    "categoryId": 10,
+    "measureId": null
+  },
+  {
+    "name": "Apricots",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Avocados",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Broccoli",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Broccoli (frozen)",
+    "categoryId": 13,
+    "measureId": null
+  },
+  {
+    "name": "Bread",
+    "categoryId": 6,
+    "measureId": null
+  },
+  {
+    "name": "Bulgur",
+    "categoryId": 14,
+    "measureId": null
+  },
+  {
+    "name": "Cola",
+    "categoryId": 2,
+    "measureId": null
+  },
+  {
+    "name": "Corn",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Potato Chips",
+    "categoryId": 10,
+    "measureId": null
+  },
+  {
+    "name": "Cocoa",
+    "categoryId": 10,
+    "measureId": null
+  },
+  {
+    "name": "Cumin",
+    "categoryId": 20,
+    "measureId": null
+  },
+  {
+    "name": "Caviar",
+    "categoryId": 12,
+    "measureId": null
+  },
+  {
+    "name": "Celery",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Coffe",
+    "categoryId": 3,
+    "measureId": null
+  },
+  {
+    "name": "Cabbage",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Candles",
+    "categoryId": 21,
+    "measureId": null
+  },
+  {
+    "name": "Cat Food",
+    "categoryId": 22,
+    "measureId": null
+  },
+  {
+    "name": "Dog Food",
+    "categoryId": 22,
+    "measureId": null
+  },
+  {
+    "name": "Shampoo",
+    "categoryId": 18,
+    "measureId": null
+  },
+  {
+    "name": "Deodorant",
+    "categoryId": 18,
+    "measureId": null
+  },
+  {
+    "name": "Diapers",
+    "categoryId": 17,
+    "measureId": null
+  },
+  {
+    "name": "Edam Cheese",
+    "categoryId": 4,
+    "measureId": null
+  },
+  {
+    "name": "Figs",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Frosting",
+    "categoryId": 1,
+    "measureId": null
+  },
+  {
+    "name": "Chocolate Coating",
+    "categoryId": 1,
+    "measureId": null
+  },
+  {
+    "name": "Baby Food",
+    "categoryId": 17,
+    "measureId": null
+  },
+  {
+    "name": "Chewing Gum",
+    "categoryId": 10,
+    "measureId": null
+  },
+  {
+    "name": "Vinegar",
+    "categoryId": 8,
+    "measureId": null
+  },
+  {
+    "name": "Ginger",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Gnocchi",
+    "categoryId": 14,
+    "measureId": null
+  },
+  {
+    "name": "Penne",
+    "categoryId": 14,
+    "measureId": null
+  },
+  {
+    "name": "Farfalle",
+    "categoryId": 14,
+    "measureId": null
+  },
+  {
+    "name": "Spaghetti",
+    "categoryId": 14,
+    "measureId": null
+  },
+  {
+    "name": "Maccheroni",
+    "categoryId": 14,
+    "measureId": null
+  },
+  {
+    "name": "Fusilli",
+    "categoryId": 14,
+    "measureId": null
+  },
+  {
+    "name": "Girandole",
+    "categoryId": 14,
+    "measureId": null
+  },
+  {
+    "name": "Tagliatelle",
+    "categoryId": 14,
+    "measureId": null
+  },
+  {
+    "name": "Lasagne Sheets",
+    "categoryId": 14,
+    "measureId": null
+  },
+  {
+    "name": "Tea",
+    "categoryId": 9,
+    "measureId": null
+  },
+  {
+    "name": "Honey",
+    "categoryId": 3,
+    "measureId": null
+  },
+  {
+    "name": "Hamburger Buns",
+    "categoryId": 6,
+    "measureId": null
+  },
+  {
+    "name": "Ice Tea",
+    "categoryId": 2,
+    "measureId": null
+  },
+  {
+    "name": "Instant Soup",
+    "categoryId": 16,
+    "measureId": null
+  },
+  {
+    "name": "Jam",
+    "categoryId": 3,
+    "measureId": null
+  },
+  {
+    "name": "Peanut Butter",
+    "categoryId": 3,
+    "measureId": null
+  },
+  {
+    "name": "Ketchup",
+    "categoryId": 8,
+    "measureId": null
+  },
+  {
+    "name": "Salad Dressing",
+    "categoryId": 8,
+    "measureId": null
+  },
+  {
+    "name": "Napkins",
+    "categoryId": 21,
+    "measureId": null
+  },
+  {
+    "name": "Kitchen paper",
+    "categoryId": 21,
+    "measureId": null
+  },
+  {
+    "name": "Limes",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Salt",
+    "categoryId": 20,
+    "measureId": null
+  },
+  {
+    "name": "Pepper",
+    "categoryId": 20,
+    "measureId": null
+  },
+  {
+    "name": "Sugar",
+    "categoryId": 1,
+    "measureId": null
+  },
+  {
+    "name": "Salmon",
+    "categoryId": 12,
+    "measureId": null
+  },
+  {
+    "name": "Sponge",
+    "categoryId": 21,
+    "measureId": null
+  },
+  {
+    "name": "Nutmeg",
+    "categoryId": 20,
+    "measureId": null
+  },
+  {
+    "name": "Cayenne",
+    "categoryId": 20,
+    "measureId": null
+  },
+  {
+    "name": "Caraway",
+    "categoryId": 20,
+    "measureId": null
+  },
+  {
+    "name": "Thyme",
+    "categoryId": 20,
+    "measureId": null
+  },
+  {
+    "name": "Rosemary",
+    "categoryId": 20,
+    "measureId": null
+  },
+  {
+    "name": "Tofu",
+    "categoryId": 9,
+    "measureId": null
+  },
+  {
+    "name": "Rice",
+    "categoryId": 14,
+    "measureId": null
+  },
+  {
+    "name": "Vanilla Sugar",
+    "categoryId": 1,
+    "measureId": null
+  },
+  {
+    "name": "Balsamico Vinegar",
+    "categoryId": 8,
+    "measureId": null
+  },
+  {
+    "name": "Wine",
+    "categoryId": 2,
+    "measureId": null
+  },
+  {
+    "name": "Beer",
+    "categoryId": 2,
+    "measureId": null
+  },
+  {
+    "name": "Walnuts",
+    "categoryId": 10,
+    "measureId": null
+  },
+  {
+    "name": "Hazelnuts",
+    "categoryId": 10,
+    "measureId": null
+  },
+  {
+    "name": "Yeast",
+    "categoryId": 1,
+    "measureId": null
+  },
+  {
+    "name": "Champignons",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Pears",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Savoy",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Coconut Milk",
+    "categoryId": 15,
+    "measureId": null
+  },
+  {
+    "name": "Cereal",
+    "categoryId": 3,
+    "measureId": null
+  },
+  {
+    "name": "Cream",
+    "categoryId": 5,
+    "measureId": null
+  },
+  {
+    "name": "Gouda",
+    "categoryId": 4,
+    "measureId": null
+  },
+  {
+    "name": "Crème fraîche",
+    "categoryId": 5,
+    "measureId": null
+  },
+  {
+    "name": "Parsnips",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Zucchini",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Dish soap",
+    "categoryId": 19,
+    "measureId": null
+  },
+  {
+    "name": "Pumpkin",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Tonic water",
+    "categoryId": 2,
+    "measureId": null
+  },
+  {
+    "name": "Toothpaste",
+    "categoryId": 18,
+    "measureId": null
+  },
+  {
+    "name": "Tangerines",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Mozzarella",
+    "categoryId": 4,
+    "measureId": null
+  },
+  {
+    "name": "Feta cheese",
+    "categoryId": 4,
+    "measureId": null
+  },
+  {
+    "name": "Rocket salad",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Sunflower seeds",
+    "categoryId": 9,
+    "measureId": null
+  },
+  {
+    "name": "Cashew nuts",
+    "categoryId": 9,
+    "measureId": null
+  },
+  {
+    "name": "Lemons",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Pine nuts",
+    "categoryId": 9,
+    "measureId": null
+  },
+  {
+    "name": "Olives",
+    "categoryId": 15,
+    "measureId": null
+  },
+  {
+    "name": "Baking paper",
+    "categoryId": 21,
+    "measureId": null
+  },
+  {
+    "name": "Pickles",
+    "categoryId": 15,
+    "measureId": null
+  },
+  {
+    "name": "French fries",
+    "categoryId": 13,
+    "measureId": null
+  },
+  {
+    "name": "Detergent",
+    "categoryId": 19,
+    "measureId": null
+  },
+  {
+    "name": "Elastic bands",
+    "categoryId": 21,
+    "measureId": null
+  },
+  {
+    "name": "Hot peppers",
+    "categoryId": 15,
+    "measureId": null
+  },
+  {
+    "name": "Artichokes",
+    "categoryId": 15,
+    "measureId": null
+  },
+  {
+    "name": "Capers",
+    "categoryId": 15,
+    "measureId": null
+  },
+  {
+    "name": "Bay leaves",
+    "categoryId": 20,
+    "measureId": null
+  },
+  {
+    "name": "Chickpeas",
+    "categoryId": 15,
+    "measureId": null
+  },
+  {
+    "name": "Breadcrumbs",
+    "categoryId": 15,
+    "measureId": null
+  },
+  {
+    "name": "Cheddar",
+    "categoryId": 4,
+    "measureId": null
+  },
+  {
+    "name": "Cloves",
+    "categoryId": 20,
+    "measureId": null
+  },
+  {
+    "name": "White cabbage",
+    "categoryId": 7,
+    "measureId": null
+  },
+  {
+    "name": "Pointed cabbage",
+    "categoryId": 7,
+    "measureId": null
+  }
+]

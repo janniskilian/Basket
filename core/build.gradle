@@ -1,0 +1,23 @@
+apply plugin: "kotlin-kapt"
+apply plugin: "androidx.navigation.safeargs"
+
+kapt {
+	arguments {
+		arg("room.schemaLocation", "$projectDir/schemas".toString())
+	}
+}
+
+dependencies {
+	implementation deps.androidx.ktx
+	implementation deps.androidx.appcompat
+	implementation deps.androidx.lifecycle
+	implementation deps.androidx.constraintlayout
+	implementation deps.androidx.room_runtime
+	kapt deps.androidx.room_compiler
+
+	implementation deps.material
+
+	debugImplementation deps.leak_canary.debug
+	debugImplementation deps.leak_canary.fragment
+	releaseImplementation deps.leak_canary.release
+}

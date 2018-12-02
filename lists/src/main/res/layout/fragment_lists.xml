@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<com.google.android.material.appbar.AppBarLayout style="@style/Widget.App.AppBarLayout">
+
+		<androidx.appcompat.widget.Toolbar style="@style/Widget.App.Toolbar">
+
+			<TextView
+				android:id="@+id/headline"
+				style="@style/Widget.App.ToolbarTitle"
+				android:text="@string/shopping_lists_title"/>
+		</androidx.appcompat.widget.Toolbar>
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/recyclerView"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			tools:listitem="@layout/shopping_list_item"/>
+
+		<ImageView
+			android:contentDescription="@string/empty_image_desc"
+			android:id="@+id/emptyImage"
+			style="@style/Widget.App.EmptyImage"
+			app:layout_constraintBottom_toTopOf="@id/emptyHeadline"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintVertical_chainStyle="packed"
+			app:srcCompat="@drawable/ic_shopping_lists_24"/>
+
+		<TextView
+			android:id="@+id/emptyHeadline"
+			style="@style/Widget.App.EmptyHeadline"
+			android:text="@string/shopping_lists_empty_title"
+			app:layout_constraintBottom_toTopOf="@id/emptyInfo"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/emptyImage"/>
+
+		<TextView
+			android:id="@+id/emptyInfo"
+			style="@style/Widget.App.EmptyInfo"
+			android:text="@string/shopping_lists_empty_info"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/emptyHeadline"/>
+
+		<androidx.constraintlayout.widget.Group
+			android:id="@+id/emptyGroup"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:visibility="gone"
+			app:constraint_referenced_ids="emptyImage,emptyHeadline,emptyInfo"/>
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
