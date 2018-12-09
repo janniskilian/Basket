@@ -34,9 +34,10 @@ class ArticleViewModel(
 			setCategory(null)
 		} else {
 			GlobalScope.launch(Dispatchers.Main) {
-				val article = dataClient.article.get(articleId)
-				setName(article.name)
-				setCategory(article.category)
+				dataClient.article.get(articleId)?.let {
+					setName(it.name)
+					setCategory(it.category)
+				}
 			}
 		}
 	}

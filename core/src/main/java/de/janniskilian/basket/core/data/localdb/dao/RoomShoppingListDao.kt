@@ -2,15 +2,19 @@ package de.janniskilian.basket.core.data.localdb.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import de.janniskilian.basket.core.data.localdb.entity.RoomShoppingList
 import de.janniskilian.basket.core.data.localdb.result.RoomShoppingListResult
 
 @Dao
-interface RoomShoppingListDao : RoomBaseDao<RoomShoppingList> {
+interface RoomShoppingListDao {
+
+	@Insert
+	suspend fun insert(shoppingList: RoomShoppingList): Long
 
 	@Query("$SELECT_QUERY WHERE shoppingList.id = :id")
-	fun select(id: Long): List<RoomShoppingListResult>
+	suspend fun select(id: Long): List<RoomShoppingListResult>
 
 	@Query("$SELECT_QUERY WHERE shoppingList.id = :id")
 	fun selectLiveData(id: Long): LiveData<List<RoomShoppingListResult>>

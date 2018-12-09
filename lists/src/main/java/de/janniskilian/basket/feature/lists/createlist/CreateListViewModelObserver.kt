@@ -1,11 +1,8 @@
 package de.janniskilian.basket.feature.lists.createlist
 
-import androidx.navigation.fragment.findNavController
-import de.janniskilian.basket.core.createArgs
 import de.janniskilian.basket.core.util.extension.extern.observe
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.lists.R
-import de.janniskilian.basket.feature.lists.list.ListFragmentArgs
 import kotlinx.android.synthetic.main.fragment_create_list.*
 
 class CreateListViewModelObserver(
@@ -48,10 +45,10 @@ class CreateListViewModelObserver(
 	}
 
 	private fun startListFragment(shoppingListId: Long) {
-		fragment.findNavController().navigate(
+		/*fragment.findNavController().navigate(
 			R.id.listFragment,
-			createArgs(ListFragmentArgs(shoppingListId))
-		)
+			ListFragmentArgs.Builder(shoppingListId).build().toBundle()
+		)*/
 		fragment.dismiss()
 	}
 }

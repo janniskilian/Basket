@@ -1,6 +1,8 @@
 package de.janniskilian.basket.core.data
 
-interface DataClient {
+import java.io.Closeable
+
+interface DataClient: Closeable {
 
 	val article: ArticleDataClient
 

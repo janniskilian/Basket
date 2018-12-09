@@ -31,6 +31,7 @@ subprojects {
 	}
 	apply plugin: "kotlin-android"
 	apply plugin: "kotlin-android-extensions"
+	apply plugin: "androidx.navigation.safeargs"
 
 	android {
 		buildToolsVersion build_version.build_tools
@@ -62,6 +63,8 @@ subprojects {
 			unitTests {
 				includeAndroidResources = true
 			}
+
+			animationsDisabled true
 		}
 	}
 
@@ -85,8 +88,14 @@ subprojects {
 		testImplementation deps.testing.kotlin_test
 		testImplementation deps.testing.mockito
 		testImplementation deps.testing.robolectric
-		/*testImplementation deps.testing.livedata
-		testImplementation deps.testing.room*/
+
+		androidTestImplementation deps.testing.kotlin_test
+		androidTestImplementation deps.android_testing.core
+		androidTestImplementation deps.android_testing.runner
+		androidTestImplementation deps.android_testing.junit
+		androidTestImplementation deps.android_testing.rules
+		androidTestImplementation deps.android_testing.livedata
+		androidTestImplementation deps.android_testing.room
 
 		if (name != "core") {
 			implementation project(path: ":core")

@@ -2,9 +2,11 @@ package de.janniskilian.basket.feature.lists.addlistitem
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import de.janniskilian.basket.core.util.extension.extern.switchMap
 import de.janniskilian.basket.core.util.function.createMutableLiveData
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class AddListItemViewModel(
 	private val getSuggestionsUseCase: GetSuggestionsUseCase,
@@ -17,9 +19,7 @@ class AddListItemViewModel(
 		get() = _input
 
 	val items: LiveData<List<ShoppingListItemSuggestion>> =
-		Transformations.switchMap(_input) {
-			getSuggestionsUseCase.run(it)
-		}
+		_input.switchMap { getSuggestionsUseCase.run(it) }
 
 	fun setInput(input: String) {
 		_input.value = input
@@ -31,7 +31,7 @@ class AddListItemViewModel(
 
 	fun suggestionItemClicked(position: Int) {
 		items.value?.getOrNull(position)?.let {
-			listItemSuggestionClickedUseCase.run(it)
+			GlobalScope.launch { listItemSuggestionClickedUseCase.run(it) }
 		}
 	}
 

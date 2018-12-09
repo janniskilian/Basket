@@ -8,7 +8,6 @@ import de.janniskilian.basket.core.data.localdb.transformation.roomToModel
 import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
 import de.janniskilian.basket.core.util.extension.extern.map
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -16,68 +15,54 @@ class ShoppingListItemDataClientImpl(localDb: LocalDatabase) : ShoppingListItemD
 
 	private val dao = localDb.shoppingListItemDao()
 
-	override fun create(
+	override suspend fun create(
 		shoppingListId: Long,
 		article: Article,
 		quantity: String,
 		checked: Boolean
 	) {
-		GlobalScope.launch(Dispatchers.IO) {
-			dao.insert(
-				RoomShoppingListItem(
-					shoppingListId,
-					article.id,
-					quantity,
-					checked
-				)
+		dao.insert(
+			RoomShoppingListItem(
+				shoppingListId,
+				article.id,
+				quantity,
+				checked
 			)
-		}
+		)
 	}
 
-	override fun create(shoppingListItems: List<ShoppingListItem>) {
-		GlobalScope.launch(Dispatchers.IO) {
+	override fun create(shoppingListItems: List<ShoppingListItem>) =
+		GlobalScope.launch {
 			dao.insert(shoppingListItems.map { modelToRoom(it) })
 		}
-	}
 
 	override fun get(id: Long): LiveData<ShoppingListItem> =
 		dao
 			.select(id)
 			.map { roomToModel(it) }
 
-	override fun update(shoppingListItem: ShoppingListItem) {
-		GlobalScope.launch(Dispatchers.IO) {
+	override fun update(shoppingListItem: ShoppingListItem) =
+		GlobalScope.launch {
 			dao.update(modelToRoom(shoppingListItem))
 		}
-	}
 
-	override fun delete(shoppingListItem: ShoppingListItem) {
-		GlobalScope.launch(Dispatchers.IO) {
-			dao.delete(modelToRoom(shoppingListItem))
-		}
-	}
-
-	override fun delete(shoppingListId: Long, articleId: Long) {
-		GlobalScope.launch(Dispatchers.IO) {
-			dao.delete(shoppingListId, articleId)
-		}
-	}
-
-	override fun setAllCheckedForShoppingList(shoppingListId: Long, checked: Boolean) {
-		GlobalScope.launch(Dispatchers.IO) {
+	override fun setAllCheckedForShoppingList(shoppingListId: Long, checked: Boolean) =
+		GlobalScope.launch {
 			dao.setAllCheckedForShoppingList(shoppingListId, checked)
 		}
-	}
 
-	override fun deleteAllForShoppingList(shoppingListId: Long) {
-		GlobalScope.launch(Dispatchers.IO) {
+	override fun delete(shoppingListId: Long, articleId: Long) =
+		GlobalScope.launch {
+			dao.delete(shoppingListId, articleId)
+		}
+
+	override fun deleteAllForShoppingList(shoppingListId: Long) =
+		GlobalScope.launch {
 			dao.deleteAllForShoppingList(shoppingListId)
 		}
-	}
 
-	override fun deleteAllCheckedForShoppingList(shoppingListId: Long) {
-		GlobalScope.launch(Dispatchers.IO) {
+	override fun deleteAllCheckedForShoppingList(shoppingListId: Long) =
+		GlobalScope.launch {
 			dao.deleteAllCheckedForShoppingList(shoppingListId)
 		}
-	}
 }

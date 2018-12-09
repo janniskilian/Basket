@@ -32,7 +32,7 @@ class CreateListViewModel(
 	init {
 		if (shoppingListId != null) {
 			GlobalScope.launch(Dispatchers.Main) {
-				dataClient.shoppingList.get(shoppingListId).await()?.let {
+				dataClient.shoppingList.get(shoppingListId)?.let {
 					setName(it.name)
 					setSelectedColor(it.color)
 				}
@@ -71,7 +71,7 @@ class CreateListViewModel(
 
 			shoppingListId == null ->
 				GlobalScope.launch(Dispatchers.Main) {
-					val id = useCases.createList(name, _selectedColor.value).await()
+					val id = useCases.createList(name, _selectedColor.value)
 					_startList.setValue(id)
 				}
 

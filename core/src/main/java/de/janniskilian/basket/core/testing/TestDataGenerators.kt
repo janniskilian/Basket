@@ -1,4 +1,4 @@
-package de.janniskilian.basket.core.type.testing
+package de.janniskilian.basket.core.testing
 
 import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.type.domain.Category
@@ -48,7 +48,7 @@ fun createTestShoppingList(items: List<ShoppingListItem> = emptyList()): Shoppin
 fun createTestShoppingList(itemCount: Int): ShoppingList =
 	createTestShoppingList().apply {
 		copy(
-			items = (0 until itemCount).map {
+			items = List(itemCount) {
 				createTestShoppingListItem(this)
 			}
 		)

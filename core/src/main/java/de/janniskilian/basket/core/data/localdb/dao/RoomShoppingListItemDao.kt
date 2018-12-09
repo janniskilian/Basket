@@ -2,12 +2,20 @@ package de.janniskilian.basket.core.data.localdb.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import de.janniskilian.basket.core.data.localdb.entity.RoomShoppingListItem
 import de.janniskilian.basket.core.data.localdb.result.RoomShoppingListItemResult
 
 @Dao
-interface RoomShoppingListItemDao : RoomBaseDao<RoomShoppingListItem> {
+interface RoomShoppingListItemDao {
+
+	@Insert
+	suspend fun insert(shoppingListItem: RoomShoppingListItem)
+
+	@Insert
+	suspend fun insert(shoppingListItems: List<RoomShoppingListItem>)
 
 	@Query(
 		"""SELECT shoppingListItem.id AS id, shoppingListItem.shoppingListId AS shoppingListId,
@@ -23,26 +31,8 @@ interface RoomShoppingListItemDao : RoomBaseDao<RoomShoppingListItem> {
 	)
 	fun select(id: Long): LiveData<RoomShoppingListItemResult>
 
-	@Query(
-		"""SELECT shoppingListItem.id AS id, shoppingListItem.shoppingListId AS shoppingListId,
-			shoppingListItem.quantity AS quantity, shoppingListItem.checked AS checked,
-			article.id AS articleId, article.name AS articleName, article.categoryId AS categoryId,
-			category.name AS categoryName
-			FROM shoppingListItem
-			LEFT OUTER JOIN article
-			ON shoppingListItem.articleId = article.id
-			LEFT OUTER JOIN category
-			ON article.categoryId = category.id
-			WHERE shoppingListItem.shoppingListId = :shoppingListId"""
-	)
-	fun selectAll(shoppingListId: Long): List<RoomShoppingListItemResult>
-
-	@Query(
-		"""SELECT COUNT(articleId)
-			FROM shoppingListItem
-			WHERE shoppingListId = :shoppingListId AND articleId = :articleId"""
-	)
-	fun selectArticleCount(shoppingListId: Long, articleId: Long): Int
+	@Update
+	suspend fun update(shoppingListItem: RoomShoppingListItem)
 
 	@Query("UPDATE shoppingListItem SET checked = :checked WHERE shoppingListId = :shoppingListId")
 	fun setAllCheckedForShoppingList(

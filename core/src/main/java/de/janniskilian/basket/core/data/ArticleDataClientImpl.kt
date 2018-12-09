@@ -9,39 +9,27 @@ import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.type.domain.ArticleSuggestion
 import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.util.extension.extern.map
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ArticleDataClientImpl(localDb: LocalDatabase) : ArticleDataClient {
 
 	private val dao = localDb.articleDao()
 
-	override fun create(name: String, category: Category?) {
-		GlobalScope.launch(Dispatchers.IO) {
-			dao.insert(RoomArticle(name, category?.id))
-		}
+	override fun create(name: String, category: Category?) =
+		GlobalScope.launch { dao.insert(RoomArticle(name, category?.id)) }
+
+	override suspend fun createSuspend(name: String, category: Category?): Article? {
+		val id = dao.insert(RoomArticle(name, category?.id))
+		return get(id)
 	}
 
-	override fun createSync(name: String, category: Category?): Deferred<Article> =
-		GlobalScope.async(Dispatchers.IO) {
-			val id = dao.insert(RoomArticle(name, category?.id))
-			roomToModel(dao.select(id))
-		}
-
-	override fun create(articles: List<RoomArticle>) {
-		GlobalScope.launch(Dispatchers.IO) {
-			dao.insert(articles)
-		}
+	override suspend fun create(articles: List<RoomArticle>) {
+		dao.insert(articles)
 	}
 
-	override suspend fun get(id: Long): Article =
-		withContext(Dispatchers.IO) {
-			roomToModel(dao.select(id))
-		}
+	override suspend fun get(id: Long): Article? =
+		dao.select(id)?.let(::roomToModel)
 
 	override fun get(name: String, shoppingListId: Long): LiveData<List<ArticleSuggestion>> =
 		dao
@@ -66,15 +54,14 @@ class ArticleDataClientImpl(localDb: LocalDatabase) : ArticleDataClient {
 				results.map { roomToModel(it) }
 			}
 
-	override fun update(article: Article) {
-		GlobalScope.launch(Dispatchers.IO) {
-			dao.update(modelToRoom(article))
-		}
+	override suspend fun getSuspend(name: String): List<Article> =
+		dao
+			.selectSuspend("%$name%")
+			.map(::roomToModel)
+
+	override suspend fun update(article: Article) {
+		dao.update(modelToRoom(article))
 	}
 
-	override fun delete(articleId: Long) {
-		GlobalScope.launch(Dispatchers.IO) {
-			dao.delete(articleId)
-		}
-	}
+	override fun delete(articleId: Long) = GlobalScope.launch { dao.delete(articleId) }
 }

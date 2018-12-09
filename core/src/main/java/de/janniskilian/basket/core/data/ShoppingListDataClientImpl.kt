@@ -7,35 +7,27 @@ import de.janniskilian.basket.core.data.localdb.transformation.modelToRoom
 import de.janniskilian.basket.core.data.localdb.transformation.roomToModel
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.util.extension.extern.map
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClient {
 
 	private val shoppingListDao = localDb.shoppingListDao()
 
-	override fun create(name: String, color: Int): Deferred<Long> =
-		GlobalScope.async(Dispatchers.IO) {
-			shoppingListDao.insert(RoomShoppingList(name, color))
-		}
+	override suspend fun create(name: String, color: Int): Long =
+		shoppingListDao.insert(RoomShoppingList(name, color))
 
-	override fun create(shoppingList: ShoppingList): Deferred<Long> =
-		GlobalScope.async(Dispatchers.IO) {
-			shoppingListDao.insert(modelToRoom(shoppingList))
-		}
+	override suspend fun create(shoppingList: ShoppingList): Long =
+		shoppingListDao.insert(modelToRoom(shoppingList))
 
-	override fun get(id: Long): Deferred<ShoppingList?> =
-		GlobalScope.async(Dispatchers.IO) {
-			val result = shoppingListDao.select(id)
-			if (result.isEmpty()) {
-				null
-			} else {
-				roomToModel(result)
-			}
+	override suspend fun get(id: Long): ShoppingList? {
+		val result = shoppingListDao.select(id)
+		return if (result.isEmpty()) {
+			null
+		} else {
+			roomToModel(result)
 		}
+	}
 
 	override fun getLiveData(id: Long): LiveData<ShoppingList> =
 		shoppingListDao
@@ -51,27 +43,8 @@ class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClien
 					.map { (_, value) -> roomToModel(value) }
 			}
 
-	override fun update(shoppingList: ShoppingList) {
-		GlobalScope.launch(Dispatchers.IO) {
-			shoppingListDao.update(modelToRoom(shoppingList))
-		}
-	}
+	override fun update(shoppingListId: Long, name: String, color: Int) =
+		GlobalScope.launch { shoppingListDao.update(shoppingListId, name, color) }
 
-	override fun update(shoppingListId: Long, name: String, color: Int) {
-		GlobalScope.launch(Dispatchers.IO) {
-			shoppingListDao.update(shoppingListId, name, color)
-		}
-	}
-
-	override fun delete(shoppingList: ShoppingList) {
-		GlobalScope.launch(Dispatchers.IO) {
-			shoppingListDao.delete(modelToRoom(shoppingList))
-		}
-	}
-
-	override fun delete(id: Long) {
-		GlobalScope.launch(Dispatchers.IO) {
-			shoppingListDao.delete(id)
-		}
-	}
+	override fun delete(id: Long) = GlobalScope.launch { shoppingListDao.delete(id) }
 }

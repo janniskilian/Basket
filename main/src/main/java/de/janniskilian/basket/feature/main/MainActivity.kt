@@ -16,10 +16,14 @@ import de.janniskilian.basket.R
 import de.janniskilian.basket.core.ANIMATION_DURATION_M
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.BasketApp
+import de.janniskilian.basket.core.data.DefaultDataImporter
+import de.janniskilian.basket.core.data.DefaultDataLoader
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainerProvider
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), NavigationContainerProvider {
 
@@ -36,6 +40,13 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
 		setSupportActionBar(appBar)
 		setupNavigation()
 		setClickListeners()
+
+		GlobalScope.launch {
+			DefaultDataImporter(
+				(application as BasketApp).appModule.dataModule.dataClient,
+				DefaultDataLoader(this@MainActivity)
+			).run()
+		}
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {

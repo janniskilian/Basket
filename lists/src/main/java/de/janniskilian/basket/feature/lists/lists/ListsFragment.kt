@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.appModule
-import de.janniskilian.basket.core.createArgs
 import de.janniskilian.basket.core.type.datapassing.CreateListFragmentArgs
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.util.extension.extern.observe
@@ -22,7 +21,6 @@ import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.core.util.recyclerview.ItemSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.createlist.CreateListFragment
-import de.janniskilian.basket.feature.lists.list.ListFragmentArgs
 import kotlinx.android.synthetic.main.fragment_lists.*
 
 class ListsFragment : BaseFragment() {
@@ -53,7 +51,7 @@ class ListsFragment : BaseFragment() {
 		setupRecyclerView()
 		setClickListeners()
 		viewModel.shoppingLists.observe(this, ::shoppingListsObserver)
-		viewModel.shoppingListDeleted.observe(this, ::deletedShoppingListObserver)
+		viewModel.shoppingListDeleted.observe(this) { showListDeletedSnackbar() }
 	}
 
 	override fun onFabClicked() {
@@ -114,7 +112,7 @@ class ListsFragment : BaseFragment() {
 		emptyGroup.isVisible = shoppingLists.isEmpty()
 	}
 
-	private fun deletedShoppingListObserver(shoppingList: ShoppingList) {
+	private fun showListDeletedSnackbar() {
 		Snackbar
 			.make(requireView(), R.string.list_deleted_snackbar, Snackbar.LENGTH_LONG)
 			.setAction(R.string.restore_button) { viewModel.restoreShoppingList() }
@@ -124,8 +122,7 @@ class ListsFragment : BaseFragment() {
 	private fun startList(position: Int) {
 		viewModel.shoppingLists.value?.getOrNull(position)?.let {
 			findNavController().navigate(
-				R.id.listFragment,
-				createArgs(ListFragmentArgs(it.id))
+				ListsFragmentDirections.actionListsFragmentToListFragment(it.id)
 			)
 		}
 	}

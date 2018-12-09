@@ -13,6 +13,7 @@ dependencies {
 	implementation deps.androidx.lifecycle
 	implementation deps.androidx.constraintlayout
 	implementation deps.androidx.room_runtime
+	implementation deps.androidx.room_coroutines
 	kapt deps.androidx.room_compiler
 
 	implementation deps.material

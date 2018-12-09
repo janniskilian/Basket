@@ -17,4 +17,7 @@ dependencies {
 	implementation project(path: ":groups")
 	implementation project(path: ":articles")
 	implementation project(path: ":categories")
+
+	androidTestImplementation deps.android_testing.espresso
+	androidTestImplementation deps.android_testing.espresso_contrib
 }

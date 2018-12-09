@@ -1,28 +1,22 @@
 package de.janniskilian.basket.core.data
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-
 class DefaultDataImporter(
 	private val dataClient: DataClient,
 	private val defaultDataLoader: DefaultDataLoader
 ) {
 
-	fun run() {
-		GlobalScope.launch(Dispatchers.IO) {
-			if (dataClient.category.getCount().await() == 0) {
-				createCategories()
-				createArticles()
-			}
+	suspend fun run() {
+		if (dataClient.category.getCount() == 0) {
+			createCategories()
+			createArticles()
 		}
 	}
 
 	private suspend fun createCategories() {
-		dataClient.category.create(defaultDataLoader.loadCategories()).await()
+		dataClient.category.create(defaultDataLoader.loadCategories())
 	}
 
-	private fun createArticles() {
+	private suspend fun createArticles() {
 		dataClient.article.create(defaultDataLoader.loadArticles())
 	}
 }

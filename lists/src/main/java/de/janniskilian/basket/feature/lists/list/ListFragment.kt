@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.appModule
-import de.janniskilian.basket.core.bindArgs
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.addlistitem.AddListItemFragment
 import kotlinx.android.synthetic.main.fragment_list.*
@@ -19,7 +18,7 @@ class ListFragment : BaseFragment() {
 		ListModule(appModule, this, args)
 	}
 
-	private val args by bindArgs<ListFragmentArgs>()
+	private val args by lazy { ListFragmentArgs.fromBundle(arguments) }
 
 	private val viewModel get() = module.listViewModel
 

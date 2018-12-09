@@ -6,28 +6,22 @@ import de.janniskilian.basket.core.data.CategoryDataClient
 import de.janniskilian.basket.core.data.CategoryDataClientImpl
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.data.DataClientImpl
-import de.janniskilian.basket.core.data.DefaultDataImporter
-import de.janniskilian.basket.core.data.DefaultDataLoader
 import de.janniskilian.basket.core.data.ShoppingListDataClient
 import de.janniskilian.basket.core.data.ShoppingListDataClientImpl
 import de.janniskilian.basket.core.data.ShoppingListItemDataClient
 import de.janniskilian.basket.core.data.ShoppingListItemDataClientImpl
 import de.janniskilian.basket.core.data.localdb.LocalDatabase
 
-class DataModule(private val androidModule: AndroidModule) {
+class DataModule(private val localDatabase: LocalDatabase) {
 
 	val dataClient: DataClient by lazy {
 		DataClientImpl(
 			articleDataClient,
 			categoryDataClient,
 			shoppingListDataClient,
-			shoppingListItemDataClient
-		).also {
-			DefaultDataImporter(
-				it,
-				DefaultDataLoader(androidModule.applicationContext)
-			).run()
-		}
+			shoppingListItemDataClient,
+			localDatabase
+		)
 	}
 
 	private val articleDataClient: ArticleDataClient by lazy {
@@ -44,9 +38,5 @@ class DataModule(private val androidModule: AndroidModule) {
 
 	private val shoppingListItemDataClient: ShoppingListItemDataClient by lazy {
 		ShoppingListItemDataClientImpl(localDatabase)
-	}
-
-	private val localDatabase by lazy {
-		LocalDatabase.create(androidModule.applicationContext)
 	}
 }

@@ -2,25 +2,21 @@ package de.janniskilian.basket.core.data
 
 import androidx.lifecycle.LiveData
 import de.janniskilian.basket.core.type.domain.ShoppingList
-import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Job
 
 interface ShoppingListDataClient {
 
-	fun create(name: String, color: Int): Deferred<Long>
+	suspend fun create(name: String, color: Int): Long
 
-	fun create(shoppingList: ShoppingList): Deferred<Long>
+	suspend fun create(shoppingList: ShoppingList): Long
 
-	fun get(id: Long): Deferred<ShoppingList?>
+	suspend fun get(id: Long): ShoppingList?
 
 	fun getLiveData(id: Long): LiveData<ShoppingList>
 
 	fun getAll(): LiveData<List<ShoppingList>>
 
-	fun update(shoppingList: ShoppingList)
+	fun update(shoppingListId: Long, name: String, color: Int): Job
 
-	fun update(shoppingListId: Long, name: String, color: Int)
-
-	fun delete(shoppingList: ShoppingList)
-
-	fun delete(id: Long)
+	fun delete(id: Long): Job
 }

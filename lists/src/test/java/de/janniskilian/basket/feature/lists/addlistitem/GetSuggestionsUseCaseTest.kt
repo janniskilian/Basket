@@ -8,7 +8,9 @@ import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.type.domain.ArticleSuggestion
 import de.janniskilian.basket.core.type.domain.Category
+import de.janniskilian.basket.core.util.extension.extern.nextValue
 import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -40,8 +42,8 @@ class GetSuggestionsUseCaseTest {
 	private val useCase = GetSuggestionsUseCase(1, dataClient)
 
 	@Test
-	fun `ascending ordering by article name`() {
-		useCase.run("").observeForever { result ->
+	fun `ascending ordering by article name`() = runBlocking {
+		useCase.run("").nextValue { result ->
 			assertEquals(
 				listOf(
 					ShoppingListItemSuggestion(apples, true, true),
@@ -54,15 +56,15 @@ class GetSuggestionsUseCaseTest {
 	}
 
 	@Test
-	fun `create article suggestion`() {
-		useCase.run("apple").observeForever { result ->
+	fun `create article suggestion`() = runBlocking {
+		useCase.run("apple").nextValue { result ->
 			assertEquals(
 				ShoppingListItemSuggestion(Article(0, "apple", null), false, false),
 				result.first()
 			)
 		}
 
-		useCase.run(apples.name).observeForever { result ->
+		useCase.run(apples.name).nextValue { result ->
 			assertEquals(
 				ShoppingListItemSuggestion(apples, true, true),
 				result.first()
@@ -71,10 +73,10 @@ class GetSuggestionsUseCaseTest {
 	}
 
 	@Test
-	fun `add quantity to suggestions`() {
+	fun `add quantity to suggestions`() = runBlocking {
 		val formatedQuantity = "2 kg"
 
-		useCase.run("a 2kg").observeForever { result ->
+		useCase.run("a 2kg").nextValue { result ->
 			assertEquals(
 				listOf(
 					ShoppingListItemSuggestion(

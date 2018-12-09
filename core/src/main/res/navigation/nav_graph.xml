@@ -9,13 +9,21 @@
 		android:id="@+id/listsFragment"
 		android:name="de.janniskilian.basket.feature.lists.lists.ListsFragment"
 		android:label="Lists"
-		tools:layout="@layout/fragment_lists"/>
+		tools:layout="@layout/fragment_lists">
+		<action
+			android:id="@+id/action_listsFragment_to_listFragment"
+			app:destination="@id/listFragment"/>
+	</fragment>
 
 	<fragment
 		android:id="@+id/listFragment"
 		android:name="de.janniskilian.basket.feature.lists.list.ListFragment"
 		android:label="List"
-		tools:layout="@layout/fragment_list"/>
+		tools:layout="@layout/fragment_list">
+		<argument
+			android:name="shoppingListId"
+			app:argType="long"/>
+	</fragment>
 
 	<fragment
 		android:id="@+id/groupsFragment"
