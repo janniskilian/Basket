@@ -117,7 +117,7 @@
 
 	<style name="Widget.App.IconButton" parent="Widget.AppCompat.Toolbar.Button.Navigation">
 		<item name="android:layout_width">@dimen/increment</item>
-		<item name="android:layout_height">@dimen/increment</item>
+		<item name="android:layout_height">wrap_content</item>
 		<item name="android:tint">?attr/colorIcon</item>
 	</style>
 

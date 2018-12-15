@@ -12,7 +12,9 @@ class ListItemInputParserTest {
 		checkResult("Apples", "Apples")
 		checkResult("Apple Pie", "Apple Pie")
 		checkResult("Apple Pie   ", "Apple Pie")
-		checkResult("Apple Pie, ", "Apple Pie")
+		checkResult("Apple Pie, ", "Apple Pie,")
+		checkResult("Apple, Pie", "Apple, Pie")
+		checkResult("Apple, Pie ", "Apple, Pie")
 		checkResult("Apple, Pie, ", "Apple, Pie,")
 		checkResult(" ", "")
 	}
@@ -23,8 +25,8 @@ class ListItemInputParserTest {
 		checkResult("Bananas, 2", "Bananas", "2")
 		checkResult("Banana Bread 2", "Banana Bread", "2")
 		checkResult("Banana Bread,  2", "Banana Bread", "2")
-		//checkResult("Banana, Bread 2", "Banana Bread", "2")
-		//checkResult("Banana, Bread, 2", "Banana Bread", "2")
+		checkResult("Banana, Bread 2", "Banana, Bread", "2")
+		checkResult("Banana, Bread, 2", "Banana, Bread", "2")
 	}
 
 	@Test

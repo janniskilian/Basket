@@ -3,13 +3,13 @@ package de.janniskilian.basket.feature.lists.addlistitem
 class ListItemInputParser {
 
 	private val quantitySeparatorRegex by lazy {
-		Regex("""[,\-]+\s*(([0-9]+)\s*([a-zA-Z0-9]+)?)?""")
+		Regex("""[,;\-]+\s*(([0-9]+)\s*([a-zA-Z0-9]+)?)""")
 	}
 	private val alphaNameInputRegex by lazy {
-		Regex("""([a-zA-Z\s]*[a-zA-Z])(\s+([0-9]+)?\s*([a-zA-Z]+)?)?""")
+		Regex("""([a-zA-Z,;\-\s]*[a-zA-Z])(\s+([0-9]+)?\s*([a-zA-Z]+)?)?""")
 	}
 	private val alphaNumNameInputRegex by lazy {
-		Regex("""([a-zA-Z0-9\s]*[a-zA-Z0-9])\s*[,\-]+\s*(([0-9]+)?\s*([a-zA-Z]+)?)?""")
+		Regex("""([a-zA-Z0-9,;\-\s]*[a-zA-Z0-9])\s*[,\-]+\s*(([0-9]+)?\s*([a-zA-Z]+)?)?""")
 	}
 
 	fun parse(input: String): Result {
