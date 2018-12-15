@@ -52,7 +52,7 @@ subprojects {
 				if (name == "main") {
 					shrinkResources true
 				}
-				proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+				proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
 			}
 		}
 		compileOptions {
@@ -100,12 +100,6 @@ subprojects {
 		if (name != "core") {
 			implementation project(path: ":core")
 		}
-	}
-}
-
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-	kotlinOptions {
-		freeCompilerArgs = ["-progressive"]
 	}
 }
 

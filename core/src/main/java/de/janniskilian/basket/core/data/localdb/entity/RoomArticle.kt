@@ -17,12 +17,13 @@ import androidx.room.PrimaryKey
 )
 data class RoomArticle(
 
-	@ColumnInfo(index = true)
+	@ColumnInfo(name = "name", index = true)
 	val name: String,
 
-	@ColumnInfo(index = true)
+	@ColumnInfo(name = "categoryId", index = true)
 	val categoryId: Long?,
 
 	@PrimaryKey(autoGenerate = true)
+	@ColumnInfo(name = "id")
 	val id: Long = 0
 )

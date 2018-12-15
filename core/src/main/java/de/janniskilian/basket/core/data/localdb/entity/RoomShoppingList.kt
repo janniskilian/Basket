@@ -6,11 +6,14 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "shoppingList")
 data class RoomShoppingList(
-	@ColumnInfo(index = true)
+
+	@ColumnInfo(name = "name", index = true)
 	val name: String,
 
+	@ColumnInfo(name = "color")
 	val color: Int,
 
 	@PrimaryKey(autoGenerate = true)
+	@ColumnInfo(name = "id")
 	val id: Long = 0
 )
