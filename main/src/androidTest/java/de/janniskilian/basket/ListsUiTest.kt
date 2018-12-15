@@ -20,7 +20,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class HandleListUiTest {
+class ListsUiTest {
 
 	@get:Rule
 	val activityRule = UiTestRule()

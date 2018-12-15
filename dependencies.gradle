@@ -5,7 +5,7 @@ def versions = [
 	room       : "2.1.0-alpha03",
 	nav        : "1.0.0-alpha08",
 	leak_canary: "1.6.2",
-	espresso   : "3.1.0"
+	espresso   : "3.1.1"
 ]
 
 def kotlin = [
@@ -39,7 +39,7 @@ def leak_canary = [
 
 def plugins = [
 	kotlin       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
-	android      : "com.android.tools.build:gradle:3.3.0-rc02",
+	android      : "com.android.tools.build:gradle:3.4.0-alpha08",
 	nav_safe_args: "android.arch.navigation:navigation-safe-args-gradle-plugin:$versions.nav"
 ]
 
@@ -47,14 +47,14 @@ def testing = [
 	junit      : "junit:junit:4.12",
 	kotlin_test: "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin",
 	mockito    : "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0",
-	robolectric: "org.robolectric:robolectric:4.0.2"
+	robolectric: "org.robolectric:robolectric:4.1"
 ]
 
 def android_testing = [
-	core            : "androidx.test:core:1.0.0",
-	runner          : "androidx.test:runner:1.1.0",
-	junit           : "androidx.test.ext:junit:1.0.0",
-	rules           : "androidx.test:rules:1.1.0",
+	core            : "androidx.test:core:1.1.0",
+	runner          : "androidx.test:runner:1.1.1",
+	junit           : "androidx.test.ext:junit:1.1.0",
+	rules           : "androidx.test:rules:1.1.1",
 	espresso        : "androidx.test.espresso:espresso-core:$versions.espresso",
 	espresso_contrib: "androidx.test.espresso:espresso-contrib:$versions.espresso",
 	livedata        : "androidx.arch.core:core-testing:$versions.lifecycle",

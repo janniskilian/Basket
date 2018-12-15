@@ -3,7 +3,6 @@ package de.janniskilian.basket.core.data
 import java.io.Closeable
 
 interface DataClient: Closeable {
-
 	val article: ArticleDataClient
 
 	val category: CategoryDataClient
@@ -11,4 +10,6 @@ interface DataClient: Closeable {
 	val shoppingList: ShoppingListDataClient
 
 	val shoppingListItem: ShoppingListItemDataClient
+
+	fun clear()
 }

@@ -13,4 +13,8 @@ class DataClientImpl(
 	override fun close() {
 		localDatabase.close()
 	}
+
+	override fun clear() {
+		localDatabase.clearAllTables()
+	}
 }
