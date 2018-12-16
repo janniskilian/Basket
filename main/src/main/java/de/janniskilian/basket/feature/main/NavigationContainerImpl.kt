@@ -3,11 +3,14 @@ package de.janniskilian.basket.feature.main
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.content.res.ColorStateList
+import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
+import androidx.core.view.updateMargins
 import androidx.lifecycle.LifecycleOwner
+import com.google.android.material.snackbar.Snackbar
 import de.janniskilian.basket.R
 import de.janniskilian.basket.core.ANIMATION_DURATION_M
 import de.janniskilian.basket.core.ANIMATION_DURATION_S
@@ -16,6 +19,7 @@ import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
 import de.janniskilian.basket.core.navigationcontainer.SearchBarViewModel
 import de.janniskilian.basket.core.util.WeakRef
+import de.janniskilian.basket.core.util.extension.extern.contentView
 import de.janniskilian.basket.core.util.extension.extern.doOnEnd
 import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
 import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
@@ -26,146 +30,163 @@ import de.janniskilian.basket.core.util.extension.extern.showKeyboard
 import de.janniskilian.basket.core.util.function.createSpeechInputIntent
 import de.janniskilian.basket.core.util.weakRef
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.math.roundToInt
 
 class NavigationContainerImpl(private val activity: MainActivity) : NavigationContainer {
 
-	override fun setAppBarColor(color: Int, animate: Boolean) {
-		if (animate) {
-			val initialColor = activity.appBar.backgroundTint?.defaultColor
-				?: ContextCompat.getColor(activity, R.color.primary)
+    override fun setAppBarColor(color: Int, animate: Boolean) {
+        if (animate) {
+            val initialColor = activity.appBar.backgroundTint?.defaultColor
+                ?: ContextCompat.getColor(activity, R.color.primary)
 
-			if (color == initialColor) return
+            if (color == initialColor) return
 
-			val evaluator = ArgbEvaluator()
+            val evaluator = ArgbEvaluator()
 
-			with(ValueAnimator.ofFloat(0f, 1f)) {
-				duration = ANIMATION_DURATION_M
-				interpolator = LinearInterpolator()
-				addUpdateListener {
-					activity.appBar.backgroundTint = ColorStateList.valueOf(
-						evaluator.evaluate(animatedFraction, initialColor, color) as Int
-					)
-				}
-				start()
-			}
-		} else {
-			activity.appBar.backgroundTint = ColorStateList.valueOf(color)
-		}
-	}
+            with(ValueAnimator.ofFloat(0f, 1f)) {
+                duration = ANIMATION_DURATION_M
+                interpolator = LinearInterpolator()
+                addUpdateListener {
+                    activity.appBar.backgroundTint = ColorStateList.valueOf(
+                        evaluator.evaluate(animatedFraction, initialColor, color) as Int
+                    )
+                }
+                start()
+            }
+        } else {
+            activity.appBar.backgroundTint = ColorStateList.valueOf(color)
+        }
+    }
 
-	override fun attachSearchBar(viewModel: SearchBarViewModel) {
-		val fragment = activity.currentFragment ?: return
-		val viewModelWeakRef = viewModel.weakRef()
+    override fun showSnackbar(resId: Int, duration: Int, configure: Snackbar.() -> Unit) {
+        Snackbar
+            .make(activity.contentView, resId, duration)
+            .apply {
+                configure()
 
-		observeSearchBarViewModel(viewModel, fragment)
-		setupSearchBarListeners(fragment.weakRef(), viewModelWeakRef)
-	}
+                view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    val appBarHeight = activity.appBar.height + activity.fab.height / 2f
+                    val margin = activity.resources.getDimension(R.dimen.half)
+                    updateMargins(bottom = (appBarHeight + margin).roundToInt())
+                }
+            }
+            .show()
 
-	private fun observeSearchBarViewModel(
-		viewModel: SearchBarViewModel,
-		lifecycleOwner: LifecycleOwner
-	) {
-		viewModel.searchBarVisible.observe(lifecycleOwner, ::toggleSearchBar)
-		viewModel.searchBarInput.observe(lifecycleOwner, ::searchBarInputObserver)
-	}
+    }
 
-	private fun setupSearchBarListeners(
-		fragmentWeakRef: WeakRef<BaseFragment>,
-		viewModelWeakRef: WeakRef<SearchBarViewModel>
-	) {
+    override fun attachSearchBar(viewModel: SearchBarViewModel) {
+        val fragment = activity.currentFragment ?: return
+        val viewModelWeakRef = viewModel.weakRef()
 
-		activity.searchBarBackButton.setOnClickListener {
-			viewModelWeakRef()?.setSearchBarVisible(false)
-		}
+        observeSearchBarViewModel(viewModel, fragment)
+        setupSearchBarListeners(fragment.weakRef(), viewModelWeakRef)
+    }
 
-		activity.searchBarSpeechInputButton.setOnClickListener {
-			if (viewModelWeakRef()?.searchBarInput?.value.isNullOrEmpty()) {
-				fragmentWeakRef()?.startActivityForResult(
-					createSpeechInputIntent(),
-					REQ_SPEECH_INPUT
-				)
-			} else {
-				viewModelWeakRef()?.setSearchBarInput("")
-			}
-		}
+    private fun observeSearchBarViewModel(
+        viewModel: SearchBarViewModel,
+        lifecycleOwner: LifecycleOwner
+    ) {
+        viewModel.searchBarVisible.observe(lifecycleOwner, ::toggleSearchBar)
+        viewModel.searchBarInput.observe(lifecycleOwner, ::searchBarInputObserver)
+    }
 
-		activity.searchBarEditText.onTextChanged {
-			viewModelWeakRef()?.setSearchBarInput(it)
-		}
+    private fun setupSearchBarListeners(
+        fragmentWeakRef: WeakRef<BaseFragment>,
+        viewModelWeakRef: WeakRef<SearchBarViewModel>
+    ) {
 
-		if (!activity.hasHardwareKeyboard) {
-			activity.searchBarEditText.backPressedListener = {
-				viewModelWeakRef()?.setSearchBarVisible(false)
-			}
-		}
-	}
+        activity.searchBarBackButton.setOnClickListener {
+            viewModelWeakRef()?.setSearchBarVisible(false)
+        }
 
-	private fun toggleSearchBar(visible: Boolean) {
-		if (activity.searchBarContainer.isVisible == visible) return
+        activity.searchBarSpeechInputButton.setOnClickListener {
+            if (viewModelWeakRef()?.searchBarInput?.value.isNullOrEmpty()) {
+                fragmentWeakRef()?.startActivityForResult(
+                    createSpeechInputIntent(),
+                    REQ_SPEECH_INPUT
+                )
+            } else {
+                viewModelWeakRef()?.setSearchBarInput("")
+            }
+        }
 
-		val fabEndAlpha: Float
-		val searchBarEndAlpha: Float
-		if (visible) {
-			fabEndAlpha = 0f
-			searchBarEndAlpha = 1f
+        activity.searchBarEditText.onTextChanged {
+            viewModelWeakRef()?.setSearchBarInput(it)
+        }
 
-			activity.searchBarContainer.isVisible = true
-		} else {
-			fabEndAlpha = 1f
-			searchBarEndAlpha = 0f
+        if (!activity.hasHardwareKeyboard) {
+            activity.searchBarEditText.backPressedListener = {
+                viewModelWeakRef()?.setSearchBarVisible(false)
+            }
+        }
+    }
 
-			activity.fab.isVisible = true
-		}
+    private fun toggleSearchBar(visible: Boolean) {
+        if (activity.searchBarContainer.isVisible == visible) return
 
-		activity.searchBarContainer.updateLayoutParams {
-			height = activity.appBar.height + 2
-		}
+        val fabEndAlpha: Float
+        val searchBarEndAlpha: Float
+        if (visible) {
+            fabEndAlpha = 0f
+            searchBarEndAlpha = 1f
 
-		activity.fab
-			.animate()
-			.alpha(fabEndAlpha)
-			.setDuration(ANIMATION_DURATION_S)
-			.doOnEnd {
-				if (visible) {
-					activity.fab.isVisible = false
-				}
-			}
-			.start()
+            activity.searchBarContainer.isVisible = true
+        } else {
+            fabEndAlpha = 1f
+            searchBarEndAlpha = 0f
 
-		activity.searchBarContainer
-			.animate()
-			.alpha(searchBarEndAlpha)
-			.setDuration(ANIMATION_DURATION_S)
-			.doOnEnd {
-				if (!visible) {
-					activity.searchBarContainer.isVisible = false
-				}
-			}
-			.start()
+            activity.fab.isVisible = true
+        }
 
-		if (visible) {
-			activity.searchBarEditText.requestFocus()
-			activity.showKeyboard(activity.searchBarEditText)
-		} else {
-			activity.searchBarEditText.clearFocus()
-			activity.hideKeyboard()
-		}
-	}
+        activity.searchBarContainer.updateLayoutParams {
+            height = activity.appBar.height + 2
+        }
 
-	private fun searchBarInputObserver(input: String) {
-		if (activity.searchBarEditText.text.toString() != input) {
-			activity.searchBarEditText.setText(input)
-		}
+        activity.fab
+            .animate()
+            .alpha(fabEndAlpha)
+            .setDuration(ANIMATION_DURATION_S)
+            .doOnEnd {
+                if (visible) {
+                    activity.fab.isVisible = false
+                }
+            }
+            .start()
 
-		val showSpeechInput = input.isEmpty()
-		activity.searchBarSpeechInputButton.setSelectedImageState(!showSpeechInput)
-		activity.searchBarSpeechInputButton.contentDescription = activity.getString(
-			if (showSpeechInput) {
-				R.string.speech_input_button_desc
-			} else {
-				R.string.clear_input_button_desc
-			}
-		)
-	}
+        activity.searchBarContainer
+            .animate()
+            .alpha(searchBarEndAlpha)
+            .setDuration(ANIMATION_DURATION_S)
+            .doOnEnd {
+                if (!visible) {
+                    activity.searchBarContainer.isVisible = false
+                }
+            }
+            .start()
+
+        if (visible) {
+            activity.searchBarEditText.requestFocus()
+            activity.showKeyboard(activity.searchBarEditText)
+        } else {
+            activity.searchBarEditText.clearFocus()
+            activity.hideKeyboard()
+        }
+    }
+
+    private fun searchBarInputObserver(input: String) {
+        if (activity.searchBarEditText.text.toString() != input) {
+            activity.searchBarEditText.setText(input)
+        }
+
+        val showSpeechInput = input.isEmpty()
+        activity.searchBarSpeechInputButton.setSelectedImageState(!showSpeechInput)
+        activity.searchBarSpeechInputButton.contentDescription = activity.getString(
+            if (showSpeechInput) {
+                R.string.speech_input_button_desc
+            } else {
+                R.string.clear_input_button_desc
+            }
+        )
+    }
 }
 

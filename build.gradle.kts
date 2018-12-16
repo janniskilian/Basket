@@ -13,8 +13,8 @@ buildscript {
 }
 
 plugins {
-    id("com.github.ben-manes.versions").version("0.20.0")
-    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC12")
+    id("com.github.ben-manes.versions") version "0.20.0"
+    id("io.gitlab.arturbosch.detekt") version "1.0.0-RC12"
 }
 
 allprojects {
@@ -108,4 +108,11 @@ subprojects {
             implementation(project(":core"))
         }
     }
+}
+
+detekt {
+    input = files("$projectDir")
+    config = files("$projectDir/detektConfig.yml")
+    parallel = true
+    filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
 }
