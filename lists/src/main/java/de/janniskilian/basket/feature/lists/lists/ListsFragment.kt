@@ -58,7 +58,7 @@ class ListsFragment : BaseFragment() {
     }
 
     override fun onFabClicked() {
-        showBottomSheetFragment(CreateListFragment.create())
+        showDialogFragment(CreateListFragment.create())
     }
 
     private fun setupRecyclerView() {

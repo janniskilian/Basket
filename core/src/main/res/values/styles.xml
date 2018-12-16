@@ -13,7 +13,13 @@
 		<item name="actionOverflowButtonStyle">@style/actionOverflowButtonStyle</item>
 	</style>
 
-	<style name="ThemeOverlay.App.Dark" parent="ThemeOverlay.MaterialComponents.Dark">
+    <style name="Theme.App.FullScreenDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Dark" parent="ThemeOverlay.MaterialComponents.Dark">
 		<item name="colorIcon">@color/icon_dark</item>
 	</style>
 

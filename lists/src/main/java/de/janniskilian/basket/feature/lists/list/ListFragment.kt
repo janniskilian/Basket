@@ -78,6 +78,6 @@ class ListFragment : BaseFragment() {
 	}
 
 	override fun onFabClicked() {
-		showBottomSheetFragment(AddListItemFragment.create(args.shoppingListId))
+        showDialogFragment(AddListItemFragment.create(args.shoppingListId))
 	}
 }

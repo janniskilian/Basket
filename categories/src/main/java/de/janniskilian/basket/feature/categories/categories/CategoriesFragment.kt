@@ -82,7 +82,7 @@ class CategoriesFragment : BaseFragment() {
 		}
 
 	override fun onFabClicked() {
-		showBottomSheetFragment(CategoryFragment.create(CategoryFragmentArgs(null)))
+        showDialogFragment(CategoryFragment.create(CategoryFragmentArgs(null)))
 	}
 }
 

@@ -16,14 +16,10 @@ import de.janniskilian.basket.R
 import de.janniskilian.basket.core.ANIMATION_DURATION_M
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.BasketApp
-import de.janniskilian.basket.core.data.DefaultDataImporter
-import de.janniskilian.basket.core.data.DefaultDataLoader
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainerProvider
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), NavigationContainerProvider {
 
@@ -41,11 +37,10 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
         setupNavigation()
         setClickListeners()
 
-        GlobalScope.launch {
-            DefaultDataImporter(
-                (application as BasketApp).appModule.dataModule.dataClient,
-                DefaultDataLoader(this@MainActivity)
-            ).run()
+        if (savedInstanceState == null
+            && !sharedPrefs.getBoolean(KEY_DEFAULT_DATA_IMPORTED, false)
+        ) {
+            OnboardingFragment().apply { show(supportFragmentManager, tag) }
         }
     }
 
@@ -71,13 +66,6 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
     }
 
     private fun setupNavigation() {
-        val startDestination = if (sharedPrefs.getBoolean(KEY_DEFAULT_DATA_IMPORTED, false)) {
-            R.id.listsFragment
-        } else {
-            R.id.listsFragment
-        }
-        findNavController(R.id.navHost).graph.startDestination = startDestination
-
         navHost.childFragmentManager.registerFragmentLifecycleCallbacks(
             object : FragmentManager.FragmentLifecycleCallbacks() {
                 override fun onFragmentStarted(fm: FragmentManager, fragment: Fragment) {

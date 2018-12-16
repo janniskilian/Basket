@@ -1,6 +1,7 @@
 package de.janniskilian.basket.core.data
 
 import android.content.Context
+import android.content.res.Configuration
 import android.util.JsonReader
 import android.util.JsonToken
 import androidx.annotation.RawRes
@@ -9,94 +10,102 @@ import de.janniskilian.basket.core.data.localdb.entity.RoomArticle
 import de.janniskilian.basket.core.data.localdb.entity.RoomCategory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.*
 
-class DefaultDataLoader(private val context: Context) {
+class DefaultDataLoader(context: Context, locale: Locale = Locale.getDefault()) {
 
-	suspend fun loadCategories(): List<RoomCategory> =
-		withContext(Dispatchers.IO) {
-			readArray(R.raw.categories) { reader, _ ->
-				var id: Long? = null
-				var name: String? = null
+    private val localizedContext by lazy {
+        val conf = Configuration(context.resources.configuration).also {
+            it.setLocale(locale)
+        }
+        context.createConfigurationContext(conf)
+    }
 
-				while (reader.hasNext()) {
-					val fieldName = reader.nextName()
-					when (fieldName) {
-						ID -> id = reader.nextLong()
+    suspend fun loadCategories(): List<RoomCategory> =
+        withContext(Dispatchers.IO) {
+            readArray(R.raw.categories) { reader, _ ->
+                var id: Long? = null
+                var name: String? = null
 
-						NAME -> name = reader.nextString()
+                while (reader.hasNext()) {
+                    val fieldName = reader.nextName()
+                    when (fieldName) {
+                        ID -> id = reader.nextLong()
 
-						else -> reader.skipValue()
-					}
-				}
+                        NAME -> name = reader.nextString()
 
-				if (id != null && name != null) {
-					RoomCategory(name, id)
-				} else {
-					null
-				}
-			}
-		}
+                        else -> reader.skipValue()
+                    }
+                }
 
-	suspend fun loadArticles(): List<RoomArticle> =
-		withContext(Dispatchers.IO) {
-			readArray(R.raw.articles) { reader, index ->
-				var name: String? = null
-				var categoryId: Long? = null
+                if (id != null && name != null) {
+                    RoomCategory(name, id)
+                } else {
+                    null
+                }
+            }
+        }
 
-				while (reader.hasNext()) {
-					val fieldName = reader.nextName()
-					when (fieldName) {
-						NAME -> name = reader.nextString()
+    suspend fun loadArticles(): List<RoomArticle> =
+        withContext(Dispatchers.IO) {
+            readArray(R.raw.articles) { reader, index ->
+                var name: String? = null
+                var categoryId: Long? = null
 
-						CATEGORY_ID -> {
-							if (reader.peek() == JsonToken.NUMBER) {
-								categoryId = reader.nextLong()
-							} else {
-								reader.skipValue()
-							}
-						}
+                while (reader.hasNext()) {
+                    val fieldName = reader.nextName()
+                    when (fieldName) {
+                        NAME -> name = reader.nextString()
 
-						else -> reader.skipValue()
-					}
-				}
+                        CATEGORY_ID -> {
+                            if (reader.peek() == JsonToken.NUMBER) {
+                                categoryId = reader.nextLong()
+                            } else {
+                                reader.skipValue()
+                            }
+                        }
 
-				if (name != null) {
-					RoomArticle(name, categoryId, index + 1L)
-				} else {
-					null
-				}
-			}
-		}
+                        else -> reader.skipValue()
+                    }
+                }
 
-	private inline fun <T> readArray(
-		@RawRes resId: Int,
-		parse: (reader: JsonReader, index: Int) -> T?
-	): List<T> {
-		val list = mutableListOf<T>()
-		var index = 0
+                if (name != null) {
+                    RoomArticle(name, categoryId, index + 1L)
+                } else {
+                    null
+                }
+            }
+        }
 
-		JsonReader(context.resources.openRawResource(resId).reader()).use { reader ->
-			reader.beginArray()
+    private inline fun <T> readArray(
+        @RawRes resId: Int,
+        parse: (reader: JsonReader, index: Int) -> T?
+    ): List<T> {
+        val list = mutableListOf<T>()
+        var index = 0
 
-			while (reader.hasNext()) {
-				reader.beginObject()
-				parse(reader, index)?.let {
-					list.add(it)
-				}
-				reader.endObject()
-				index++
-			}
+        JsonReader(localizedContext.resources.openRawResource(resId).reader()).use { reader ->
+            reader.beginArray()
 
-			reader.endArray()
-		}
+            while (reader.hasNext()) {
+                reader.beginObject()
+                parse(reader, index)?.let {
+                    list.add(it)
+                }
+                reader.endObject()
+                index++
+            }
 
-		return list
-	}
+            reader.endArray()
+        }
 
-	companion object {
+        return list
+    }
 
-		private const val ID = "id"
-		private const val NAME = "name"
-		private const val CATEGORY_ID = "categoryId"
-	}
+    companion object {
+
+        private const val ID = "id"
+        private const val NAME = "name"
+        private const val CATEGORY_ID = "categoryId"
+    }
 }

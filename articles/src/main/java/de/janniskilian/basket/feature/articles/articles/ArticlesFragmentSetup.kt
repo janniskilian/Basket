@@ -46,8 +46,8 @@ class ArticlesFragmentSetup(
 		viewModel.articles.value?.getOrNull(position)?.let { article ->
 			ArticleFragment
 				.create(ArticleFragmentArgs(article.id))
-				.let {
-					it.show(fragment.fragmentManager, it.tag)
+				.apply {
+					show(fragment.fragmentManager, tag)
 				}
 		}
 	}

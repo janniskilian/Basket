@@ -682,5 +682,13 @@
   {
     "name": "Spitzkohl",
     "categoryId": 7
+  },
+  {
+    "name": "Gemüsebrühe",
+    "categoryId": 15
+  },
+  {
+    "name": "Geschenkpapier",
+    "categoryId": 21
   }
 ]

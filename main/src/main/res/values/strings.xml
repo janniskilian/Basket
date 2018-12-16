@@ -13,4 +13,13 @@
 	<string name="navigation_button_desc">Navigation button</string>
 	<string name="navigation_item_icon_desc">Navigation target icon</string>
 
+	<string name="import_presets_headline">Presets Language</string>
+	<string name="import_presets_info">Select the language for preset articles.</string>
+	<string name="import_presets_button">Start</string>
+
+	<string-array name="presets_languages">
+		<item>en</item>
+		<item>de</item>
+	</string-array>
+
 </resources>

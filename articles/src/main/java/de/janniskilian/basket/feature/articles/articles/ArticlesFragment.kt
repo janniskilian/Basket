@@ -76,6 +76,6 @@ class ArticlesFragment : BaseFragment() {
 		}
 
 	override fun onFabClicked() {
-		showBottomSheetFragment(ArticleFragment.create(ArticleFragmentArgs(null)))
+		showDialogFragment(ArticleFragment.create(ArticleFragmentArgs(null)))
 	}
 }

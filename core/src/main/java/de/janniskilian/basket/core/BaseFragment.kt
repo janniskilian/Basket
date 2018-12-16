@@ -27,7 +27,7 @@ open class BaseFragment : Fragment() {
 
 	open fun onFabClicked() {}
 
-	protected fun showBottomSheetFragment(fragment: DialogFragment) {
+    protected fun showDialogFragment(fragment: DialogFragment) {
 		fragment.show(requireActivity().supportFragmentManager, fragment.tag)
 	}
 }

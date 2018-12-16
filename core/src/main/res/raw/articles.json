@@ -853,5 +853,13 @@
     "name": "Pointed cabbage",
     "categoryId": 7,
     "measureId": null
+  },
+  {
+    "name": "Vegetable broth",
+    "categoryId": 15
+  },
+  {
+    "name": "Wrapping paper",
+    "categoryId": 21
   }
 ]
