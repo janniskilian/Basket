@@ -47,7 +47,7 @@ class OnboardingFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_FRAME, R.style.Theme_App_FullScreenDialog)
+        setStyle(STYLE_NO_FRAME, R.style.Widget_App_FullHeightDialog)
     }
 
     override fun onCreateView(

@@ -47,7 +47,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="?attr/actionBarSize"
 		android:layout_gravity="bottom"
-		android:background="@color/white"
+        android:background="?attr/colorForeground"
 		android:visibility="gone">
 
 		<ImageButton

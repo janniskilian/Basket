@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.App" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:statusBarColor">?android:attr/colorBackground</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorForeground">@color/white</item>
+        <item name="colorIcon">@color/icon_light</item>
+
+        <item name="actionOverflowButtonStyle">@style/actionOverflowButtonStyle</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Dark" parent="ThemeOverlay.MaterialComponents.Dark">
+        <item name="colorIcon">@color/icon_dark</item>
+    </style>
+
+    <style name="Widget.App.BottomSheetDialog" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorSecondary">@color/secondary</item>
+
+        <item name="android:statusBarColor">@color/transparent</item>
+
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="Widget.App.FullHeightDialog" parent="Theme.MaterialComponents.Light.DialogWhenLarge">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorSecondary">@color/secondary</item>
+
+        <item name="android:statusBarColor">@color/transparent</item>
+
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+</resources>

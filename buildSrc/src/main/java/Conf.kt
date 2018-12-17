@@ -13,7 +13,7 @@ object Conf {
         val result = p.waitFor()
         return if (result == 0) {
             p.inputStream.reader().use {
-                it.readLines().get(0).toInt()
+                it.readLines().get(0).toInt().coerceAtLeast(25)
             }
         } else {
             0

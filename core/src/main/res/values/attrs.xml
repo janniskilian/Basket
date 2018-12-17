@@ -3,6 +3,7 @@
 
 	<declare-styleable name="AppTheme">
 
+        <attr name="colorForeground" format="color"/>
 		<attr name="colorIcon" format="color"/>
 
 	</declare-styleable>

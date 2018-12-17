@@ -20,7 +20,7 @@
 		android:id="@+id/icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:tint="@color/navigation_item_icon_color"/>
+        android:tint="?attr/colorIcon"/>
 
 	<TextView
 		android:id="@+id/title"
