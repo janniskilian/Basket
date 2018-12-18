@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:layout_width="match_parent"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-	<com.google.android.material.appbar.AppBarLayout style="@style/Widget.App.AppBarLayout">
+    <com.google.android.material.appbar.AppBarLayout style="@style/Widget.Basket.AppBarLayout">
 
-		<androidx.appcompat.widget.Toolbar style="@style/Widget.App.Toolbar">
+        <androidx.appcompat.widget.Toolbar style="@style/Widget.Basket.Toolbar">
 
-			<TextView
-				android:id="@+id/headline"
-				style="@style/Widget.App.ToolbarTitle"/>
-		</androidx.appcompat.widget.Toolbar>
-	</com.google.android.material.appbar.AppBarLayout>
+            <TextView
+                android:id="@+id/headline"
+                style="@style/Widget.Basket.ToolbarTitle"/>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
-	<androidx.constraintlayout.widget.ConstraintLayout
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-		<androidx.recyclerview.widget.RecyclerView
-			android:id="@+id/recyclerView"
-			tools:listitem="@layout/shopping_list_article_item"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"/>
-	</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/shopping_list_article_item"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

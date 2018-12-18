@@ -1,19 +1,19 @@
 <vector
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:width="24dp"
-	android:height="24dp"
-	android:viewportWidth="24"
-	android:viewportHeight="24">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
 
-	<group
-		android:name="menuBackGroup"
-		android:pivotX="12"
-		android:pivotY="12">
-		<path
-			android:name="menuPath"
-			android:pathData="@string/avd_path_menu"
-			android:strokeWidth="2"
-			android:strokeColor="@color/white"
-			android:strokeLineCap="round"/>
-	</group>
+    <group
+        android:name="menuBackGroup"
+        android:pivotX="12"
+        android:pivotY="12">
+        <path
+            android:name="menuPath"
+            android:pathData="@string/avd_path_menu"
+            android:strokeWidth="2"
+            android:strokeColor="@color/white"
+            android:strokeLineCap="round"/>
+    </group>
 </vector>

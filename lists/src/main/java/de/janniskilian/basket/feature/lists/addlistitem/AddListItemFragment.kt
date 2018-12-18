@@ -27,7 +27,7 @@ class AddListItemFragment : DialogFragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setStyle(DialogFragment.STYLE_NORMAL, R.style.Widget_App_FullHeightDialog)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.Widget_Basket_FullHeightDialog)
 	}
 
 	override fun onCreateView(

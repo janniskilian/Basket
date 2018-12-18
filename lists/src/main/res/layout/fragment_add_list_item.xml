@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="bottom"
-        app:backgroundTint="?attr/colorForeground"
+        app:backgroundTint="?attr/colorSurface"
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp">
 
@@ -29,7 +29,7 @@
 
             <ImageButton
                 android:id="@+id/upButton"
-                style="@style/Widget.App.IconButton"
+                style="@style/Widget.Basket.IconButton"
                 android:contentDescription="@string/up_button_desc"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
 
             <ImageButton
                 android:id="@+id/searchBarSpeechInputButton"
-                style="@style/Widget.App.IconButton"
+                style="@style/Widget.Basket.IconButton"
                 android:contentDescription="@string/speech_input_button_desc"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -21,63 +21,63 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ListsViewModelTest {
 
-	private lateinit var appModule: AppModule
+    private lateinit var appModule: AppModule
 
-	private lateinit var viewModel: ListsViewModel
+    private lateinit var viewModel: ListsViewModel
 
-	private val dataClient get() = appModule.dataModule.dataClient
+    private val dataClient get() = appModule.dataModule.dataClient
 
-	@get:Rule
-	val instantTaskExecutorRule = InstantTaskExecutorRule()
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-	@Before
-	fun setup() {
-		val context = ApplicationProvider.getApplicationContext<Application>()
-		appModule = createTestAppModule(context)
+    @Before
+    fun setup() {
+        val context = ApplicationProvider.getApplicationContext<Application>()
+        appModule = createTestAppModule(context)
 
-		runBlocking {
-			DefaultDataImporter(dataClient, DefaultDataLoader(context)).run()
-		}
+        runBlocking {
+            DefaultDataImporter(dataClient, DefaultDataLoader(context)).run()
+        }
 
-		viewModel = ListsViewModel(dataClient)
-	}
+        viewModel = ListsViewModel(dataClient)
+    }
 
-	@After
-	fun destroy() {
-		dataClient.close()
-	}
+    @After
+    fun destroy() {
+        dataClient.close()
+    }
 
-	@Test
-	@UiThreadTest
-	fun sortListsByName() = runBlocking {
-		val id1 = dataClient.shoppingList.create("C", Color.RED)
-		val id2 = dataClient.shoppingList.create("B", Color.RED)
-		val id3 = dataClient.shoppingList.create("A", Color.RED)
+    @Test
+    @UiThreadTest
+    fun sortListsByName() = runBlocking {
+        val id1 = dataClient.shoppingList.create("C", Color.RED)
+        val id2 = dataClient.shoppingList.create("B", Color.RED)
+        val id3 = dataClient.shoppingList.create("A", Color.RED)
 
-		viewModel.shoppingLists.nextValue {
-			assert(it.size == 3)
-			assert(it.component1().id == id3)
-			assert(it.component2().id == id2)
-			assert(it.component3().id == id1)
-		}
-	}
+        viewModel.shoppingLists.nextValue {
+            assert(it.size == 3)
+            assert(it.component1().id == id3)
+            assert(it.component2().id == id2)
+            assert(it.component3().id == id1)
+        }
+    }
 
-	@Test
-	@UiThreadTest
-	fun deleteAndRestoreList() = runBlocking {
-		val id1 = dataClient.shoppingList.create("Test", Color.RED)
-		viewModel.shoppingLists.nextValue { lists ->
-			assert(lists.indexOfFirst { it.id == id1 } == 1)
-		}
+    @Test
+    @UiThreadTest
+    fun deleteAndRestoreList() = runBlocking {
+        val id1 = dataClient.shoppingList.create("Test", Color.RED)
+        viewModel.shoppingLists.nextValue { lists ->
+            assert(lists.indexOfFirst { it.id == id1 } == 1)
+        }
 
-		viewModel.deleteList(1)
-		viewModel.shoppingLists.nextValue { lists ->
-			assert(lists.isEmpty())
-		}
+        viewModel.deleteList(1)
+        viewModel.shoppingLists.nextValue { lists ->
+            assert(lists.isEmpty())
+        }
 
-		viewModel.restoreShoppingList()
-		viewModel.shoppingLists.nextValue { lists ->
-			assert(lists.indexOfFirst { it.id == id1 } == 1)
-		}
-	}
+        viewModel.restoreShoppingList()
+        viewModel.shoppingLists.nextValue { lists ->
+            assert(lists.indexOfFirst { it.id == id1 } == 1)
+        }
+    }
 }

@@ -11,46 +11,46 @@ import de.janniskilian.basket.feature.categories.category.CategoryFragment
 import kotlinx.android.synthetic.main.fragment_categories.*
 
 class CategoriesFragmentSetup(
-	private val fragment: CategoriesFragment,
-	private val viewModel: CategoriesViewModel
+    private val fragment: CategoriesFragment,
+    private val viewModel: CategoriesViewModel
 ) {
 
-	private val categoriesAdapter get() = fragment.recyclerView.adapter as? CategoriesAdapter
+    private val categoriesAdapter get() = fragment.recyclerView.adapter as? CategoriesAdapter
 
-	fun run() {
-		setupRecyclerView()
+    fun run() {
+        setupRecyclerView()
 
-		categoriesAdapter?.clickListener = ::categoryClicked
+        categoriesAdapter?.clickListener = ::categoryClicked
 
-		viewModel.categories.observe(fragment) {
-			categoriesAdapter?.submitList(it)
-		}
+        viewModel.categories.observe(fragment) {
+            categoriesAdapter?.submitList(it)
+        }
 
-		fragment.navigationContainer.attachSearchBar(viewModel)
-	}
+        fragment.navigationContainer.attachSearchBar(viewModel)
+    }
 
-	private fun setupRecyclerView() {
-		with(fragment.recyclerView) {
-			setHasFixedSize(true)
-			layoutManager = LinearLayoutManager(fragment.requireContext())
-			adapter = CategoriesAdapter()
-			(itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
-			addItemDecoration(
-				DividerItemDecoration(
-					fragment.requireContext(),
-					DividerItemDecoration.VERTICAL
-				)
-			)
-		}
-	}
+    private fun setupRecyclerView() {
+        with(fragment.recyclerView) {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(fragment.requireContext())
+            adapter = CategoriesAdapter()
+            (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
+            addItemDecoration(
+                DividerItemDecoration(
+                    fragment.requireContext(),
+                    DividerItemDecoration.VERTICAL
+                )
+            )
+        }
+    }
 
-	private fun categoryClicked(category: Category?) {
-		if (category != null) {
-			CategoryFragment
-				.create(CategoryFragmentArgs(category.id))
-				.let {
-					it.show(fragment.fragmentManager, it.tag)
-				}
-		}
-	}
+    private fun categoryClicked(category: Category?) {
+        if (category != null) {
+            CategoryFragment
+                .create(CategoryFragmentArgs(category.id))
+                .let {
+                    it.show(fragment.fragmentManager, it.tag)
+                }
+        }
+    }
 }

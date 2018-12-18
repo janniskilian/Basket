@@ -15,7 +15,7 @@
 
         <ImageView
             android:id="@+id/image"
-            style="@style/Widget.App.EmptyImage"
+            style="@style/Widget.Basket.EmptyImage"
             app:layout_constraintBottom_toTopOf="@id/headline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/three"
             android:text="@string/import_presets_headline"
-            android:textAppearance="@style/TextAppearance.App.Headline"
+            android:textAppearance="@style/TextAppearance.Basket.Headline"
             app:layout_constraintBottom_toTopOf="@id/info"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,6 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button"
-            style="@style/Widget.App.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/three"

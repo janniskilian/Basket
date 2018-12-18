@@ -1,29 +1,29 @@
 <animated-vector
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:aapt="http://schemas.android.com/aapt"
-	android:drawable="@drawable/vd_addchecked_add">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:drawable="@drawable/vd_addchecked_add">
 
-	<target android:name="addPath">
-		<aapt:attr name="android:animation">
-			<objectAnimator
-				android:duration="@integer/animation_duration_s"
-				android:interpolator="@android:interpolator/fast_out_slow_in"
-				android:propertyName="pathData"
-				android:valueFrom="@string/avd_path_add"
-				android:valueTo="@string/avd_path_checked"
-				android:valueType="pathType"/>
-		</aapt:attr>
-	</target>
+    <target android:name="addPath">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:duration="@integer/animation_duration_s"
+                android:interpolator="@android:interpolator/fast_out_slow_in"
+                android:propertyName="pathData"
+                android:valueFrom="@string/avd_path_add"
+                android:valueTo="@string/avd_path_checked"
+                android:valueType="pathType"/>
+        </aapt:attr>
+    </target>
 
-	<target android:name="addCheckedGroup">
-		<aapt:attr name="android:animation">
-			<objectAnimator
-				android:duration="@integer/animation_duration_s"
-				android:interpolator="@android:interpolator/fast_out_slow_in"
-				android:propertyName="rotation"
-				android:valueFrom="-180"
-				android:valueTo="0"/>
-		</aapt:attr>
-	</target>
+    <target android:name="addCheckedGroup">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:duration="@integer/animation_duration_s"
+                android:interpolator="@android:interpolator/fast_out_slow_in"
+                android:propertyName="rotation"
+                android:valueFrom="-180"
+                android:valueTo="0"/>
+        </aapt:attr>
+    </target>
 
 </animated-vector>

@@ -8,16 +8,16 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
-        style="@style/Widget.App.AppBarLayout">
+        style="@style/Widget.Basket.AppBarLayout">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            style="@style/Widget.App.Toolbar">
+            style="@style/Widget.Basket.Toolbar">
 
             <TextView
                 android:id="@+id/headline"
-                style="@style/Widget.App.ToolbarTitle"
-                android:text="@string/shopping_lists_title" />
+                style="@style/Widget.Basket.ToolbarTitle"
+                android:text="@string/shopping_lists_title"/>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -31,42 +31,42 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/shopping_list_item" />
+            tools:listitem="@layout/shopping_list_item"/>
 
         <ImageView
             android:id="@+id/emptyImage"
-            style="@style/Widget.App.EmptyImage"
+            style="@style/Widget.Basket.EmptyImage"
             android:contentDescription="@string/empty_image_desc"
             app:layout_constraintBottom_toTopOf="@id/emptyHeadline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            app:srcCompat="@drawable/ic_shopping_lists_24" />
+            app:srcCompat="@drawable/ic_shopping_lists_24"/>
 
         <TextView
             android:id="@+id/emptyHeadline"
-            style="@style/Widget.App.EmptyHeadline"
+            style="@style/Widget.Basket.EmptyHeadline"
             android:text="@string/shopping_lists_empty_title"
             app:layout_constraintBottom_toTopOf="@id/emptyInfo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/emptyImage" />
+            app:layout_constraintTop_toBottomOf="@id/emptyImage"/>
 
         <TextView
             android:id="@+id/emptyInfo"
-            style="@style/Widget.App.EmptyInfo"
+            style="@style/Widget.Basket.EmptyInfo"
             android:text="@string/shopping_lists_empty_info"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/emptyHeadline" />
+            app:layout_constraintTop_toBottomOf="@id/emptyHeadline"/>
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/emptyGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="emptyImage,emptyHeadline,emptyInfo" />
+            app:constraint_referenced_ids="emptyImage,emptyHeadline,emptyInfo"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

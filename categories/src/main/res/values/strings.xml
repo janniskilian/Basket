@@ -1,11 +1,11 @@
 <resources>
 
-	<string name="categories_title">Categories</string>
+    <string name="categories_title">Categories</string>
 
-	<string name="category_name_hint">Category name</string>
-	<string name="create_category_button">Create</string>
-	<string name="save_category_button">Save</string>
+    <string name="category_name_hint">Category name</string>
+    <string name="create_category_button">Create</string>
+    <string name="save_category_button">Save</string>
 
-	<string name="fab_create_category">Create Category</string>
+    <string name="fab_create_category">Create Category</string>
 
 </resources>

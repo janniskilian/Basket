@@ -19,70 +19,70 @@ import kotlinx.android.synthetic.main.fragment_categories.*
 
 class CategoriesFragment : BaseFragment() {
 
-	private val module by lazy {
-		CategoriesModule(appModule, this)
-	}
+    private val module by lazy {
+        CategoriesModule(appModule, this)
+    }
 
-	private val setup get() = module.categoriesSetup
+    private val setup get() = module.categoriesSetup
 
-	private val viewModel get() = module.categoriesViewModel
+    private val viewModel get() = module.categoriesViewModel
 
-	override val menuRes: Int?
-		get() = R.menu.search
+    override val menuRes: Int?
+        get() = R.menu.search
 
-	override val fabTextRes: Int?
-		get() = R.string.fab_create_category
+    override val fabTextRes: Int?
+        get() = R.string.fab_create_category
 
-	override fun onCreateView(
-		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View =
-		inflater.inflate(
-			R.layout.fragment_categories,
-			container,
-			false
-		)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View =
+        inflater.inflate(
+            R.layout.fragment_categories,
+            container,
+            false
+        )
 
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		setup.run()
-	}
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setup.run()
+    }
 
-	override fun onDestroyView() {
-		recyclerView.adapter = null
-		super.onDestroyView()
-	}
+    override fun onDestroyView() {
+        recyclerView.adapter = null
+        super.onDestroyView()
+    }
 
-	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-		if (requestCode == REQ_SPEECH_INPUT
-			&& resultCode == Activity.RESULT_OK
-		) {
-			getSpeechInputResult(data)?.let {
-				viewModel.setSearchBarInput(it)
-			}
-		}
-	}
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQ_SPEECH_INPUT
+            && resultCode == Activity.RESULT_OK
+        ) {
+            getSpeechInputResult(data)?.let {
+                viewModel.setSearchBarInput(it)
+            }
+        }
+    }
 
-	override fun onOptionsItemSelected(item: MenuItem?): Boolean =
-		if (item?.itemId == R.id.action_search) {
-			viewModel.setSearchBarVisible(true)
-			true
-		} else {
-			false
-		}
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean =
+        if (item?.itemId == R.id.action_search) {
+            viewModel.setSearchBarVisible(true)
+            true
+        } else {
+            false
+        }
 
-	override fun onBackPressed(): Boolean =
-		if (requireActivity().hasHardwareKeyboard
-			&& viewModel.searchBarVisible.value == true
-		) {
-			viewModel.setSearchBarVisible(false)
-			true
-		} else {
-			false
-		}
+    override fun onBackPressed(): Boolean =
+        if (requireActivity().hasHardwareKeyboard
+            && viewModel.searchBarVisible.value == true
+        ) {
+            viewModel.setSearchBarVisible(false)
+            true
+        } else {
+            false
+        }
 
-	override fun onFabClicked() {
+    override fun onFabClicked() {
         showDialogFragment(CategoryFragment.create(CategoryFragmentArgs(null)))
-	}
+    }
 }
 

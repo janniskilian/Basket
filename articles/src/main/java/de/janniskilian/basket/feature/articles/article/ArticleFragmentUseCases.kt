@@ -8,18 +8,18 @@ import kotlinx.coroutines.launch
 
 class ArticleFragmentUseCases(private val dataClient: DataClient) {
 
-	fun createArticle(name: String, category: Category?): Job =
-		dataClient.article.create(name, category)
+    fun createArticle(name: String, category: Category?): Job =
+        dataClient.article.create(name, category)
 
-	fun editArticle(articleId: Long, name: String, category: Category?): Job =
-		GlobalScope.launch {
-			dataClient.article.get(articleId)?.let {
-				dataClient.article.update(
-					it.copy(name = name, category = category)
-				)
-			}
-		}
+    fun editArticle(articleId: Long, name: String, category: Category?): Job =
+        GlobalScope.launch {
+            dataClient.article.get(articleId)?.let {
+                dataClient.article.update(
+                    it.copy(name = name, category = category)
+                )
+            }
+        }
 
-	fun deleteArticle(articleId: Long): Job =
-		dataClient.article.delete(articleId)
+    fun deleteArticle(articleId: Long): Job =
+        dataClient.article.delete(articleId)
 }

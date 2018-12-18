@@ -1,5 +1,6 @@
 package de.janniskilian.basket.feature.lists.lists
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -85,29 +86,7 @@ class ListsFragment : BaseFragment() {
 
     private fun setClickListeners() {
         listsAdapter?.itemClickListener = { startList(it) }
-        listsAdapter?.moreButtonClickListener = { position ->
-            recyclerView.findViewHolderForAdapterPosition(position)?.let { viewHolder ->
-                with(
-                    PopupMenu(
-                        requireContext(),
-                        viewHolder.itemView.findViewById(R.id.moreButton)
-                    )
-                ) {
-                    inflate(R.menu.list_item)
-                    setOnMenuItemClickListener {
-                        when (it.itemId) {
-                            R.id.action_edit_list -> editList(position)
-                            R.id.action_delete_list -> {
-                                viewModel.deleteList(position)
-                            }
-                        }
-
-                        true
-                    }
-                    show()
-                }
-            }
-        }
+        listsAdapter?.moreButtonClickListener = ::showListPopupMenu
     }
 
     private fun shoppingListsObserver(shoppingLists: List<ShoppingList>) {
@@ -118,6 +97,37 @@ class ListsFragment : BaseFragment() {
                 0
             } else {
                 SCROLL_FLAG_SCROLL or SCROLL_FLAG_ENTER_ALWAYS
+            }
+        }
+    }
+
+    private fun showListPopupMenu(position: Int) {
+        recyclerView.findViewHolderForAdapterPosition(position)?.let { viewHolder ->
+            with(
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+                    PopupMenu(
+                        requireContext(),
+                        viewHolder.itemView.findViewById(R.id.moreButton),
+                        0,
+                        androidx.appcompat.R.attr.actionOverflowMenuStyle,
+                        0
+                    )
+                } else {
+                    PopupMenu(requireContext(), viewHolder.itemView.findViewById(R.id.moreButton))
+                }
+            ) {
+                inflate(R.menu.list_item)
+                setOnMenuItemClickListener {
+                    when (it.itemId) {
+                        R.id.action_edit_list -> editList(position)
+                        R.id.action_delete_list -> {
+                            viewModel.deleteList(position)
+                        }
+                    }
+
+                    true
+                }
+                show()
             }
         }
     }

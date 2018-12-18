@@ -13,35 +13,35 @@ import de.janniskilian.basket.feature.articles.R
 
 class ArticleFragment : BaseBottomSheetDialogFragment() {
 
-	private val module by lazy {
-		ArticleModule(appModule, this, getArgs())
-	}
+    private val module by lazy {
+        ArticleModule(appModule, this, getArgs())
+    }
 
-	private val setup get() = module.articleSetup
+    private val setup get() = module.articleSetup
 
-	private val viewModel get() = module.articleViewModel
+    private val viewModel get() = module.articleViewModel
 
-	override fun onCreateView(
-		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View =
-		inflater.inflate(
-			R.layout.fragment_article,
-			container,
-			false
-		)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View =
+        inflater.inflate(
+            R.layout.fragment_article,
+            container,
+            false
+        )
 
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		setup.run()
-	}
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setup.run()
+    }
 
-	override fun onBackPressed(): Boolean =
-		viewModel.backPressed()
+    override fun onBackPressed(): Boolean =
+        viewModel.backPressed()
 
-	companion object {
+    companion object {
 
-		fun create(args: ArticleFragmentArgs): ArticleFragment =
-			ArticleFragment().putArgs(args)
-	}
+        fun create(args: ArticleFragmentArgs): ArticleFragment =
+            ArticleFragment().putArgs(args)
+    }
 }

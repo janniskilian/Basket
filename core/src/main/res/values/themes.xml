@@ -1,43 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.App" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:statusBarColor">?android:attr/colorBackground</item>
+    <style name="Theme.Basket.Light" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowLightStatusBar">true</item>
 
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorSecondary">@color/secondary</item>
-        <item name="colorForeground">@color/white</item>
         <item name="colorIcon">@color/icon_light</item>
-
-        <item name="actionOverflowButtonStyle">@style/actionOverflowButtonStyle</item>
     </style>
 
-    <style name="ThemeOverlay.App.Dark" parent="ThemeOverlay.MaterialComponents.Dark">
+    <style name="Theme.Basket.Dark" parent="@style/Theme.MaterialComponents.NoActionBar">
         <item name="colorIcon">@color/icon_dark</item>
     </style>
 
-    <style name="Widget.App.BottomSheetDialog" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+    <style name="Base.Theme.Basket.DayNight" parent="Theme.Basket.Light"/>
+
+    <style name="Theme.Basket.DayNight" parent="Base.Theme.Basket.DayNight">
+        <item name="android:statusBarColor">?android:attr/colorBackground</item>
+
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@android:color/primary_text_light</item>
 
-        <item name="android:statusBarColor">@color/transparent</item>
-
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="materialButtonStyle">@style/Widget.Basket.Button</item>
+        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox
+        </item>
+        <item name="actionOverflowButtonStyle">@style/Widget.Basket.ActionButton.Overflow</item>
+        <item name="bottomSheetDialogTheme">@style/Widget.Basket.BottomSheetDialog</item>
     </style>
 
-    <style name="Widget.App.FullHeightDialog" parent="Theme.MaterialComponents.Light.DialogWhenLarge">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorSecondary">@color/secondary</item>
+    <style name="ThemeOverlay.Basket.DayNight" parent="ThemeOverlay.MaterialComponents.Light"/>
 
-        <item name="android:statusBarColor">@color/transparent</item>
-
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowSoftInputMode">adjustResize</item>
+    <style name="ThemeOverlay.Basket.Dark" parent="ThemeOverlay.MaterialComponents.Dark">
+        <item name="colorIcon">@color/icon_dark</item>
     </style>
 
 </resources>

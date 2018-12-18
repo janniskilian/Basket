@@ -18,64 +18,64 @@ import de.janniskilian.basket.feature.articles.article.ArticleFragment
 
 class ArticlesFragment : BaseFragment() {
 
-	private val module by lazy {
-		ArticlesModule(appModule, this)
-	}
+    private val module by lazy {
+        ArticlesModule(appModule, this)
+    }
 
-	private val setup get() = module.articlesSetup
+    private val setup get() = module.articlesSetup
 
-	private val viewModel get() = module.articlesViewModel
+    private val viewModel get() = module.articlesViewModel
 
-	override val menuRes: Int?
-		get() = R.menu.search
+    override val menuRes: Int?
+        get() = R.menu.search
 
-	override val fabTextRes: Int?
-		get() = R.string.fab_create_article
+    override val fabTextRes: Int?
+        get() = R.string.fab_create_article
 
-	override fun onCreateView(
-		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View? =
-		inflater.inflate(
-			R.layout.fragment_articles,
-			container,
-			false
-		)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
+        inflater.inflate(
+            R.layout.fragment_articles,
+            container,
+            false
+        )
 
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		setup.run()
-	}
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setup.run()
+    }
 
-	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-		if (requestCode == REQ_SPEECH_INPUT
-			&& resultCode == Activity.RESULT_OK
-		) {
-			getSpeechInputResult(data)?.let {
-				viewModel.setSearchBarInput(it)
-			}
-		}
-	}
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQ_SPEECH_INPUT
+            && resultCode == Activity.RESULT_OK
+        ) {
+            getSpeechInputResult(data)?.let {
+                viewModel.setSearchBarInput(it)
+            }
+        }
+    }
 
-	override fun onOptionsItemSelected(item: MenuItem?): Boolean =
-		if (item?.itemId == R.id.action_search) {
-			viewModel.setSearchBarVisible(true)
-			true
-		} else {
-			false
-		}
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean =
+        if (item?.itemId == R.id.action_search) {
+            viewModel.setSearchBarVisible(true)
+            true
+        } else {
+            false
+        }
 
-	override fun onBackPressed(): Boolean =
-		if (requireActivity().hasHardwareKeyboard
-			&& viewModel.searchBarVisible.value == true
-		) {
-			viewModel.setSearchBarVisible(false)
-			true
-		} else {
-			false
-		}
+    override fun onBackPressed(): Boolean =
+        if (requireActivity().hasHardwareKeyboard
+            && viewModel.searchBarVisible.value == true
+        ) {
+            viewModel.setSearchBarVisible(false)
+            true
+        } else {
+            false
+        }
 
-	override fun onFabClicked() {
-		showDialogFragment(ArticleFragment.create(ArticleFragmentArgs(null)))
-	}
+    override fun onFabClicked() {
+        showDialogFragment(ArticleFragment.create(ArticleFragmentArgs(null)))
+    }
 }

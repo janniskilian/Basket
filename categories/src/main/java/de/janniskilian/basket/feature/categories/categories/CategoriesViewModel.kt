@@ -9,9 +9,9 @@ import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.util.extension.extern.switchMap
 
 class CategoriesViewModel(
-	dataClient: DataClient
+    dataClient: DataClient
 ) : ViewModel(), SearchBarViewModel by DefaultSearchBarViewModel() {
 
-	val categories: LiveData<List<Category>> =
-		searchBarInput.switchMap { dataClient.category.get(it) }
+    val categories: LiveData<List<Category>> =
+        searchBarInput.switchMap { dataClient.category.get(it) }
 }

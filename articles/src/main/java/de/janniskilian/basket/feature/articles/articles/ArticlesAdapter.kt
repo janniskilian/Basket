@@ -11,36 +11,36 @@ import de.janniskilian.basket.feature.articles.R
 import kotlinx.android.synthetic.main.article_item.view.*
 
 class ArticlesAdapter : ListAdapter<Article, ArticlesAdapter.ViewHolder>(
-	GenericDiffItemCallback { oldItem, newItem ->
-		oldItem.id == newItem.id
-	}
+    GenericDiffItemCallback { oldItem, newItem ->
+        oldItem.id == newItem.id
+    }
 ) {
 
-	var clickListener: ((position: Int) -> Unit)? = null
+    var clickListener: ((position: Int) -> Unit)? = null
 
-	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-		ViewHolder(
-			LayoutInflater
-				.from(parent.context)
-				.inflate(
-					R.layout.article_item,
-					parent,
-					false
-				)
-		)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(
+            LayoutInflater
+                .from(parent.context)
+                .inflate(
+                    R.layout.article_item,
+                    parent,
+                    false
+                )
+        )
 
-	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-		val item = getItem(position)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = getItem(position)
 
-		with(holder.itemView) {
-			setOnClickListener {
-				clickListener?.invoke(holder.adapterPosition)
-			}
+        with(holder.itemView) {
+            setOnClickListener {
+                clickListener?.invoke(holder.adapterPosition)
+            }
 
-			articleName.text = item.name
-			categoryName.text = item.category?.name ?: context.getString(R.string.category_default)
-		}
-	}
+            articleName.text = item.name
+            categoryName.text = item.category?.name ?: context.getString(R.string.category_default)
+        }
+    }
 
-	class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

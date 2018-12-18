@@ -19,7 +19,7 @@ object Deps {
         val recyclerview = "androidx.recyclerview:recyclerview:1.0.0"
     }
 
-    val material = "com.google.android.material:material:1.0.0"
+    val material = "com.google.android.material:material:1.1.0-alpha02"
 
     val timber = "com.jakewharton.timber:timber:4.7.1"
 

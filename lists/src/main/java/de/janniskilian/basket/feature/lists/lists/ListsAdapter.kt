@@ -3,9 +3,9 @@ package de.janniskilian.basket.feature.lists.lists
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.R
@@ -33,7 +33,7 @@ class ListsAdapter : ListAdapter<ShoppingList, ListsAdapter.ViewHolder>(
 		val item = getItem(position)
 		//val resources = holder.itemView.context.resources
 
-		with(holder.itemView as CardView) {
+        with(holder.itemView as MaterialCardView) {
 			setOnClickListener { itemClickListener?.invoke(holder.adapterPosition) }
 			moreButton.setOnClickListener {
 				moreButtonClickListener?.invoke(holder.adapterPosition)

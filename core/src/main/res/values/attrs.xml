@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<declare-styleable name="AppTheme">
+    <declare-styleable name="AppTheme">
 
-        <attr name="colorForeground" format="color"/>
-		<attr name="colorIcon" format="color"/>
+        <attr name="colorIcon" format="color"/>
 
-	</declare-styleable>
+    </declare-styleable>
 
 </resources>

@@ -4,8 +4,8 @@ import kotlinx.android.synthetic.main.fragment_category.*
 
 class CategoryRouterImpl(private val fragment: CategoryFragment) : CategoryRouter {
 
-	override fun dismiss() {
-		fragment.nameEditText.clearFocus()
-		fragment.dismiss()
-	}
+    override fun dismiss() {
+        fragment.nameEditText.clearFocus()
+        fragment.dismiss()
+    }
 }

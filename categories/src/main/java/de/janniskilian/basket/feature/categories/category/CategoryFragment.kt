@@ -13,30 +13,30 @@ import de.janniskilian.basket.feature.categories.R
 
 class CategoryFragment : BaseBottomSheetDialogFragment() {
 
-	private val module by lazy {
-		CategoryModule(appModule, this, getArgs())
-	}
+    private val module by lazy {
+        CategoryModule(appModule, this, getArgs())
+    }
 
-	private val setup get() = module.categorySetup
+    private val setup get() = module.categorySetup
 
-	override fun onCreateView(
-		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View =
-		inflater.inflate(
-			R.layout.fragment_category,
-			container,
-			false
-		)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View =
+        inflater.inflate(
+            R.layout.fragment_category,
+            container,
+            false
+        )
 
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		setup.run()
-	}
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setup.run()
+    }
 
-	companion object {
+    companion object {
 
-		fun create(args: CategoryFragmentArgs): CategoryFragment =
-			CategoryFragment().putArgs(args)
-	}
+        fun create(args: CategoryFragmentArgs): CategoryFragment =
+            CategoryFragment().putArgs(args)
+    }
 }
