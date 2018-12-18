@@ -11,7 +11,8 @@ import androidx.room.PrimaryKey
 		ForeignKey(
 			entity = RoomCategory::class,
 			parentColumns = ["id"],
-			childColumns = ["categoryId"]
+			childColumns = ["categoryId"],
+			onDelete = ForeignKey.SET_NULL
 		)
 	]
 )

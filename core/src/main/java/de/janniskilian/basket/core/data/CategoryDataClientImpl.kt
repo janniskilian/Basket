@@ -39,6 +39,9 @@ class CategoryDataClientImpl(localDb: LocalDatabase) : CategoryDataClient {
 	override fun update(category: Category) =
 		GlobalScope.launch { dao.update(modelToRoom(category)) }
 
-	override fun delete(category: Category) =
-		GlobalScope.launch { dao.delete(modelToRoom(category)) }
+    override fun update(id: Long, name: String) =
+        GlobalScope.launch { dao.update(id, name) }
+
+    override fun delete(id: Long) =
+        GlobalScope.launch { dao.delete(id) }
 }

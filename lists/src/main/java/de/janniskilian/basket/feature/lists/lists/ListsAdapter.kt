@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import de.janniskilian.basket.core.type.domain.ShoppingList
+import de.janniskilian.basket.core.util.extension.extern.createStrokeColor
 import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.shopping_list_item.view.*
@@ -40,6 +41,7 @@ class ListsAdapter : ListAdapter<ShoppingList, ListsAdapter.ViewHolder>(
 			}
 
 			setCardBackgroundColor(item.color)
+            strokeColor = item.color.createStrokeColor()
 
 			nameTextView.text = item.name
 			itemsTotalTextView.text = resources.getQuantityString(

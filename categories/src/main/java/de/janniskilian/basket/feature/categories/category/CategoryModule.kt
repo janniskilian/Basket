@@ -2,6 +2,7 @@ package de.janniskilian.basket.feature.categories.category
 
 import de.janniskilian.basket.core.module.AppModule
 import de.janniskilian.basket.core.type.datapassing.CategoryFragmentArgs
+import de.janniskilian.basket.core.util.function.createViewModel
 
 class CategoryModule(
     private val appModule: AppModule,
@@ -13,21 +14,22 @@ class CategoryModule(
         CategoryFragmentSetup(
             fragment,
             args,
-            categoryEventHandler,
-            appModule.dataModule.dataClient
+            categoryViewModel,
+            categoryViewModelObserver
         )
     }
 
-    private val categoryEventHandler by lazy {
-        CategoryEventHandler(
-            args,
-            categoryRouter,
-            fragment,
-            appModule.dataModule.dataClient
-        )
+    private val categoryViewModel by lazy {
+        createViewModel(fragment) {
+            CategoryViewModel(
+                args.categoryId,
+                CategoryFragmentUseCases(appModule.dataModule.dataClient),
+                appModule.dataModule.dataClient
+            )
+        }
     }
 
-    private val categoryRouter by lazy {
-        CategoryRouterImpl(fragment)
+    private val categoryViewModelObserver by lazy {
+        CategoryViewModelObserver(categoryViewModel, fragment)
     }
 }

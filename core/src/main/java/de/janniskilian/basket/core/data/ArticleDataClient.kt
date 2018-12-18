@@ -25,5 +25,7 @@ interface ArticleDataClient {
 
 	suspend fun update(article: Article)
 
+    fun update(id: Long, name: String, categoryId: Long?): Job
+
 	fun delete(articleId: Long): Job
 }

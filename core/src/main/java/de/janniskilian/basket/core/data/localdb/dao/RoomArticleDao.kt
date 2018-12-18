@@ -52,6 +52,9 @@ interface RoomArticleDao {
 	@Update
 	suspend fun update(article: RoomArticle)
 
+    @Query("UPDATE article SET name = :name, categoryId = :categoryId WHERE id = :id")
+    fun update(id: Long, name: String, categoryId: Long?)
+
 	@Query("DELETE FROM article WHERE id = :id")
 	fun delete(id: Long)
 

@@ -21,5 +21,7 @@ interface CategoryDataClient {
 
 	fun update(category: Category): Job
 
-	fun delete(category: Category): Job
+    fun update(id: Long, name: String): Job
+
+    fun delete(id: Long): Job
 }

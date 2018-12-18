@@ -11,7 +11,7 @@
                 <shape android:shape="oval">
                     <stroke
                         android:width="2dp"
-                        android:color="#88000000"/>
+                        android:color="@color/stroke_shade"/>
                 </shape>
             </item>
 

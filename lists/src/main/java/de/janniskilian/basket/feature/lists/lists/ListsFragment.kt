@@ -116,7 +116,7 @@ class ListsFragment : BaseFragment() {
                     PopupMenu(requireContext(), viewHolder.itemView.findViewById(R.id.moreButton))
                 }
             ) {
-                inflate(R.menu.list_item)
+                inflate(R.menu.shopping_list_item)
                 setOnMenuItemClickListener {
                     when (it.itemId) {
                         R.id.action_edit_list -> editList(position)

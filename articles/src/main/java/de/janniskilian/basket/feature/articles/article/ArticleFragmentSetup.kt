@@ -40,18 +40,13 @@ class ArticleFragmentSetup(
 
     private fun setClickListeners() {
         fragment.nameEditText.onDone(viewModel::submitButtonClicked)
-        fragment.categoryEditText.setOnClickListener {
-            viewModel.editCategoryClicked()
-        }
-
+        fragment.categoryEditText.setOnClickListener { viewModel.editCategoryClicked() }
         fragment.deleteButton.setOnClickListener { viewModel.deleteButtonClicked() }
         fragment.submitButton.setOnClickListener { viewModel.submitButtonClicked() }
     }
 
     private fun setupNameEditText() {
-        fragment.nameEditText.onTextChanged {
-            viewModel.setName(it)
-        }
+        fragment.nameEditText.onTextChanged(viewModel::setName)
     }
 
     private fun setupCategoriesRecyclerView() {
