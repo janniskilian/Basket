@@ -53,6 +53,7 @@
         <ImageButton
             android:id="@+id/moreButton"
             style="@style/Widget.Basket.IconButton"
+            android:layout_height="@dimen/increment"
             android:contentDescription="@string/options_menu_button_desc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
