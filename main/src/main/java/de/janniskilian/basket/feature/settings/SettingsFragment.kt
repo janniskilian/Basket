@@ -9,17 +9,14 @@ import de.janniskilian.basket.core.BaseFragment
 
 class SettingsFragment : BaseFragment() {
 
-	override fun onCreateView(
-		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View? =
-		inflater.inflate(
-			R.layout.fragment_settings,
-			container,
-			false
-		)
-
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-	}
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
+        inflater.inflate(
+            R.layout.fragment_settings,
+            container,
+            false
+        )
 }

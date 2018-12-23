@@ -22,4 +22,12 @@
         <item>de</item>
     </string-array>
 
+    <string name="pref_title_category_lists">Lists</string>
+    <string name="pref_title_prevent_sleep">Prevent sleep</string>
+    <string name="pref_summary_prevent_sleep">Prevent the screen from automatically turning off while a list is displayed</string>
+    <string name="pref_title_compact_lists">Display lists compactly</string>
+    <string name="pref_title_category_day_night_mode">Night Mode</string>
+    <string name="pref_title_system_day_night_mode">Use night mode system setting</string>
+    <string name="pref_title_day_night_mode">Enable night mode</string>
+
 </resources>

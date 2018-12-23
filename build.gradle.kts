@@ -73,6 +73,10 @@ subprojects {
             }
             animationsDisabled = true
         }
+        lintOptions {
+            isWarningsAsErrors = true
+            isIgnoreTestSources = true
+        }
     }
 
     apply(from = "$rootDir/androidExtensions.gradle")

@@ -17,6 +17,7 @@ object Deps {
         val roomCompiler = "androidx.room:room-compiler:${V.room}"
         val constraintlayout = "androidx.constraintlayout:constraintlayout:1.1.3"
         val recyclerview = "androidx.recyclerview:recyclerview:1.0.0"
+        val preference = "androidx.preference:preference:1.0.0"
     }
 
     val material = "com.google.android.material:material:1.1.0-alpha02"
@@ -48,7 +49,7 @@ object Deps {
     }
 
     object Plugins {
-        val android = "com.android.tools.build:gradle:3.4.0-alpha08"
+        val android = "com.android.tools.build:gradle:3.4.0-alpha09"
         val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.11"
         val navSafeArgs = "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0-alpha08"
     }

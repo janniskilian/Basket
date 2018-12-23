@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="pref_key_category_lists" translatable="false">pref_key_category_lists</string>
+    <string name="pref_key_prevent_sleep" translatable="false">pref_key_prevent_sleep</string>
+    <string name="pref_key_compact_lists" translatable="false">pref_key_compact_lists</string>
+    <string name="pref_key_category_day_night_mode" translatable="false">pref_key_category_day_night_mode</string>
+    <string name="pref_key_system_day_night_mode" translatable="false">pref_key_system_day_night_mode</string>
+    <string name="pref_key_day_night_mode" translatable="false">pref_key_day_night_mode</string>
+
+    <bool name="pref_def_prevent_sleep">true</bool>
+    <bool name="pref_def_compact_lists">false</bool>
+    <bool name="pref_def_system_day_night_mode">true</bool>
+    <bool name="pref_def_day_night_mode">false</bool>
+
+</resources>

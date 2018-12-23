@@ -1,11 +1,13 @@
 package de.janniskilian.basket.core
 
 import android.app.Application
+import android.preference.PreferenceManager
 import com.squareup.leakcanary.LeakCanary
 import de.janniskilian.basket.core.data.localdb.LocalDatabase
 import de.janniskilian.basket.core.module.AndroidModule
 import de.janniskilian.basket.core.module.AppModule
 import de.janniskilian.basket.core.module.DataModule
+import de.janniskilian.basket.core.util.function.setDayNightMode
 import timber.log.Timber
 
 class BasketApp : Application() {
@@ -26,6 +28,7 @@ class BasketApp : Application() {
 		if (!LeakCanary.isInAnalyzerProcess(this)) {
 			setupLogging()
 			//setupLeakCanary()
+			setupDayNightMode()
 		}
 	}
 
@@ -37,5 +40,19 @@ class BasketApp : Application() {
 
 	private fun setupLeakCanary() {
 		LeakCanary.install(this)
+	}
+
+	private fun setupDayNightMode() {
+		val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
+		val autoDayNightMode = sharedPrefs.getBoolean(
+			getString(R.string.pref_key_system_day_night_mode),
+			resources.getBoolean(R.bool.pref_def_system_day_night_mode)
+		)
+		val dayNightMode = sharedPrefs.getBoolean(
+			getString(R.string.pref_key_day_night_mode),
+			resources.getBoolean(R.bool.pref_def_day_night_mode)
+		)
+
+		setDayNightMode(autoDayNightMode, dayNightMode)
 	}
 }

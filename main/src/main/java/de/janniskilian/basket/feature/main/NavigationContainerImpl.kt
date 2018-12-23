@@ -6,15 +6,16 @@ import android.content.res.ColorStateList
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.core.content.ContextCompat
+import androidx.core.view.doOnLayout
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.snackbar.Snackbar
 import de.janniskilian.basket.R
 import de.janniskilian.basket.core.ANIMATION_DURATION_M
 import de.janniskilian.basket.core.ANIMATION_DURATION_S
-import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
 import de.janniskilian.basket.core.navigationcontainer.SearchBarViewModel
@@ -64,14 +65,15 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
             .apply {
                 configure()
 
-                view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    val appBarHeight = activity.appBar.height + activity.fab.height / 2f
-                    val margin = activity.resources.getDimension(R.dimen.half)
-                    updateMargins(bottom = (appBarHeight + margin).roundToInt())
+                view.doOnLayout {
+                    it.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                        val appBarHeight = activity.appBar.height + activity.fab.height / 2f
+                        val margin = activity.resources.getDimension(R.dimen.half)
+                        updateMargins(bottom = (appBarHeight + margin).roundToInt())
+                    }
                 }
             }
             .show()
-
     }
 
     override fun attachSearchBar(viewModel: SearchBarViewModel) {
@@ -91,7 +93,7 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
     }
 
     private fun setupSearchBarListeners(
-        fragmentWeakRef: WeakRef<BaseFragment>,
+        fragmentWeakRef: WeakRef<Fragment>,
         viewModelWeakRef: WeakRef<SearchBarViewModel>
     ) {
 

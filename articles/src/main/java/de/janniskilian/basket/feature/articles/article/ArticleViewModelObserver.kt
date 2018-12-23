@@ -31,8 +31,11 @@ class ArticleViewModelObserver(
     override fun observe() {
         with(viewModel) {
             name.observe(fragment, ::renderName)
-            category.observe(fragment, ::renderCategory)
-            categories.observe(fragment, ::renderCategories)
+            category.observe(fragment) {
+                renderCategory(it)
+                renderCategories()
+            }
+            categories.observe(fragment) { renderCategories() }
             mode.observe(fragment, ::renderMode)
             error.observe(fragment, ::renderError)
             dismiss.observe(fragment) { fragment.dismiss() }
@@ -51,8 +54,12 @@ class ArticleViewModelObserver(
         )
     }
 
-    private fun renderCategories(it: List<Category?>) {
-        (fragment.recyclerView.adapter as? CategoriesAdapter)?.submitList(it)
+    private fun renderCategories() {
+        (fragment.recyclerView.adapter as? CategoriesAdapter)?.submitList(
+            viewModel.categories.value?.map {
+                CategoriesAdapter.Item(it, it == viewModel.category.value)
+            }
+        )
     }
 
     private fun renderMode(mode: ArticleDialogMode) {

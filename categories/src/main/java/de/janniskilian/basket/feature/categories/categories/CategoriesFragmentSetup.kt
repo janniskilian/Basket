@@ -22,8 +22,10 @@ class CategoriesFragmentSetup(
 
         categoriesAdapter?.clickListener = ::categoryClicked
 
-        viewModel.categories.observe(fragment) {
-            categoriesAdapter?.submitList(it)
+        viewModel.categories.observe(fragment) { categories ->
+            categoriesAdapter?.submitList(
+                categories.map { CategoriesAdapter.Item(it) }
+            )
         }
 
         fragment.navigationContainer.attachSearchBar(viewModel)

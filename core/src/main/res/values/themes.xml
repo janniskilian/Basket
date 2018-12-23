@@ -23,9 +23,6 @@
         <item name="colorSecondaryVariant">@color/secondary_dark</item>
         <item name="colorOnSecondary">@android:color/primary_text_light</item>
 
-        <item name="materialButtonStyle">@style/Widget.Basket.Button</item>
-        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox
-        </item>
         <item name="actionOverflowButtonStyle">@style/Widget.Basket.ActionButton.Overflow</item>
         <item name="bottomSheetDialogTheme">@style/Widget.Basket.BottomSheetDialog</item>
     </style>

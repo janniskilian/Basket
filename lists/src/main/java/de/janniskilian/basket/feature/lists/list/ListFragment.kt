@@ -14,70 +14,70 @@ import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListFragment : BaseFragment() {
 
-	private val module by lazy {
-		ListModule(appModule, this, args)
-	}
+    private val module by lazy {
+        ListModule(appModule, this, args)
+    }
 
-	private val args by lazy { ListFragmentArgs.fromBundle(arguments) }
+    private val args by lazy { ListFragmentArgs.fromBundle(arguments) }
 
-	private val viewModel get() = module.listViewModel
+    private val viewModel get() = module.listViewModel
 
-	private val setup get() = module.listSetup
+    private val setup get() = module.listSetup
 
-	val shoppingListAdapter get() = recyclerView.adapter as? ShoppingListAdapter
+    val shoppingListAdapter get() = recyclerView.adapter as? ShoppingListAdapter
 
-	var recreated = false
+    var recreated = false
 
-	override val menuRes: Int?
-		get() = R.menu.list
+    override val menuRes: Int?
+        get() = R.menu.list
 
-	override val fabTextRes: Int?
-		get() = R.string.fab_add_list_item
+    override val fabTextRes: Int?
+        get() = R.string.fab_add_list_item
 
-	override fun onCreateView(
-		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View =
-		inflater.inflate(
-			R.layout.fragment_list,
-			container,
-			false
-		)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View =
+        inflater.inflate(
+            R.layout.fragment_list,
+            container,
+            false
+        )
 
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		recreated = savedInstanceState != null
-		setup.run()
-	}
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        recreated = savedInstanceState != null
+        setup.run()
+    }
 
-	override fun onDestroy() {
-		super.onDestroy()
-		navigationContainer.setAppBarColor(
-			ContextCompat.getColor(
-				requireContext(),
-				R.color.primary
-			),
-			true
-		)
-	}
+    override fun onDestroy() {
+        super.onDestroy()
+        navigationContainer.setAppBarColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.primary
+            ),
+            true
+        )
+    }
 
-	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-		when (item?.itemId) {
-			R.id.action_check_all_list_items -> viewModel.setAllListItemsChecked(true)
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.action_check_all_list_items -> viewModel.setAllListItemsChecked(true)
 
-			R.id.action_uncheck_all_list_items -> viewModel.setAllListItemsChecked(false)
+            R.id.action_uncheck_all_list_items -> viewModel.setAllListItemsChecked(false)
 
-			R.id.action_remove_all_checked_list_items -> viewModel.removeAllCheckedListItems()
+            R.id.action_remove_all_checked_list_items -> viewModel.removeAllCheckedListItems()
 
-			R.id.action_remove_all_list_items -> viewModel.removeAllListItems()
+            R.id.action_remove_all_list_items -> viewModel.removeAllListItems()
 
-			else -> return false
-		}
+            else -> return false
+        }
 
-		return true
-	}
+        return true
+    }
 
-	override fun onFabClicked() {
+    override fun onFabClicked() {
         showDialogFragment(AddListItemFragment.create(args.shoppingListId))
-	}
+    }
 }
