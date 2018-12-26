@@ -2,7 +2,6 @@ package de.janniskilian.basket.core.data
 
 import androidx.lifecycle.LiveData
 import de.janniskilian.basket.core.type.domain.ShoppingList
-import kotlinx.coroutines.Job
 
 interface ShoppingListDataClient {
 
@@ -16,7 +15,7 @@ interface ShoppingListDataClient {
 
 	fun getAll(): LiveData<List<ShoppingList>>
 
-	fun update(shoppingListId: Long, name: String, color: Int): Job
+    suspend fun update(shoppingListId: Long, name: String, color: Int)
 
-	fun delete(id: Long): Job
+    suspend fun delete(id: Long)
 }

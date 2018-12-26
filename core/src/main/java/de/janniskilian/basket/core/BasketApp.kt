@@ -27,7 +27,7 @@ class BasketApp : Application() {
 
 		if (!LeakCanary.isInAnalyzerProcess(this)) {
 			setupLogging()
-			//setupLeakCanary()
+			setupLeakCanary()
 			setupDayNightMode()
 		}
 	}

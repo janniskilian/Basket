@@ -5,13 +5,10 @@ import de.janniskilian.basket.core.data.localdb.entity.RoomArticle
 import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.type.domain.ArticleSuggestion
 import de.janniskilian.basket.core.type.domain.Category
-import kotlinx.coroutines.Job
 
 interface ArticleDataClient {
 
-	fun create(name: String, category: Category?): Job
-
-	suspend fun createSuspend(name: String, category: Category?): Article?
+    suspend fun create(name: String, category: Category?): Article?
 
 	suspend fun create(articles: List<RoomArticle>)
 
@@ -25,7 +22,8 @@ interface ArticleDataClient {
 
 	suspend fun update(article: Article)
 
-    fun update(id: Long, name: String, categoryId: Long?): Job
+    suspend fun update(id: Long, name: String, categoryId: Long?)
 
-	fun delete(articleId: Long): Job
+    suspend fun delete(articleId: Long)
+
 }

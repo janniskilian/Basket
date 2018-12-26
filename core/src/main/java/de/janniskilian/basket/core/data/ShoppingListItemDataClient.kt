@@ -3,7 +3,6 @@ package de.janniskilian.basket.core.data
 import androidx.lifecycle.LiveData
 import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
-import kotlinx.coroutines.Job
 
 interface ShoppingListItemDataClient {
 
@@ -14,17 +13,17 @@ interface ShoppingListItemDataClient {
 		checked: Boolean = false
 	)
 
-	fun create(shoppingListItems: List<ShoppingListItem>): Job
+    suspend fun create(shoppingListItems: List<ShoppingListItem>)
 
 	fun get(id: Long): LiveData<ShoppingListItem>
 
-	fun update(shoppingListItem: ShoppingListItem): Job
+    suspend fun update(shoppingListItem: ShoppingListItem)
 
-	fun setAllCheckedForShoppingList(shoppingListId: Long, checked: Boolean): Job
+    suspend fun setAllCheckedForShoppingList(shoppingListId: Long, checked: Boolean)
 
-	fun delete(shoppingListId: Long, articleId: Long): Job
+    suspend fun delete(shoppingListId: Long, articleId: Long)
 
-	fun deleteAllForShoppingList(shoppingListId: Long): Job
+    suspend fun deleteAllForShoppingList(shoppingListId: Long)
 
-	fun deleteAllCheckedForShoppingList(shoppingListId: Long): Job
+    suspend fun deleteAllCheckedForShoppingList(shoppingListId: Long)
 }

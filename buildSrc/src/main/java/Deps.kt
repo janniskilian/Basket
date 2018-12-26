@@ -9,7 +9,9 @@ object Deps {
     object AndroidX {
         val ktx = "androidx.core:core-ktx:1.0.1"
         val appcompat = "androidx.appcompat:appcompat:1.0.2"
-        val lifecycle = "androidx.lifecycle:lifecycle-extensions:${V.lifecycle}"
+        val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${V.lifecycle}"
+        val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${V.lifecycle}"
+        val lifecycleExt = "androidx.lifecycle:lifecycle-extensions:${V.lifecycle}"
         val navFragment = "android.arch.navigation:navigation-fragment-ktx:${V.nav}"
         val navUi = "android.arch.navigation:navigation-ui-ktx:${V.nav}"
         val roomRuntime = "androidx.room:room-runtime:${V.room}"
@@ -44,7 +46,7 @@ object Deps {
         val rules = "androidx.test:rules:1.1.1"
         val espresso = "androidx.test.espresso:espresso-core:${V.espresso}"
         val espressoContrib = "androidx.test.espresso:espresso-contrib:${V.espresso}"
-        val livedata = "androidx.arch.core:core-testing:${V.lifecycle}"
+        val archCore = "androidx.arch.core:core-testing:2.0.0"
         val room = "androidx.room:room-testing:${V.room}"
     }
 

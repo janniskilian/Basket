@@ -2,11 +2,11 @@ package de.janniskilian.basket.feature.lists.lists
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.ShoppingList
-import de.janniskilian.basket.core.util.extension.extern.map
 import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ListsViewModel(private val dataClient: DataClient) : ViewModel() {
@@ -22,14 +22,14 @@ class ListsViewModel(private val dataClient: DataClient) : ViewModel() {
 
     fun deleteList(position: Int) {
         shoppingLists.value?.getOrNull(position)?.let {
-            dataClient.shoppingList.delete(it.id)
+            viewModelScope.launch { dataClient.shoppingList.delete(it.id) }
             _shoppingListDeleted.setValue(it)
         }
     }
 
     fun restoreShoppingList() {
         shoppingListDeleted.value?.let {
-            GlobalScope.launch {
+            viewModelScope.launch {
                 dataClient.shoppingList.create(it)
                 dataClient.shoppingListItem.create(it.items)
             }

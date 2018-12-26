@@ -1,6 +1,6 @@
 package de.janniskilian.basket.feature.categories.category
 
-import de.janniskilian.basket.core.util.extension.extern.observe
+import androidx.lifecycle.observe
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.categories.R
 import kotlinx.android.synthetic.main.fragment_category.*

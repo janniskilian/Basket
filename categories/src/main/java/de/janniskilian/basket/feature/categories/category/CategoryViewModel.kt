@@ -3,10 +3,10 @@ package de.janniskilian.basket.feature.categories.category
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class CategoryViewModel(
@@ -23,7 +23,7 @@ class CategoryViewModel(
 
     init {
         if (categoryId != null) {
-            GlobalScope.launch(Dispatchers.Main) {
+            viewModelScope.launch(Dispatchers.Main) {
                 dataClient.category.getSuspend(categoryId)?.let {
                     setName(it.name)
                 }
@@ -47,8 +47,10 @@ class CategoryViewModel(
 
     fun deleteButtonClicked() {
         if (categoryId != null) {
-            useCases.deleteCategory(categoryId)
-            _dismiss.setValue(Unit)
+            viewModelScope.launch {
+                useCases.deleteCategory(categoryId)
+                _dismiss.postValue(Unit)
+            }
         }
     }
 
@@ -57,13 +59,15 @@ class CategoryViewModel(
         if (name.isNullOrBlank()) {
             _error.value = true
         } else {
-            if (categoryId == null) {
-                useCases.createCategory(name)
-            } else {
-                useCases.editCategory(categoryId, name)
-            }
+            viewModelScope.launch {
+                if (categoryId == null) {
+                    useCases.createCategory(name)
+                } else {
+                    useCases.editCategory(categoryId, name)
+                }
 
-            _dismiss.setValue(Unit)
+                _dismiss.postValue(Unit)
+            }
         }
     }
 }

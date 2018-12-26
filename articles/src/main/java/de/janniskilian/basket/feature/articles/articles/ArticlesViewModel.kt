@@ -3,10 +3,10 @@ package de.janniskilian.basket.feature.articles.articles
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.navigationcontainer.SearchBarViewModel
 import de.janniskilian.basket.core.type.domain.Article
-import de.janniskilian.basket.core.util.extension.extern.switchMap
 import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
 
 class ArticlesViewModel(dataClient: DataClient) : ViewModel(), SearchBarViewModel {

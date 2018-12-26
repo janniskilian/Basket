@@ -105,7 +105,7 @@ subprojects {
         androidTestImplementation(Deps.AndroidTesting.runner)
         androidTestImplementation(Deps.AndroidTesting.junit)
         androidTestImplementation(Deps.AndroidTesting.rules)
-        androidTestImplementation(Deps.AndroidTesting.livedata)
+        androidTestImplementation(Deps.AndroidTesting.archCore)
         androidTestImplementation(Deps.AndroidTesting.room)
 
         if (name != "core") {

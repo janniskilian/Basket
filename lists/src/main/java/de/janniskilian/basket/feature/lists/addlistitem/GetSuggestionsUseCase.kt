@@ -1,9 +1,9 @@
 package de.janniskilian.basket.feature.lists.addlistitem
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.Article
-import de.janniskilian.basket.core.util.extension.extern.map
 import de.janniskilian.basket.core.util.function.addToFront
 
 class GetSuggestionsUseCase(private val shoppingListId: Long, private val dataClient: DataClient) {

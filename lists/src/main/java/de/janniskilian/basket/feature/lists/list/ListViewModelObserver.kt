@@ -1,9 +1,9 @@
 package de.janniskilian.basket.feature.lists.list
 
+import androidx.lifecycle.observe
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
 import de.janniskilian.basket.core.util.extension.extern.flatMapIndexed
-import de.janniskilian.basket.core.util.extension.extern.observe
 import de.janniskilian.basket.core.util.function.addToFront
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.lists.R

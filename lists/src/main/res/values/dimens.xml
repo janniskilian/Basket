@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="shopping_list_item_spacing">@dimen/two</dimen>
     <dimen name="color_item_size">40dp</dimen>
+
+    <dimen name="list_spacing_default">@dimen/four</dimen>
+    <dimen name="list_spacing_compact">@dimen/one</dimen>
 </resources>

@@ -6,12 +6,12 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import androidx.lifecycle.observe
 import de.janniskilian.basket.core.ANIMATION_DURATION_M
 import de.janniskilian.basket.core.CategoriesAdapter
 import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.util.extension.extern.doOnEnd
 import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
-import de.janniskilian.basket.core.util.extension.extern.observe
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.articles.R
 import de.janniskilian.basket.feature.articles.article.ArticleDialogMode.EDIT

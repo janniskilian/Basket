@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +21,6 @@ import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.appModule
 import de.janniskilian.basket.core.type.datapassing.CreateListFragmentArgs
 import de.janniskilian.basket.core.type.domain.ShoppingList
-import de.janniskilian.basket.core.util.extension.extern.observe
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.core.util.recyclerview.ItemSpacingDecoration
 import de.janniskilian.basket.feature.lists.R

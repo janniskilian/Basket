@@ -3,14 +3,13 @@ package de.janniskilian.basket.feature.articles.article
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.Category
-import de.janniskilian.basket.core.util.extension.extern.map
 import de.janniskilian.basket.core.util.function.addToFront
 import de.janniskilian.basket.core.util.function.createMutableLiveData
 import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ArticleViewModel(
@@ -33,7 +32,7 @@ class ArticleViewModel(
         if (articleId == null) {
             setCategory(null)
         } else {
-            GlobalScope.launch(Dispatchers.Main) {
+            viewModelScope.launch {
                 dataClient.article.get(articleId)?.let {
                     setName(it.name)
                     setCategory(it.category)
@@ -85,8 +84,10 @@ class ArticleViewModel(
 
     fun deleteButtonClicked() {
         if (articleId != null) {
-            useCases.deleteArticle(articleId)
-            _dismiss.setValue(Unit)
+            viewModelScope.launch {
+                useCases.deleteArticle(articleId)
+                _dismiss.postValue(Unit)
+            }
         }
     }
 
@@ -95,13 +96,15 @@ class ArticleViewModel(
         if (name.isNullOrBlank()) {
             _error.value = true
         } else {
-            if (articleId == null) {
-                useCases.createArticle(name, category.value)
-            } else {
-                useCases.editArticle(articleId, name, category.value)
-            }
+            viewModelScope.launch {
+                if (articleId == null) {
+                    useCases.createArticle(name, category.value)
+                } else {
+                    useCases.editArticle(articleId, name, category.value)
+                }
 
-            _dismiss.setValue(Unit)
+                _dismiss.postValue(Unit)
+            }
         }
     }
 }

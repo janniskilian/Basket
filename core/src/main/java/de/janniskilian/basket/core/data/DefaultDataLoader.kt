@@ -8,8 +8,7 @@ import androidx.annotation.RawRes
 import de.janniskilian.basket.core.R
 import de.janniskilian.basket.core.data.localdb.entity.RoomArticle
 import de.janniskilian.basket.core.data.localdb.entity.RoomCategory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import de.janniskilian.basket.core.util.function.withIOContext
 import java.util.*
 
 class DefaultDataLoader(context: Context, locale: Locale = Locale.getDefault()) {
@@ -21,61 +20,59 @@ class DefaultDataLoader(context: Context, locale: Locale = Locale.getDefault()) 
         context.createConfigurationContext(conf)
     }
 
-    suspend fun loadCategories(): List<RoomCategory> =
-        withContext(Dispatchers.IO) {
-            readArray(R.raw.categories) { reader, _ ->
-                var id: Long? = null
-                var name: String? = null
+    suspend fun loadCategories(): List<RoomCategory> = withIOContext {
+        readArray(R.raw.categories) { reader, _ ->
+            var id: Long? = null
+            var name: String? = null
 
-                while (reader.hasNext()) {
-                    val fieldName = reader.nextName()
-                    when (fieldName) {
-                        ID -> id = reader.nextLong()
+            while (reader.hasNext()) {
+                val fieldName = reader.nextName()
+                when (fieldName) {
+                    ID -> id = reader.nextLong()
 
-                        NAME -> name = reader.nextString()
+                    NAME -> name = reader.nextString()
 
-                        else -> reader.skipValue()
-                    }
-                }
-
-                if (id != null && name != null) {
-                    RoomCategory(name, id)
-                } else {
-                    null
+                    else -> reader.skipValue()
                 }
             }
+
+            if (id != null && name != null) {
+                RoomCategory(name, id)
+            } else {
+                null
+            }
         }
+    }
 
-    suspend fun loadArticles(): List<RoomArticle> =
-        withContext(Dispatchers.IO) {
-            readArray(R.raw.articles) { reader, index ->
-                var name: String? = null
-                var categoryId: Long? = null
+    suspend fun loadArticles(): List<RoomArticle> = withIOContext {
+        readArray(R.raw.articles) { reader, index ->
+            var name: String? = null
+            var categoryId: Long? = null
 
-                while (reader.hasNext()) {
-                    val fieldName = reader.nextName()
-                    when (fieldName) {
-                        NAME -> name = reader.nextString()
+            while (reader.hasNext()) {
+                val fieldName = reader.nextName()
+                when (fieldName) {
+                    NAME -> name = reader.nextString()
 
-                        CATEGORY_ID -> {
-                            if (reader.peek() == JsonToken.NUMBER) {
-                                categoryId = reader.nextLong()
-                            } else {
-                                reader.skipValue()
-                            }
+                    CATEGORY_ID -> {
+                        if (reader.peek() == JsonToken.NUMBER) {
+                            categoryId = reader.nextLong()
+                        } else {
+                            reader.skipValue()
                         }
-
-                        else -> reader.skipValue()
                     }
-                }
 
-                if (name != null) {
-                    RoomArticle(name, categoryId, index + 1L)
-                } else {
-                    null
+                    else -> reader.skipValue()
                 }
             }
+
+            if (name != null) {
+                RoomArticle(name, categoryId, index + 1L)
+            } else {
+                null
+            }
         }
+    }
 
     private inline fun <T> readArray(
         @RawRes resId: Int,

@@ -1,10 +1,10 @@
 package de.janniskilian.basket.feature.articles.articles
 
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.janniskilian.basket.core.type.datapassing.ArticleFragmentArgs
-import de.janniskilian.basket.core.util.extension.extern.observe
 import de.janniskilian.basket.feature.articles.article.ArticleFragment
 import kotlinx.android.synthetic.main.fragment_articles.*
 

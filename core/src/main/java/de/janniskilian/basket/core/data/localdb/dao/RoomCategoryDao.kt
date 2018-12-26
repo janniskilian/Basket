@@ -11,25 +11,25 @@ import de.janniskilian.basket.core.data.localdb.entity.RoomCategory
 interface RoomCategoryDao {
 
     @Insert
-    suspend fun insert(category: RoomCategory): Long
+    fun insert(category: RoomCategory)
 
     @Insert
-    suspend fun insert(categories: List<RoomCategory>): List<Long>
+    fun insert(categories: List<RoomCategory>): List<Long>
 
     @Query("SELECT * FROM category WHERE id = :id")
     fun select(id: Long): LiveData<RoomCategory>
 
     @Query("SELECT * FROM category WHERE id = :id")
-    suspend fun selectSuspend(id: Long): RoomCategory?
+    fun selectSuspend(id: Long): RoomCategory?
 
     @Query("SELECT * FROM category WHERE name LIKE :name ORDER BY name ASC")
     fun select(name: String): LiveData<List<RoomCategory>>
 
     @Query("SELECT COUNT(id) FROM category")
-    suspend fun selectCount(): Int
+    fun selectCount(): Int
 
     @Update
-    suspend fun update(category: RoomCategory)
+    fun update(category: RoomCategory)
 
     @Query("UPDATE category SET name = :name WHERE id = :id")
     fun update(id: Long, name: String)

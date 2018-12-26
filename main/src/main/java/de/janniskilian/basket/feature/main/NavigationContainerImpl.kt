@@ -12,6 +12,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.observe
 import com.google.android.material.snackbar.Snackbar
 import de.janniskilian.basket.R
 import de.janniskilian.basket.core.ANIMATION_DURATION_M
@@ -24,7 +25,6 @@ import de.janniskilian.basket.core.util.extension.extern.contentView
 import de.janniskilian.basket.core.util.extension.extern.doOnEnd
 import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
 import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
-import de.janniskilian.basket.core.util.extension.extern.observe
 import de.janniskilian.basket.core.util.extension.extern.onTextChanged
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
 import de.janniskilian.basket.core.util.extension.extern.showKeyboard

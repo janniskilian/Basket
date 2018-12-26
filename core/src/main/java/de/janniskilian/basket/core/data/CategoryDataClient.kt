@@ -3,25 +3,24 @@ package de.janniskilian.basket.core.data
 import androidx.lifecycle.LiveData
 import de.janniskilian.basket.core.data.localdb.entity.RoomCategory
 import de.janniskilian.basket.core.type.domain.Category
-import kotlinx.coroutines.Job
 
 interface CategoryDataClient {
 
-	fun create(name: String): Job
+    suspend fun create(name: String)
 
-	suspend fun create(categories: List<RoomCategory>): List<Long>
+    suspend fun create(categories: List<RoomCategory>): List<Long>
 
-	fun get(id: Long): LiveData<Category>
+    fun get(id: Long): LiveData<Category>
 
-	suspend fun getSuspend(id: Long): Category?
+    suspend fun getSuspend(id: Long): Category?
 
-	fun get(name: String = ""): LiveData<List<Category>>
+    fun get(name: String = ""): LiveData<List<Category>>
 
-	suspend fun getCount(): Int
+    suspend fun getCount(): Int
 
-	fun update(category: Category): Job
+    suspend fun update(category: Category)
 
-    fun update(id: Long, name: String): Job
+    suspend fun update(id: Long, name: String)
 
-    fun delete(id: Long): Job
+    suspend fun delete(id: Long)
 }

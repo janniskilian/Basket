@@ -1,11 +1,11 @@
 package de.janniskilian.basket.feature.lists.addlistitem
 
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
-import de.janniskilian.basket.core.util.extension.extern.observe
 import de.janniskilian.basket.core.util.extension.extern.onDone
 import de.janniskilian.basket.core.util.extension.extern.onTextChanged
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState

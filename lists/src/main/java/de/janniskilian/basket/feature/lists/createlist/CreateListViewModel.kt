@@ -3,12 +3,12 @@ package de.janniskilian.basket.feature.lists.createlist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.util.function.createMutableLiveData
 import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
 import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class CreateListViewModel(
@@ -31,7 +31,7 @@ class CreateListViewModel(
 
 	init {
 		if (shoppingListId != null) {
-			GlobalScope.launch(Dispatchers.Main) {
+            viewModelScope.launch(Dispatchers.Main) {
 				dataClient.shoppingList.get(shoppingListId)?.let {
 					setName(it.name)
 					setSelectedColor(it.color)
@@ -70,14 +70,16 @@ class CreateListViewModel(
 			name.isNullOrBlank() -> _error.value = true
 
 			shoppingListId == null ->
-				GlobalScope.launch(Dispatchers.Main) {
+                viewModelScope.launch {
 					val id = useCases.createList(name, _selectedColor.value)
-					_startList.setValue(id)
+                    _startList.postValue(id)
 				}
 
 			else -> {
-				useCases.updateList(shoppingListId, name, _selectedColor.value)
-				_dismiss.setValue(Unit)
+                viewModelScope.launch {
+                    useCases.updateList(shoppingListId, name, _selectedColor.value)
+                    _dismiss.postValue(Unit)
+                }
 			}
 		}
 	}

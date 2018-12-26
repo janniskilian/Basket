@@ -11,10 +11,10 @@ import de.janniskilian.basket.core.data.localdb.result.RoomShoppingListResult
 interface RoomShoppingListDao {
 
 	@Insert
-	suspend fun insert(shoppingList: RoomShoppingList): Long
+	fun insert(shoppingList: RoomShoppingList): Long
 
 	@Query("$SELECT_QUERY WHERE shoppingList.id = :id")
-	suspend fun select(id: Long): List<RoomShoppingListResult>
+	fun select(id: Long): List<RoomShoppingListResult>
 
 	@Query("$SELECT_QUERY WHERE shoppingList.id = :id")
 	fun selectLiveData(id: Long): LiveData<List<RoomShoppingListResult>>

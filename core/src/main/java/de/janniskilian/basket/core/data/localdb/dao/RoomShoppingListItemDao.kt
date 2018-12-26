@@ -12,10 +12,10 @@ import de.janniskilian.basket.core.data.localdb.result.RoomShoppingListItemResul
 interface RoomShoppingListItemDao {
 
 	@Insert
-	suspend fun insert(shoppingListItem: RoomShoppingListItem)
+	fun insert(shoppingListItem: RoomShoppingListItem)
 
 	@Insert
-	suspend fun insert(shoppingListItems: List<RoomShoppingListItem>)
+	fun insert(shoppingListItems: List<RoomShoppingListItem>)
 
 	@Query(
 		"""SELECT shoppingListItem.id AS id, shoppingListItem.shoppingListId AS shoppingListId,
@@ -32,7 +32,7 @@ interface RoomShoppingListItemDao {
 	fun select(id: Long): LiveData<RoomShoppingListItemResult>
 
 	@Update
-	suspend fun update(shoppingListItem: RoomShoppingListItem)
+	fun update(shoppingListItem: RoomShoppingListItem)
 
 	@Query("UPDATE shoppingListItem SET checked = :checked WHERE shoppingListId = :shoppingListId")
 	fun setAllCheckedForShoppingList(
