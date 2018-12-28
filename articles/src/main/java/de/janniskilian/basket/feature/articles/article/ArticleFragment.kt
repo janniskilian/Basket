@@ -4,18 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import de.janniskilian.basket.core.BaseBottomSheetDialogFragment
+import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.appModule
-import de.janniskilian.basket.core.getArgs
-import de.janniskilian.basket.core.putArgs
-import de.janniskilian.basket.core.type.datapassing.ArticleFragmentArgs
+import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
 import de.janniskilian.basket.feature.articles.R
 
-class ArticleFragment : BaseBottomSheetDialogFragment() {
+class ArticleFragment : BaseFragment() {
 
     private val module by lazy {
-        ArticleModule(appModule, this, getArgs())
+        ArticleModule(appModule, this, args)
     }
+
+    private val args by lazy { ArticleFragmentArgs.fromBundle(arguments) }
 
     private val setup get() = module.articleSetup
 
@@ -36,12 +36,11 @@ class ArticleFragment : BaseBottomSheetDialogFragment() {
         setup.run()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        hideKeyboard()
+    }
+
     override fun onBackPressed(): Boolean =
         viewModel.backPressed()
-
-    companion object {
-
-        fun create(args: ArticleFragmentArgs): ArticleFragment =
-            ArticleFragment().putArgs(args)
-    }
 }

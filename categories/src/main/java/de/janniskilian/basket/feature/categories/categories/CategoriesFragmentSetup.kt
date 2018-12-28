@@ -1,13 +1,12 @@
 package de.janniskilian.basket.feature.categories.categories
 
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.janniskilian.basket.core.CategoriesAdapter
-import de.janniskilian.basket.core.type.datapassing.CategoryFragmentArgs
 import de.janniskilian.basket.core.type.domain.Category
-import de.janniskilian.basket.feature.categories.category.CategoryFragment
 import kotlinx.android.synthetic.main.fragment_categories.*
 
 class CategoriesFragmentSetup(
@@ -48,11 +47,11 @@ class CategoriesFragmentSetup(
 
     private fun categoryClicked(category: Category?) {
         if (category != null) {
-            CategoryFragment
-                .create(CategoryFragmentArgs(category.id))
-                .let {
-                    it.show(fragment.fragmentManager, it.tag)
-                }
+            fragment.findNavController().navigate(
+                CategoriesFragmentDirections
+                    .actionCategoriesFragmentToCategoryFragment()
+                    .setCategoryId(category.id)
+            )
         }
     }
 }

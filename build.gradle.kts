@@ -1,4 +1,5 @@
 import groovy.lang.Closure
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     repositories {
@@ -26,6 +27,15 @@ allprojects {
 
 tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs += listOf(
+            "-XXLanguage:+InlineClasses",
+            "-progressive"
+        )
+    }
 }
 
 subprojects {

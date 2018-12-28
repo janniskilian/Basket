@@ -1,7 +1,7 @@
 package de.janniskilian.basket.feature.articles.article
 
 import de.janniskilian.basket.core.module.AppModule
-import de.janniskilian.basket.core.type.datapassing.ArticleFragmentArgs
+import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.function.createViewModel
 
 class ArticleModule(
@@ -22,7 +22,7 @@ class ArticleModule(
     val articleViewModel by lazy {
         createViewModel(fragment) {
             ArticleViewModel(
-                args.articleId,
+                args.articleId.minusOneAsNull(),
                 ArticleFragmentUseCases(appModule.dataModule.dataClient),
                 appModule.dataModule.dataClient
             )

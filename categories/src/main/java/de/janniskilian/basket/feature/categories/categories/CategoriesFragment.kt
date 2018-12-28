@@ -7,14 +7,13 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.appModule
-import de.janniskilian.basket.core.type.datapassing.CategoryFragmentArgs
 import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
 import de.janniskilian.basket.core.util.function.getSpeechInputResult
 import de.janniskilian.basket.feature.categories.R
-import de.janniskilian.basket.feature.categories.category.CategoryFragment
 import kotlinx.android.synthetic.main.fragment_categories.*
 
 class CategoriesFragment : BaseFragment() {
@@ -82,7 +81,11 @@ class CategoriesFragment : BaseFragment() {
         }
 
     override fun onFabClicked() {
-        showDialogFragment(CategoryFragment.create(CategoryFragmentArgs(null)))
+        findNavController().navigate(
+            CategoriesFragmentDirections
+                .actionCategoriesFragmentToCategoryFragment()
+                .setCategoryId(-1L)
+        )
     }
 }
 

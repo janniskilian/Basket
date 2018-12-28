@@ -5,12 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:focusableInTouchMode="true">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -19,13 +20,23 @@
             android:clipToPadding="false"
             android:padding="@dimen/two">
 
+            <TextView
+                android:id="@+id/headline"
+                style="@style/Widget.Basket.ToolbarTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/two"
                 app:errorEnabled="true"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintBottom_toTopOf="@id/categoryLayout"
+                app:layout_constraintTop_toBottomOf="@id/headline"
+                app:layout_constraintVertical_bias="1">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nameEditText"
@@ -44,9 +55,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/one"
                 app:errorEnabled="true"
+                app:layout_constraintBottom_toTopOf="@id/submitButton"
                 app:layout_constraintEnd_toEndOf="@id/nameLayout"
-                app:layout_constraintStart_toStartOf="@id/nameLayout"
-                app:layout_constraintTop_toBottomOf="@id/nameLayout">
+                app:layout_constraintStart_toStartOf="@id/nameLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/categoryEditText"
@@ -75,7 +86,6 @@
                 android:layout_marginTop="@dimen/two"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/categoryLayout"
                 tools:text="@string/create_article_button"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

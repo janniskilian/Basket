@@ -1,11 +1,10 @@
 package de.janniskilian.basket.feature.articles.articles
 
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import de.janniskilian.basket.core.type.datapassing.ArticleFragmentArgs
-import de.janniskilian.basket.feature.articles.article.ArticleFragment
 import kotlinx.android.synthetic.main.fragment_articles.*
 
 class ArticlesFragmentSetup(
@@ -43,12 +42,12 @@ class ArticlesFragmentSetup(
     }
 
     private fun articleClicked(position: Int) {
-        viewModel.articles.value?.getOrNull(position)?.let { article ->
-            ArticleFragment
-                .create(ArticleFragmentArgs(article.id))
-                .apply {
-                    show(fragment.fragmentManager, tag)
-                }
+        viewModel.articles.value?.getOrNull(position)?.let {
+            fragment.findNavController().navigate(
+                ArticlesFragmentDirections
+                    .actionArticlesFragmentToArticleFragment()
+                    .setArticleId(it.id)
+            )
         }
     }
 }

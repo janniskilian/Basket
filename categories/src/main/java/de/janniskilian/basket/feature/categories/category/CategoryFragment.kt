@@ -4,18 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import de.janniskilian.basket.core.BaseBottomSheetDialogFragment
+import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.appModule
-import de.janniskilian.basket.core.getArgs
-import de.janniskilian.basket.core.putArgs
-import de.janniskilian.basket.core.type.datapassing.CategoryFragmentArgs
+import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
 import de.janniskilian.basket.feature.categories.R
 
-class CategoryFragment : BaseBottomSheetDialogFragment() {
+class CategoryFragment : BaseFragment() {
 
     private val module by lazy {
-        CategoryModule(appModule, this, getArgs())
+        CategoryModule(appModule, this, args)
     }
+
+    private val args by lazy { CategoryFragmentArgs.fromBundle(arguments) }
 
     private val setup get() = module.categorySetup
 
@@ -34,9 +34,8 @@ class CategoryFragment : BaseBottomSheetDialogFragment() {
         setup.run()
     }
 
-    companion object {
-
-        fun create(args: CategoryFragmentArgs): CategoryFragment =
-            CategoryFragment().putArgs(args)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        hideKeyboard()
     }
 }

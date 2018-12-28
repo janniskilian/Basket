@@ -28,7 +28,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">@font/roboto_slab_700</item>
         <item name="fontFamily">@font/roboto_slab_700</item>
-        <item name="android:textColor">?attr/colorPrimaryDark</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:letterSpacing">0.025</item>
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">end</item>

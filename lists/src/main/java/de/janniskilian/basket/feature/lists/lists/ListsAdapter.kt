@@ -32,7 +32,6 @@ class ListsAdapter : ListAdapter<ShoppingList, ListsAdapter.ViewHolder>(
 
 	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 		val item = getItem(position)
-		//val resources = holder.itemView.context.resources
 
         with(holder.itemView as MaterialCardView) {
 			setOnClickListener { itemClickListener?.invoke(holder.adapterPosition) }

@@ -1,16 +1,13 @@
 package de.janniskilian.basket.feature.articles.article
 
-import android.animation.ValueAnimator
-import android.graphics.Point
-import android.view.View
 import androidx.core.view.isVisible
-import androidx.core.view.updateLayoutParams
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.lifecycle.observe
-import de.janniskilian.basket.core.ANIMATION_DURATION_M
+import androidx.navigation.fragment.findNavController
+import androidx.transition.AutoTransition
+import androidx.transition.TransitionManager
+import de.janniskilian.basket.core.ANIMATION_DURATION_S
 import de.janniskilian.basket.core.CategoriesAdapter
 import de.janniskilian.basket.core.type.domain.Category
-import de.janniskilian.basket.core.util.extension.extern.doOnEnd
 import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.articles.R
@@ -22,12 +19,6 @@ class ArticleViewModelObserver(
     private val fragment: ArticleFragment
 ) : ViewModelObserver<ArticleViewModel>(viewModel) {
 
-    private val recyclerViewHeight by lazy {
-        val size = Point()
-        fragment.requireActivity().windowManager.defaultDisplay.getSize(size)
-        size.y / 2
-    }
-
     override fun observe() {
         with(viewModel) {
             name.observe(fragment, ::renderName)
@@ -38,7 +29,7 @@ class ArticleViewModelObserver(
             categories.observe(fragment) { renderCategories() }
             mode.observe(fragment, ::renderMode)
             error.observe(fragment, ::renderError)
-            dismiss.observe(fragment) { fragment.dismiss() }
+            dismiss.observe(fragment) { fragment.findNavController().navigateUp() }
         }
     }
 
@@ -81,53 +72,11 @@ class ArticleViewModelObserver(
     private fun toggleRecyclerView(visible: Boolean) {
         if (visible == fragment.recyclerView.isVisible) return
 
-        val startHeight: Int
-        val targetHeight: Int
-        val startView: View
-        val targetView: View
-        if (visible) {
-            startHeight = fragment.constraintLayout.height
-            targetHeight = recyclerViewHeight
-            startView = fragment.constraintLayout
-            targetView = fragment.recyclerView
-        } else {
-            startHeight = recyclerViewHeight
-            targetHeight = fragment.constraintLayout.height
-            startView = fragment.recyclerView
-            targetView = fragment.constraintLayout
-        }
-
-        val animationDuration = ANIMATION_DURATION_M
-        ValueAnimator
-            .ofInt(startHeight, targetHeight)
-            .apply {
-                duration = animationDuration
-                interpolator = FastOutSlowInInterpolator()
-                addUpdateListener {
-                    fragment.content.updateLayoutParams {
-                        height = it.animatedValue as Int
-                    }
-                }
-                start()
-            }
-
-        startView.alpha = 1f
-        with(startView.animate()) {
-            duration = animationDuration / 2
-            alpha(0f)
-            doOnEnd {
-                startView.isVisible = false
-            }
-            start()
-        }
-
-        targetView.alpha = 0f
-        targetView.isVisible = true
-        with(targetView.animate()) {
-            duration = animationDuration / 2
-            startDelay = animationDuration / 2
-            alpha(1f)
-            start()
-        }
+        TransitionManager.beginDelayedTransition(
+            fragment.content,
+            AutoTransition().setDuration(ANIMATION_DURATION_S)
+        )
+        fragment.constraintLayout.isVisible = !visible
+        fragment.recyclerView.isVisible = visible
     }
 }

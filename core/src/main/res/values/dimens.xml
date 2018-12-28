@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="card_elevation">@dimen/half</dimen>
+    <dimen name="card_elevation">0dp</dimen>
     <dimen name="card_corner_radius">@dimen/one</dimen>
 
     <dimen name="half">4dp</dimen>

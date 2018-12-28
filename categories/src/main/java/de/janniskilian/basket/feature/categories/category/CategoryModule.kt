@@ -1,7 +1,7 @@
 package de.janniskilian.basket.feature.categories.category
 
 import de.janniskilian.basket.core.module.AppModule
-import de.janniskilian.basket.core.type.datapassing.CategoryFragmentArgs
+import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.function.createViewModel
 
 class CategoryModule(
@@ -22,7 +22,7 @@ class CategoryModule(
     private val categoryViewModel by lazy {
         createViewModel(fragment) {
             CategoryViewModel(
-                args.categoryId,
+                args.categoryId.minusOneAsNull(),
                 CategoryFragmentUseCases(appModule.dataModule.dataClient),
                 appModule.dataModule.dataClient
             )

@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
     android:focusableInTouchMode="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -14,13 +15,23 @@
         android:clipToPadding="false"
         android:padding="@dimen/two">
 
+        <TextView
+            android:id="@+id/headline"
+            style="@style/Widget.Basket.ToolbarTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/two"
             app:errorEnabled="true"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintBottom_toTopOf="@id/submitButton"
+            app:layout_constraintTop_toBottomOf="@id/headline"
+            app:layout_constraintVertical_bias="1">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameEditText"
@@ -49,7 +60,6 @@
             android:layout_marginTop="@dimen/two"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameLayout"
             tools:text="@string/create_category_button"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

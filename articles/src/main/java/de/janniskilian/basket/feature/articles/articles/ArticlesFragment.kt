@@ -7,14 +7,13 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.appModule
-import de.janniskilian.basket.core.type.datapassing.ArticleFragmentArgs
 import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
 import de.janniskilian.basket.core.util.function.getSpeechInputResult
 import de.janniskilian.basket.feature.articles.R
-import de.janniskilian.basket.feature.articles.article.ArticleFragment
 
 class ArticlesFragment : BaseFragment() {
 
@@ -76,6 +75,10 @@ class ArticlesFragment : BaseFragment() {
         }
 
     override fun onFabClicked() {
-        showDialogFragment(ArticleFragment.create(ArticleFragmentArgs(null)))
+        findNavController().navigate(
+            ArticlesFragmentDirections
+                .actionArticlesFragmentToArticleFragment()
+                .setArticleId(-1L)
+        )
     }
 }

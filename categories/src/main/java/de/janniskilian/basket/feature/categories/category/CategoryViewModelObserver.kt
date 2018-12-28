@@ -1,6 +1,7 @@
 package de.janniskilian.basket.feature.categories.category
 
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.categories.R
 import kotlinx.android.synthetic.main.fragment_category.*
@@ -14,7 +15,7 @@ class CategoryViewModelObserver(
         with(viewModel) {
             name.observe(fragment, ::renderName)
             error.observe(fragment, ::renderError)
-            dismiss.observe(fragment) { fragment.dismiss() }
+            dismiss.observe(fragment) { fragment.findNavController().navigateUp() }
         }
     }
 

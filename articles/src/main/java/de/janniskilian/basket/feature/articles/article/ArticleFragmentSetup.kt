@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.CategoriesAdapter
-import de.janniskilian.basket.core.type.datapassing.ArticleFragmentArgs
+import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.extension.extern.onDone
 import de.janniskilian.basket.core.util.extension.extern.onTextChanged
 import de.janniskilian.basket.feature.articles.R
@@ -13,12 +13,15 @@ import kotlinx.android.synthetic.main.fragment_article.*
 
 class ArticleFragmentSetup(
     private val fragment: ArticleFragment,
-    private val args: ArticleFragmentArgs,
+    args: ArticleFragmentArgs,
     private val viewModel: ArticleViewModel,
     private val viewModelObserver: ArticleViewModelObserver
 ) {
 
+    private val articleId = args.articleId.minusOneAsNull()
+
     fun run() {
+        setupTitle()
         setupButtons()
         setClickListeners()
         setupNameEditText()
@@ -27,10 +30,19 @@ class ArticleFragmentSetup(
         viewModelObserver.observe()
     }
 
-    private fun setupButtons() {
-        fragment.deleteButton.isVisible = args.articleId != null
+    private fun setupTitle() {
+        val titleTextRes = if (articleId == null) {
+            R.string.article_create_title
+        } else {
+            R.string.article_edit_title
+        }
+        fragment.headline.setText(titleTextRes)
+    }
 
-        val buttonTextRes = if (args.articleId == null) {
+    private fun setupButtons() {
+        fragment.deleteButton.isVisible = articleId != null
+
+        val buttonTextRes = if (articleId == null) {
             R.string.create_article_button
         } else {
             R.string.save_article_button
