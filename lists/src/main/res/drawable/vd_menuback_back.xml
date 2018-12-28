@@ -12,8 +12,6 @@
         <path
             android:name="backPath"
             android:pathData="@string/avd_path_back"
-            android:strokeWidth="2"
-            android:strokeColor="@color/white"
-            android:strokeLineCap="round"/>
+            android:fillColor="@color/white"/>
     </group>
 </vector>
