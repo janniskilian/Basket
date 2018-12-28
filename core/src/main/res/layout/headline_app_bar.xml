@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Widget.Basket.AppBarLayout">
+
+    <androidx.appcompat.widget.Toolbar style="@style/Widget.Basket.Toolbar">
+
+        <TextView
+            android:id="@+id/headline"
+            style="@style/Widget.Basket.ToolbarTitle"/>
+    </androidx.appcompat.widget.Toolbar>
+</com.google.android.material.appbar.AppBarLayout>
+

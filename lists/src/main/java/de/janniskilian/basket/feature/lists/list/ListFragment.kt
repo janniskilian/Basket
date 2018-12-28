@@ -14,11 +14,11 @@ import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListFragment : BaseFragment() {
 
+    private val args by lazy { ListFragmentArgs.fromBundle(arguments) }
+
     private val module by lazy {
         ListModule(appModule, this, args)
     }
-
-    private val args by lazy { ListFragmentArgs.fromBundle(arguments) }
 
     private val viewModel get() = module.listViewModel
 

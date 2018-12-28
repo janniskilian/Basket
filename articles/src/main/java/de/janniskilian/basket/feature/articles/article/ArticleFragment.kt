@@ -11,11 +11,11 @@ import de.janniskilian.basket.feature.articles.R
 
 class ArticleFragment : BaseFragment() {
 
+    private val args by lazy { ArticleFragmentArgs.fromBundle(arguments) }
+
     private val module by lazy {
         ArticleModule(appModule, this, args)
     }
-
-    private val args by lazy { ArticleFragmentArgs.fromBundle(arguments) }
 
     private val setup get() = module.articleSetup
 

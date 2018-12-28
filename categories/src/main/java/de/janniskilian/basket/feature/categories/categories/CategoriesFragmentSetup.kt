@@ -1,7 +1,6 @@
 package de.janniskilian.basket.feature.categories.categories
 
 import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,7 +46,7 @@ class CategoriesFragmentSetup(
 
     private fun categoryClicked(category: Category?) {
         if (category != null) {
-            fragment.findNavController().navigate(
+            fragment.navigate(
                 CategoriesFragmentDirections
                     .actionCategoriesFragmentToCategoryFragment()
                     .setCategoryId(category.id)

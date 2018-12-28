@@ -1,8 +1,8 @@
 <resources>
 
     <string name="articles_title">Articles</string>
-    <string name="article_create_title">Create Article</string>
-    <string name="article_edit_title">Edit Article</string>
+    <string name="create_article_headline">Create Article</string>
+    <string name="edit_article_headline">Edit Article</string>
 
     <string name="article_name_hint">Name</string>
     <string name="article_category_hint">Category</string>

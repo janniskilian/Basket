@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.appModule
@@ -81,7 +80,7 @@ class CategoriesFragment : BaseFragment() {
         }
 
     override fun onFabClicked() {
-        findNavController().navigate(
+        navigate(
             CategoriesFragmentDirections
                 .actionCategoriesFragmentToCategoryFragment()
                 .setCategoryId(-1L)

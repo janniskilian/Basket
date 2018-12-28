@@ -1,7 +1,6 @@
 package de.janniskilian.basket.feature.articles.articles
 
 import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,7 +42,7 @@ class ArticlesFragmentSetup(
 
     private fun articleClicked(position: Int) {
         viewModel.articles.value?.getOrNull(position)?.let {
-            fragment.findNavController().navigate(
+            fragment.navigate(
                 ArticlesFragmentDirections
                     .actionArticlesFragmentToArticleFragment()
                     .setArticleId(it.id)

@@ -9,5 +9,7 @@ interface NavigationContainer {
 
     fun showSnackbar(@StringRes resId: Int, duration: Int, configure: Snackbar.() -> Unit)
 
+    fun dismissSnackbar()
+
     fun attachSearchBar(viewModel: SearchBarViewModel)
 }

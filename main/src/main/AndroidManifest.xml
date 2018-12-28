@@ -12,6 +12,7 @@
         android:theme="@style/Theme.Basket.DayNight">
 
         <activity
+            android:windowSoftInputMode="adjustResize"
             android:name=".feature.main.MainActivity"
             android:screenOrientation="portrait">
 

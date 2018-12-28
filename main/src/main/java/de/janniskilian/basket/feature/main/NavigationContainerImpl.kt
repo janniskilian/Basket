@@ -6,7 +6,6 @@ import android.content.res.ColorStateList
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.core.content.ContextCompat
-import androidx.core.view.doOnLayout
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
@@ -35,6 +34,8 @@ import kotlin.math.roundToInt
 
 class NavigationContainerImpl(private val activity: MainActivity) : NavigationContainer {
 
+    private var snackbar: WeakRef<Snackbar>? = null
+
     override fun setAppBarColor(color: Int, animate: Boolean) {
         if (animate) {
             val initialColor = activity.appBar.backgroundTint?.defaultColor
@@ -60,20 +61,26 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
     }
 
     override fun showSnackbar(resId: Int, duration: Int, configure: Snackbar.() -> Unit) {
-        Snackbar
+        snackbar = Snackbar
             .make(activity.contentView, resId, duration)
             .apply {
                 configure()
 
-                view.doOnLayout {
-                    it.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                view.post {
+                    view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                         val appBarHeight = activity.appBar.height + activity.fab.height / 2f
                         val margin = activity.resources.getDimension(R.dimen.half)
                         updateMargins(bottom = (appBarHeight + margin).roundToInt())
                     }
                 }
+
+                show()
             }
-            .show()
+            .weakRef()
+    }
+
+    override fun dismissSnackbar() {
+        snackbar?.invoke()?.dismiss()
     }
 
     override fun attachSearchBar(viewModel: SearchBarViewModel) {

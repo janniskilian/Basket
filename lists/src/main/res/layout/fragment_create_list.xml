@@ -1,52 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:clipToPadding="false"
-    android:focusableInTouchMode="true">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nameLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/two"
-        android:layout_marginTop="@dimen/two"
-        android:layout_marginEnd="@dimen/two"
-        app:errorEnabled="true"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameEditText"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/list_name_hint"
-            android:imeOptions="actionDone"
-            android:inputType="textCapSentences"
-            android:singleLine="true"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:clipToPadding="false"
+            android:focusableInTouchMode="true">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/one"
-        app:layout_constraintTop_toBottomOf="@id/nameLayout"/>
+            <include
+                android:id="@+id/appBarLayout"
+                layout="@layout/headline_app_bar"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/createButton"
-        style="@style/Widget.Basket.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/two"
-        android:layout_marginTop="@dimen/three"
-        android:layout_marginEnd="@dimen/two"
-        android:layout_marginBottom="@dimen/two"
-        android:text="@string/create_list_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerView"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/two"
+                android:layout_marginTop="@dimen/two"
+                android:layout_marginEnd="@dimen/two"
+                android:layout_marginBottom="@dimen/one"
+                app:errorEnabled="true"
+                app:layout_constraintBottom_toTopOf="@id/recyclerView"
+                app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+                app:layout_constraintVertical_bias="1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/list_name_hint"
+                    android:imeOptions="actionDone"
+                    android:inputType="textCapSentences"
+                    android:singleLine="true"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/three"
+                app:layout_constraintBottom_toTopOf="@id/createButton"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/createButton"
+                style="@style/Widget.Basket.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/two"
+                android:layout_marginEnd="@dimen/two"
+                android:layout_marginBottom="@dimen/two"
+                android:text="@string/create_list_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

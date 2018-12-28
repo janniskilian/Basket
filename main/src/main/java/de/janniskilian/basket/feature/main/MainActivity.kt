@@ -66,12 +66,14 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
     }
 
     private fun setupNavigation() {
+        findNavController(R.id.navHost).addOnDestinationChangedListener { _, _, _ ->
+            navigationContainer.dismissSnackbar()
+        }
+
         navHost.childFragmentManager.registerFragmentLifecycleCallbacks(
             object : FragmentManager.FragmentLifecycleCallbacks() {
                 override fun onFragmentStarted(fm: FragmentManager, fragment: Fragment) {
-                    if (fragment is BaseFragment
-                        && fragment === currentFragment
-                    ) {
+                    if (fragment is BaseFragment) {
                         invalidateOptionsMenu()
 
                         val fabTextRes = fragment.fabTextRes

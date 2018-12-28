@@ -1,5 +1,6 @@
 package de.janniskilian.basket.feature.articles.article
 
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,6 +9,7 @@ import de.janniskilian.basket.core.CategoriesAdapter
 import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.extension.extern.onDone
 import de.janniskilian.basket.core.util.extension.extern.onTextChanged
+import de.janniskilian.basket.core.util.extension.extern.requireView
 import de.janniskilian.basket.feature.articles.R
 import kotlinx.android.synthetic.main.fragment_article.*
 
@@ -21,7 +23,7 @@ class ArticleFragmentSetup(
     private val articleId = args.articleId.minusOneAsNull()
 
     fun run() {
-        setupTitle()
+        setupHeadline()
         setupButtons()
         setClickListeners()
         setupNameEditText()
@@ -30,13 +32,17 @@ class ArticleFragmentSetup(
         viewModelObserver.observe()
     }
 
-    private fun setupTitle() {
-        val titleTextRes = if (articleId == null) {
-            R.string.article_create_title
+    private fun setupHeadline() {
+        val headlineTextRes = if (articleId == null) {
+            R.string.create_article_headline
         } else {
-            R.string.article_edit_title
+            R.string.edit_article_headline
         }
-        fragment.headline.setText(titleTextRes)
+
+        fragment
+            .requireView()
+            .findViewById<TextView>(R.id.headline)
+            .setText(headlineTextRes)
     }
 
     private fun setupButtons() {

@@ -7,54 +7,71 @@ import androidx.annotation.StringRes
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import de.janniskilian.basket.core.module.AppModule
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainerProvider
 
 open class BaseFragment : Fragment() {
 
-	val navigationContainer
-		get() = (requireActivity() as NavigationContainerProvider).navigationContainer
+    private var pendingNavigation = false
 
-	@get:MenuRes
-	open val menuRes: Int?
-		get() = null
+    val navigationContainer
+        get() = (requireActivity() as NavigationContainerProvider).navigationContainer
 
-	@get:StringRes
-	open val fabTextRes: Int?
-		get() = null
+    @get:MenuRes
+    open val menuRes: Int?
+        get() = null
 
-	open fun onBackPressed(): Boolean = false
+    @get:StringRes
+    open val fabTextRes: Int?
+        get() = null
 
-	open fun onFabClicked() {}
+    override fun onResume() {
+        super.onResume()
+        pendingNavigation = false
+    }
+
+    open fun onBackPressed(): Boolean = false
+
+    open fun onFabClicked() {}
+
+    fun navigate(directions: NavDirections, navOptions: NavOptions? = null) {
+        if (!pendingNavigation) {
+            pendingNavigation = true
+            findNavController().navigate(directions, navOptions)
+        }
+    }
 
     protected fun showDialogFragment(fragment: DialogFragment) {
-		fragment.show(requireActivity().supportFragmentManager, fragment.tag)
-	}
+        fragment.show(requireActivity().supportFragmentManager, fragment.tag)
+    }
 }
 
 val Fragment.app: BasketApp
-	get() = requireActivity().application as BasketApp
+    get() = requireActivity().application as BasketApp
 
 val Fragment.appModule: AppModule
-	get() = app.appModule
+    get() = app.appModule
 
 fun <A : Parcelable> Fragment.bindArgs(): Lazy<A> =
-	lazy {
-		arguments?.getParcelable<A>(ARGS_KEY)!!
-	}
+    lazy {
+        arguments?.getParcelable<A>(ARGS_KEY)!!
+    }
 
 fun <A : Parcelable> Fragment.getArgs(): A =
-	arguments?.getParcelable(ARGS_KEY)!!
+    arguments?.getParcelable(ARGS_KEY)!!
 
 fun <A : Parcelable> createArgs(args: A): Bundle =
-	bundleOf(ARGS_KEY to args)
+    bundleOf(ARGS_KEY to args)
 
 fun <T : Fragment> T.putArgs(args: Parcelable?): T {
-	if (args != null) {
-		arguments = bundleOf(ARGS_KEY to args)
-	}
+    if (args != null) {
+        arguments = bundleOf(ARGS_KEY to args)
+    }
 
-	return this
+    return this
 }
 
 private const val ARGS_KEY = "ARGS_KEY"

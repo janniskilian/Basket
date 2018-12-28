@@ -3,4 +3,14 @@
 
     <item name="action_search" type="id"/>
 
+    <item name="listsFragment" type="id"/>
+    <item name="createListFragment" type="id"/>
+    <item name="listFragment" type="id"/>
+    <item name="groupsFragment" type="id"/>
+    <item name="articlesFragment" type="id"/>
+    <item name="articleFragment" type="id"/>
+    <item name="categoriesFragment" type="id"/>
+    <item name="categoryFragment" type="id"/>
+    <item name="settingsFragment" type="id"/>
+
 </resources>

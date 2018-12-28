@@ -9,7 +9,6 @@ import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,12 +18,10 @@ import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_
 import com.google.android.material.snackbar.Snackbar
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.appModule
-import de.janniskilian.basket.core.type.datapassing.CreateListFragmentArgs
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.core.util.recyclerview.ItemSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
-import de.janniskilian.basket.feature.lists.createlist.CreateListFragment
 import kotlinx.android.synthetic.main.fragment_lists.*
 
 class ListsFragment : BaseFragment() {
@@ -59,7 +56,9 @@ class ListsFragment : BaseFragment() {
     }
 
     override fun onFabClicked() {
-        showDialogFragment(CreateListFragment.create())
+        navigate(
+            ListsFragmentDirections.actionListsFragmentToCreateListFragment()
+        )
     }
 
     private fun setupRecyclerView() {
@@ -140,19 +139,17 @@ class ListsFragment : BaseFragment() {
 
     private fun startList(position: Int) {
         viewModel.shoppingLists.value?.getOrNull(position)?.let {
-            findNavController().navigate(
-                ListsFragmentDirections.actionListsFragmentToListFragment(it.id)
-            )
+            navigate(ListsFragmentDirections.actionListsFragmentToListFragment(it.id))
         }
     }
 
     private fun editList(position: Int) {
-        viewModel.shoppingLists.value?.getOrNull(position)?.let { shoppingList ->
-            CreateListFragment
-                .create(CreateListFragmentArgs(shoppingList.id))
-                .let {
-                    it.show(fragmentManager, it.tag)
-                }
+        viewModel.shoppingLists.value?.getOrNull(position)?.let {
+            navigate(
+                ListsFragmentDirections
+                    .actionListsFragmentToCreateListFragment()
+                    .setShoppingListId(it.id)
+            )
         }
     }
 }
