@@ -6,64 +6,71 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.appModule
-import de.janniskilian.basket.core.getArgs
-import de.janniskilian.basket.core.putArgs
 import de.janniskilian.basket.core.util.function.getSpeechInputResult
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.fragment_lists.*
 
 class AddListItemFragment : DialogFragment() {
 
-	private val module by lazy {
-		AddListItemModule(appModule, this, getArgs())
-	}
+    private val shoppingListId by lazy {
+        arguments?.getLong(KEY_SHOPPING_LIST_ID) ?: 0L
+    }
 
-	private val setup get() = module.addListItemSetup
+    private val module by lazy {
+        AddListItemModule(appModule, this, shoppingListId)
+    }
 
-	private val viewModel get() = module.addListItemViewModel
+    private val setup get() = module.addListItemSetup
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
+    private val viewModel get() = module.addListItemViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setStyle(DialogFragment.STYLE_NORMAL, R.style.Widget_Basket_FullHeightDialog)
-	}
+    }
 
-	override fun onCreateView(
-		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View =
-		inflater.inflate(
-			R.layout.fragment_add_list_item,
-			container,
-			false
-		)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View =
+        inflater.inflate(
+            R.layout.fragment_add_list_item,
+            container,
+            false
+        )
 
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		setup.run()
-	}
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setup.run()
+    }
 
-	override fun onDestroyView() {
-		recyclerView.adapter = null
-		super.onDestroyView()
-	}
+    override fun onDestroyView() {
+        recyclerView.adapter = null
+        super.onDestroyView()
+    }
 
-	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-		if (requestCode == REQ_SPEECH_INPUT
-			&& resultCode == Activity.RESULT_OK
-		) {
-			getSpeechInputResult(data)?.let {
-				viewModel.setInput(it)
-			}
-		}
-	}
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQ_SPEECH_INPUT
+            && resultCode == Activity.RESULT_OK
+        ) {
+            getSpeechInputResult(data)?.let {
+                viewModel.setInput(it)
+            }
+        }
+    }
 
-	companion object {
+    companion object {
 
-		fun create(shoppingListId: Long): AddListItemFragment =
-			AddListItemFragment().putArgs(AddListItemFragmentArgs(shoppingListId))
-	}
+        private const val KEY_SHOPPING_LIST_ID = "KEY_SHOPPING_LIST_ID"
+
+        fun create(shoppingListId: Long): AddListItemFragment =
+            AddListItemFragment().apply {
+                arguments = bundleOf(KEY_SHOPPING_LIST_ID to shoppingListId)
+            }
+    }
 }
 

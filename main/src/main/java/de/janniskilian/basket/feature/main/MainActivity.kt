@@ -140,9 +140,7 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
 
     private fun showNavigation() {
         findNavController(R.id.navHost).currentDestination?.id?.let { destinationId ->
-            val fragment = BottomNavigationDrawerFragment.create(
-                BottomNavigationDrawerFragmentArgs(destinationId)
-            )
+            val fragment = BottomNavigationDrawerFragment.create(destinationId)
             fragment.show(supportFragmentManager, fragment.tag)
         }
     }

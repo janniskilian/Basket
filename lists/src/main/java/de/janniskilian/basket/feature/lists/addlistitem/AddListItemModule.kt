@@ -4,9 +4,9 @@ import de.janniskilian.basket.core.module.AppModule
 import de.janniskilian.basket.core.util.function.createViewModel
 
 class AddListItemModule(
-	private val appModule: AppModule,
-	private val fragment: AddListItemFragment,
-	private val args: AddListItemFragmentArgs
+    private val appModule: AppModule,
+    private val fragment: AddListItemFragment,
+    private val shoppingListId: Long
 ) {
 
 	val addListItemViewModel by lazy {
@@ -23,10 +23,10 @@ class AddListItemModule(
 	}
 
 	private val getSuggestionsUseCase by lazy {
-		GetSuggestionsUseCase(args.shoppingListId, appModule.dataModule.dataClient)
+        GetSuggestionsUseCase(shoppingListId, appModule.dataModule.dataClient)
 	}
 
 	private val createListItemUseCase by lazy {
-		ListItemSuggestionClickedUseCase(args.shoppingListId, appModule.dataModule.dataClient)
+        ListItemSuggestionClickedUseCase(shoppingListId, appModule.dataModule.dataClient)
 	}
 }

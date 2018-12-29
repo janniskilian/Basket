@@ -89,8 +89,6 @@ subprojects {
         }
     }
 
-    apply(from = "$rootDir/androidExtensions.gradle")
-
     dependencies {
         val implementation by configurations
         val testImplementation by configurations
