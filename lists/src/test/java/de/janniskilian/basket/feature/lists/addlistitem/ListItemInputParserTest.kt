@@ -27,7 +27,7 @@ class ListItemInputParserTest {
 		checkResult("Banana Bread,  2", "Banana Bread", "2")
 		checkResult("Banana, Bread 2", "Banana, Bread", "2")
 		checkResult("Banana, Bread, 2", "Banana, Bread", "2")
-		checkResult("Gruyerè 2", "Gruyerè", "2")
+		checkResult("Gruyère 2", "Gruyère", "2")
 	}
 
 	@Test
@@ -40,7 +40,7 @@ class ListItemInputParserTest {
 		checkResult("Banana Bread  2  kg", "Banana Bread", "2", "kg")
 		checkResult("Banana Bread, 2kg", "Banana Bread", "2", "kg")
 		checkResult("Banana Bread, 2 kg", "Banana Bread", "2", "kg")
-		checkResult("Gruyerè 200g", "Gruyerè", "200", "g")
+		checkResult("Gruyère 200g", "Gruyère", "200", "g")
 	}
 
 	private fun checkResult(

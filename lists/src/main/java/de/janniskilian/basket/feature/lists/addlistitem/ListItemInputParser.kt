@@ -6,10 +6,10 @@ class ListItemInputParser {
         Regex("""[,;\-]+\s*(([0-9]+)\s*([a-zA-Z0-9]+)?)""")
     }
     private val alphaNameInputRegex by lazy {
-        Regex("""([\p{IsAlphabetic},;\-\s]*[\p{IsAlphabetic}])(\s+([0-9]+)?\s*([\p{IsAlphabetic}]+)?)?""")
+        Regex("""([\p{L},;\-\s]*[\p{L}])(\s+([0-9]+)?\s*([\p{L}]+)?)?""")
     }
     private val alphaNumNameInputRegex by lazy {
-        Regex("""([\p{IsAlphabetic}0-9,;\-\s]*[\p{IsAlphabetic}0-9])\s*[,\-]+\s*(([0-9]+)?\s*([\p{IsAlphabetic}]+)?)?""")
+        Regex("""([\p{L}0-9,;\-\s]*[\p{L}0-9])\s*[,\-]+\s*(([0-9]+)?\s*([\p{L}]+)?)?""")
     }
 
     fun parse(input: String): Result {
