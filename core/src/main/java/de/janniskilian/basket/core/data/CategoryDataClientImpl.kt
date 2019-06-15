@@ -31,7 +31,7 @@ class CategoryDataClientImpl(localDb: LocalDatabase) : CategoryDataClient {
 
     override fun get(name: String) =
         dao
-            .select("%$name%")
+            .select("$name%")
             .map { results ->
                 results.map { roomToModel(it) }
             }

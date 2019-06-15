@@ -42,11 +42,7 @@ class ArticlesFragmentSetup(
 
     private fun articleClicked(position: Int) {
         viewModel.articles.value?.getOrNull(position)?.let {
-            fragment.navigate(
-                ArticlesFragmentDirections
-                    .actionArticlesFragmentToArticleFragment()
-                    .setArticleId(it.id)
-            )
+            fragment.navigate(ArticlesFragmentDirections.actionArticlesFragmentToArticleFragment(it.id))
         }
     }
 }

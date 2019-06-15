@@ -1,10 +1,11 @@
+@Suppress("MayBeConstant")
 object V {
 
-    const val kotlin = "1.3.11"
-    const val coroutines = "1.1.0"
-    const val lifecycle = "2.1.0-alpha01"
-    const val room = "2.1.0-alpha03"
-    const val nav = "1.0.0-alpha09"
-    const val leakCanary = "1.6.2"
-    const val espresso = "3.1.1"
+    val kotlin = "1.3.31"
+    val coroutines = "1.2.1"
+    val lifecycle = "2.1.0-beta01"
+    val room = "2.1.0"
+    val nav = "2.0.0"
+    val leakCanary = "1.6.3"
+    val espresso = "3.2.0"
 }

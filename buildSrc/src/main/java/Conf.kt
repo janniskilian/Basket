@@ -1,6 +1,7 @@
 object Conf {
 
-    const val buildTools = "28.0.3"
+    const val buildTools = "29.0.0"
+    const val compileSdk = 28
     const val targetSdk = 28
     const val minSdk = 21
     val versionCode get() = commitCount()
@@ -13,7 +14,7 @@ object Conf {
         val result = p.waitFor()
         return if (result == 0) {
             p.inputStream.reader().use {
-                it.readLines().get(0).toInt().coerceAtLeast(25)
+                it.readLines()[0].toInt().coerceAtLeast(25)
             }
         } else {
             0

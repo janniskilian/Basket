@@ -27,6 +27,9 @@
 
     <string name="list_deleted_snackbar">List deleted</string>
 
+    <string name="shopping_list_empty_title">This list is empty</string>
+    <string name="shopping_list_empty_info">Tap the yellow button to add items</string>
+
     <string name="action_menu_edit_list">Edit list</string>
     <string name="action_menu_delete_list">Delete list</string>
 

@@ -1,3 +1,4 @@
+@Suppress("MayBeConstant")
 object Deps {
 
     object Kotlin {
@@ -12,17 +13,17 @@ object Deps {
         val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${V.lifecycle}"
         val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${V.lifecycle}"
         val lifecycleExt = "androidx.lifecycle:lifecycle-extensions:${V.lifecycle}"
-        val navFragment = "android.arch.navigation:navigation-fragment-ktx:${V.nav}"
-        val navUi = "android.arch.navigation:navigation-ui-ktx:${V.nav}"
+        val navFragment = "androidx.navigation:navigation-fragment-ktx:${V.nav}"
+        val navUi = "androidx.navigation:navigation-ui-ktx:${V.nav}"
         val roomRuntime = "androidx.room:room-runtime:${V.room}"
-        val roomCoroutines = "androidx.room:room-coroutines:${V.room}"
+        val roomKtx = "androidx.room:room-ktx:${V.room}"
         val roomCompiler = "androidx.room:room-compiler:${V.room}"
         val constraintlayout = "androidx.constraintlayout:constraintlayout:1.1.3"
         val recyclerview = "androidx.recyclerview:recyclerview:1.0.0"
         val preference = "androidx.preference:preference:1.0.0"
     }
 
-    val material = "com.google.android.material:material:1.1.0-alpha02"
+    val material = "com.google.android.material:material:1.1.0-alpha07"
 
     val timber = "com.jakewharton.timber:timber:4.7.1"
 
@@ -35,24 +36,24 @@ object Deps {
     object Testing {
         val junit = "junit:junit:4.12"
         val kotlinTest = "org.jetbrains.kotlin:kotlin-test-junit:${V.kotlin}"
-        val mockito = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0"
-        val robolectric = "org.robolectric:robolectric:4.1"
+        val mockito = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
+        val robolectric = "org.robolectric:robolectric:4.3"
     }
 
     object AndroidTesting {
-        val core = "androidx.test:core:1.1.0"
-        val runner = "androidx.test:runner:1.1.1"
-        val junit = "androidx.test.ext:junit:1.1.0"
-        val rules = "androidx.test:rules:1.1.1"
+        val core = "androidx.test:core:1.2.0"
+        val runner = "androidx.test:runner:1.2.0"
+        val junit = "androidx.test.ext:junit:1.1.1"
+        val rules = "androidx.test:rules:1.2.0"
         val espresso = "androidx.test.espresso:espresso-core:${V.espresso}"
         val espressoContrib = "androidx.test.espresso:espresso-contrib:${V.espresso}"
-        val archCore = "androidx.arch.core:core-testing:2.0.0"
+        val archCore = "androidx.arch.core:core-testing:2.0.1"
         val room = "androidx.room:room-testing:${V.room}"
     }
 
     object Plugins {
-        val android = "com.android.tools.build:gradle:3.4.0-alpha09"
-        val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.11"
-        val navSafeArgs = "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0-alpha08"
+        val android = "com.android.tools.build:gradle:3.5.0-beta04"
+        val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${V.kotlin}"
+        val navSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${V.nav}"
     }
 }

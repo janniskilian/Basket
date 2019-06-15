@@ -14,20 +14,14 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.observe
 import com.google.android.material.snackbar.Snackbar
 import de.janniskilian.basket.R
-import de.janniskilian.basket.core.ANIMATION_DURATION_M
 import de.janniskilian.basket.core.ANIMATION_DURATION_S
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
 import de.janniskilian.basket.core.navigationcontainer.SearchBarViewModel
 import de.janniskilian.basket.core.util.WeakRef
-import de.janniskilian.basket.core.util.extension.extern.contentView
-import de.janniskilian.basket.core.util.extension.extern.doOnEnd
-import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
-import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
-import de.janniskilian.basket.core.util.extension.extern.onTextChanged
-import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
-import de.janniskilian.basket.core.util.extension.extern.showKeyboard
+import de.janniskilian.basket.core.util.extension.extern.*
 import de.janniskilian.basket.core.util.function.createSpeechInputIntent
+import de.janniskilian.basket.core.util.function.getLong
 import de.janniskilian.basket.core.util.weakRef
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.math.roundToInt
@@ -46,7 +40,7 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
             val evaluator = ArgbEvaluator()
 
             with(ValueAnimator.ofFloat(0f, 1f)) {
-                duration = ANIMATION_DURATION_M
+                duration = getLong(activity, R.integer.transition_duration)
                 interpolator = LinearInterpolator()
                 addUpdateListener {
                     activity.appBar.backgroundTint = ColorStateList.valueOf(

@@ -7,6 +7,8 @@ data class ShoppingList(
 	val items: List<ShoppingListItem>
 ) {
 
+	val isEmpty get() = items.isEmpty()
+
 	val checkedItemCount: Int
 		get() = items.count { it.checked }
 }

@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListFragment : BaseFragment() {
 
-    private val args by lazy { ListFragmentArgs.fromBundle(arguments) }
+    private val args by lazy { ListFragmentArgs.fromBundle(requireArguments()) }
 
     private val module by lazy {
         ListModule(appModule, this, args)
@@ -61,8 +61,8 @@ class ListFragment : BaseFragment() {
         )
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.action_check_all_list_items -> viewModel.setAllListItemsChecked(true)
 
             R.id.action_uncheck_all_list_items -> viewModel.setAllListItemsChecked(false)

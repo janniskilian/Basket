@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -53,7 +55,7 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
         return menuRes != null
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean =
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
         currentFragment?.onOptionsItemSelected(item) ?: false
 
     override fun onSupportNavigateUp(): Boolean =
@@ -106,9 +108,12 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
         fab.setOnClickListener { currentFragment?.onFabClicked() }
     }
 
-    private fun setFabText(buttonTextRes: Int) {
+    private fun setFabText(@StringRes buttonTextRes: Int) {
         if (fab.text.isNullOrEmpty()) {
             fab.setText(buttonTextRes)
+            fab.updateLayoutParams {
+                width = ViewGroup.LayoutParams.WRAP_CONTENT
+            }
         } else {
             fab.updateLayoutParams {
                 width = fab.width

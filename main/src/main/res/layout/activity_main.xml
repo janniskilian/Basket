@@ -14,12 +14,10 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"/>
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab"
-        style="@style/Widget.Basket.ExtendedFAB"
-        android:ellipsize="none"
-        android:gravity="start|center_vertical"
-        android:singleLine="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:icon="@drawable/ic_add_24"
         app:layout_anchor="@id/appBar"
         app:layout_anchorGravity="center_horizontal"/>

@@ -1,9 +1,11 @@
 package de.janniskilian.basket.feature.lists.list
 
+import androidx.core.view.isVisible
 import androidx.lifecycle.observe
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
 import de.janniskilian.basket.core.util.extension.extern.flatMapIndexed
+import de.janniskilian.basket.core.util.extension.extern.setScrollable
 import de.janniskilian.basket.core.util.function.addToFront
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.lists.R
@@ -22,11 +24,15 @@ class ListViewModelObserver(
 	}
 
 	private fun renderTitle(shoppingList: ShoppingList) {
+		fragment.toolbar.setScrollable(!shoppingList.isEmpty)
 		fragment.headline.text = shoppingList.name
 		fragment.navigationContainer.setAppBarColor(shoppingList.color, !fragment.recreated)
 	}
 
 	private fun renderList(shoppingList: ShoppingList) {
+		fragment.emptyGroup.isVisible = shoppingList.isEmpty
+		fragment.recyclerView.isVisible = !shoppingList.isEmpty
+
 		val (checkedItems, uncheckedItems) = shoppingList.items.partition { it.checked }
 
 		val uncheckedItemGroups = uncheckedItems.groupBy { it.article.category }

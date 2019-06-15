@@ -46,14 +46,14 @@ class ArticleDataClientImpl(localDb: LocalDatabase) : ArticleDataClient {
 
     override fun get(name: String): LiveData<List<Article>> =
         dao
-            .select("%$name%")
+            .select("$name%")
             .map { results ->
                 results.map { roomToModel(it) }
             }
 
     override suspend fun getSuspend(name: String) = withIOContext {
         dao
-            .selectSuspend("%$name%")
+            .selectSuspend("$name%")
             .map(::roomToModel)
     }
 

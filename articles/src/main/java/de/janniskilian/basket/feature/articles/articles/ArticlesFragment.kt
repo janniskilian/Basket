@@ -55,8 +55,8 @@ class ArticlesFragment : BaseFragment() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean =
-        if (item?.itemId == R.id.action_search) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        if (item.itemId == R.id.action_search) {
             viewModel.setSearchBarVisible(true)
             true
         } else {
@@ -74,10 +74,6 @@ class ArticlesFragment : BaseFragment() {
         }
 
     override fun onFabClicked() {
-        navigate(
-            ArticlesFragmentDirections
-                .actionArticlesFragmentToArticleFragment()
-                .setArticleId(-1L)
-        )
+        navigate(ArticlesFragmentDirections.actionArticlesFragmentToArticleFragment(-1L))
     }
 }

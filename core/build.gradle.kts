@@ -20,7 +20,7 @@ dependencies {
     implementation(Deps.AndroidX.lifecycleExt)
     implementation(Deps.AndroidX.constraintlayout)
     implementation(Deps.AndroidX.roomRuntime)
-    implementation(Deps.AndroidX.roomCoroutines)
+    implementation(Deps.AndroidX.roomKtx)
     kapt(Deps.AndroidX.roomCompiler)
 
     implementation(Deps.material)

@@ -7,18 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.core.view.isVisible
-import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
-import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 import com.google.android.material.snackbar.Snackbar
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.appModule
 import de.janniskilian.basket.core.type.domain.ShoppingList
+import de.janniskilian.basket.core.util.extension.extern.setScrollable
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.core.util.recyclerview.ItemSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
@@ -91,13 +88,7 @@ class ListsFragment : BaseFragment() {
     private fun shoppingListsObserver(shoppingLists: List<ShoppingList>) {
         listsAdapter?.submitList(shoppingLists)
         emptyGroup.isVisible = shoppingLists.isEmpty()
-        toolbar.updateLayoutParams<AppBarLayout.LayoutParams> {
-            scrollFlags = if (shoppingLists.isEmpty()) {
-                0
-            } else {
-                SCROLL_FLAG_SCROLL or SCROLL_FLAG_ENTER_ALWAYS
-            }
-        }
+        toolbar.setScrollable(shoppingLists.isEmpty())
     }
 
     private fun showListPopupMenu(position: Int) {
@@ -145,11 +136,7 @@ class ListsFragment : BaseFragment() {
 
     private fun editList(position: Int) {
         viewModel.shoppingLists.value?.getOrNull(position)?.let {
-            navigate(
-                ListsFragmentDirections
-                    .actionListsFragmentToCreateListFragment()
-                    .setShoppingListId(it.id)
-            )
+            navigate(ListsFragmentDirections.actionListsFragmentToCreateListFragment(it.id))
         }
     }
 }

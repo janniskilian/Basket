@@ -5,7 +5,6 @@ import androidx.core.view.isVisible
 import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.extension.extern.onDone
 import de.janniskilian.basket.core.util.extension.extern.onTextChanged
-import de.janniskilian.basket.core.util.extension.extern.requireView
 import de.janniskilian.basket.feature.categories.R
 import kotlinx.android.synthetic.main.fragment_category.*
 

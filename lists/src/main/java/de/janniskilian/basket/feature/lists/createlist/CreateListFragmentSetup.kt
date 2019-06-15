@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.extension.extern.onDone
 import de.janniskilian.basket.core.util.extension.extern.onTextChanged
-import de.janniskilian.basket.core.util.extension.extern.requireView
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.core.util.recyclerview.ItemSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
@@ -78,7 +77,7 @@ class CreateListFragmentSetup(
             )
             addItemDecoration(
                 EndSpacingDecoration(
-                    resources.getDimensionPixelSize(de.janniskilian.basket.feature.lists.R.dimen.one),
+                    resources.getDimensionPixelSize(R.dimen.one),
                     RecyclerView.HORIZONTAL,
                     EndSpacingDecoration.Position.START_AND_END
                 )

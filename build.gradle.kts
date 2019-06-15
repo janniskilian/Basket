@@ -1,6 +1,3 @@
-import groovy.lang.Closure
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 buildscript {
     repositories {
         google()
@@ -14,8 +11,8 @@ buildscript {
 }
 
 plugins {
-    id("com.github.ben-manes.versions") version "0.20.0"
-    id("io.gitlab.arturbosch.detekt") version "1.0.0-RC12"
+    id("com.github.ben-manes.versions") version "0.21.0"
+    id("io.gitlab.arturbosch.detekt") version "1.0.0-RC15"
 }
 
 allprojects {
@@ -46,11 +43,11 @@ subprojects {
     }
     apply(plugin = "kotlin-android")
     apply(plugin = "kotlin-android-extensions")
-    apply(plugin = "androidx.navigation.safeargs")
+    apply(plugin = "androidx.navigation.safeargs.kotlin")
 
     configure<com.android.build.gradle.TestedExtension> {
         buildToolsVersion(Conf.buildTools)
-        compileSdkVersion(Conf.targetSdk)
+        compileSdkVersion(Conf.compileSdk)
         defaultConfig {
             minSdkVersion(Conf.minSdk)
             targetSdkVersion(Conf.targetSdk)

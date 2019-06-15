@@ -11,7 +11,7 @@ import de.janniskilian.basket.feature.lists.R
 
 class CreateListFragment : BaseFragment() {
 
-    private val args by lazy { CreateListFragmentArgs.fromBundle(arguments) }
+    private val args by lazy { CreateListFragmentArgs.fromBundle(requireArguments()) }
 
     private val module by lazy {
         CreateListModule(appModule, this, args)

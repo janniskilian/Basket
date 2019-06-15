@@ -10,7 +10,7 @@
         android:id="@+id/appBarLayout"
         style="@style/Widget.Basket.AppBarLayout">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Widget.Basket.Toolbar">
 
@@ -18,7 +18,7 @@
                 android:id="@+id/headline"
                 style="@style/Widget.Basket.ToolbarTitle"
                 android:text="@string/shopping_lists_title"/>
-        </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.MaterialToolbar>>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
