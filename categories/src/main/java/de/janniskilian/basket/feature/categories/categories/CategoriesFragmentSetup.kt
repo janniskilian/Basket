@@ -46,7 +46,7 @@ class CategoriesFragmentSetup(
 
     private fun categoryClicked(category: Category?) {
         if (category != null) {
-            fragment.navigate(CategoriesFragmentDirections.actionCategoriesFragmentToCategoryFragment(category.id))
+            fragment.navigate(CategoriesFragmentDirections.actionCategoriesFragmentToCategoryFragment(category.id.value))
         }
     }
 }

@@ -2,12 +2,14 @@ package de.janniskilian.basket.core.data
 
 import androidx.lifecycle.LiveData
 import de.janniskilian.basket.core.type.domain.Article
+import de.janniskilian.basket.core.type.domain.ArticleId
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
 
 interface ShoppingListItemDataClient {
 
 	suspend fun create(
-		shoppingListId: Long,
+		shoppingListId: ShoppingListId,
 		article: Article,
 		quantity: String = "",
 		checked: Boolean = false
@@ -15,15 +17,15 @@ interface ShoppingListItemDataClient {
 
     suspend fun create(shoppingListItems: List<ShoppingListItem>)
 
-	fun get(id: Long): LiveData<ShoppingListItem>
+	fun get(shoppingListId: ShoppingListId): LiveData<ShoppingListItem>
 
     suspend fun update(shoppingListItem: ShoppingListItem)
 
-    suspend fun setAllCheckedForShoppingList(shoppingListId: Long, checked: Boolean)
+	suspend fun setAllCheckedForShoppingList(shoppingListId: ShoppingListId, checked: Boolean)
 
-    suspend fun delete(shoppingListId: Long, articleId: Long)
+	suspend fun delete(shoppingListId: ShoppingListId, articleId: ArticleId)
 
-    suspend fun deleteAllForShoppingList(shoppingListId: Long)
+	suspend fun deleteAllForShoppingList(shoppingListId: ShoppingListId)
 
-    suspend fun deleteAllCheckedForShoppingList(shoppingListId: Long)
+	suspend fun deleteAllCheckedForShoppingList(shoppingListId: ShoppingListId)
 }

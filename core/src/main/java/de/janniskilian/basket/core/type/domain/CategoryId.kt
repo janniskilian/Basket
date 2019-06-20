@@ -1,3 +1,3 @@
 package de.janniskilian.basket.core.type.domain
 
-inline class ArticleId(val value: Long)
+inline class CategoryId(val value: Long)

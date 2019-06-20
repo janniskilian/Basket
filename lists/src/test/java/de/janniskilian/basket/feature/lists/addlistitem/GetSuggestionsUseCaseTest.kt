@@ -5,9 +5,7 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import de.janniskilian.basket.core.data.ArticleDataClient
 import de.janniskilian.basket.core.data.DataClient
-import de.janniskilian.basket.core.type.domain.Article
-import de.janniskilian.basket.core.type.domain.ArticleSuggestion
-import de.janniskilian.basket.core.type.domain.Category
+import de.janniskilian.basket.core.type.domain.*
 import de.janniskilian.basket.core.util.extension.extern.nextValue
 import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
 import kotlinx.coroutines.runBlocking
@@ -19,9 +17,9 @@ import kotlin.test.assertEquals
 @RunWith(RobolectricTestRunner::class)
 class GetSuggestionsUseCaseTest {
 
-	private val bananas = Article(1, "Bananas", Category(1, "Produce"))
-	private val apples = Article(2, "Apples", Category(1, "Produce"))
-	private val clementines = Article(3, "Clementines", Category(1, "Produce"))
+	private val bananas = Article(ArticleId(1), "Bananas", Category(CategoryId(1), "Produce"))
+	private val apples = Article(ArticleId(2), "Apples", Category(CategoryId(1), "Produce"))
+	private val clementines = Article(ArticleId(3), "Clementines", Category(CategoryId(1), "Produce"))
 
 	private val articleDataClientResult = DefaultMutableLiveData(
 		listOf(
@@ -32,14 +30,14 @@ class GetSuggestionsUseCaseTest {
 	)
 
 	private val articleDataClient: ArticleDataClient = mock {
-		on { get(any(), any()) } doReturn articleDataClientResult
+		on { get(any(), ShoppingListId(any())) } doReturn articleDataClientResult
 	}
 
 	private val dataClient: DataClient = mock {
 		on { article } doReturn articleDataClient
 	}
 
-	private val useCase = GetSuggestionsUseCase(1, dataClient)
+	private val useCase = GetSuggestionsUseCase(ShoppingListId(1), dataClient)
 
 	@Test
 	fun `ascending ordering by article name`() = runBlocking {
@@ -59,7 +57,7 @@ class GetSuggestionsUseCaseTest {
 	fun `create article suggestion`() = runBlocking {
 		useCase.run("apple").nextValue { result ->
 			assertEquals(
-				ShoppingListItemSuggestion(Article(0, "apple", null), false, false),
+				ShoppingListItemSuggestion(Article(ArticleId(0), "apple", null), false, false),
 				result.first()
 			)
 		}
@@ -80,7 +78,7 @@ class GetSuggestionsUseCaseTest {
 			assertEquals(
 				listOf(
 					ShoppingListItemSuggestion(
-						Article(0, "a", null),
+						Article(ArticleId(0), "a", null),
 						false,
 						false,
 						formatedQuantity

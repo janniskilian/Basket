@@ -2,6 +2,7 @@ package de.janniskilian.basket.feature.lists.createlist
 
 import androidx.core.content.ContextCompat
 import de.janniskilian.basket.core.module.AppModule
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.function.createViewModel
 import de.janniskilian.basket.feature.lists.R
@@ -24,7 +25,7 @@ class CreateListModule(
     private val viewModel by lazy {
         createViewModel(fragment) {
             CreateListViewModel(
-                args.shoppingListId.minusOneAsNull(),
+                args.shoppingListId.minusOneAsNull()?.let(::ShoppingListId),
                 colors,
                 createListFragmentUseCases,
                 appModule.dataModule.dataClient

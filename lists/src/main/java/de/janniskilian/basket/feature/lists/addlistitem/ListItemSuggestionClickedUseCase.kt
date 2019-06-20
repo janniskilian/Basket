@@ -2,9 +2,10 @@ package de.janniskilian.basket.feature.lists.addlistitem
 
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.Article
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 
 class ListItemSuggestionClickedUseCase(
-    private val shoppingListId: Long,
+    private val shoppingListId: ShoppingListId,
     private val dataClient: DataClient
 ) {
 

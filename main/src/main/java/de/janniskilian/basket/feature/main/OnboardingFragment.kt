@@ -15,6 +15,7 @@ import de.janniskilian.basket.core.data.DefaultDataImporter
 import de.janniskilian.basket.core.data.DefaultDataLoader
 import kotlinx.android.synthetic.main.fragment_onboarding.*
 import kotlinx.android.synthetic.main.language_item.view.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
@@ -85,13 +86,15 @@ class OnboardingFragment : DialogFragment() {
                     dataClient,
                     DefaultDataLoader(requireContext(), selectedLocale)
                 ).run()
-            }
 
-            sharedPrefs.edit {
-                putBoolean(KEY_DEFAULT_DATA_IMPORTED, true)
-            }
+                launch(Dispatchers.Main) {
+                    sharedPrefs.edit {
+                        putBoolean(KEY_DEFAULT_DATA_IMPORTED, true)
+                    }
 
-            dismiss()
+                    dismiss()
+                }
+            }
         }
     }
 }

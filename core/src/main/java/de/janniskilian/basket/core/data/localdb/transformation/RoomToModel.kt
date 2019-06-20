@@ -4,19 +4,16 @@ import de.janniskilian.basket.core.data.localdb.entity.RoomCategory
 import de.janniskilian.basket.core.data.localdb.result.RoomArticleResult
 import de.janniskilian.basket.core.data.localdb.result.RoomShoppingListItemResult
 import de.janniskilian.basket.core.data.localdb.result.RoomShoppingListResult
-import de.janniskilian.basket.core.type.domain.Article
-import de.janniskilian.basket.core.type.domain.Category
-import de.janniskilian.basket.core.type.domain.ShoppingList
-import de.janniskilian.basket.core.type.domain.ShoppingListItem
+import de.janniskilian.basket.core.type.domain.*
 
 fun roomToModel(category: RoomCategory): Category =
-	Category(category.id, category.name)
+    Category(CategoryId(category.id), category.name)
 
 fun roomToModel(articleResult: RoomArticleResult): Article {
 	val category = articleResult.category?.let { roomToModel(it) }
 
 	return Article(
-		articleResult.articleId,
+        ArticleId(articleResult.articleId),
 		articleResult.articleName,
 		category
 	)
@@ -24,7 +21,7 @@ fun roomToModel(articleResult: RoomArticleResult): Article {
 
 fun roomToModel(result: List<RoomShoppingListResult>): ShoppingList =
 	ShoppingList(
-		result.first().shoppingListId,
+        ShoppingListId(result.first().shoppingListId),
 		result.first().shoppingListName,
 		result.first().color,
 		result.mapNotNull { resultItem ->
@@ -34,13 +31,13 @@ fun roomToModel(result: List<RoomShoppingListResult>): ShoppingList =
 				) {
 					null
 				} else {
-					Category(it.categoryId, it.categoryName)
+                    Category(CategoryId(it.categoryId), it.categoryName)
 				}
 				ShoppingListItem(
-					it.id,
-					result.first().shoppingListId,
+                    ShoppingListItemId(it.id),
+                    ShoppingListId(result.first().shoppingListId),
 					Article(
-						it.articleId,
+                        ArticleId(it.articleId),
 						it.articleName,
 						category
 					),
@@ -58,16 +55,16 @@ fun roomToModel(shoppingListItem: RoomShoppingListItemResult): ShoppingListItem 
 		null
 	} else {
 		Category(
-			shoppingListItem.categoryId,
+            CategoryId(shoppingListItem.categoryId),
 			shoppingListItem.categoryName
 		)
 	}
 
 	return ShoppingListItem(
-		shoppingListItem.id,
-		shoppingListItem.shoppingListId,
+        ShoppingListItemId(shoppingListItem.id),
+        ShoppingListId(shoppingListItem.shoppingListId),
 		Article(
-			shoppingListItem.articleId,
+            ArticleId(shoppingListItem.articleId),
 			shoppingListItem.articleName,
 			category
 		),

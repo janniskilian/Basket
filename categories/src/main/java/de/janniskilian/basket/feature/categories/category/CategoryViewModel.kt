@@ -5,12 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
+import de.janniskilian.basket.core.type.domain.CategoryId
 import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CategoryViewModel(
-    private val categoryId: Long?,
+    private val categoryId: CategoryId?,
     private val useCases: CategoryFragmentUseCases,
     dataClient: DataClient
 ) : ViewModel() {

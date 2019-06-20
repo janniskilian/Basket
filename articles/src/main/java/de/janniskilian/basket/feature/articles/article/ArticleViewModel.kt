@@ -1,11 +1,8 @@
 package de.janniskilian.basket.feature.articles.article
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import de.janniskilian.basket.core.data.DataClient
+import de.janniskilian.basket.core.type.domain.ArticleId
 import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.util.function.addToFront
 import de.janniskilian.basket.core.util.function.createMutableLiveData
@@ -13,7 +10,7 @@ import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 class ArticleViewModel(
-    private val articleId: Long?,
+    private val articleId: ArticleId?,
     private val useCases: ArticleFragmentUseCases,
     dataClient: DataClient
 ) : ViewModel() {

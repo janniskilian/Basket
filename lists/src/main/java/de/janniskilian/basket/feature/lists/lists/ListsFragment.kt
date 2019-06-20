@@ -130,13 +130,13 @@ class ListsFragment : BaseFragment() {
 
     private fun startList(position: Int) {
         viewModel.shoppingLists.value?.getOrNull(position)?.let {
-            navigate(ListsFragmentDirections.actionListsFragmentToListFragment(it.id))
+            navigate(ListsFragmentDirections.actionListsFragmentToListFragment(it.id.value))
         }
     }
 
     private fun editList(position: Int) {
         viewModel.shoppingLists.value?.getOrNull(position)?.let {
-            navigate(ListsFragmentDirections.actionListsFragmentToCreateListFragment(it.id))
+            navigate(ListsFragmentDirections.actionListsFragmentToCreateListFragment(it.id.value))
         }
     }
 }

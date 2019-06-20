@@ -2,9 +2,7 @@ package de.janniskilian.basket.core.data
 
 import androidx.lifecycle.LiveData
 import de.janniskilian.basket.core.data.localdb.entity.RoomArticle
-import de.janniskilian.basket.core.type.domain.Article
-import de.janniskilian.basket.core.type.domain.ArticleSuggestion
-import de.janniskilian.basket.core.type.domain.Category
+import de.janniskilian.basket.core.type.domain.*
 
 interface ArticleDataClient {
 
@@ -12,9 +10,9 @@ interface ArticleDataClient {
 
 	suspend fun create(articles: List<RoomArticle>)
 
-	suspend fun get(id: Long): Article?
+    suspend fun get(articleId: ArticleId): Article?
 
-	fun get(name: String, shoppingListId: Long): LiveData<List<ArticleSuggestion>>
+    fun get(name: String, shoppingListId: ShoppingListId): LiveData<List<ArticleSuggestion>>
 
 	fun get(name: String): LiveData<List<Article>>
 
@@ -22,8 +20,8 @@ interface ArticleDataClient {
 
 	suspend fun update(article: Article)
 
-    suspend fun update(id: Long, name: String, categoryId: Long?)
+    suspend fun update(articleId: ArticleId, name: String, categoryId: CategoryId?)
 
-    suspend fun delete(articleId: Long)
+    suspend fun delete(articleId: ArticleId)
 
 }

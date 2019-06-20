@@ -6,6 +6,7 @@ import de.janniskilian.basket.core.data.localdb.entity.RoomCategory
 import de.janniskilian.basket.core.data.localdb.transformation.modelToRoom
 import de.janniskilian.basket.core.data.localdb.transformation.roomToModel
 import de.janniskilian.basket.core.type.domain.Category
+import de.janniskilian.basket.core.type.domain.CategoryId
 import de.janniskilian.basket.core.util.function.withIOContext
 
 class CategoryDataClientImpl(localDb: LocalDatabase) : CategoryDataClient {
@@ -20,13 +21,13 @@ class CategoryDataClientImpl(localDb: LocalDatabase) : CategoryDataClient {
         dao.insert(categories)
     }
 
-    override fun get(id: Long) =
+    override fun get(categoryId: CategoryId) =
         dao
-            .select(id)
+            .select(categoryId.value)
             .map { roomToModel(it) }
 
-    override suspend fun getSuspend(id: Long) = withIOContext {
-        dao.selectSuspend(id)?.let(::roomToModel)
+    override suspend fun getSuspend(categoryId: CategoryId) = withIOContext {
+        dao.selectSuspend(categoryId.value)?.let(::roomToModel)
     }
 
     override fun get(name: String) =
@@ -42,11 +43,11 @@ class CategoryDataClientImpl(localDb: LocalDatabase) : CategoryDataClient {
         dao.update(modelToRoom(category))
     }
 
-    override suspend fun update(id: Long, name: String) = withIOContext {
-        dao.update(id, name)
+    override suspend fun update(categoryId: CategoryId, name: String) = withIOContext {
+        dao.update(categoryId.value, name)
     }
 
-    override suspend fun delete(id: Long) = withIOContext {
-        dao.delete(id)
+    override suspend fun delete(categoryId: CategoryId) = withIOContext {
+        dao.delete(categoryId.value)
     }
 }

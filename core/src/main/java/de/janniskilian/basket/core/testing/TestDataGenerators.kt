@@ -1,9 +1,6 @@
 package de.janniskilian.basket.core.testing
 
-import de.janniskilian.basket.core.type.domain.Article
-import de.janniskilian.basket.core.type.domain.Category
-import de.janniskilian.basket.core.type.domain.ShoppingList
-import de.janniskilian.basket.core.type.domain.ShoppingListItem
+import de.janniskilian.basket.core.type.domain.*
 import kotlin.math.pow
 import kotlin.random.Random
 
@@ -12,13 +9,13 @@ private fun Random.nextString(length: Int = 8): String =
 
 fun createTestCategory(): Category =
 	Category(
-		Random.nextLong(),
+        CategoryId(Random.nextLong()),
 		Random.nextString()
 	)
 
 fun createTestArticle(category: Category? = createTestCategory()): Article =
 	Article(
-		Random.nextLong(),
+        ArticleId(Random.nextLong()),
 		Random.nextString(),
 		category
 	)
@@ -30,7 +27,7 @@ fun createTestShoppingListItem(
 	checked: Boolean = Random.nextBoolean()
 ): ShoppingListItem =
 	ShoppingListItem(
-		Random.nextLong(),
+        ShoppingListItemId(Random.nextLong()),
 		shoppingList.id,
 		article,
 		quantity.toString(),
@@ -39,7 +36,7 @@ fun createTestShoppingListItem(
 
 fun createTestShoppingList(items: List<ShoppingListItem> = emptyList()): ShoppingList =
 	ShoppingList(
-		Random.nextLong(),
+        ShoppingListId(Random.nextLong()),
 		Random.nextString(),
 		Random.nextInt(),
 		items

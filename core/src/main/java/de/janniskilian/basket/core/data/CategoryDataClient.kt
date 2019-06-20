@@ -3,6 +3,7 @@ package de.janniskilian.basket.core.data
 import androidx.lifecycle.LiveData
 import de.janniskilian.basket.core.data.localdb.entity.RoomCategory
 import de.janniskilian.basket.core.type.domain.Category
+import de.janniskilian.basket.core.type.domain.CategoryId
 
 interface CategoryDataClient {
 
@@ -10,9 +11,9 @@ interface CategoryDataClient {
 
     suspend fun create(categories: List<RoomCategory>): List<Long>
 
-    fun get(id: Long): LiveData<Category>
+    fun get(categoryId: CategoryId): LiveData<Category>
 
-    suspend fun getSuspend(id: Long): Category?
+    suspend fun getSuspend(categoryId: CategoryId): Category?
 
     fun get(name: String = ""): LiveData<List<Category>>
 
@@ -20,7 +21,7 @@ interface CategoryDataClient {
 
     suspend fun update(category: Category)
 
-    suspend fun update(id: Long, name: String)
+    suspend fun update(categoryId: CategoryId, name: String)
 
-    suspend fun delete(id: Long)
+    suspend fun delete(categoryId: CategoryId)
 }

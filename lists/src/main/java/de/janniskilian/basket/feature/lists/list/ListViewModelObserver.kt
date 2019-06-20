@@ -39,7 +39,7 @@ class ListViewModelObserver(
 		val categories = uncheckedItemGroups.keys.sortedBy { it?.name }
 		val uncheckedAdapterItems = categories.flatMapIndexed { i, category ->
 			val groupItem = ShoppingListAdapter.Item.Group(
-				category?.id ?: NO_CATEGORY_ID,
+				category?.id?.value ?: NO_CATEGORY_ID,
 				category?.name ?: fragment.getString(R.string.category_default),
 				i == 0
 			)

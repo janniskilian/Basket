@@ -3,6 +3,7 @@ package de.janniskilian.basket.feature.lists.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
 import kotlinx.coroutines.launch
 
@@ -11,7 +12,8 @@ class ListViewModel(
 	private val dataClient: DataClient
 ) : ViewModel() {
 
-	val shoppingList = dataClient.shoppingList.getLiveData(args.shoppingListId)
+	val shoppingListId = ShoppingListId(args.shoppingListId)
+	val shoppingList = dataClient.shoppingList.getLiveData(shoppingListId)
 
 	fun listItemClicked(shoppingListItem: ShoppingListItem) {
 		viewModelScope.launch {
@@ -23,19 +25,19 @@ class ListViewModel(
 
 	fun setAllListItemsChecked(checked: Boolean) {
 		viewModelScope.launch {
-			dataClient.shoppingListItem.setAllCheckedForShoppingList(args.shoppingListId, checked)
+			dataClient.shoppingListItem.setAllCheckedForShoppingList(shoppingListId, checked)
 		}
 	}
 
 	fun removeAllListItems() {
 		viewModelScope.launch {
-			dataClient.shoppingListItem.deleteAllForShoppingList(args.shoppingListId)
+			dataClient.shoppingListItem.deleteAllForShoppingList(shoppingListId)
 		}
 	}
 
 	fun removeAllCheckedListItems() {
 		viewModelScope.launch {
-			dataClient.shoppingListItem.deleteAllCheckedForShoppingList(args.shoppingListId)
+			dataClient.shoppingListItem.deleteAllCheckedForShoppingList(shoppingListId)
 		}
 	}
 }

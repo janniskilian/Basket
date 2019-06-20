@@ -1,6 +1,7 @@
 package de.janniskilian.basket.feature.articles.article
 
 import de.janniskilian.basket.core.data.DataClient
+import de.janniskilian.basket.core.type.domain.ArticleId
 import de.janniskilian.basket.core.type.domain.Category
 
 class ArticleFragmentUseCases(private val dataClient: DataClient) {
@@ -9,11 +10,11 @@ class ArticleFragmentUseCases(private val dataClient: DataClient) {
         dataClient.article.create(name, category)
     }
 
-    suspend fun editArticle(articleId: Long, name: String, category: Category?) {
+    suspend fun editArticle(articleId: ArticleId, name: String, category: Category?) {
         dataClient.article.update(articleId, name, category?.id)
     }
 
-    suspend fun deleteArticle(articleId: Long) {
+    suspend fun deleteArticle(articleId: ArticleId) {
         dataClient.article.delete(articleId)
     }
 }

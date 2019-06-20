@@ -10,6 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.appModule
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.function.getSpeechInputResult
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.fragment_lists.*
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_lists.*
 class AddListItemFragment : DialogFragment() {
 
     private val shoppingListId by lazy {
-        arguments?.getLong(KEY_SHOPPING_LIST_ID) ?: 0L
+        ShoppingListId(arguments?.getLong(KEY_SHOPPING_LIST_ID) ?: 0L)
     }
 
     private val module by lazy {
@@ -30,7 +31,7 @@ class AddListItemFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.Widget_Basket_FullHeightDialog)
+        setStyle(STYLE_NORMAL, R.style.Widget_Basket_FullHeightDialog)
     }
 
     override fun onCreateView(

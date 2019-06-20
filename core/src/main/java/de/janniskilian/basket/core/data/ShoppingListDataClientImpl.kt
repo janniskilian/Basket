@@ -7,6 +7,7 @@ import de.janniskilian.basket.core.data.localdb.entity.RoomShoppingList
 import de.janniskilian.basket.core.data.localdb.transformation.modelToRoom
 import de.janniskilian.basket.core.data.localdb.transformation.roomToModel
 import de.janniskilian.basket.core.type.domain.ShoppingList
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.function.withIOContext
 
 class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClient {
@@ -21,8 +22,8 @@ class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClien
         shoppingListDao.insert(modelToRoom(shoppingList))
     }
 
-    override suspend fun get(id: Long) = withIOContext {
-        val result = shoppingListDao.select(id)
+    override suspend fun get(shoppingListId: ShoppingListId) = withIOContext {
+        val result = shoppingListDao.select(shoppingListId.value)
         if (result.isEmpty()) {
             null
         } else {
@@ -30,9 +31,9 @@ class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClien
         }
     }
 
-    override fun getLiveData(id: Long): LiveData<ShoppingList> =
+    override fun getLiveData(shoppingListId: ShoppingListId): LiveData<ShoppingList> =
         shoppingListDao
-            .selectLiveData(id)
+            .selectLiveData(shoppingListId.value)
             .map { roomToModel(it) }
 
     override fun getAll(): LiveData<List<ShoppingList>> =
@@ -44,11 +45,11 @@ class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClien
                     .map { (_, value) -> roomToModel(value) }
             }
 
-    override suspend fun update(shoppingListId: Long, name: String, color: Int) = withIOContext {
-        shoppingListDao.update(shoppingListId, name, color)
+    override suspend fun update(shoppingListId: ShoppingListId, name: String, color: Int) = withIOContext {
+        shoppingListDao.update(shoppingListId.value, name, color)
     }
 
-    override suspend fun delete(id: Long) = withIOContext {
-        shoppingListDao.delete(id)
+    override suspend fun delete(shoppingListId: ShoppingListId) = withIOContext {
+        shoppingListDao.delete(shoppingListId.value)
     }
 }

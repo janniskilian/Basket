@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.Article
+import de.janniskilian.basket.core.type.domain.ArticleId
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.function.addToFront
 
-class GetSuggestionsUseCase(private val shoppingListId: Long, private val dataClient: DataClient) {
+class GetSuggestionsUseCase(private val shoppingListId: ShoppingListId, private val dataClient: DataClient) {
 
 	private val parser = ListItemInputParser()
 
@@ -43,7 +45,7 @@ class GetSuggestionsUseCase(private val shoppingListId: Long, private val dataCl
 				itemSuggestions.addToFront(
 					ShoppingListItemSuggestion(
 						Article(
-							0,
+							ArticleId(0),
 							parsedInput.name,
 							null
 						),

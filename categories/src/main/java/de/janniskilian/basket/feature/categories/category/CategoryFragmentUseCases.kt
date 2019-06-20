@@ -1,6 +1,7 @@
 package de.janniskilian.basket.feature.categories.category
 
 import de.janniskilian.basket.core.data.DataClient
+import de.janniskilian.basket.core.type.domain.CategoryId
 
 class CategoryFragmentUseCases(private val dataClient: DataClient) {
 
@@ -8,11 +9,11 @@ class CategoryFragmentUseCases(private val dataClient: DataClient) {
         dataClient.category.create(name)
     }
 
-    suspend fun editCategory(id: Long, name: String) {
+    suspend fun editCategory(id: CategoryId, name: String) {
         dataClient.category.update(id, name)
     }
 
-    suspend fun deleteCategory(id: Long) {
+    suspend fun deleteCategory(id: CategoryId) {
         dataClient.category.delete(id)
     }
 }
