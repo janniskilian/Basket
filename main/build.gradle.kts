@@ -6,7 +6,7 @@ android {
 }
 
 dependencies {
-    implementation(Deps.AndroidX.ktx)
+    implementation(Deps.AndroidX.core)
     implementation(Deps.AndroidX.appcompat)
     implementation(Deps.AndroidX.livedata)
     implementation(Deps.AndroidX.viewmodel)

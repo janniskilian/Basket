@@ -113,7 +113,7 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
             }
         }
 
-        activity.searchBarEditText.onTextChanged {
+        activity.searchBarEditText.doOnTextChanged {
             viewModelWeakRef()?.setSearchBarInput(it)
         }
 

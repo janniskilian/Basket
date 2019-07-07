@@ -8,8 +8,8 @@ object Deps {
     }
 
     object AndroidX {
-        val ktx = "androidx.core:core-ktx:1.0.1"
-        val appcompat = "androidx.appcompat:appcompat:1.0.2"
+        val core = "androidx.core:core-ktx:1.1.0-rc02"
+        val appcompat = "androidx.appcompat:appcompat:1.1.0-rc01"
         val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${V.lifecycle}"
         val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${V.lifecycle}"
         val lifecycleExt = "androidx.lifecycle:lifecycle-extensions:${V.lifecycle}"
@@ -20,7 +20,7 @@ object Deps {
         val roomCompiler = "androidx.room:room-compiler:${V.room}"
         val constraintlayout = "androidx.constraintlayout:constraintlayout:1.1.3"
         val recyclerview = "androidx.recyclerview:recyclerview:1.0.0"
-        val preference = "androidx.preference:preference:1.0.0"
+        val preference = "androidx.preference:preference:1.1.0-rc01"
     }
 
     val material = "com.google.android.material:material:1.1.0-alpha07"
@@ -52,7 +52,7 @@ object Deps {
     }
 
     object Plugins {
-        val android = "com.android.tools.build:gradle:3.5.0-beta04"
+        val android = "com.android.tools.build:gradle:3.5.0-beta05"
         val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${V.kotlin}"
         val navSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${V.nav}"
     }

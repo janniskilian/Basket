@@ -4,9 +4,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
 import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.extension.extern.onDone
-import de.janniskilian.basket.core.util.extension.extern.onTextChanged
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.core.util.recyclerview.ItemSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
@@ -45,9 +45,7 @@ class CreateListFragmentSetup(
     }
 
     private fun setupNameEditText() {
-        fragment.nameEditText.onTextChanged {
-            viewModel.setName(it)
-        }
+        fragment.nameEditText.doOnTextChanged(viewModel::setName)
     }
 
     private fun setupButton() {

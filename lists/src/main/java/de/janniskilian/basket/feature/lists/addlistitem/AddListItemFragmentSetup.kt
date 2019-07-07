@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
+import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
 import de.janniskilian.basket.core.util.extension.extern.onDone
-import de.janniskilian.basket.core.util.extension.extern.onTextChanged
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
 import de.janniskilian.basket.core.util.function.createSpeechInputIntent
 import de.janniskilian.basket.feature.lists.R
@@ -72,9 +72,7 @@ class AddListItemFragmentSetup(
 
 	private fun setupInputEditText() {
 		with(fragment.inputEditText) {
-			onTextChanged {
-				viewModel.setInput(it)
-			}
+            doOnTextChanged(viewModel::setInput)
 			backPressedListener = fragment::dismiss
 			onDone { viewModel.inputDoneButtonClicked() }
 		}

@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("kapt")
@@ -12,7 +11,7 @@ kapt {
 }
 
 dependencies {
-    implementation(Deps.AndroidX.ktx)
+    implementation(Deps.AndroidX.core)
     implementation(Deps.AndroidX.appcompat)
 
     implementation(Deps.AndroidX.livedata)

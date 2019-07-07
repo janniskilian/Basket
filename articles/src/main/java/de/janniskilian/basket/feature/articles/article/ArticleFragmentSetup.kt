@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.CategoriesAdapter
+import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
 import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.extension.extern.onDone
-import de.janniskilian.basket.core.util.extension.extern.onTextChanged
 import de.janniskilian.basket.feature.articles.R
 import kotlinx.android.synthetic.main.fragment_article.*
 
@@ -63,7 +63,7 @@ class ArticleFragmentSetup(
     }
 
     private fun setupNameEditText() {
-        fragment.nameEditText.onTextChanged(viewModel::setName)
+        fragment.nameEditText.doOnTextChanged(viewModel::setName)
     }
 
     private fun setupCategoriesRecyclerView() {
