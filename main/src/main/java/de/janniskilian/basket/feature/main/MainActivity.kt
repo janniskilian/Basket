@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
         if (savedInstanceState == null
             && !sharedPrefs.getBoolean(KEY_DEFAULT_DATA_IMPORTED, false)
         ) {
-            OnboardingFragment().apply { show(supportFragmentManager, tag) }
+            findNavController().navigate(R.id.onboardingFragment)
         }
     }
 
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
         currentFragment?.onOptionsItemSelected(item) ?: false
 
     override fun onSupportNavigateUp(): Boolean =
-        findNavController(R.id.navHost).navigateUp()
+        findNavController().navigateUp()
 
     override fun onBackPressed() {
         if (currentFragment?.onBackPressed() != true) {
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
     }
 
     private fun setupNavigation() {
-        findNavController(R.id.navHost).addOnDestinationChangedListener { _, _, _ ->
+        findNavController().addOnDestinationChangedListener { _, _, _ ->
             navigationContainer.dismissSnackbar()
         }
 
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
             if (navHost.childFragmentManager.backStackEntryCount == 0) {
                 showNavigation()
             } else {
-                findNavController(R.id.navHost).navigateUp()
+                findNavController().navigateUp()
             }
         }
 
@@ -144,11 +144,16 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
     }
 
     private fun showNavigation() {
-        findNavController(R.id.navHost).currentDestination?.id?.let { destinationId ->
-            val fragment = BottomNavigationDrawerFragment.create(destinationId)
-            fragment.show(supportFragmentManager, fragment.tag)
+        val navController = findNavController()
+        navController.currentDestination?.id?.let { destinationId ->
+            navController.navigate(
+                R.id.bottomNavigationDrawerFragment,
+                BottomNavigationDrawerFragmentArgs(destinationId).toBundle()
+            )
         }
     }
+
+    private fun findNavController() = findNavController(R.id.navHost)
 
     val currentFragment: BaseFragment?
         get() = navHost.childFragmentManager.primaryNavigationFragment as? BaseFragment

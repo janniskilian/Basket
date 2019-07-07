@@ -57,6 +57,9 @@ class ListFragmentSetup(
             )
         }
 
-        fragment.shoppingListAdapter?.listItemClickListener = viewModel::listItemClicked
+        fragment.shoppingListAdapter?.apply {
+            listItemClickListener = viewModel::listItemClicked
+            editButtonClickListener = { fragment.startListItem(it) }
+        }
     }
 }

@@ -6,10 +6,7 @@ import de.janniskilian.basket.core.data.localdb.LocalDatabase
 import de.janniskilian.basket.core.data.localdb.entity.RoomShoppingListItem
 import de.janniskilian.basket.core.data.localdb.transformation.modelToRoom
 import de.janniskilian.basket.core.data.localdb.transformation.roomToModel
-import de.janniskilian.basket.core.type.domain.Article
-import de.janniskilian.basket.core.type.domain.ArticleId
-import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.core.type.domain.ShoppingListItem
+import de.janniskilian.basket.core.type.domain.*
 import de.janniskilian.basket.core.util.function.withIOContext
 
 class ShoppingListItemDataClientImpl(localDb: LocalDatabase) : ShoppingListItemDataClient {
@@ -36,9 +33,9 @@ class ShoppingListItemDataClientImpl(localDb: LocalDatabase) : ShoppingListItemD
         dao.insert(shoppingListItems.map { modelToRoom(it) })
     }
 
-    override fun get(shoppingListId: ShoppingListId): LiveData<ShoppingListItem> =
+    override fun get(shoppingListItemId: ShoppingListItemId): LiveData<ShoppingListItem> =
         dao
-            .select(shoppingListId.value)
+            .select(shoppingListItemId.value)
             .map { roomToModel(it) }
 
     override suspend fun update(shoppingListItem: ShoppingListItem) = withIOContext {

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.appModule
@@ -18,7 +17,9 @@ import kotlinx.android.synthetic.main.fragment_lists.*
 class AddListItemFragment : DialogFragment() {
 
     private val shoppingListId by lazy {
-        ShoppingListId(arguments?.getLong(KEY_SHOPPING_LIST_ID) ?: 0L)
+        ShoppingListId(
+            AddListItemFragmentArgs.fromBundle(requireArguments()).shoppingListId
+        )
     }
 
     private val module by lazy {
@@ -62,16 +63,6 @@ class AddListItemFragment : DialogFragment() {
                 viewModel.setInput(it)
             }
         }
-    }
-
-    companion object {
-
-        private const val KEY_SHOPPING_LIST_ID = "KEY_SHOPPING_LIST_ID"
-
-        fun create(shoppingListId: Long): AddListItemFragment =
-            AddListItemFragment().apply {
-                arguments = bundleOf(KEY_SHOPPING_LIST_ID to shoppingListId)
-            }
     }
 }
 

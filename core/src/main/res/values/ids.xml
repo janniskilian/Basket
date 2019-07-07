@@ -3,9 +3,13 @@
 
     <item name="action_search" type="id"/>
 
+    <item name="onboardingFragment" type="id" />
+    <item name="bottomNavigationDrawerFragment" type="id" />
+    <item name="addListItemFragment" type="id" />
     <item name="listsFragment" type="id"/>
     <item name="createListFragment" type="id"/>
     <item name="listFragment" type="id"/>
+    <item name="listItemFragment" type="id" />
     <item name="groupsFragment" type="id"/>
     <item name="articlesFragment" type="id"/>
     <item name="articleFragment" type="id"/>

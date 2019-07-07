@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
-import androidx.core.os.bundleOf
 import androidx.core.view.forEach
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
@@ -17,8 +16,8 @@ import kotlinx.android.synthetic.main.navigation_item.view.*
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
-    private val currentNavId by lazy {
-        arguments?.getInt(KEY_CURRENT_NAV_ID) ?: 0
+    private val currentDestinationId by lazy {
+        BottomNavigationDrawerFragmentArgs.fromBundle(requireArguments()).currentDestinationId
     }
 
     override fun onCreateView(
@@ -40,7 +39,7 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setSelectedItem(currentNavId)
+        setSelectedItem(currentDestinationId)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -70,7 +69,7 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
     private fun itemClicked(navId: Int) {
         val options = NavOptions.Builder()
-            .setPopUpTo(currentNavId, true)
+            .setPopUpTo(currentDestinationId, true)
             .build()
 
         (requireActivity() as MainActivity)
@@ -79,15 +78,5 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
         setSelectedItem(navId)
         dismiss()
-    }
-
-    companion object {
-
-        private const val KEY_CURRENT_NAV_ID = "KEY_CURRENT_NAV_ID"
-
-        fun create(currentNavId: Int): BottomNavigationDrawerFragment =
-            BottomNavigationDrawerFragment().apply {
-                arguments = bundleOf(KEY_CURRENT_NAV_ID to currentNavId)
-            }
     }
 }

@@ -5,6 +5,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/listsFragment">
 
+    <dialog
+        android:id="@id/onboardingFragment"
+        android:name="de.janniskilian.basket.feature.main.OnboardingFragment"
+        android:label="Lists"
+        tools:layout="@layout/fragment_onboarding" />
+
+    <dialog
+        android:id="@id/bottomNavigationDrawerFragment"
+        android:name="de.janniskilian.basket.feature.main.BottomNavigationDrawerFragment"
+        android:label="Navigation"
+        tools:layout="@layout/fragment_bottom_navigation_drawer">
+
+        <argument
+            android:name="currentDestinationId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </dialog>
+
+    <dialog
+        android:id="@id/addListItemFragment"
+        android:name="de.janniskilian.basket.feature.lists.addlistitem.AddListItemFragment"
+        android:label="Add list item"
+        tools:layout="@layout/fragment_add_list_item">
+
+        <argument
+            android:name="shoppingListId"
+            android:defaultValue="-1L"
+            app:argType="long" />
+    </dialog>
+
     <fragment
         android:id="@id/listsFragment"
         android:name="de.janniskilian.basket.feature.lists.lists.ListsFragment"
@@ -17,10 +47,10 @@
 
         <action
             android:id="@+id/action_listsFragment_to_listFragment"
-            app:enterAnim="@anim/nav_enter"
-            app:exitAnim="@anim/nav_exit"
-            app:popEnterAnim="@anim/nav_enter"
-            app:popExitAnim="@anim/nav_exit"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim"
             app:destination="@id/listFragment"/>
     </fragment>
 
@@ -37,6 +67,10 @@
 
         <action
             android:id="@+id/action_createListFragment_to_listFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim"
             app:destination="@id/listFragment"/>
     </fragment>
 
@@ -49,6 +83,34 @@
         <argument
             android:name="shoppingListId"
             app:argType="long"/>
+
+        <action
+            android:id="@+id/action_listFragment_to_addListItemFragment"
+            app:destination="@id/addListItemFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+
+        <action
+            android:id="@+id/action_listFragment_to_listItemFragment"
+            app:destination="@id/listItemFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@id/listItemFragment"
+        android:name="de.janniskilian.basket.core.listitem.ListItemFragment"
+        android:label="Edit item"
+        tools:layout="@layout/fragment_list_item">
+
+        <argument
+            android:name="listItemId"
+            android:defaultValue="-1L"
+            app:argType="long" />
     </fragment>
 
     <fragment
@@ -65,6 +127,10 @@
 
         <action
             android:id="@+id/action_articlesFragment_to_articleFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim"
             app:destination="@id/articleFragment"/>
     </fragment>
 
@@ -88,6 +154,10 @@
 
         <action
             android:id="@+id/action_categoriesFragment_to_categoryFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim"
             app:destination="@id/categoryFragment"/>
     </fragment>
 

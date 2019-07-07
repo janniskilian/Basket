@@ -2,7 +2,6 @@ package de.janniskilian.basket.core
 
 import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
@@ -39,10 +38,6 @@ open class BaseFragment : Fragment() {
             pendingNavigation = true
             findNavController().navigate(directions, navOptions)
         }
-    }
-
-    protected fun showDialogFragment(fragment: DialogFragment) {
-        fragment.show(requireActivity().supportFragmentManager, fragment.tag)
     }
 }
 

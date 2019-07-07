@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.appModule
+import de.janniskilian.basket.core.type.domain.ShoppingListItem
 import de.janniskilian.basket.feature.lists.R
-import de.janniskilian.basket.feature.lists.addlistitem.AddListItemFragment
 import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListFragment : BaseFragment() {
@@ -78,6 +78,12 @@ class ListFragment : BaseFragment() {
     }
 
     override fun onFabClicked() {
-        showDialogFragment(AddListItemFragment.create(args.shoppingListId))
+        navigate(
+            ListFragmentDirections.actionListFragmentToAddListItemFragment(args.shoppingListId)
+        )
+    }
+
+    fun startListItem(listItem: ShoppingListItem) {
+        navigate(ListFragmentDirections.actionListFragmentToListItemFragment(listItem.id.value))
     }
 }
