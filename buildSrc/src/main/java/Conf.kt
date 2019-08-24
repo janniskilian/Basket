@@ -1,6 +1,6 @@
 object Conf {
 
-    const val buildTools = "29.0.0"
+    const val buildTools = "29.0.2"
     const val compileSdk = 28
     const val targetSdk = 28
     const val minSdk = 21

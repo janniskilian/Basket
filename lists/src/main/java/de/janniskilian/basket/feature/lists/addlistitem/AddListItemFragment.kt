@@ -17,9 +17,7 @@ import kotlinx.android.synthetic.main.fragment_lists.*
 class AddListItemFragment : DialogFragment() {
 
     private val shoppingListId by lazy {
-        ShoppingListId(
-            AddListItemFragmentArgs.fromBundle(requireArguments()).shoppingListId
-        )
+        ShoppingListId(AddListItemFragmentArgs.fromBundle(requireArguments()).shoppingListId)
     }
 
     private val module by lazy {
@@ -40,11 +38,7 @@ class AddListItemFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View =
-        inflater.inflate(
-            R.layout.fragment_add_list_item,
-            container,
-            false
-        )
+        inflater.inflate(R.layout.fragment_add_list_item, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setup.run()
@@ -59,9 +53,7 @@ class AddListItemFragment : DialogFragment() {
         if (requestCode == REQ_SPEECH_INPUT
             && resultCode == Activity.RESULT_OK
         ) {
-            getSpeechInputResult(data)?.let {
-                viewModel.setInput(it)
-            }
+            getSpeechInputResult(data)?.let(viewModel::setInput)
         }
     }
 }

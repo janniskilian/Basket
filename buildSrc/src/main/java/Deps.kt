@@ -8,7 +8,7 @@ object Deps {
     }
 
     object AndroidX {
-        val core = "androidx.core:core-ktx:1.1.0-rc02"
+        val core = "androidx.core:core-ktx:1.1.0-rc03"
         val appcompat = "androidx.appcompat:appcompat:1.1.0-rc01"
         val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${V.lifecycle}"
         val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${V.lifecycle}"
@@ -23,7 +23,7 @@ object Deps {
         val preference = "androidx.preference:preference:1.1.0-rc01"
     }
 
-    val material = "com.google.android.material:material:1.1.0-alpha07"
+    val material = "com.google.android.material:material:1.1.0-alpha09"
 
     val timber = "com.jakewharton.timber:timber:4.7.1"
 
@@ -47,12 +47,12 @@ object Deps {
         val rules = "androidx.test:rules:1.2.0"
         val espresso = "androidx.test.espresso:espresso-core:${V.espresso}"
         val espressoContrib = "androidx.test.espresso:espresso-contrib:${V.espresso}"
-        val archCore = "androidx.arch.core:core-testing:2.0.1"
+        val archCore = "androidx.arch.core:core-testing:2.1.0-rc01"
         val room = "androidx.room:room-testing:${V.room}"
     }
 
     object Plugins {
-        val android = "com.android.tools.build:gradle:3.5.0-beta05"
+        val android = "com.android.tools.build:gradle:3.5.0"
         val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${V.kotlin}"
         val navSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${V.nav}"
     }
