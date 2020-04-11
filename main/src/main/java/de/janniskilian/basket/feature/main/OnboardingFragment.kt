@@ -52,7 +52,7 @@ class OnboardingFragment : BaseFragment() {
     override val showAppBar get() = false
 
     override val appBarColor by lazy {
-        createMutableLiveData(requireContext().getThemeColor(android.R.attr.windowBackground))
+        createMutableLiveData(requireContext().getThemeColor(android.R.attr.colorBackground))
     }
 
     override val animateAppBarColor get() = false

@@ -20,7 +20,7 @@
     </style>
 
     <style name="Widget.Basket.ActionButton.Overflow" parent="@style/Widget.AppCompat.ActionButton.Overflow">
-        <item name="tint">?attr/colorControlNormal</item>
+        <item name="tint">?attr/colorOnPrimarySurface</item>
     </style>
 
     <style name="Widget.Basket.Headline" parent="TextAppearance.MaterialComponents.Headline5">

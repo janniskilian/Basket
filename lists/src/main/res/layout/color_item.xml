@@ -21,6 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:contentDescription="@string/color_selector_item_desc"
-        app:tint="?attr/colorControlNormal"
-        app:srcCompat="@drawable/ic_done_24"/>
+        app:srcCompat="@drawable/ic_done_24"
+        app:tint="?attr/colorOnPrimary" />
 </FrameLayout>

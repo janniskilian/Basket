@@ -7,6 +7,7 @@ import androidx.lifecycle.map
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
 import de.janniskilian.basket.core.util.extension.extern.appModule
+import de.janniskilian.basket.core.util.function.createUiListColor
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.fragment_list.*
 
@@ -33,7 +34,9 @@ class ListFragment : BaseFragment() {
     override val fabTextRes get() = R.string.fab_add_list_item
 
     override val appBarColor by lazy {
-        viewModel.shoppingList.map { it.color }
+        viewModel.shoppingList.map {
+            createUiListColor(requireContext(), it.color)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -37,7 +37,7 @@ abstract class BaseFragment : Fragment() {
     open val showAppBar: Boolean get() = true
 
     open val appBarColor: LiveData<Int> by lazy {
-        createMutableLiveData(requireContext().getThemeColor(R.attr.colorPrimary))
+        createMutableLiveData(requireContext().getThemeColor(R.attr.colorPrimarySurface))
     }
 
     open val animateAppBarColor get() = true
