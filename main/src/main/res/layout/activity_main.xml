@@ -38,6 +38,7 @@
             android:id="@+id/navigationButton"
             style="@style/Widget.Basket.IconButton"
             android:contentDescription="@string/navigation_button_desc"
+            android:tint="?attr/colorOnPrimary"
             app:srcCompat="@drawable/asl_menuback" />
     </com.google.android.material.bottomappbar.BottomAppBar>
 

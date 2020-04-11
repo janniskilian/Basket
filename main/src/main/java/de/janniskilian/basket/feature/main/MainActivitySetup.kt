@@ -101,17 +101,14 @@ class MainActivitySetup(
                 duration = getLong(activity, R.integer.transition_duration)
                 interpolator = LinearInterpolator()
                 addUpdateListener {
-                    val currentColor =
+                    activity.appBar.backgroundTint = ColorStateList.valueOf(
                         evaluator.evaluate(animatedFraction, initialColor, color) as Int
-
-                    activity.appBar.backgroundTint = ColorStateList.valueOf(currentColor)
-                    activity.window.navigationBarColor = currentColor
+                    )
                 }
                 start()
             }
         } else {
             activity.appBar.backgroundTint = ColorStateList.valueOf(color)
-            activity.window.navigationBarColor = color
         }
     }
 }

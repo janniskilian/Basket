@@ -4,3 +4,5 @@
 -keepclassmembernames class kotlinx.** {
     volatile <fields>;
 }
+
+-keepnames class androidx.navigation.fragment.NavHostFragment {}
