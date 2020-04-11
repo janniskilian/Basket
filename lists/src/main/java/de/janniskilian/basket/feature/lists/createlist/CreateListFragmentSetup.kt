@@ -67,17 +67,19 @@ class CreateListFragmentSetup(
             )
             adapter = ColorsAdapter()
             (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
+
+            val spacing = resources.getDimensionPixelSize(R.dimen.one)
             addItemDecoration(
                 ItemSpacingDecoration(
-                    resources.getDimensionPixelSize(R.dimen.one),
+                    spacing,
                     RecyclerView.HORIZONTAL
                 )
             )
             addItemDecoration(
                 EndSpacingDecoration(
-                    resources.getDimensionPixelSize(R.dimen.one),
-                    RecyclerView.HORIZONTAL,
-                    EndSpacingDecoration.Position.START_AND_END
+                    spacing,
+                    spacing,
+                    RecyclerView.HORIZONTAL
                 )
             )
         }

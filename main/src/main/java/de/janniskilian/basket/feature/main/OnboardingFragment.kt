@@ -1,18 +1,19 @@
 package de.janniskilian.basket.feature.main
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.edit
 import androidx.core.view.children
 import androidx.core.view.forEach
-import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
 import de.janniskilian.basket.R
+import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.BasketApp
 import de.janniskilian.basket.core.KEY_DEFAULT_DATA_IMPORTED
 import de.janniskilian.basket.core.data.DefaultDataImporter
 import de.janniskilian.basket.core.data.DefaultDataLoader
+import de.janniskilian.basket.core.util.extension.extern.getThemeColor
+import de.janniskilian.basket.core.util.function.createMutableLiveData
 import kotlinx.android.synthetic.main.fragment_onboarding.*
 import kotlinx.android.synthetic.main.language_item.view.*
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +21,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
-class OnboardingFragment : DialogFragment() {
+class OnboardingFragment : BaseFragment() {
 
     private val appModule get() = (requireActivity().application as BasketApp).appModule
 
@@ -46,17 +47,15 @@ class OnboardingFragment : DialogFragment() {
             }
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_FRAME, R.style.Widget_Basket_FullHeightDialog)
+    override val layoutRes get() = R.layout.fragment_onboarding
+
+    override val showAppBar get() = false
+
+    override val appBarColor by lazy {
+        createMutableLiveData(requireContext().getThemeColor(android.R.attr.windowBackground))
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(R.layout.fragment_onboarding, container, false)
+    override val animateAppBarColor get() = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setClickListeners()
@@ -92,7 +91,7 @@ class OnboardingFragment : DialogFragment() {
                         putBoolean(KEY_DEFAULT_DATA_IMPORTED, true)
                     }
 
-                    dismiss()
+                    findNavController().popBackStack()
                 }
             }
         }

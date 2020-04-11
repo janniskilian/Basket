@@ -1,11 +1,6 @@
 package de.janniskilian.basket.feature.main
 
-import android.animation.ArgbEvaluator
-import android.animation.ValueAnimator
-import android.content.res.ColorStateList
 import android.view.ViewGroup
-import android.view.animation.LinearInterpolator
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
@@ -21,7 +16,6 @@ import de.janniskilian.basket.core.navigationcontainer.SearchBarViewModel
 import de.janniskilian.basket.core.util.WeakRef
 import de.janniskilian.basket.core.util.extension.extern.*
 import de.janniskilian.basket.core.util.function.createSpeechInputIntent
-import de.janniskilian.basket.core.util.function.getLong
 import de.janniskilian.basket.core.util.weakRef
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.math.roundToInt
@@ -29,30 +23,6 @@ import kotlin.math.roundToInt
 class NavigationContainerImpl(private val activity: MainActivity) : NavigationContainer {
 
     private var snackbar: WeakRef<Snackbar>? = null
-
-    override fun setAppBarColor(color: Int, animate: Boolean) {
-        if (animate) {
-            val initialColor = activity.appBar.backgroundTint?.defaultColor
-                ?: ContextCompat.getColor(activity, R.color.primary)
-
-            if (color == initialColor) return
-
-            val evaluator = ArgbEvaluator()
-
-            with(ValueAnimator.ofFloat(0f, 1f)) {
-                duration = getLong(activity, R.integer.transition_duration)
-                interpolator = LinearInterpolator()
-                addUpdateListener {
-                    activity.appBar.backgroundTint = ColorStateList.valueOf(
-                        evaluator.evaluate(animatedFraction, initialColor, color) as Int
-                    )
-                }
-                start()
-            }
-        } else {
-            activity.appBar.backgroundTint = ColorStateList.valueOf(color)
-        }
-    }
 
     override fun showSnackbar(resId: Int, duration: Int, configure: Snackbar.() -> Unit) {
         snackbar = Snackbar
@@ -149,7 +119,7 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
             .animate()
             .alpha(fabEndAlpha)
             .setDuration(ANIMATION_DURATION_S)
-            .doOnEnd {
+            .withEndAction {
                 if (visible) {
                     activity.fab.isVisible = false
                 }
@@ -160,7 +130,7 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
             .animate()
             .alpha(searchBarEndAlpha)
             .setDuration(ANIMATION_DURATION_S)
-            .doOnEnd {
+            .withEndAction {
                 if (!visible) {
                     activity.searchBarContainer.isVisible = false
                 }

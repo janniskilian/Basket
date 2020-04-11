@@ -9,7 +9,7 @@ interface CategoryDataClient {
 
     suspend fun create(name: String)
 
-    suspend fun create(categories: List<RoomCategory>): List<Long>
+    suspend fun create(categories: List<RoomCategory>): List<CategoryId>
 
     fun get(categoryId: CategoryId): LiveData<Category>
 

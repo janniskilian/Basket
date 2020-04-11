@@ -17,16 +17,15 @@ class ListViewModelObserver(
 ) : ViewModelObserver<ListViewModel>(viewModel) {
 
 	override fun observe() {
-		viewModel.shoppingList.observe(fragment) {
-			renderTitle(it)
-			renderList(it)
-		}
-	}
+        viewModel.shoppingList.observe(fragment.viewLifecycleOwner) {
+            renderTitle(it)
+            renderList(it)
+        }
+    }
 
 	private fun renderTitle(shoppingList: ShoppingList) {
 		fragment.toolbar.setScrollable(!shoppingList.isEmpty)
 		fragment.headline.text = shoppingList.name
-		fragment.navigationContainer.setAppBarColor(shoppingList.color, !fragment.recreated)
 	}
 
 	private fun renderList(shoppingList: ShoppingList) {

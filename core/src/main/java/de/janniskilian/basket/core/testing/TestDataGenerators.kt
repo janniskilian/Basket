@@ -4,17 +4,22 @@ import de.janniskilian.basket.core.type.domain.*
 import kotlin.math.pow
 import kotlin.random.Random
 
-private fun Random.nextString(length: Int = 8): String =
-	(nextFloat() * 10f.pow(length)).toInt().toString()
+private const val RANDOM_STRING_DEFAULT_LENGTH = 8
+private const val RANDOM_STRING_EXPANSION_BASE = 10f
+
+private fun Random.nextString(length: Int = RANDOM_STRING_DEFAULT_LENGTH): String =
+    (nextFloat() * RANDOM_STRING_EXPANSION_BASE.pow(length))
+        .toInt()
+        .toString()
 
 fun createTestCategory(): Category =
-	Category(
+    Category(
         CategoryId(Random.nextLong()),
-		Random.nextString()
-	)
+        Random.nextString()
+    )
 
 fun createTestArticle(category: Category? = createTestCategory()): Article =
-	Article(
+    Article(
         ArticleId(Random.nextLong()),
 		Random.nextString(),
 		category

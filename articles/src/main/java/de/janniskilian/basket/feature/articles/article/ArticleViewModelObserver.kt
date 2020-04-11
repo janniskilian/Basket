@@ -21,15 +21,17 @@ class ArticleViewModelObserver(
 
     override fun observe() {
         with(viewModel) {
-            name.observe(fragment, ::renderName)
-            category.observe(fragment) {
+            name.observe(fragment.viewLifecycleOwner, ::renderName)
+            category.observe(fragment.viewLifecycleOwner) {
                 renderCategory(it)
                 renderCategories()
             }
-            categories.observe(fragment) { renderCategories() }
-            mode.observe(fragment, ::renderMode)
-            error.observe(fragment, ::renderError)
-            dismiss.observe(fragment) { fragment.findNavController().navigateUp() }
+            categories.observe(fragment.viewLifecycleOwner) { renderCategories() }
+            mode.observe(fragment.viewLifecycleOwner, ::renderMode)
+            error.observe(fragment.viewLifecycleOwner, ::renderError)
+            dismiss.observe(fragment.viewLifecycleOwner) {
+                fragment.findNavController().navigateUp()
+            }
         }
     }
 

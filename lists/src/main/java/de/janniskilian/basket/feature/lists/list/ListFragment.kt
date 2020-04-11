@@ -1,14 +1,12 @@
 package de.janniskilian.basket.feature.lists.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.lifecycle.map
 import de.janniskilian.basket.core.BaseFragment
-import de.janniskilian.basket.core.appModule
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
+import de.janniskilian.basket.core.util.extension.extern.appModule
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.fragment_list.*
 
@@ -28,37 +26,19 @@ class ListFragment : BaseFragment() {
 
     var recreated = false
 
-    override val menuRes: Int?
-        get() = R.menu.list
+    override val layoutRes get() = R.layout.fragment_list
 
-    override val fabTextRes: Int?
-        get() = R.string.fab_add_list_item
+    override val menuRes get() = R.menu.list
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View =
-        inflater.inflate(
-            R.layout.fragment_list,
-            container,
-            false
-        )
+    override val fabTextRes get() = R.string.fab_add_list_item
+
+    override val appBarColor by lazy {
+        viewModel.shoppingList.map { it.color }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recreated = savedInstanceState != null
         setup.run()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        navigationContainer.setAppBarColor(
-            ContextCompat.getColor(
-                requireContext(),
-                R.color.primary
-            ),
-            true
-        )
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

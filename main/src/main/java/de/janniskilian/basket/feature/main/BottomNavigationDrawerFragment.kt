@@ -1,5 +1,6 @@
 package de.janniskilian.basket.feature.main
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,11 @@ import androidx.core.view.forEach
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.shape.ShapeAppearanceModel
 import de.janniskilian.basket.R
+import de.janniskilian.basket.core.util.extension.extern.getThemeColor
+import de.janniskilian.basket.core.util.extension.extern.getThemeResource
 import kotlinx.android.synthetic.main.fragment_bottom_navigation_drawer.*
 import kotlinx.android.synthetic.main.fragment_bottom_navigation_drawer.view.*
 import kotlinx.android.synthetic.main.navigation_item.view.*
@@ -44,7 +49,22 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        (view?.parent as? View)?.setBackgroundResource(R.drawable.bottom_sheet_dialog_background)
+
+        (view?.parent as? View)?.background = MaterialShapeDrawable(
+            ShapeAppearanceModel
+                .builder(
+                    requireContext(),
+                    requireContext().getThemeResource(R.attr.shapeAppearanceLargeComponent),
+                    requireContext().getThemeResource(R.attr.shapeAppearanceOverlay)
+                )
+                .setBottomLeftCornerSize(0f)
+                .setBottomRightCornerSize(0f)
+                .build()
+        ).apply {
+            fillColor = ColorStateList.valueOf(
+                requireContext().getThemeColor(R.attr.colorSurface)
+            )
+        }
     }
 
     private fun createNavigationItems(view: View) {
@@ -70,6 +90,10 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
     private fun itemClicked(navId: Int) {
         val options = NavOptions.Builder()
             .setPopUpTo(currentDestinationId, true)
+            .setEnterAnim(R.anim.nav_default_enter_anim)
+            .setExitAnim(R.anim.nav_default_exit_anim)
+            .setPopEnterAnim(R.anim.nav_default_pop_enter_anim)
+            .setPopExitAnim(R.anim.nav_default_pop_exit_anim)
             .build()
 
         (requireActivity() as MainActivity)

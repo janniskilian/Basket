@@ -26,13 +26,13 @@ class CreateListViewModel(
 
 	private val _error = createMutableLiveData(false)
 
-	private val _startList = SingleLiveEvent<Long>()
+	private val _startList = SingleLiveEvent<ShoppingListId>()
 
 	private val _dismiss = SingleLiveEvent<Unit>()
 
 	init {
 		if (shoppingListId != null) {
-            viewModelScope.launch(Dispatchers.Main) {
+			viewModelScope.launch(Dispatchers.Main) {
 				dataClient.shoppingList.get(shoppingListId)?.let {
 					setName(it.name)
 					setSelectedColor(it.color)
@@ -50,7 +50,7 @@ class CreateListViewModel(
 	val error: LiveData<Boolean>
 		get() = _error
 
-	val startList: LiveData<Long>
+	val startList: LiveData<ShoppingListId>
 		get() = _startList
 
 	val dismiss: LiveData<Unit>

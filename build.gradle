@@ -1,0 +1,130 @@
+buildscript {
+    apply from: "util.gradle"
+    apply from: "dependencies.gradle"
+
+    addRepos(repositories)
+    dependencies {
+        classpath deps.plugins.kotlin
+        classpath deps.plugins.android
+        classpath deps.plugins.navSafeArgs
+        classpath deps.plugins.detekt
+    }
+}
+
+plugins {
+    id "com.github.ben-manes.versions" version "0.28.0"
+    id "io.gitlab.arturbosch.detekt" version "1.7.4"
+}
+
+apply plugin: "io.gitlab.arturbosch.detekt"
+
+allprojects {
+    addRepos(repositories)
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+subprojects {
+    if (name == "main") {
+        apply plugin: "com.android.application"
+    } else {
+        apply plugin: "com.android.library"
+    }
+    apply plugin: "kotlin-android"
+    apply plugin: "kotlin-android-extensions"
+    apply plugin: "androidx.navigation.safeargs.kotlin"
+
+    android {
+        buildToolsVersion conf.buildTools
+        compileSdkVersion conf.targetSdk
+        defaultConfig {
+            minSdkVersion conf.minSdk
+            targetSdkVersion conf.targetSdk
+            versionCode conf.versionCode
+            versionName conf.versionName
+            testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        }
+        buildTypes {
+            debug {
+                multiDexEnabled true
+            }
+            release {
+                minifyEnabled true
+                if (name == "main") {
+                    shrinkResources true
+                }
+                proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            }
+        }
+        kotlinOptions {
+            jvmTarget = "1.8"
+            freeCompilerArgs += [
+                    "-XXLanguage:+InlineClasses",
+                    "-progressive"
+            ]
+        }
+        compileOptions {
+            sourceCompatibility 1.8
+            targetCompatibility 1.8
+        }
+        testOptions {
+            unitTests {
+                includeAndroidResources = true
+            }
+
+            animationsDisabled true
+        }
+    }
+
+    dependencies {
+        implementation fileTree(dir: "libs", include: ["*.jar"])
+
+        implementation deps.kotlin.stdlib
+        implementation deps.kotlin.coroutines
+        implementation deps.kotlin.coroutinesAndroid
+
+        implementation deps.androidx.navFragment
+        implementation deps.androidx.navUi
+
+        implementation deps.timber
+
+        testImplementation deps.testing.junit
+        testImplementation deps.testing.kotlinTest
+        testImplementation deps.testing.mockito
+        testImplementation deps.testing.robolectric
+
+        androidTestImplementation deps.testing.kotlinTest
+        androidTestImplementation deps.androidTesting.core
+        androidTestImplementation deps.androidTesting.runner
+        androidTestImplementation deps.androidTesting.junit
+        androidTestImplementation deps.androidTesting.rules
+        androidTestImplementation deps.androidTesting.livedata
+        androidTestImplementation deps.androidTesting.room
+
+        if (name != "core") {
+            implementation project(path: ":core")
+        }
+    }
+}
+
+detekt {
+    failFast = false
+    config = files("$projectDir/config/detekt/detekt.yml")
+    buildUponDefaultConfig = true
+    reports {
+        txt.enabled = true
+        html.enabled = false
+        xml.enabled = false
+    }
+}
+
+tasks.withType(io.gitlab.arturbosch.detekt.Detekt) {
+    jvmTarget = "1.8"
+    source = files("$projectDir")
+    exclude ".*test.*"
+    exclude "**/build/**"
+    exclude ".*/resources/.*"
+    exclude ".*/tmp/.*"
+}

@@ -5,8 +5,6 @@ import com.google.android.material.snackbar.Snackbar
 
 interface NavigationContainer {
 
-    fun setAppBarColor(color: Int, animate: Boolean)
-
     fun showSnackbar(@StringRes resId: Int, duration: Int, configure: Snackbar.() -> Unit)
 
     fun dismissSnackbar()

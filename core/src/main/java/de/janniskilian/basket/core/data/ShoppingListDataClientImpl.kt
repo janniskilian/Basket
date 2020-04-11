@@ -15,11 +15,11 @@ class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClien
     private val shoppingListDao = localDb.shoppingListDao()
 
     override suspend fun create(name: String, color: Int) = withIOContext {
-        shoppingListDao.insert(RoomShoppingList(name, color))
+        ShoppingListId(shoppingListDao.insert(RoomShoppingList(name, color)))
     }
 
     override suspend fun create(shoppingList: ShoppingList) = withIOContext {
-        shoppingListDao.insert(modelToRoom(shoppingList))
+        ShoppingListId(shoppingListDao.insert(modelToRoom(shoppingList)))
     }
 
     override suspend fun get(shoppingListId: ShoppingListId) = withIOContext {

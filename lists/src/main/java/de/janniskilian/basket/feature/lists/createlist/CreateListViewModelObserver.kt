@@ -1,8 +1,8 @@
 package de.janniskilian.basket.feature.lists.createlist
 
 import androidx.lifecycle.observe
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.fragment_create_list.*
@@ -14,11 +14,13 @@ class CreateListViewModelObserver(
 
     override fun observe() {
         with(viewModel) {
-            name.observe(fragment, ::renderName)
-            selectedColor.observe(fragment) { renderColors() }
-            error.observe(fragment, ::renderError)
-            startList.observe(fragment, ::startListFragment)
-            dismiss.observe(fragment) { fragment.findNavController().navigateUp() }
+            name.observe(fragment.viewLifecycleOwner, ::renderName)
+            selectedColor.observe(fragment.viewLifecycleOwner) { renderColors() }
+            error.observe(fragment.viewLifecycleOwner, ::renderError)
+            startList.observe(fragment.viewLifecycleOwner, ::startListFragment)
+            dismiss.observe(fragment.viewLifecycleOwner) {
+                fragment.findNavController().navigateUp()
+            }
         }
     }
 
@@ -46,12 +48,10 @@ class CreateListViewModelObserver(
         }
     }
 
-    private fun startListFragment(shoppingListId: Long) {
+    private fun startListFragment(shoppingListId: ShoppingListId) {
         fragment.navigate(
-            CreateListFragmentDirections.actionCreateListFragmentToListFragment(shoppingListId),
-            NavOptions.Builder()
-                .setPopUpTo(R.id.listsFragment, false)
-                .build()
+            CreateListFragmentDirections
+                .actionCreateListFragmentToListFragment(shoppingListId.value)
         )
     }
 }

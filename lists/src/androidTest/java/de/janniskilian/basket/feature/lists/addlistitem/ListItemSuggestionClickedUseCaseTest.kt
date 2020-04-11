@@ -11,7 +11,9 @@ import de.janniskilian.basket.core.data.DefaultDataLoader
 import de.janniskilian.basket.core.module.AppModule
 import de.janniskilian.basket.core.testing.createTestAppModule
 import de.janniskilian.basket.core.type.domain.Article
+import de.janniskilian.basket.core.type.domain.ArticleId
 import de.janniskilian.basket.core.type.domain.ShoppingList
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -29,7 +31,7 @@ class ListItemSuggestionClickedUseCaseTest {
 
     private lateinit var useCase: ListItemSuggestionClickedUseCase
 
-    private var shoppingListId = 0L
+    private var shoppingListId = ShoppingListId(0)
 
     private val dataClient get() = appModule.dataModule.dataClient
 
@@ -57,7 +59,7 @@ class ListItemSuggestionClickedUseCaseTest {
     @Test
     @UiThreadTest
     fun addListItemWithExistingArticle() = runBlocking {
-        val article = createListItemWithExistingArticle(1)
+        val article = createListItemWithExistingArticle(ArticleId(1))
         val shoppingList = getShoppingList()
 
         assertEquals(1, shoppingList.items.size)
@@ -81,8 +83,8 @@ class ListItemSuggestionClickedUseCaseTest {
     @Test
     @UiThreadTest
     fun removeListItem() = runBlocking {
-        val article1 = createListItemWithExistingArticle(1)
-        val article2 = createListItemWithExistingArticle(2)
+        val article1 = createListItemWithExistingArticle(ArticleId(1))
+        val article2 = createListItemWithExistingArticle(ArticleId(2))
         val article3 = createListItemWithNewArticle("New test article")
 
         assertEquals(3, getShoppingList().items.size)
@@ -97,7 +99,7 @@ class ListItemSuggestionClickedUseCaseTest {
     private suspend fun getShoppingList(): ShoppingList =
         dataClient.shoppingList.get(shoppingListId)!!
 
-    private suspend fun createListItemWithExistingArticle(articleId: Long): Article {
+    private suspend fun createListItemWithExistingArticle(articleId: ArticleId): Article {
         val article = dataClient.article.get(articleId)
         assertNotNull(article)
         useCase.run(ShoppingListItemSuggestion(article, false, true))
@@ -105,7 +107,7 @@ class ListItemSuggestionClickedUseCaseTest {
     }
 
     private suspend fun createListItemWithNewArticle(articleName: String): Article {
-        val article = Article(0, articleName, null)
+        val article = Article(ArticleId(0), articleName, null)
         useCase.run(ShoppingListItemSuggestion(article, false, false))
         return article
     }

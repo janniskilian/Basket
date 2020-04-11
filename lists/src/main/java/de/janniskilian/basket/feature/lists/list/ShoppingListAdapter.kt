@@ -1,6 +1,5 @@
 package de.janniskilian.basket.feature.lists.list
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,27 +10,16 @@ import androidx.core.view.updateMargins
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
-import de.janniskilian.basket.core.util.extension.extern.getDimen
 import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.shopping_list_article_item.view.*
 
-class ShoppingListAdapter(context: Context, displayCompact: Boolean) :
+class ShoppingListAdapter(private val displayCompact: Boolean) :
     ListAdapter<ShoppingListAdapter.Item, ShoppingListAdapter.ViewHolder>(
         GenericDiffItemCallback { oldItem, newItem ->
             oldItem.id == newItem.id
         }
     ) {
-
-    private val categoryItemMargin by lazy {
-        val resId = if (displayCompact) {
-            R.dimen.list_spacing_compact
-        } else {
-            R.dimen.list_spacing_default
-        }
-
-        getDimen(context, resId)
-    }
 
     var listItemClickListener: ((shoppingListItem: ShoppingListItem) -> Unit)? = null
     var editButtonClickListener: ((shoppingListItem: ShoppingListItem) -> Unit)? = null
@@ -91,7 +79,12 @@ class ShoppingListAdapter(context: Context, displayCompact: Boolean) :
         val topMargin = if (item.atTop) {
             0
         } else {
-            categoryItemMargin
+            val resId = if (displayCompact) {
+                R.dimen.list_spacing_compact
+            } else {
+                R.dimen.list_spacing_default
+            }
+            holder.itemView.context.resources.getDimensionPixelSize(resId)
         }
         holder.itemView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             updateMargins(top = topMargin)

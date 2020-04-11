@@ -3,13 +3,11 @@ package de.janniskilian.basket.feature.articles.articles
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
-import de.janniskilian.basket.core.appModule
+import de.janniskilian.basket.core.util.extension.extern.appModule
 import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
 import de.janniskilian.basket.core.util.function.getSpeechInputResult
 import de.janniskilian.basket.feature.articles.R
@@ -24,22 +22,11 @@ class ArticlesFragment : BaseFragment() {
 
     private val viewModel get() = module.articlesViewModel
 
-    override val menuRes: Int?
-        get() = R.menu.search
+    override val layoutRes get() = R.layout.fragment_articles
 
-    override val fabTextRes: Int?
-        get() = R.string.fab_create_article
+    override val menuRes get() = R.menu.search
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(
-            R.layout.fragment_articles,
-            container,
-            false
-        )
+    override val fabTextRes get() = R.string.fab_create_article
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setup.run()

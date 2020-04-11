@@ -20,7 +20,7 @@ class CategoriesFragmentSetup(
 
         categoriesAdapter?.clickListener = ::categoryClicked
 
-        viewModel.categories.observe(fragment) { categories ->
+        viewModel.categories.observe(fragment.viewLifecycleOwner) { categories ->
             categoriesAdapter?.submitList(
                 categories.map { CategoriesAdapter.Item(it) }
             )
@@ -46,7 +46,10 @@ class CategoriesFragmentSetup(
 
     private fun categoryClicked(category: Category?) {
         if (category != null) {
-            fragment.navigate(CategoriesFragmentDirections.actionCategoriesFragmentToCategoryFragment(category.id.value))
+            fragment.navigate(
+                CategoriesFragmentDirections
+                    .actionCategoriesFragmentToCategoryFragment(category.id.value)
+            )
         }
     }
 }

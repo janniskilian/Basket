@@ -1,6 +1,7 @@
 package de.janniskilian.basket.feature.lists.addlistitem
 
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +27,7 @@ class AddListItemFragmentSetup(
         setupInputEditText()
         setClickListeners()
 
-        viewModel.input.observe(fragment) { input ->
+        viewModel.input.observe(fragment.viewLifecycleOwner) { input ->
             if (fragment.inputEditText.text.toString() != input) {
                 fragment.inputEditText.setText(input)
             }
@@ -42,7 +43,7 @@ class AddListItemFragmentSetup(
             )
         }
 
-        viewModel.items.observe(fragment) { suggestions ->
+        viewModel.items.observe(fragment.viewLifecycleOwner) { suggestions ->
             suggestionsAdapter?.submitList(
                 suggestions.map {
                     ShoppingListItemSuggestionsAdapter.Item(it)
@@ -78,7 +79,9 @@ class AddListItemFragmentSetup(
     private fun setClickListeners() {
         suggestionsAdapter?.clickListener = viewModel::suggestionItemClicked
 
-		fragment.upButton.setOnClickListener { fragment.dismiss() }
+        fragment.upButton.setOnClickListener {
+            fragment.findNavController().popBackStack()
+        }
 
         fragment.searchBarSpeechInputButton.setOnClickListener {
             if (viewModel.input.value.isNullOrEmpty()) {

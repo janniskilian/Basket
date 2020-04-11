@@ -22,44 +22,43 @@ class ListFragmentSetup(
         viewModelObserver.observe()
     }
 
-    private fun setupWindow() {
+    private fun setupWindow() = with(fragment) {
         val preventSleep = sharedPrefs.getBoolean(
             fragment.getString(R.string.pref_key_prevent_sleep),
-            fragment.resources.getBoolean(R.bool.pref_def_prevent_sleep)
+            resources.getBoolean(R.bool.pref_def_prevent_sleep)
         )
-        fragment
-            .requireActivity()
+        requireActivity()
             .window
             .keepScreenOn(preventSleep)
     }
 
-    private fun setupRecyclerView() {
+    private fun setupRecyclerView() = with(fragment) {
         val displayCompact = sharedPrefs.getBoolean(
             fragment.getString(R.string.pref_key_compact_lists),
-            fragment.resources.getBoolean(R.bool.pref_def_compact_lists)
+            resources.getBoolean(R.bool.pref_def_compact_lists)
         )
 
-        with(fragment.recyclerView) {
+        with(recyclerView) {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(
-                fragment.requireContext(),
+                requireContext(),
                 RecyclerView.VERTICAL,
                 false
             )
-            adapter = ShoppingListAdapter(fragment.requireContext(), displayCompact)
+            adapter = ShoppingListAdapter(displayCompact)
             (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
             addItemDecoration(
                 EndSpacingDecoration(
-                    fragment.resources.getDimensionPixelSize(R.dimen.five),
-                    RecyclerView.VERTICAL,
-                    EndSpacingDecoration.Position.END
+                    0,
+                    resources.getDimensionPixelSize(R.dimen.fab_spacing),
+                    RecyclerView.VERTICAL
                 )
             )
         }
 
-        fragment.shoppingListAdapter?.apply {
+        shoppingListAdapter?.apply {
             listItemClickListener = viewModel::listItemClicked
-            editButtonClickListener = { fragment.startListItem(it) }
+            editButtonClickListener = { startListItem(it) }
         }
     }
 }

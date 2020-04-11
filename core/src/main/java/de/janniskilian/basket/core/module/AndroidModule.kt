@@ -2,8 +2,8 @@ package de.janniskilian.basket.core.module
 
 import android.app.Application
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
 
 class AndroidModule(private val application: Application) {
 
@@ -11,6 +11,6 @@ class AndroidModule(private val application: Application) {
 		get() = application
 
 	val sharedPreferences: SharedPreferences by lazy {
-		PreferenceManager.getDefaultSharedPreferences(applicationContext)
-	}
+        application.getSharedPreferences(application.packageName, MODE_PRIVATE)
+    }
 }

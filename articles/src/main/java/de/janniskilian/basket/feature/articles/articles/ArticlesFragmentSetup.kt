@@ -4,6 +4,9 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
+import de.janniskilian.basket.feature.articles.R
 import kotlinx.android.synthetic.main.fragment_articles.*
 
 class ArticlesFragmentSetup(
@@ -18,7 +21,7 @@ class ArticlesFragmentSetup(
 
         articlesAdapter?.clickListener = ::articleClicked
 
-        viewModel.articles.observe(fragment) {
+        viewModel.articles.observe(fragment.viewLifecycleOwner) {
             articlesAdapter?.submitList(it)
         }
 
@@ -35,6 +38,13 @@ class ArticlesFragmentSetup(
                 DividerItemDecoration(
                     fragment.requireContext(),
                     DividerItemDecoration.VERTICAL
+                )
+            )
+            addItemDecoration(
+                EndSpacingDecoration(
+                    0,
+                    resources.getDimensionPixelSize(R.dimen.fab_spacing),
+                    RecyclerView.VERTICAL
                 )
             )
         }

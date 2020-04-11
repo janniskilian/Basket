@@ -13,9 +13,11 @@ class CategoryViewModelObserver(
 
     override fun observe() {
         with(viewModel) {
-            name.observe(fragment, ::renderName)
-            error.observe(fragment, ::renderError)
-            dismiss.observe(fragment) { fragment.findNavController().navigateUp() }
+            name.observe(fragment.viewLifecycleOwner, ::renderName)
+            error.observe(fragment.viewLifecycleOwner, ::renderError)
+            dismiss.observe(fragment.viewLifecycleOwner) {
+                fragment.findNavController().navigateUp()
+            }
         }
     }
 

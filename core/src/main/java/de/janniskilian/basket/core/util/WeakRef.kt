@@ -4,9 +4,9 @@ import java.lang.ref.WeakReference
 
 class WeakRef<T>(reference: T) {
 
-	private val weakRef = WeakReference(reference)
+    private val internalWeakRef = WeakReference(reference)
 
-	operator fun invoke(): T? = weakRef.get()
+    operator fun invoke(): T? = internalWeakRef.get()
 }
 
 fun <T : Any> T.weakRef(): WeakRef<T> =

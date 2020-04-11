@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="card_elevation">0dp</dimen>
     <dimen name="card_border_width">2dp</dimen>
-
-    <dimen name="corner_radius_small">@dimen/half</dimen>
-    <dimen name="corner_radius_medium">@dimen/one</dimen>
-    <dimen name="corner_radius_large">@dimen/two</dimen>
 
     <dimen name="half">4dp</dimen>
     <dimen name="one">8dp</dimen>
@@ -13,6 +10,7 @@
     <dimen name="three">24dp</dimen>
     <dimen name="four">32dp</dimen>
     <dimen name="five">40dp</dimen>
+    <dimen name="six">48dp</dimen>
     <dimen name="increment">56dp</dimen>
 
     <dimen name="empty_image_size">96dp</dimen>
@@ -20,4 +18,7 @@
 
     <dimen name="drag_handle_width">@dimen/four</dimen>
     <dimen name="drag_handle_height">@dimen/half</dimen>
+
+    <dimen name="fab_spacing">@dimen/five</dimen>
+
 </resources>

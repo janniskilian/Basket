@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/appBar"
+        android:id="@+id/addListItemAppBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="bottom"

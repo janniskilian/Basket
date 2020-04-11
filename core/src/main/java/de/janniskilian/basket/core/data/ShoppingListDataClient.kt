@@ -6,15 +6,15 @@ import de.janniskilian.basket.core.type.domain.ShoppingListId
 
 interface ShoppingListDataClient {
 
-	suspend fun create(name: String, color: Int): Long
+    suspend fun create(name: String, color: Int): ShoppingListId
 
-	suspend fun create(shoppingList: ShoppingList): Long
+    suspend fun create(shoppingList: ShoppingList): ShoppingListId
 
     suspend fun get(shoppingListId: ShoppingListId): ShoppingList?
 
     fun getLiveData(shoppingListId: ShoppingListId): LiveData<ShoppingList>
 
-	fun getAll(): LiveData<List<ShoppingList>>
+    fun getAll(): LiveData<List<ShoppingList>>
 
     suspend fun update(shoppingListId: ShoppingListId, name: String, color: Int)
 

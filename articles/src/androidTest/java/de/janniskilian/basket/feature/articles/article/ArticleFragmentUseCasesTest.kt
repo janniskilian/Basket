@@ -9,6 +9,8 @@ import de.janniskilian.basket.core.data.DefaultDataImporter
 import de.janniskilian.basket.core.data.DefaultDataLoader
 import de.janniskilian.basket.core.module.AppModule
 import de.janniskilian.basket.core.testing.createTestAppModule
+import de.janniskilian.basket.core.type.domain.ArticleId
+import de.janniskilian.basket.core.type.domain.CategoryId
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -54,7 +56,7 @@ class ArticleFragmentUseCasesTest {
         val name1 = "Test1"
         val name2 = "Test2"
         val name3 = "Test3"
-        val category = dataClient.category.getSuspend(1)
+        val category = dataClient.category.getSuspend(CategoryId(1))
 
         useCases.createArticle(name1, null)
         useCases.createArticle(name2, category)
@@ -76,13 +78,13 @@ class ArticleFragmentUseCasesTest {
     @Test
     @UiThreadTest
     fun editArticle() = runBlocking {
-        val article = dataClient.article.get(1)
+        val article = dataClient.article.get(ArticleId(1))
         val editedName = "Test"
 
         assertNotNull(article)
         useCases.editArticle(article.id, editedName, null)
 
-        val editedArticle = dataClient.article.get(1)
+        val editedArticle = dataClient.article.get(ArticleId(1))
         assertNotNull(editedArticle)
         assertEquals(editedName, editedArticle.name)
         assertNull(editedArticle.category)
@@ -91,9 +93,9 @@ class ArticleFragmentUseCasesTest {
     @Test
     @UiThreadTest
     fun deleteArticle() = runBlocking {
-        val article = dataClient.article.get(1)
+        val article = dataClient.article.get(ArticleId(1))
         assertNotNull(article)
         useCases.deleteArticle(article.id)
-        assertNull(dataClient.article.get(1))
+        assertNull(dataClient.article.get(ArticleId(1)))
     }
 }

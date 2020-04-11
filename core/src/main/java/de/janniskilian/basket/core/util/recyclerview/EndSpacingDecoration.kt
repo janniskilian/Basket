@@ -6,52 +6,40 @@ import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.util.extension.extern.getRealViewPosition
 
 class EndSpacingDecoration(
-	private val space: Int,
-	private val direction: Int,
-	private val where: Position
+    private val startSpacing: Int,
+    private val endSpacing: Int,
+    private val direction: Int
 ) : RecyclerView.ItemDecoration() {
 
-	override fun getItemOffsets(
-		outRect: Rect,
-		view: View,
-		parent: RecyclerView,
-		state: RecyclerView.State
-	) {
-		val adapter = parent.adapter ?: return
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
+        val adapter = parent.adapter ?: return
 
-		val position = parent.getRealViewPosition(view)
+        val position = parent.getRealViewPosition(view)
 
-		val firstRow = position == 0
-		val lastRow = position == adapter.itemCount - 1
+        val firstRow = position == 0
+        val lastRow = position == adapter.itemCount - 1
 
-		if (firstRow
-			&& (where == Position.START
-				|| where == Position.START_AND_END)
-		) {
-			if (direction == RecyclerView.VERTICAL) {
-				outRect.top = space
-			} else if (direction == RecyclerView.HORIZONTAL) {
-				outRect.left = space
-			}
-		}
+        if (firstRow) {
+            if (direction == RecyclerView.VERTICAL) {
+                outRect.top = startSpacing
+            } else if (direction == RecyclerView.HORIZONTAL) {
+                outRect.left = startSpacing
+            }
+        }
 
-		if (lastRow
-			&& (where == Position.END
-				|| where == Position.START_AND_END)
-		) {
-			if (direction == RecyclerView.VERTICAL) {
-				outRect.bottom = space
-			} else if (direction == RecyclerView.HORIZONTAL) {
-				outRect.right = space
-			}
-		}
-	}
-
-	enum class Position {
-		START,
-		END,
-		START_AND_END
-	}
+        if (lastRow) {
+            if (direction == RecyclerView.VERTICAL) {
+                outRect.bottom = endSpacing
+            } else if (direction == RecyclerView.HORIZONTAL) {
+                outRect.right = endSpacing
+            }
+        }
+    }
 }
 
 

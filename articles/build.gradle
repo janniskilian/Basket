@@ -1,0 +1,11 @@
+dependencies {
+    implementation deps.androidx.core
+	implementation deps.androidx.appcompat
+	implementation deps.androidx.livedata
+	implementation deps.androidx.viewmodel
+	implementation deps.androidx.lifecycleExt
+	implementation deps.androidx.constraintlayout
+	implementation deps.androidx.recyclerview
+
+	implementation deps.material
+}

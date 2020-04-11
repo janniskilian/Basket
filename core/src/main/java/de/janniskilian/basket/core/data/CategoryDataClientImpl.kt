@@ -18,7 +18,7 @@ class CategoryDataClientImpl(localDb: LocalDatabase) : CategoryDataClient {
     }
 
     override suspend fun create(categories: List<RoomCategory>) = withIOContext {
-        dao.insert(categories)
+        dao.insert(categories).map(::CategoryId)
     }
 
     override fun get(categoryId: CategoryId) =

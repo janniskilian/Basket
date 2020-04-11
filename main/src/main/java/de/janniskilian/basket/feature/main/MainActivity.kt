@@ -1,27 +1,15 @@
 package de.janniskilian.basket.feature.main
 
-import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import androidx.core.view.updateLayoutParams
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import de.janniskilian.basket.R
-import de.janniskilian.basket.core.ANIMATION_DURATION_M
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.BasketApp
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainerProvider
-import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationContainerProvider {
 
@@ -29,15 +17,23 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
         (application as BasketApp).appModule.androidModule.sharedPreferences
     }
 
+    private val uiController = MainActivityUiController(this)
+    private val setup = MainActivitySetup(this, uiController)
+
+    val navHostFragment
+        get() = supportFragmentManager
+            .findFragmentByTag(getString(R.string.tag_nav_host_fragment))!!
+
+    val currentFragment: BaseFragment?
+        get() = navHostFragment.childFragmentManager.primaryNavigationFragment as? BaseFragment
+
     override val navigationContainer: NavigationContainer = NavigationContainerImpl(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(appBar)
-        setupNavigation()
-        setClickListeners()
+        setup.run()
 
         if (savedInstanceState == null
             && !sharedPrefs.getBoolean(KEY_DEFAULT_DATA_IMPORTED, false)
@@ -67,96 +63,7 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
         }
     }
 
-    private fun setupNavigation() {
-        findNavController().addOnDestinationChangedListener { _, _, _ ->
-            navigationContainer.dismissSnackbar()
-        }
-
-        navHost.childFragmentManager.registerFragmentLifecycleCallbacks(
-            object : FragmentManager.FragmentLifecycleCallbacks() {
-                override fun onFragmentStarted(fm: FragmentManager, fragment: Fragment) {
-                    if (fragment is BaseFragment) {
-                        invalidateOptionsMenu()
-
-                        val fabTextRes = fragment.fabTextRes
-                        fab.isVisible = fabTextRes != null
-                        if (fabTextRes != null) {
-                            setFabText(fabTextRes)
-                        }
-                    }
-                }
-            },
-            false
-        )
-
-        navHost.childFragmentManager.addOnBackStackChangedListener {
-            updateNavigationIcon()
-        }
-
-        navigationButton.setOnClickListener {
-            if (navHost.childFragmentManager.backStackEntryCount == 0) {
-                showNavigation()
-            } else {
-                findNavController().navigateUp()
-            }
-        }
-
-        updateNavigationIcon()
-    }
-
-    private fun setClickListeners() {
-        fab.setOnClickListener { currentFragment?.onFabClicked() }
-    }
-
-    private fun setFabText(@StringRes buttonTextRes: Int) {
-        if (fab.text.isNullOrEmpty()) {
-            fab.setText(buttonTextRes)
-            fab.updateLayoutParams {
-                width = ViewGroup.LayoutParams.WRAP_CONTENT
-            }
-        } else {
-            fab.updateLayoutParams {
-                width = fab.width
-            }
-            fab.setText(buttonTextRes)
-
-            fab.measure(
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-            )
-            with(ValueAnimator.ofInt(fab.width, fab.measuredWidth)) {
-                duration = ANIMATION_DURATION_M
-                interpolator = FastOutSlowInInterpolator()
-                addUpdateListener {
-                    fab.updateLayoutParams {
-                        width = animatedValue as Int
-                    }
-                }
-                start()
-            }
-        }
-    }
-
-    private fun updateNavigationIcon() {
-        navigationButton.setSelectedImageState(
-            navHost.childFragmentManager.backStackEntryCount > 0
-        )
-    }
-
-    private fun showNavigation() {
-        val navController = findNavController()
-        navController.currentDestination?.id?.let { destinationId ->
-            navController.navigate(
-                R.id.bottomNavigationDrawerFragment,
-                BottomNavigationDrawerFragmentArgs(destinationId).toBundle()
-            )
-        }
-    }
-
-    private fun findNavController() = findNavController(R.id.navHost)
-
-    val currentFragment: BaseFragment?
-        get() = navHost.childFragmentManager.primaryNavigationFragment as? BaseFragment
+    fun findNavController() = navHostFragment.findNavController()
 
     companion object {
 

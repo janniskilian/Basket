@@ -15,15 +15,15 @@
         <item name="layout_scrollFlags">scroll|enterAlways</item>
     </style>
 
-    <style name="Widget.Basket.ToolbarTitle" parent="TextAppearance.Basket.Headline">
+    <style name="Widget.Basket.ToolbarTitle" parent="Widget.Basket.Headline">
         <item name="android:gravity">center_horizontal</item>
     </style>
 
     <style name="Widget.Basket.ActionButton.Overflow" parent="@style/Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:tint">?attr/colorIcon</item>
+        <item name="tint">?attr/colorControlNormal</item>
     </style>
 
-    <style name="TextAppearance.Basket.Headline" parent="TextAppearance.MaterialComponents.Headline5">
+    <style name="Widget.Basket.Headline" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">@font/roboto_slab_700</item>
@@ -38,7 +38,7 @@
         <item name="android:layout_width">@dimen/empty_image_size</item>
         <item name="android:layout_height">@dimen/empty_image_size</item>
         <item name="android:contentDescription">@string/empty_image_desc</item>
-        <item name="android:tint">@color/empty_image</item>
+        <item name="tint">@color/on_surface_10</item>
     </style>
 
     <style name="Widget.Basket.EmptyHeadline">
@@ -104,7 +104,7 @@
         <item name="android:layout_width">@dimen/increment</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:maxHeight">@dimen/increment</item>
-        <item name="android:tint">?attr/colorIcon</item>
+        <item name="tint">?attr/colorControlNormal</item>
     </style>
 
 </resources>
