@@ -6,7 +6,11 @@ import de.janniskilian.basket.core.data.localdb.LocalDatabase
 import de.janniskilian.basket.core.data.localdb.entity.RoomShoppingListItem
 import de.janniskilian.basket.core.data.localdb.transformation.modelToRoom
 import de.janniskilian.basket.core.data.localdb.transformation.roomToModel
-import de.janniskilian.basket.core.type.domain.*
+import de.janniskilian.basket.core.type.domain.Article
+import de.janniskilian.basket.core.type.domain.ArticleId
+import de.janniskilian.basket.core.type.domain.ShoppingListId
+import de.janniskilian.basket.core.type.domain.ShoppingListItem
+import de.janniskilian.basket.core.type.domain.ShoppingListItemId
 import de.janniskilian.basket.core.util.function.withIOContext
 
 class ShoppingListItemDataClientImpl(localDb: LocalDatabase) : ShoppingListItemDataClient {
@@ -49,15 +53,17 @@ class ShoppingListItemDataClientImpl(localDb: LocalDatabase) : ShoppingListItemD
         dao.setAllCheckedForShoppingList(shoppingListId.value, checked)
     }
 
-    override suspend fun delete(shoppingListId: ShoppingListId, articleId: ArticleId) = withIOContext {
-        dao.delete(shoppingListId.value, articleId.value)
-    }
+    override suspend fun delete(shoppingListId: ShoppingListId, articleId: ArticleId) =
+        withIOContext {
+            dao.delete(shoppingListId.value, articleId.value)
+        }
 
     override suspend fun deleteAllForShoppingList(shoppingListId: ShoppingListId) = withIOContext {
         dao.deleteAllForShoppingList(shoppingListId.value)
     }
 
-    override suspend fun deleteAllCheckedForShoppingList(shoppingListId: ShoppingListId) = withIOContext {
-        dao.deleteAllCheckedForShoppingList(shoppingListId.value)
-    }
+    override suspend fun deleteAllCheckedForShoppingList(shoppingListId: ShoppingListId) =
+        withIOContext {
+            dao.deleteAllCheckedForShoppingList(shoppingListId.value)
+        }
 }

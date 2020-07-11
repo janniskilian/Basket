@@ -50,7 +50,7 @@ class ArticlesFragment : BaseFragment() {
             false
         }
 
-    override fun onBackPressed(): Boolean =
+    override fun onNavigateUpAction(): Boolean =
         if (requireActivity().hasHardwareKeyboard
             && viewModel.searchBarVisible.value == true
         ) {

@@ -25,7 +25,7 @@ class ListFragment : BaseFragment() {
 
     val shoppingListAdapter get() = recyclerView.adapter as? ShoppingListAdapter
 
-    var recreated = false
+    private var isRecreated = false
 
     override val layoutRes get() = R.layout.fragment_list
 
@@ -40,7 +40,7 @@ class ListFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recreated = savedInstanceState != null
+        isRecreated = savedInstanceState != null
         setup.run()
     }
 

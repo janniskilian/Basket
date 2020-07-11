@@ -77,7 +77,11 @@ class MainActivitySetup(
             if (navHostFragment.childFragmentManager.backStackEntryCount == 0) {
                 uiController.showNavigation()
             } else {
-                findNavController().navigateUp()
+                if (currentFragment?.onNavigateUpAction() != true
+                    && currentFragment?.onHomePressed() != true
+                ) {
+                    findNavController().navigateUp()
+                }
             }
         }
 

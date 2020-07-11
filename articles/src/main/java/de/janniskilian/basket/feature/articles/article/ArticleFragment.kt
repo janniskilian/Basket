@@ -30,6 +30,6 @@ class ArticleFragment : BaseFragment() {
         hideKeyboard()
     }
 
-    override fun onBackPressed(): Boolean =
+    override fun onNavigateUpAction(): Boolean =
         viewModel.backPressed()
 }

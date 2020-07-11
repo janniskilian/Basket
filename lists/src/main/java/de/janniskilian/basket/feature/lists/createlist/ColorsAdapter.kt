@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import createTintColorFilter
+import de.janniskilian.basket.core.util.function.createTintColorFilter
 import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.color_item.view.*

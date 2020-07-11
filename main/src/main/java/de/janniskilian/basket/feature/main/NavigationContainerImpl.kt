@@ -14,7 +14,12 @@ import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
 import de.janniskilian.basket.core.navigationcontainer.SearchBarViewModel
 import de.janniskilian.basket.core.util.WeakRef
-import de.janniskilian.basket.core.util.extension.extern.*
+import de.janniskilian.basket.core.util.extension.extern.contentView
+import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
+import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
+import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
+import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
+import de.janniskilian.basket.core.util.extension.extern.showKeyboard
 import de.janniskilian.basket.core.util.function.createSpeechInputIntent
 import de.janniskilian.basket.core.util.weakRef
 import kotlinx.android.synthetic.main.activity_main.*

@@ -54,6 +54,10 @@ abstract class BaseFragment : Fragment() {
         pendingNavigation = false
     }
 
+    open fun onNavigateUpAction(): Boolean = false
+
+    open fun onHomePressed(): Boolean = false
+
     open fun onBackPressed(): Boolean = false
 
     open fun onFabClicked() {}

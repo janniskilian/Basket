@@ -8,8 +8,8 @@ import de.janniskilian.basket.core.type.domain.ShoppingListItem
 import kotlinx.coroutines.launch
 
 class ListViewModel(
-	private val args: ListFragmentArgs,
-	private val dataClient: DataClient
+    args: ListFragmentArgs,
+    private val dataClient: DataClient
 ) : ViewModel() {
 
 	val shoppingListId = ShoppingListId(args.shoppingListId)

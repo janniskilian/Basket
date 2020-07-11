@@ -7,54 +7,59 @@ import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.type.domain.ArticleId
 import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.function.addToFront
+import java.util.*
 
-class GetSuggestionsUseCase(private val shoppingListId: ShoppingListId, private val dataClient: DataClient) {
+class GetSuggestionsUseCase(
+    private val shoppingListId: ShoppingListId,
+    private val dataClient: DataClient
+) {
 
-	private val parser = ListItemInputParser()
+    private val parser = ListItemInputParser()
 
-	fun run(input: String): LiveData<List<ShoppingListItemSuggestion>> =
-		getSuggestions(input)
+    fun run(input: String): LiveData<List<ShoppingListItemSuggestion>> =
+        getSuggestions(input)
 
-	private fun getSuggestions(input: String): LiveData<List<ShoppingListItemSuggestion>> {
-		val parsedInput = parser.parse(input)
-		val articles = dataClient.article.get(parsedInput.name, shoppingListId)
-		val amount = parsedInput.quantity.orEmpty() +
-			parsedInput.unit?.let { " $it" }.orEmpty()
+    private fun getSuggestions(input: String): LiveData<List<ShoppingListItemSuggestion>> {
+        val parsedInput = parser.parse(input)
+        val articles = dataClient.article.get(parsedInput.name, shoppingListId)
+        val amount = parsedInput.quantity.orEmpty() +
+                parsedInput.unit?.let { " $it" }.orEmpty()
 
-		return articles.map { result ->
-			val itemSuggestions = result
-				.map {
-					ShoppingListItemSuggestion(
-						it.article,
-						it.existingListItem,
-						true,
-						amount
-					)
-				}
-				.sortedBy { it.article.name }
+        return articles.map { result ->
+            val itemSuggestions = result
+                .map {
+                    ShoppingListItemSuggestion(
+                        it.article,
+                        it.existingListItem,
+                        true,
+                        amount
+                    )
+                }
+                .sortedBy { it.article.name }
 
-			val exactMatchExists = lazy {
-				result.any {
-					it.article.name.toLowerCase() == parsedInput.name.toLowerCase()
-				}
-			}
+            val exactMatchExists = lazy {
+                result.any {
+                    it.article.name.toLowerCase(Locale.ROOT) ==
+                            parsedInput.name.toLowerCase(Locale.ROOT)
+                }
+            }
 
-			if (input.isBlank() || exactMatchExists.value) {
-				itemSuggestions
-			} else {
-				itemSuggestions.addToFront(
-					ShoppingListItemSuggestion(
-						Article(
-							ArticleId(0),
-							parsedInput.name,
-							null
-						),
-						false,
-						false,
-						amount
-					)
-				)
-			}
-		}
-	}
+            if (input.isBlank() || exactMatchExists.value) {
+                itemSuggestions
+            } else {
+                itemSuggestions.addToFront(
+                    ShoppingListItemSuggestion(
+                        Article(
+                            ArticleId(0),
+                            parsedInput.name,
+                            null
+                        ),
+                        false,
+                        false,
+                        amount
+                    )
+                )
+            }
+        }
+    }
 }

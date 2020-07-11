@@ -7,6 +7,8 @@
 
     <string name="action_menu_search">Search</string>
 
+    <string name="list_item_article_name_hint">Name</string>
+
     <string name="up_button_desc">Back button</string>
     <string name="speech_input_button_desc">Speech input</string>
     <string name="clear_input_button_desc">Clear input</string>

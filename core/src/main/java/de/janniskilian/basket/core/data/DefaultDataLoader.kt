@@ -26,8 +26,7 @@ class DefaultDataLoader(context: Context, locale: Locale = Locale.getDefault()) 
             var name: String? = null
 
             while (reader.hasNext()) {
-                val fieldName = reader.nextName()
-                when (fieldName) {
+                when (reader.nextName()) {
                     ID -> id = reader.nextLong()
 
                     NAME -> name = reader.nextString()
@@ -50,8 +49,7 @@ class DefaultDataLoader(context: Context, locale: Locale = Locale.getDefault()) 
             var categoryId: Long? = null
 
             while (reader.hasNext()) {
-                val fieldName = reader.nextName()
-                when (fieldName) {
+                when (reader.nextName()) {
                     NAME -> name = reader.nextString()
 
                     CATEGORY_ID -> {

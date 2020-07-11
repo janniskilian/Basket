@@ -58,7 +58,9 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
         findNavController().navigateUp()
 
     override fun onBackPressed() {
-        if (currentFragment?.onBackPressed() != true) {
+        if (currentFragment?.onNavigateUpAction() != true
+            && currentFragment?.onBackPressed() != true
+        ) {
             super.onBackPressed()
         }
     }

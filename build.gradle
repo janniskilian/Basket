@@ -7,13 +7,12 @@ buildscript {
         classpath deps.plugins.kotlin
         classpath deps.plugins.android
         classpath deps.plugins.navSafeArgs
-        classpath deps.plugins.detekt
     }
 }
 
 plugins {
     id "com.github.ben-manes.versions" version "0.28.0"
-    id "io.gitlab.arturbosch.detekt" version "1.7.4"
+    id "io.gitlab.arturbosch.detekt" version "1.10.0"
 }
 
 apply plugin: "io.gitlab.arturbosch.detekt"

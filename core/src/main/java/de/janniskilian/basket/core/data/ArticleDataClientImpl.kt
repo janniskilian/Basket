@@ -6,7 +6,12 @@ import de.janniskilian.basket.core.data.localdb.LocalDatabase
 import de.janniskilian.basket.core.data.localdb.entity.RoomArticle
 import de.janniskilian.basket.core.data.localdb.transformation.modelToRoom
 import de.janniskilian.basket.core.data.localdb.transformation.roomToModel
-import de.janniskilian.basket.core.type.domain.*
+import de.janniskilian.basket.core.type.domain.Article
+import de.janniskilian.basket.core.type.domain.ArticleId
+import de.janniskilian.basket.core.type.domain.ArticleSuggestion
+import de.janniskilian.basket.core.type.domain.Category
+import de.janniskilian.basket.core.type.domain.CategoryId
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.function.withIOContext
 
 class ArticleDataClientImpl(localDb: LocalDatabase) : ArticleDataClient {
@@ -26,11 +31,14 @@ class ArticleDataClientImpl(localDb: LocalDatabase) : ArticleDataClient {
         dao.select(articleId.value)?.let(::roomToModel)
     }
 
-    override fun get(name: String, shoppingListId: ShoppingListId): LiveData<List<ArticleSuggestion>> =
+    override fun get(
+        name: String,
+        shoppingListId: ShoppingListId
+    ): LiveData<List<ArticleSuggestion>> =
         dao
             .select("$name%", shoppingListId.value)
             .map { result ->
-                result.map { it ->
+                result.map {
                     ArticleSuggestion(
                         Article(
                             ArticleId(it.articleId),
@@ -59,9 +67,10 @@ class ArticleDataClientImpl(localDb: LocalDatabase) : ArticleDataClient {
         dao.update(modelToRoom(article))
     }
 
-    override suspend fun update(articleId: ArticleId, name: String, categoryId: CategoryId?) = withIOContext {
-        dao.update(articleId.value, name, categoryId?.value)
-    }
+    override suspend fun update(articleId: ArticleId, name: String, categoryId: CategoryId?) =
+        withIOContext {
+            dao.update(articleId.value, name, categoryId?.value)
+        }
 
     override suspend fun delete(articleId: ArticleId) = withIOContext {
         dao.delete(articleId.value)
