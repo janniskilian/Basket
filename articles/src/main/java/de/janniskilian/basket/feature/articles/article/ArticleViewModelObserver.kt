@@ -11,7 +11,7 @@ import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.articles.R
-import de.janniskilian.basket.feature.articles.article.ArticleDialogMode.EDIT
+import de.janniskilian.basket.feature.articles.article.ArticleFragmentMode.EDIT
 import kotlinx.android.synthetic.main.fragment_article.*
 
 class ArticleViewModelObserver(
@@ -55,7 +55,7 @@ class ArticleViewModelObserver(
         )
     }
 
-    private fun renderMode(mode: ArticleDialogMode) {
+    private fun renderMode(mode: ArticleFragmentMode) {
         if (mode != EDIT) {
             fragment.hideKeyboard()
         }

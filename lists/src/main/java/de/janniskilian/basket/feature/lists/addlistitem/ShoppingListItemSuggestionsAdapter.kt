@@ -4,9 +4,9 @@ import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import de.janniskilian.basket.core.util.extension.extern.getThemeColor
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
 import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.R
@@ -43,27 +43,27 @@ class ShoppingListItemSuggestionsAdapter :
 			name.text = formatItemSuggestion(item.item)
 
 			val iconRes: Int
-			val tintColorRes: Int
+			val tintColorAttr: Int
 			when {
 				item.item.existingListItem -> {
 					iconRes = R.drawable.asl_addchecked
-					tintColorRes = R.color.primary
+					tintColorAttr = R.attr.colorPrimary
 				}
 
 				item.item.existingArticle -> {
 					iconRes = R.drawable.asl_addchecked
-					tintColorRes = R.color.icon_light
+					tintColorAttr = R.attr.colorControlNormal
 				}
 
 				else -> {
 					iconRes = R.drawable.ic_create_24
-					tintColorRes = R.color.icon_light
+					tintColorAttr = R.attr.colorControlNormal
 				}
 			}
 			icon.setImageResource(iconRes)
 			icon.setSelectedImageState(item.item.existingListItem)
 			icon.imageTintList = ColorStateList.valueOf(
-				ContextCompat.getColor(context, tintColorRes)
+				context.getThemeColor(tintColorAttr)
 			)
 		}
 	}

@@ -1,7 +1,9 @@
 package de.janniskilian.basket.feature.settings
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.annotation.StringRes
+import androidx.core.content.edit
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
@@ -21,19 +23,27 @@ class PreferenceFragment : PreferenceFragmentCompat() {
         get() = get<SwitchPreferenceCompat>(R.string.pref_key_day_night_mode)
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.preference_screen, rootKey)
+        updateDayNightModePreference()
 
+        setPreferencesFromResource(R.xml.preference_screen, rootKey)
+        setupSystemDayNightModeSwitch()
+        setupDayNightModeSwitch()
+    }
+
+    private fun setupSystemDayNightModeSwitch() {
         systemDayNightModeSwitch?.apply {
             onChange<Boolean> {
                 val dayNightMode = dayNightModeSwitch?.isChecked
                     ?: getBoolean(context, R.bool.pref_def_day_night_mode)
 
-                updateDayNightMode(it, dayNightMode)
+                setDayNightMode(it, dayNightMode)
 
                 dayNightModeSwitch?.isEnabled = !it
             }
         }
+    }
 
+    private fun setupDayNightModeSwitch() {
         dayNightModeSwitch?.apply {
             isEnabled = !sharedPrefs.getBoolean(
                 getString(R.string.pref_key_system_day_night_mode),
@@ -41,16 +51,32 @@ class PreferenceFragment : PreferenceFragmentCompat() {
             )
 
             onChange<Boolean> {
-                val systemDayNightMode = systemDayNightModeSwitch?.isChecked
-                    ?: getBoolean(context, R.bool.pref_def_system_day_night_mode)
+                if (isEnabled) {
+                    val systemDayNightMode = systemDayNightModeSwitch?.isChecked
+                        ?: getBoolean(context, R.bool.pref_def_system_day_night_mode)
 
-                updateDayNightMode(systemDayNightMode, it)
+                    setDayNightMode(systemDayNightMode, it)
+                }
             }
         }
     }
 
-    private fun updateDayNightMode(systemDayNightMode: Boolean, dayNightMode: Boolean) {
-        setDayNightMode(systemDayNightMode, dayNightMode)
+    private fun updateDayNightModePreference() {
+        val autoDayNightMode = sharedPrefs.getBoolean(
+            getString(R.string.pref_key_system_day_night_mode),
+            resources.getBoolean(R.bool.pref_def_system_day_night_mode)
+        )
+        if (autoDayNightMode) {
+            val currentNightMode =
+                resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+            sharedPrefs.edit {
+                putBoolean(
+                    getString(R.string.pref_key_day_night_mode),
+                    currentNightMode == Configuration.UI_MODE_NIGHT_YES
+                )
+            }
+        }
     }
 
     @Suppress("UNCHECKED_CAST")

@@ -23,7 +23,7 @@ class ArticleViewModel(
 
     private val _category = MutableLiveData<Category?>()
 
-    private val _mode = createMutableLiveData(ArticleDialogMode.EDIT)
+    private val _mode = createMutableLiveData(ArticleFragmentMode.EDIT)
 
     private val _error = MutableLiveData<Boolean>()
 
@@ -52,7 +52,7 @@ class ArticleViewModel(
         it.addToFront(null)
     }
 
-    val mode: LiveData<ArticleDialogMode>
+    val mode: LiveData<ArticleFragmentMode>
         get() = _mode
 
     val error: LiveData<Boolean>
@@ -68,18 +68,18 @@ class ArticleViewModel(
 
     fun setCategory(category: Category?) {
         _category.value = category
-        _mode.value = ArticleDialogMode.EDIT
+        _mode.value = ArticleFragmentMode.EDIT
     }
 
     fun editCategoryClicked() {
-        _mode.value = ArticleDialogMode.SELECT_CATEGORY
+        _mode.value = ArticleFragmentMode.SELECT_CATEGORY
     }
 
     fun backPressed(): Boolean =
-        if (_mode.value == ArticleDialogMode.EDIT) {
+        if (_mode.value == ArticleFragmentMode.EDIT) {
             false
         } else {
-            _mode.value = ArticleDialogMode.EDIT
+            _mode.value = ArticleFragmentMode.EDIT
             true
         }
 
