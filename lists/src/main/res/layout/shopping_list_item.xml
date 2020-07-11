@@ -10,8 +10,9 @@
     android:foreground="?attr/selectableItemBackground"
     android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
     app:cardElevation="@dimen/card_elevation"
+    app:cardMaxElevation="@dimen/card_elevation"
     app:strokeWidth="@dimen/card_border_width"
-    tools:cardBackgroundColor="@color/red">
+    tools:cardBackgroundColor="@color/indigo">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

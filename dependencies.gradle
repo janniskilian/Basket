@@ -74,8 +74,8 @@ ext.deps = [
 ]
 
 ext.conf = [
-        buildTools   : "30.0.1",
-        targetSdk    : 30,
+        buildTools   : "29.0.3",
+        targetSdk    : 29,
         minSdk       : 21,
         versionCode  : commitCount(),
         versionName  : "1.0.0",

@@ -73,7 +73,10 @@ class ListsFragment : BaseFragment() {
     }
 
     private fun shoppingListsObserver(shoppingLists: List<ShoppingList>) {
-        listsAdapter?.submitList(shoppingLists)
+        listsAdapter?.submitList(shoppingLists) {
+            recyclerView.invalidateItemDecorations()
+        }
+
         emptyGroup.isVisible = shoppingLists.isEmpty()
         toolbar.setScrollable(shoppingLists.isEmpty())
     }

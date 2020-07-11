@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="Widget.Basket" parent="android:Widget"/>
+    <style name="Widget.Basket" parent="android:Widget" />
 
     <style name="Widget.Basket.AppBarLayout">
         <item name="android:layout_width">match_parent</item>
@@ -65,16 +65,6 @@
         <item name="layout_constraintWidth_max">@dimen/empty_text_max_width</item>
     </style>
 
-    <style name="Widget.Basket.BottomSheetDialog" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorSecondary">@color/secondary</item>
-        <item name="colorSecondaryVariant">@color/secondary_dark</item>
-
-        <item name="android:statusBarColor">@color/transparent</item>
-        <item name="android:windowIsFloating">false</item>
-    </style>
-
     <style name="Widget.Basket.FullHeightDialog" parent="Theme.MaterialComponents.Light.DialogWhenLarge">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
@@ -105,6 +95,11 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:maxHeight">@dimen/increment</item>
         <item name="tint">?attr/colorControlNormal</item>
+    </style>
+
+    <style name="Widget.Myposter.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearance">@null</item>
+        <item name="shapeAppearanceOverlay">@null</item>
     </style>
 
 </resources>

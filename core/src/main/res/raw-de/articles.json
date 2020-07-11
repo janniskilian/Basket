@@ -690,5 +690,25 @@
   {
     "name": "Geschenkpapier",
     "categoryId": 21
+  },
+  {
+    "name": "Chiliflocken",
+    "categoryId": 20
+  },
+  {
+    "name": "Erdbeeren",
+    "categoryId": 7
+  },
+  {
+    "name": "Rohrzucker",
+    "categoryId": 1
+  },
+  {
+    "name": "Reiswaffeln",
+    "categoryId": 3
+  },
+  {
+    "name": "Staubsaugerbeutel",
+    "categoryId": 21
   }
 ]

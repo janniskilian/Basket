@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Widget.Basket.BottomSheetDialog" parent="Theme.MaterialComponents.BottomSheetDialog">
+    <style name="Theme.Basket.BottomSheetDialog" parent="Theme.MaterialComponents.BottomSheetDialog">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorSecondary">@color/secondary</item>

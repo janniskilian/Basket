@@ -18,17 +18,13 @@ class ColorsAdapter : ListAdapter<ColorsAdapter.Item, ColorsAdapter.ViewHolder>(
     }
 ) {
 
-    var clickListener: ((color: Int) -> Unit)? = null
+    var itemClickListener: ((color: Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
             LayoutInflater
                 .from(parent.context)
-                .inflate(
-                    R.layout.color_item,
-                    parent,
-                    false
-                )
+                .inflate(R.layout.color_item, parent, false)
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -41,7 +37,7 @@ class ColorsAdapter : ListAdapter<ColorsAdapter.Item, ColorsAdapter.ViewHolder>(
             backgroundView.isSelected = item.selected
             checkedIcon.isVisible = item.selected
 
-            setOnClickListener { clickListener?.invoke(item.color) }
+            setOnClickListener { itemClickListener?.invoke(item.color) }
         }
     }
 

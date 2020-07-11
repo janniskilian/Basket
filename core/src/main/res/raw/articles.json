@@ -1,858 +1,687 @@
 [
   {
     "name": "Apple Juice",
-    "categoryId": 2,
-    "measureId": null
+    "categoryId": 2
   },
   {
     "name": "Apples",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Bananas",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Butter",
-    "categoryId": 5,
-    "measureId": null
+    "categoryId": 5
   },
   {
     "name": "Carrots",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Muesli",
-    "categoryId": 3,
-    "measureId": null
+    "categoryId": 3
   },
   {
     "name": "Chocolate",
-    "categoryId": 10,
-    "measureId": null
+    "categoryId": 10
   },
   {
     "name": "Cream Cheese",
-    "categoryId": 4,
-    "measureId": null
+    "categoryId": 4
   },
   {
     "name": "Cucumber",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Curd",
-    "categoryId": 5,
-    "measureId": null
+    "categoryId": 5
   },
   {
     "name": "Eggs",
-    "categoryId": 5,
-    "measureId": null
+    "categoryId": 5
   },
   {
     "name": "Emmentaler",
-    "categoryId": 4,
-    "measureId": null
+    "categoryId": 4
   },
   {
     "name": "Flour",
-    "categoryId": 1,
-    "measureId": null
+    "categoryId": 1
   },
   {
     "name": "Gruyère",
-    "categoryId": 4,
-    "measureId": null
+    "categoryId": 4
   },
   {
     "name": "Margarine",
-    "categoryId": 5,
-    "measureId": null
+    "categoryId": 5
   },
   {
     "name": "Milk",
-    "categoryId": 5,
-    "measureId": null
+    "categoryId": 5
   },
   {
     "name": "Oat Flakes",
-    "categoryId": 3,
-    "measureId": null
+    "categoryId": 3
   },
   {
     "name": "Olive Oil",
-    "categoryId": 8,
-    "measureId": null
+    "categoryId": 8
   },
   {
     "name": "Oranges",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Potatoes",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Radishes",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Soy Milk",
-    "categoryId": 9,
-    "measureId": null
+    "categoryId": 9
   },
   {
     "name": "Toast",
-    "categoryId": 6,
-    "measureId": null
+    "categoryId": 6
   },
   {
     "name": "Tomatoes",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Water",
-    "categoryId": 2,
-    "measureId": null
+    "categoryId": 2
   },
   {
     "name": "Yogurt",
-    "categoryId": 5,
-    "measureId": null
+    "categoryId": 5
   },
   {
     "name": "Soy Yogurt",
-    "categoryId": 9,
-    "measureId": null
+    "categoryId": 9
   },
   {
     "name": "Chard",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Peppers",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Grapes",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Plums",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Peaches",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Nectarine",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Lettuce",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Romaine Lettuce",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Cabbage Lettuce",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Corn Salad",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Kiwi",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Egg Plant",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Parsley",
-    "categoryId": 20,
-    "measureId": null
+    "categoryId": 20
   },
   {
     "name": "Basil",
-    "categoryId": 20,
-    "measureId": null
+    "categoryId": 20
   },
   {
     "name": "Leek",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Scallions",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Shallots",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Onions",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Garlic",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Beans",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Green Beans",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Peas",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Peas (frozen)",
-    "categoryId": 13,
-    "measureId": null
+    "categoryId": 13
   },
   {
     "name": "Broad Beans",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Cookies",
-    "categoryId": 10,
-    "measureId": null
+    "categoryId": 10
   },
   {
     "name": "Spinach",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Ice Cream",
-    "categoryId": 10,
-    "measureId": null
+    "categoryId": 10
   },
   {
     "name": "Orange Juice",
-    "categoryId": 2,
-    "measureId": null
+    "categoryId": 2
   },
   {
     "name": "Crisp Bread",
-    "categoryId": 6,
-    "measureId": null
+    "categoryId": 6
   },
   {
     "name": "Rusk",
-    "categoryId": 6,
-    "measureId": null
+    "categoryId": 6
   },
   {
     "name": "Sunflower Oil",
-    "categoryId": 8,
-    "measureId": null
+    "categoryId": 8
   },
   {
     "name": "Tomatoe Paste",
-    "categoryId": 15,
-    "measureId": null
+    "categoryId": 15
   },
   {
     "name": "Tomatoe Purée",
-    "categoryId": 15,
-    "measureId": null
+    "categoryId": 15
   },
   {
     "name": "Tomatoes (canned)",
-    "categoryId": 15,
-    "measureId": null
+    "categoryId": 15
   },
   {
     "name": "Chopped Tomatoes",
-    "categoryId": 15,
-    "measureId": null
+    "categoryId": 15
   },
   {
     "name": "Applesauce",
-    "categoryId": 15,
-    "measureId": null
+    "categoryId": 15
   },
   {
     "name": "Almonds",
-    "categoryId": 10,
-    "measureId": null
+    "categoryId": 10
   },
   {
     "name": "Apricots",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Avocados",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Broccoli",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Broccoli (frozen)",
-    "categoryId": 13,
-    "measureId": null
+    "categoryId": 13
   },
   {
     "name": "Bread",
-    "categoryId": 6,
-    "measureId": null
+    "categoryId": 6
   },
   {
     "name": "Bulgur",
-    "categoryId": 14,
-    "measureId": null
+    "categoryId": 14
   },
   {
     "name": "Cola",
-    "categoryId": 2,
-    "measureId": null
+    "categoryId": 2
   },
   {
     "name": "Corn",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Potato Chips",
-    "categoryId": 10,
-    "measureId": null
+    "categoryId": 10
   },
   {
     "name": "Cocoa",
-    "categoryId": 10,
-    "measureId": null
+    "categoryId": 10
   },
   {
     "name": "Cumin",
-    "categoryId": 20,
-    "measureId": null
+    "categoryId": 20
   },
   {
     "name": "Caviar",
-    "categoryId": 12,
-    "measureId": null
+    "categoryId": 12
   },
   {
     "name": "Celery",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Coffe",
-    "categoryId": 3,
-    "measureId": null
+    "categoryId": 3
   },
   {
     "name": "Cabbage",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Candles",
-    "categoryId": 21,
-    "measureId": null
+    "categoryId": 21
   },
   {
     "name": "Cat Food",
-    "categoryId": 22,
-    "measureId": null
+    "categoryId": 22
   },
   {
     "name": "Dog Food",
-    "categoryId": 22,
-    "measureId": null
+    "categoryId": 22
   },
   {
     "name": "Shampoo",
-    "categoryId": 18,
-    "measureId": null
+    "categoryId": 18
   },
   {
     "name": "Deodorant",
-    "categoryId": 18,
-    "measureId": null
+    "categoryId": 18
   },
   {
     "name": "Diapers",
-    "categoryId": 17,
-    "measureId": null
+    "categoryId": 17
   },
   {
     "name": "Edam Cheese",
-    "categoryId": 4,
-    "measureId": null
+    "categoryId": 4
   },
   {
     "name": "Figs",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Frosting",
-    "categoryId": 1,
-    "measureId": null
+    "categoryId": 1
   },
   {
     "name": "Chocolate Coating",
-    "categoryId": 1,
-    "measureId": null
+    "categoryId": 1
   },
   {
     "name": "Baby Food",
-    "categoryId": 17,
-    "measureId": null
+    "categoryId": 17
   },
   {
     "name": "Chewing Gum",
-    "categoryId": 10,
-    "measureId": null
+    "categoryId": 10
   },
   {
     "name": "Vinegar",
-    "categoryId": 8,
-    "measureId": null
+    "categoryId": 8
   },
   {
     "name": "Ginger",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Gnocchi",
-    "categoryId": 14,
-    "measureId": null
+    "categoryId": 14
   },
   {
     "name": "Penne",
-    "categoryId": 14,
-    "measureId": null
+    "categoryId": 14
   },
   {
     "name": "Farfalle",
-    "categoryId": 14,
-    "measureId": null
+    "categoryId": 14
   },
   {
     "name": "Spaghetti",
-    "categoryId": 14,
-    "measureId": null
+    "categoryId": 14
   },
   {
     "name": "Maccheroni",
-    "categoryId": 14,
-    "measureId": null
+    "categoryId": 14
   },
   {
     "name": "Fusilli",
-    "categoryId": 14,
-    "measureId": null
+    "categoryId": 14
   },
   {
     "name": "Girandole",
-    "categoryId": 14,
-    "measureId": null
+    "categoryId": 14
   },
   {
     "name": "Tagliatelle",
-    "categoryId": 14,
-    "measureId": null
+    "categoryId": 14
   },
   {
     "name": "Lasagne Sheets",
-    "categoryId": 14,
-    "measureId": null
+    "categoryId": 14
   },
   {
     "name": "Tea",
-    "categoryId": 9,
-    "measureId": null
+    "categoryId": 9
   },
   {
     "name": "Honey",
-    "categoryId": 3,
-    "measureId": null
+    "categoryId": 3
   },
   {
     "name": "Hamburger Buns",
-    "categoryId": 6,
-    "measureId": null
+    "categoryId": 6
   },
   {
     "name": "Ice Tea",
-    "categoryId": 2,
-    "measureId": null
+    "categoryId": 2
   },
   {
     "name": "Instant Soup",
-    "categoryId": 16,
-    "measureId": null
+    "categoryId": 16
   },
   {
     "name": "Jam",
-    "categoryId": 3,
-    "measureId": null
+    "categoryId": 3
   },
   {
     "name": "Peanut Butter",
-    "categoryId": 3,
-    "measureId": null
+    "categoryId": 3
   },
   {
     "name": "Ketchup",
-    "categoryId": 8,
-    "measureId": null
+    "categoryId": 8
   },
   {
     "name": "Salad Dressing",
-    "categoryId": 8,
-    "measureId": null
+    "categoryId": 8
   },
   {
     "name": "Napkins",
-    "categoryId": 21,
-    "measureId": null
+    "categoryId": 21
   },
   {
     "name": "Kitchen paper",
-    "categoryId": 21,
-    "measureId": null
+    "categoryId": 21
   },
   {
     "name": "Limes",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Salt",
-    "categoryId": 20,
-    "measureId": null
+    "categoryId": 20
   },
   {
     "name": "Pepper",
-    "categoryId": 20,
-    "measureId": null
+    "categoryId": 20
   },
   {
     "name": "Sugar",
-    "categoryId": 1,
-    "measureId": null
+    "categoryId": 1
   },
   {
     "name": "Salmon",
-    "categoryId": 12,
-    "measureId": null
+    "categoryId": 12
   },
   {
     "name": "Sponge",
-    "categoryId": 21,
-    "measureId": null
+    "categoryId": 21
   },
   {
     "name": "Nutmeg",
-    "categoryId": 20,
-    "measureId": null
+    "categoryId": 20
   },
   {
     "name": "Cayenne",
-    "categoryId": 20,
-    "measureId": null
+    "categoryId": 20
   },
   {
     "name": "Caraway",
-    "categoryId": 20,
-    "measureId": null
+    "categoryId": 20
   },
   {
     "name": "Thyme",
-    "categoryId": 20,
-    "measureId": null
+    "categoryId": 20
   },
   {
     "name": "Rosemary",
-    "categoryId": 20,
-    "measureId": null
+    "categoryId": 20
   },
   {
     "name": "Tofu",
-    "categoryId": 9,
-    "measureId": null
+    "categoryId": 9
   },
   {
     "name": "Rice",
-    "categoryId": 14,
-    "measureId": null
+    "categoryId": 14
   },
   {
     "name": "Vanilla Sugar",
-    "categoryId": 1,
-    "measureId": null
+    "categoryId": 1
   },
   {
     "name": "Balsamico Vinegar",
-    "categoryId": 8,
-    "measureId": null
+    "categoryId": 8
   },
   {
     "name": "Wine",
-    "categoryId": 2,
-    "measureId": null
+    "categoryId": 2
   },
   {
     "name": "Beer",
-    "categoryId": 2,
-    "measureId": null
+    "categoryId": 2
   },
   {
     "name": "Walnuts",
-    "categoryId": 10,
-    "measureId": null
+    "categoryId": 10
   },
   {
     "name": "Hazelnuts",
-    "categoryId": 10,
-    "measureId": null
+    "categoryId": 10
   },
   {
     "name": "Yeast",
-    "categoryId": 1,
-    "measureId": null
+    "categoryId": 1
   },
   {
     "name": "Champignons",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Pears",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Savoy",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Coconut Milk",
-    "categoryId": 15,
-    "measureId": null
+    "categoryId": 15
   },
   {
     "name": "Cereal",
-    "categoryId": 3,
-    "measureId": null
+    "categoryId": 3
   },
   {
     "name": "Cream",
-    "categoryId": 5,
-    "measureId": null
+    "categoryId": 5
   },
   {
     "name": "Gouda",
-    "categoryId": 4,
-    "measureId": null
+    "categoryId": 4
   },
   {
     "name": "Crème fraîche",
-    "categoryId": 5,
-    "measureId": null
+    "categoryId": 5
   },
   {
     "name": "Parsnips",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Zucchini",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Dish soap",
-    "categoryId": 19,
-    "measureId": null
+    "categoryId": 19
   },
   {
     "name": "Pumpkin",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Tonic water",
-    "categoryId": 2,
-    "measureId": null
+    "categoryId": 2
   },
   {
     "name": "Toothpaste",
-    "categoryId": 18,
-    "measureId": null
+    "categoryId": 18
   },
   {
     "name": "Tangerines",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Mozzarella",
-    "categoryId": 4,
-    "measureId": null
+    "categoryId": 4
   },
   {
     "name": "Feta cheese",
-    "categoryId": 4,
-    "measureId": null
+    "categoryId": 4
   },
   {
     "name": "Rocket salad",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Sunflower seeds",
-    "categoryId": 9,
-    "measureId": null
+    "categoryId": 9
   },
   {
     "name": "Cashew nuts",
-    "categoryId": 9,
-    "measureId": null
+    "categoryId": 9
   },
   {
     "name": "Lemons",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Pine nuts",
-    "categoryId": 9,
-    "measureId": null
+    "categoryId": 9
   },
   {
     "name": "Olives",
-    "categoryId": 15,
-    "measureId": null
+    "categoryId": 15
   },
   {
     "name": "Baking paper",
-    "categoryId": 21,
-    "measureId": null
+    "categoryId": 21
   },
   {
     "name": "Pickles",
-    "categoryId": 15,
-    "measureId": null
+    "categoryId": 15
   },
   {
     "name": "French fries",
-    "categoryId": 13,
-    "measureId": null
+    "categoryId": 13
   },
   {
     "name": "Detergent",
-    "categoryId": 19,
-    "measureId": null
+    "categoryId": 19
   },
   {
     "name": "Elastic bands",
-    "categoryId": 21,
-    "measureId": null
+    "categoryId": 21
   },
   {
     "name": "Hot peppers",
-    "categoryId": 15,
-    "measureId": null
+    "categoryId": 15
   },
   {
     "name": "Artichokes",
-    "categoryId": 15,
-    "measureId": null
+    "categoryId": 15
   },
   {
     "name": "Capers",
-    "categoryId": 15,
-    "measureId": null
+    "categoryId": 15
   },
   {
     "name": "Bay leaves",
-    "categoryId": 20,
-    "measureId": null
+    "categoryId": 20
   },
   {
     "name": "Chickpeas",
-    "categoryId": 15,
-    "measureId": null
+    "categoryId": 15
   },
   {
     "name": "Breadcrumbs",
-    "categoryId": 15,
-    "measureId": null
+    "categoryId": 15
   },
   {
     "name": "Cheddar",
-    "categoryId": 4,
-    "measureId": null
+    "categoryId": 4
   },
   {
     "name": "Cloves",
-    "categoryId": 20,
-    "measureId": null
+    "categoryId": 20
   },
   {
     "name": "White cabbage",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Pointed cabbage",
-    "categoryId": 7,
-    "measureId": null
+    "categoryId": 7
   },
   {
     "name": "Vegetable broth",
@@ -860,6 +689,26 @@
   },
   {
     "name": "Wrapping paper",
+    "categoryId": 21
+  },
+  {
+    "name": "Chili flakes",
+    "categoryId": 20
+  },
+  {
+    "name": "Strawberries",
+    "categoryId": 7
+  },
+  {
+    "name": "Cane sugar",
+    "categoryId": 1
+  },
+  {
+    "name": "Rice cakes",
+    "categoryId": 3
+  },
+  {
+    "name": "Vacuum cleaner bag",
     "categoryId": 21
   }
 ]

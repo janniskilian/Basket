@@ -89,7 +89,7 @@ class CreateListFragmentSetup(
         with(fragment) {
             createButton.setOnClickListener { viewModel.submitButtonClicked() }
             nameEditText.onDone(viewModel::submitButtonClicked)
-            (recyclerView.adapter as? ColorsAdapter)?.clickListener = viewModel::setSelectedColor
+            (recyclerView.adapter as? ColorsAdapter)?.itemClickListener = viewModel::setSelectedColor
         }
     }
 }
