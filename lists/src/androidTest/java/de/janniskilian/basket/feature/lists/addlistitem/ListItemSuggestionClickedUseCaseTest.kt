@@ -89,9 +89,27 @@ class ListItemSuggestionClickedUseCaseTest {
 
         assertEquals(3, getShoppingList().items.size)
 
-        useCase.run(ShoppingListItemSuggestion(article1, true, true))
-        useCase.run(ShoppingListItemSuggestion(article2, true, true))
-        useCase.run(ShoppingListItemSuggestion(article3, true, true))
+        useCase.run(
+            ShoppingListItemSuggestion(
+                article1,
+                existingListItem = true,
+                existingArticle = true
+            )
+        )
+        useCase.run(
+            ShoppingListItemSuggestion(
+                article2,
+                existingListItem = true,
+                existingArticle = true
+            )
+        )
+        useCase.run(
+            ShoppingListItemSuggestion(
+                article3,
+                existingListItem = true,
+                existingArticle = true
+            )
+        )
 
         assert(getShoppingList().items.isEmpty())
     }
@@ -102,13 +120,25 @@ class ListItemSuggestionClickedUseCaseTest {
     private suspend fun createListItemWithExistingArticle(articleId: ArticleId): Article {
         val article = dataClient.article.get(articleId)
         assertNotNull(article)
-        useCase.run(ShoppingListItemSuggestion(article, false, true))
+        useCase.run(
+            ShoppingListItemSuggestion(
+                article,
+                existingListItem = false,
+                existingArticle = true
+            )
+        )
         return article
     }
 
     private suspend fun createListItemWithNewArticle(articleName: String): Article {
         val article = Article(ArticleId(0), articleName, null)
-        useCase.run(ShoppingListItemSuggestion(article, false, false))
+        useCase.run(
+            ShoppingListItemSuggestion(
+                article,
+                existingListItem = false,
+                existingArticle = false
+            )
+        )
         return article
     }
 }

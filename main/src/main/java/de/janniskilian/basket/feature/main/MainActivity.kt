@@ -13,9 +13,8 @@ import de.janniskilian.basket.core.navigationcontainer.NavigationContainerProvid
 
 class MainActivity : AppCompatActivity(), NavigationContainerProvider {
 
-    private val sharedPrefs by lazy {
-        (application as BasketApp).appModule.androidModule.sharedPreferences
-    }
+    private val sharedPrefs
+        get() = (application as BasketApp).appModule.androidModule.sharedPrefs
 
     private val uiController = MainActivityUiController(this)
     private val setup = MainActivitySetup(this, uiController)

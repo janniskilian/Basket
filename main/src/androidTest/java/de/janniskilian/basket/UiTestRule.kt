@@ -1,6 +1,5 @@
 package de.janniskilian.basket
 
-import androidx.core.content.edit
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -24,7 +23,7 @@ class UiTestRule(
             .dataClient
             .clear()
 
-        appModule.androidModule.sharedPreferences.edit {
+        appModule.androidModule.sharedPrefs.edit {
             clear()
         }
     }

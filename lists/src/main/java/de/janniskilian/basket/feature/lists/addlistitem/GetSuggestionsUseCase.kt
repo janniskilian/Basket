@@ -54,9 +54,9 @@ class GetSuggestionsUseCase(
                             parsedInput.name,
                             null
                         ),
-                        false,
-                        false,
-                        amount
+                        existingListItem = false,
+                        existingArticle = false,
+                        quantity = amount
                     )
                 )
             }

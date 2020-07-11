@@ -34,7 +34,7 @@ class BasketApp : Application() {
 	}
 
 	private fun setupDayNightMode() {
-        val sharedPrefs = appModule.androidModule.sharedPreferences
+        val sharedPrefs = appModule.androidModule.sharedPrefs
         val autoDayNightMode = sharedPrefs.getBoolean(
             getString(R.string.pref_key_system_day_night_mode),
             resources.getBoolean(R.bool.pref_def_system_day_night_mode)

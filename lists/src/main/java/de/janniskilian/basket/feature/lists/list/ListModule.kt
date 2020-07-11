@@ -14,7 +14,7 @@ class ListModule(
             fragment,
             listViewModel,
             listViewModelObserver,
-            appModule.androidModule.sharedPreferences
+            appModule.androidModule.sharedPrefs
         )
     }
 

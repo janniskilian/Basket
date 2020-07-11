@@ -4,17 +4,15 @@ import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
 import androidx.preference.SwitchPreferenceCompat
 import de.janniskilian.basket.R
+import de.janniskilian.basket.core.util.extension.extern.appModule
 import de.janniskilian.basket.core.util.function.getBoolean
 import de.janniskilian.basket.core.util.function.setDayNightMode
 
 class PreferenceFragment : PreferenceFragmentCompat() {
 
-    private val sharedPrefs by lazy {
-        PreferenceManager.getDefaultSharedPreferences(requireContext())
-    }
+    private val sharedPrefs get() = appModule.androidModule.sharedPrefs
 
     private val systemDayNightModeSwitch
         get() = get<SwitchPreferenceCompat>(R.string.pref_key_system_day_night_mode)

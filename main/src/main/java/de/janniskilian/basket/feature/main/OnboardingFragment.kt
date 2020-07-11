@@ -25,7 +25,7 @@ class OnboardingFragment : BaseFragment() {
 
     private val appModule get() = (requireActivity().application as BasketApp).appModule
 
-    private val sharedPrefs get() = appModule.androidModule.sharedPreferences
+    private val sharedPrefs get() = appModule.androidModule.sharedPrefs
 
     private val dataClient get() = appModule.dataModule.dataClient
 

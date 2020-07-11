@@ -16,6 +16,7 @@ dependencies {
     implementation deps.androidx.constraintlayout
     implementation deps.androidx.roomRuntime
     implementation deps.androidx.roomKtx
+    implementation deps.androidx.preference
     kapt deps.androidx.roomCompiler
 
     implementation deps.material

@@ -16,7 +16,7 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/preferenceFragment"
         android:name="de.janniskilian.basket.feature.settings.PreferenceFragment"
         android:layout_width="match_parent"
