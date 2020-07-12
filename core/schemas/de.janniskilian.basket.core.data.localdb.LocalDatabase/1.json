@@ -2,15 +2,21 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a9c5bb7df437d14a47146fc5a9107d3e",
+    "identityHash": "7019d3025322978ad0c84b24a6c103cd",
     "entities": [
       {
         "tableName": "article",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `categoryId` INTEGER, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, FOREIGN KEY(`categoryId`) REFERENCES `category`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `searchName` TEXT NOT NULL, `categoryId` INTEGER, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, FOREIGN KEY(`categoryId`) REFERENCES `category`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
         "fields": [
           {
             "fieldPath": "name",
             "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "searchName",
+            "columnName": "searchName",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -35,12 +41,12 @@
         },
         "indices": [
           {
-            "name": "index_article_name",
+            "name": "index_article_searchName",
             "unique": false,
             "columnNames": [
-              "name"
+              "searchName"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_article_name` ON `${TABLE_NAME}` (`name`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_article_searchName` ON `${TABLE_NAME}` (`searchName`)"
           },
           {
             "name": "index_article_categoryId",
@@ -67,11 +73,17 @@
       },
       {
         "tableName": "category",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `searchName` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
         "fields": [
           {
             "fieldPath": "name",
             "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "searchName",
+            "columnName": "searchName",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -90,23 +102,29 @@
         },
         "indices": [
           {
-            "name": "index_category_name",
+            "name": "index_category_searchName",
             "unique": false,
             "columnNames": [
-              "name"
+              "searchName"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_category_name` ON `${TABLE_NAME}` (`name`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_category_searchName` ON `${TABLE_NAME}` (`searchName`)"
           }
         ],
         "foreignKeys": []
       },
       {
         "tableName": "shoppingList",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `color` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `searchName` TEXT NOT NULL, `color` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
         "fields": [
           {
             "fieldPath": "name",
             "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "searchName",
+            "columnName": "searchName",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -131,19 +149,19 @@
         },
         "indices": [
           {
-            "name": "index_shoppingList_name",
+            "name": "index_shoppingList_searchName",
             "unique": false,
             "columnNames": [
-              "name"
+              "searchName"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_shoppingList_name` ON `${TABLE_NAME}` (`name`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_shoppingList_searchName` ON `${TABLE_NAME}` (`searchName`)"
           }
         ],
         "foreignKeys": []
       },
       {
         "tableName": "shoppingListItem",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`shoppingListId` INTEGER NOT NULL, `articleId` INTEGER NOT NULL, `quantity` TEXT NOT NULL, `checked` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, FOREIGN KEY(`shoppingListId`) REFERENCES `shoppingList`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`articleId`) REFERENCES `article`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`shoppingListId` INTEGER NOT NULL, `articleId` INTEGER NOT NULL, `quantity` TEXT NOT NULL, `comment` TEXT NOT NULL, `checked` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, FOREIGN KEY(`shoppingListId`) REFERENCES `shoppingList`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`articleId`) REFERENCES `article`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "shoppingListId",
@@ -160,6 +178,12 @@
           {
             "fieldPath": "quantity",
             "columnName": "quantity",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "comment",
+            "columnName": "comment",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -229,7 +253,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a9c5bb7df437d14a47146fc5a9107d3e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7019d3025322978ad0c84b24a6c103cd')"
     ]
   }
 }

@@ -39,21 +39,28 @@ interface RoomArticleDao {
 			(SELECT articleId, shoppingListId FROM shoppingListItem
 			WHERE shoppingListId = :shoppingListId) AS listItem
 			ON article.id = listItem.articleId
-			WHERE article.name LIKE :name"""
+			WHERE article.searchName LIKE :searchName"""
     )
-    fun select(name: String, shoppingListId: Long): LiveData<List<RoomArticleSuggestionResult>>
+    fun select(
+        searchName: String,
+        shoppingListId: Long
+    ): LiveData<List<RoomArticleSuggestionResult>>
 
     @Query(SELECT_BY_NAME)
-    fun select(name: String): LiveData<List<RoomArticleResult>>
+    fun select(searchName: String): LiveData<List<RoomArticleResult>>
 
     @Query(SELECT_BY_NAME)
-    fun selectSuspend(name: String): List<RoomArticleResult>
+    fun selectSuspend(searchName: String): List<RoomArticleResult>
 
     @Update
     fun update(article: RoomArticle)
 
-    @Query("UPDATE article SET name = :name, categoryId = :categoryId WHERE id = :id")
-    fun update(id: Long, name: String, categoryId: Long?)
+    @Query(
+        """UPDATE article
+            SET name = :name, searchName = :searchName, categoryId = :categoryId
+            WHERE id = :id"""
+    )
+    fun update(id: Long, name: String, searchName: String, categoryId: Long?)
 
     @Query("DELETE FROM article WHERE id = :id")
     fun delete(id: Long)
@@ -62,11 +69,11 @@ interface RoomArticleDao {
 
         private const val SELECT_BY_NAME =
             """SELECT article.id AS articleId, article.name AS articleName,
-			category.id AS category_id, category.name AS category_name
+			category.id AS category_id, category.name AS category_name,
+            category.searchName AS category_searchName
 			FROM article
 			LEFT OUTER JOIN category
 			ON article.categoryId = category.id
-			WHERE article.name LIKE :name
-			ORDER BY article.name ASC"""
+			WHERE article.searchName LIKE :searchName"""
     }
 }

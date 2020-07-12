@@ -10,11 +10,12 @@ import de.janniskilian.basket.core.type.domain.ShoppingListItemId
 interface ShoppingListItemDataClient {
 
 	suspend fun create(
-		shoppingListId: ShoppingListId,
-		article: Article,
-		quantity: String = "",
-		checked: Boolean = false
-	)
+        shoppingListId: ShoppingListId,
+        article: Article,
+        quantity: String = "",
+        comment: String = "",
+        checked: Boolean = false
+    )
 
 	suspend fun create(shoppingListItems: List<ShoppingListItem>)
 

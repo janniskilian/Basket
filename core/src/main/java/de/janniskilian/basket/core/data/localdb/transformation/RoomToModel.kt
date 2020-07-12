@@ -41,16 +41,17 @@ fun roomToModel(result: List<RoomShoppingListResult>): ShoppingList =
 					Category(CategoryId(it.categoryId), it.categoryName)
 				}
 				ShoppingListItem(
-					ShoppingListItemId(it.id),
-					ShoppingListId(result.first().shoppingListId),
-					Article(
-						ArticleId(it.articleId),
-						it.articleName,
-						category
-					),
-					it.quantity,
-					it.checked
-				)
+                    ShoppingListItemId(it.id),
+                    ShoppingListId(result.first().shoppingListId),
+                    Article(
+                        ArticleId(it.articleId),
+                        it.articleName,
+                        category
+                    ),
+                    it.quantity,
+                    it.comment,
+                    it.checked
+                )
 			}
 		}
 	)
@@ -68,14 +69,15 @@ fun roomToModel(shoppingListItem: RoomShoppingListItemResult): ShoppingListItem 
 	}
 
 	return ShoppingListItem(
-		ShoppingListItemId(shoppingListItem.id),
-		ShoppingListId(shoppingListItem.shoppingListId),
-		Article(
-			ArticleId(shoppingListItem.articleId),
-			shoppingListItem.articleName,
-			category
-		),
-		shoppingListItem.quantity,
-		shoppingListItem.checked
-	)
+        ShoppingListItemId(shoppingListItem.id),
+        ShoppingListId(shoppingListItem.shoppingListId),
+        Article(
+            ArticleId(shoppingListItem.articleId),
+            shoppingListItem.articleName,
+            category
+        ),
+        shoppingListItem.quantity,
+        shoppingListItem.comment,
+        shoppingListItem.checked
+    )
 }

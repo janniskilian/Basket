@@ -7,13 +7,16 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "shoppingList")
 data class RoomShoppingList(
 
-	@ColumnInfo(name = "name", index = true)
-	val name: String,
+    @ColumnInfo(name = "name")
+    val name: String,
 
-	@ColumnInfo(name = "color")
-	val color: Int,
+    @ColumnInfo(name = "searchName", index = true)
+    val searchName: String,
 
-	@PrimaryKey(autoGenerate = true)
-	@ColumnInfo(name = "id")
-	val id: Long = 0
+    @ColumnInfo(name = "color")
+    val color: Int,
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    val id: Long = 0
 )

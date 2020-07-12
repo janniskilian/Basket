@@ -19,7 +19,8 @@ interface RoomShoppingListItemDao {
 
 	@Query(
 		"""SELECT shoppingListItem.id AS id, shoppingListItem.shoppingListId AS shoppingListId,
-			shoppingListItem.quantity AS quantity, shoppingListItem.checked AS checked,
+			shoppingListItem.quantity AS quantity, shoppingListItem.comment AS comment, 
+			shoppingListItem.checked AS checked,
 			article.id AS articleId, article.name AS articleName, article.categoryId AS categoryId,
 			category.name AS categoryName
 			FROM shoppingListItem

@@ -24,19 +24,22 @@ import androidx.room.PrimaryKey
 )
 class RoomShoppingListItem(
 
-	@ColumnInfo(name = "shoppingListId", index = true)
-	val shoppingListId: Long,
+    @ColumnInfo(name = "shoppingListId", index = true)
+    val shoppingListId: Long,
 
-	@ColumnInfo(name = "articleId", index = true)
-	val articleId: Long,
+    @ColumnInfo(name = "articleId", index = true)
+    val articleId: Long,
 
-	@ColumnInfo(name = "quantity")
-	val quantity: String = "",
+    @ColumnInfo(name = "quantity")
+    val quantity: String = "",
 
-	@ColumnInfo(name = "checked")
-	val checked: Boolean = false,
+    @ColumnInfo(name = "comment")
+    val comment: String = "",
 
-	@PrimaryKey(autoGenerate = true)
-	@ColumnInfo(name = "id")
-	val id: Long = 0
+    @ColumnInfo(name = "checked")
+    val checked: Boolean = false,
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    val id: Long = 0
 )

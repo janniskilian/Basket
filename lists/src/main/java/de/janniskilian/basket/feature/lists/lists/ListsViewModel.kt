@@ -6,6 +6,7 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.ShoppingList
+import de.janniskilian.basket.core.util.sortedByName
 import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.launch
 
@@ -14,7 +15,7 @@ class ListsViewModel(private val dataClient: DataClient) : ViewModel() {
     private var _shoppingListDeleted = SingleLiveEvent<ShoppingList>()
 
     val shoppingLists = dataClient.shoppingList.getAll().map { shoppingList ->
-        shoppingList.sortedBy { it.name }
+        shoppingList.sortedByName()
     }
 
     val shoppingListDeleted: LiveData<ShoppingList>

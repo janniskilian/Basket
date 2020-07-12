@@ -3,7 +3,8 @@ package de.janniskilian.basket.core.data
 import java.io.Closeable
 
 interface DataClient: Closeable {
-	val article: ArticleDataClient
+
+    val article: ArticleDataClient
 
 	val category: CategoryDataClient
 

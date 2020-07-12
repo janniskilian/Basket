@@ -8,6 +8,7 @@ import de.janniskilian.basket.core.data.localdb.transformation.modelToRoom
 import de.janniskilian.basket.core.data.localdb.transformation.roomToModel
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListId
+import de.janniskilian.basket.core.util.extension.extern.withoutSpecialChars
 import de.janniskilian.basket.core.util.function.withIOContext
 
 class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClient {
@@ -15,7 +16,15 @@ class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClien
     private val shoppingListDao = localDb.shoppingListDao()
 
     override suspend fun create(name: String, color: Int) = withIOContext {
-        ShoppingListId(shoppingListDao.insert(RoomShoppingList(name, color)))
+        ShoppingListId(
+            shoppingListDao.insert(
+                RoomShoppingList(
+                    name,
+                    name.withoutSpecialChars(),
+                    color
+                )
+            )
+        )
     }
 
     override suspend fun create(shoppingList: ShoppingList) = withIOContext {
@@ -45,9 +54,15 @@ class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClien
                     .map { (_, value) -> roomToModel(value) }
             }
 
-    override suspend fun update(shoppingListId: ShoppingListId, name: String, color: Int) = withIOContext {
-        shoppingListDao.update(shoppingListId.value, name, color)
-    }
+    override suspend fun update(shoppingListId: ShoppingListId, name: String, color: Int) =
+        withIOContext {
+            shoppingListDao.update(
+                shoppingListId.value,
+                name,
+                name.withoutSpecialChars(),
+                color
+            )
+        }
 
     override suspend fun delete(shoppingListId: ShoppingListId) = withIOContext {
         shoppingListDao.delete(shoppingListId.value)

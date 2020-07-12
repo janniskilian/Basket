@@ -5,5 +5,10 @@ data class ShoppingListItem(
     val shoppingListId: ShoppingListId,
     val article: Article,
     val quantity: String = "",
+    val comment: String = "",
     val checked: Boolean = false
-)
+) : NamedItem {
+
+    override val name: String
+        get() = article.name
+}

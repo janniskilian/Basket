@@ -22,8 +22,8 @@ interface RoomCategoryDao {
     @Query("SELECT * FROM category WHERE id = :id")
     fun selectSuspend(id: Long): RoomCategory?
 
-    @Query("SELECT * FROM category WHERE name LIKE :name ORDER BY name ASC")
-    fun select(name: String): LiveData<List<RoomCategory>>
+    @Query("SELECT * FROM category WHERE searchName LIKE :searchName")
+    fun select(searchName: String): LiveData<List<RoomCategory>>
 
     @Query("SELECT COUNT(id) FROM category")
     fun selectCount(): Int
@@ -31,8 +31,8 @@ interface RoomCategoryDao {
     @Update
     fun update(category: RoomCategory)
 
-    @Query("UPDATE category SET name = :name WHERE id = :id")
-    fun update(id: Long, name: String)
+    @Query("UPDATE category SET name = :name, searchName = :searchName WHERE id = :id")
+    fun update(id: Long, name: String, searchName: String)
 
     @Query("DELETE FROM category WHERE id = :id")
     fun delete(id: Long)

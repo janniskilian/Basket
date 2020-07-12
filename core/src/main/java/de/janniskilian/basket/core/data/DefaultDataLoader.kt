@@ -8,6 +8,7 @@ import androidx.annotation.RawRes
 import de.janniskilian.basket.core.R
 import de.janniskilian.basket.core.data.localdb.entity.RoomArticle
 import de.janniskilian.basket.core.data.localdb.entity.RoomCategory
+import de.janniskilian.basket.core.util.extension.extern.withoutSpecialChars
 import de.janniskilian.basket.core.util.function.withIOContext
 import java.util.*
 
@@ -36,7 +37,7 @@ class DefaultDataLoader(context: Context, locale: Locale = Locale.getDefault()) 
             }
 
             if (id != null && name != null) {
-                RoomCategory(name, id)
+                RoomCategory(name, name.withoutSpecialChars(), id)
             } else {
                 null
             }
@@ -65,7 +66,7 @@ class DefaultDataLoader(context: Context, locale: Locale = Locale.getDefault()) 
             }
 
             if (name != null) {
-                RoomArticle(name, categoryId, index + 1L)
+                RoomArticle(name, name.withoutSpecialChars(), categoryId, index + 1L)
             } else {
                 null
             }

@@ -22,32 +22,32 @@ class ArticlesFragmentSetup(
         articlesAdapter?.clickListener = ::articleClicked
 
         viewModel.articles.observe(fragment.viewLifecycleOwner) {
-            articlesAdapter?.submitList(it)
+            articlesAdapter?.submitList(it) {
+                fragment.recyclerView.invalidateItemDecorations()
+            }
         }
 
         fragment.navigationContainer.attachSearchBar(viewModel)
     }
 
-    private fun setupRecyclerView() {
-        with(fragment.recyclerView) {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(fragment.requireContext())
-            adapter = ArticlesAdapter()
-            (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
-            addItemDecoration(
-                DividerItemDecoration(
-                    fragment.requireContext(),
-                    DividerItemDecoration.VERTICAL
-                )
+    private fun setupRecyclerView() = with(fragment.recyclerView) {
+        setHasFixedSize(true)
+        layoutManager = LinearLayoutManager(fragment.requireContext())
+        adapter = ArticlesAdapter()
+        (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
+        addItemDecoration(
+            DividerItemDecoration(
+                fragment.requireContext(),
+                DividerItemDecoration.VERTICAL
             )
-            addItemDecoration(
-                EndSpacingDecoration(
-                    0,
-                    resources.getDimensionPixelSize(R.dimen.fab_spacing),
-                    RecyclerView.VERTICAL
-                )
+        )
+        addItemDecoration(
+            EndSpacingDecoration(
+                0,
+                resources.getDimensionPixelSize(R.dimen.fab_spacing),
+                RecyclerView.VERTICAL
             )
-        }
+        )
     }
 
     private fun articleClicked(position: Int) {

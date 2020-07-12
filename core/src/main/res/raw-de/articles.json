@@ -710,5 +710,141 @@
   {
     "name": "Staubsaugerbeutel",
     "categoryId": 21
+  },
+  {
+    "name": "Toilettenpapier",
+    "categoryId": 18
+  },
+  {
+    "name": "Taschentücher",
+    "categoryId": 18
+  },
+  {
+    "name": "Sojasauce",
+    "categoryId": 20
+  },
+  {
+    "name": "Seife",
+    "categoryId": 18
+  },
+  {
+    "name": "Zuckerschoten",
+    "categoryId": 7
+  },
+  {
+    "name": "Nudeln",
+    "categoryId": 14
+  },
+  {
+    "name": "Müllbeutel",
+    "categoryId": 21
+  },
+  {
+    "name": "Kokosöl",
+    "categoryId": 8
+  },
+  {
+    "name": "Tahina",
+    "categoryId": 15
+  },
+  {
+    "name": "Glasreiniger",
+    "categoryId": 19
+  },
+  {
+    "name": "Getrocknete Tomaten",
+    "categoryId": 15
+  },
+  {
+    "name": "Petersilie (TK)",
+    "categoryId": 13
+  },
+  {
+    "name": "Leinöl",
+    "categoryId": 8
+  },
+  {
+    "name": "Desinfektionsmittel",
+    "categoryId": 18
+  },
+  {
+    "name": "Süßkartoffeln",
+    "categoryId": 7
+  },
+  {
+    "name": "Fenchel",
+    "categoryId": 7
+  },
+  {
+    "name": "Haushaltshandschuhe",
+    "categoryId": 21
+  },
+  {
+    "name": "Rote Linsen",
+    "categoryId": 14
+  },
+  {
+    "name": "Handcreme",
+    "categoryId": 18
+  },
+  {
+    "name": "Ajvar",
+    "categoryId": 15
+  },
+  {
+    "name": "Parmesan",
+    "categoryId": 4
+  },
+  {
+    "name": "Kloßteig",
+    "categoryId": 14
+  },
+  {
+    "name": "Belugalinsen",
+    "categoryId": 14
+  },
+  {
+    "name": "Rotwein",
+    "categoryId": 2
+  },
+  {
+    "name": "Edelstahlreiniger",
+    "categoryId": 19
+  },
+  {
+    "name": "Erdnüsse",
+    "categoryId": 10
+  },
+  {
+    "name": "Hefeflocken",
+    "categoryId": 20
+  },
+  {
+    "name": "Schnittlauch",
+    "categoryId": 20
+  },
+  {
+    "name": "Kidneybohnen",
+    "categoryId": 15
+  },
+  {
+    "name": "Chilischoten",
+    "categoryId": 7
+  },
+  {
+    "name": "Augenbohnen",
+    "categoryId": 14
+  },
+  {
+    "name": "Kokosraspel",
+    "categoryId": 1
+  },
+  {
+    "name": "Garam Masala",
+    "categoryId": 20
+  },
+  {
+    "name": "Fusselrolle",
+    "categoryId": 21
   }
 ]

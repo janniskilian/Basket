@@ -8,21 +8,37 @@ import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
+import de.janniskilian.basket.core.util.extension.extern.withoutSpecialChars
 
 fun modelToRoom(category: Category): RoomCategory =
-	RoomCategory(category.name, category.id.value)
+    RoomCategory(
+        category.name,
+        category.name.withoutSpecialChars(),
+        category.id.value
+    )
 
 fun modelToRoom(article: Article): RoomArticle =
-	RoomArticle(article.name, article.category?.id?.value, article.id.value)
+    RoomArticle(
+        article.name,
+        article.name.withoutSpecialChars(),
+        article.category?.id?.value,
+        article.id.value
+    )
 
 fun modelToRoom(shoppingList: ShoppingList): RoomShoppingList =
-	RoomShoppingList(shoppingList.name, shoppingList.color, shoppingList.id.value)
+    RoomShoppingList(
+        shoppingList.name,
+        shoppingList.name.withoutSpecialChars(),
+        shoppingList.color,
+        shoppingList.id.value
+    )
 
 fun modelToRoom(shoppingListItem: ShoppingListItem): RoomShoppingListItem =
-	RoomShoppingListItem(
-		shoppingListItem.shoppingListId.value,
-		shoppingListItem.article.id.value,
-		shoppingListItem.quantity,
-		shoppingListItem.checked,
-		shoppingListItem.id.value
-	)
+    RoomShoppingListItem(
+        shoppingListItem.shoppingListId.value,
+        shoppingListItem.article.id.value,
+        shoppingListItem.quantity,
+        shoppingListItem.comment,
+        shoppingListItem.checked,
+        shoppingListItem.id.value
+    )

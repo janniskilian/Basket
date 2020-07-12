@@ -6,25 +6,28 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(
-	tableName = "article",
-	foreignKeys = [
-		ForeignKey(
-			entity = RoomCategory::class,
-			parentColumns = ["id"],
-			childColumns = ["categoryId"],
-			onDelete = ForeignKey.SET_NULL
-		)
-	]
+    tableName = "article",
+    foreignKeys = [
+        ForeignKey(
+            entity = RoomCategory::class,
+            parentColumns = ["id"],
+            childColumns = ["categoryId"],
+            onDelete = ForeignKey.SET_NULL
+        )
+    ]
 )
 data class RoomArticle(
 
-	@ColumnInfo(name = "name", index = true)
-	val name: String,
+    @ColumnInfo(name = "name")
+    val name: String,
 
-	@ColumnInfo(name = "categoryId", index = true)
-	val categoryId: Long?,
+    @ColumnInfo(name = "searchName", index = true)
+    val searchName: String,
 
-	@PrimaryKey(autoGenerate = true)
-	@ColumnInfo(name = "id")
-	val id: Long = 0
+    @ColumnInfo(name = "categoryId", index = true)
+    val categoryId: Long?,
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    val id: Long = 0
 )

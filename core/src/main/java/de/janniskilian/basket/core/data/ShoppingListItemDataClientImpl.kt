@@ -21,6 +21,7 @@ class ShoppingListItemDataClientImpl(localDb: LocalDatabase) : ShoppingListItemD
         shoppingListId: ShoppingListId,
         article: Article,
         quantity: String,
+        comment: String,
         checked: Boolean
     ) = withIOContext {
         dao.insert(
@@ -28,6 +29,7 @@ class ShoppingListItemDataClientImpl(localDb: LocalDatabase) : ShoppingListItemD
                 shoppingListId.value,
                 article.id.value,
                 quantity,
+                comment,
                 checked
             )
         )

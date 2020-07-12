@@ -33,18 +33,20 @@ fun createTestArticle(category: Category? = createTestCategory()): Article =
 	)
 
 fun createTestShoppingListItem(
-	shoppingList: ShoppingList,
-	article: Article = createTestArticle(),
-	quantity: Int = Random.nextInt(),
-	checked: Boolean = Random.nextBoolean()
+    shoppingList: ShoppingList,
+    article: Article = createTestArticle(),
+    quantity: Int = Random.nextInt(),
+    comment: String = "",
+    checked: Boolean = Random.nextBoolean()
 ): ShoppingListItem =
 	ShoppingListItem(
-		ShoppingListItemId(Random.nextLong()),
-		shoppingList.id,
-		article,
-		quantity.toString(),
-		checked
-	)
+        ShoppingListItemId(Random.nextLong()),
+        shoppingList.id,
+        article,
+        quantity.toString(),
+        comment,
+        checked
+    )
 
 fun createTestShoppingList(items: List<ShoppingListItem> = emptyList()): ShoppingList =
 	ShoppingList(

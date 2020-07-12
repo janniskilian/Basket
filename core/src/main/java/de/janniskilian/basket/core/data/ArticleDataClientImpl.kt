@@ -12,6 +12,7 @@ import de.janniskilian.basket.core.type.domain.ArticleSuggestion
 import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.type.domain.CategoryId
 import de.janniskilian.basket.core.type.domain.ShoppingListId
+import de.janniskilian.basket.core.util.extension.extern.withoutSpecialChars
 import de.janniskilian.basket.core.util.function.withIOContext
 
 class ArticleDataClientImpl(localDb: LocalDatabase) : ArticleDataClient {
@@ -19,7 +20,7 @@ class ArticleDataClientImpl(localDb: LocalDatabase) : ArticleDataClient {
     private val dao = localDb.articleDao()
 
     override suspend fun create(name: String, category: Category?) = withIOContext {
-        val id = dao.insert(RoomArticle(name, category?.id?.value))
+        val id = dao.insert(RoomArticle(name, name.withoutSpecialChars(), category?.id?.value))
         get(ArticleId(id))
     }
 
@@ -36,7 +37,7 @@ class ArticleDataClientImpl(localDb: LocalDatabase) : ArticleDataClient {
         shoppingListId: ShoppingListId
     ): LiveData<List<ArticleSuggestion>> =
         dao
-            .select("$name%", shoppingListId.value)
+            .select("${name.withoutSpecialChars()}%", shoppingListId.value)
             .map { result ->
                 result.map {
                     ArticleSuggestion(
@@ -50,16 +51,18 @@ class ArticleDataClientImpl(localDb: LocalDatabase) : ArticleDataClient {
                 }
             }
 
-    override fun get(name: String): LiveData<List<Article>> =
-        dao
-            .select("$name%")
+    override fun get(name: String): LiveData<List<Article>> {
+        val withoutSpecialChars = name.withoutSpecialChars()
+        return dao
+            .select("$withoutSpecialChars%")
             .map { results ->
                 results.map { roomToModel(it) }
             }
+    }
 
     override suspend fun getSuspend(name: String) = withIOContext {
         dao
-            .selectSuspend("$name%")
+            .selectSuspend("${name.withoutSpecialChars()}%")
             .map(::roomToModel)
     }
 
@@ -69,7 +72,12 @@ class ArticleDataClientImpl(localDb: LocalDatabase) : ArticleDataClient {
 
     override suspend fun update(articleId: ArticleId, name: String, categoryId: CategoryId?) =
         withIOContext {
-            dao.update(articleId.value, name, categoryId?.value)
+            dao.update(
+                articleId.value,
+                name,
+                name.withoutSpecialChars(),
+                categoryId?.value
+            )
         }
 
     override suspend fun delete(articleId: ArticleId) = withIOContext {
