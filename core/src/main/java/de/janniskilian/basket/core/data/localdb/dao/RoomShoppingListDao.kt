@@ -46,7 +46,8 @@ interface RoomShoppingListDao {
 				article.id AS shoppingListItem_articleId,
 				article.name AS shoppingListItem_articleName,
 				category.id AS shoppingListItem_categoryId,
-				category.name AS shoppingListItem_categoryName
+				category.name AS shoppingListItem_categoryName,
+                category.searchName AS category_searchName
 				FROM shoppingList
 				LEFT OUTER JOIN shoppingListItem ON shoppingList.id = shoppingListItem.shoppingListId
 				LEFT OUTER JOIN article ON shoppingListItem.articleId = article.id

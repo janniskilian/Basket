@@ -16,10 +16,7 @@ class GetSuggestionsUseCase(
 
     private val parser = ListItemInputParser()
 
-    fun run(input: String): LiveData<List<ShoppingListItemSuggestion>> =
-        getSuggestions(input)
-
-    private fun getSuggestions(input: String): LiveData<List<ShoppingListItemSuggestion>> {
+    fun run(input: String): LiveData<List<ShoppingListItemSuggestion>> {
         val parsedInput = parser.parse(input)
         val articles = dataClient.article.get(parsedInput.name, shoppingListId)
         val amount = parsedInput.quantity.orEmpty() +
@@ -62,4 +59,5 @@ class GetSuggestionsUseCase(
             }
         }
     }
+
 }

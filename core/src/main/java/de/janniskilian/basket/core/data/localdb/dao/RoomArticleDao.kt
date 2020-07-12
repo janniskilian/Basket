@@ -20,7 +20,8 @@ interface RoomArticleDao {
 
     @Query(
         """SELECT article.id AS articleId, article.name AS articleName,
-			category.id AS category_id, category.name AS category_name
+			category.id AS category_id, category.name AS category_name,
+            category.searchName AS category_searchName
 			FROM article
 			LEFT OUTER JOIN category
 			ON article.categoryId = category.id
@@ -31,6 +32,7 @@ interface RoomArticleDao {
     @Query(
         """SELECT DISTINCT article.id AS articleId, article.name AS articleName,
 			category.id AS category_id, category.name AS category_name,
+            category.searchName AS category_searchName,
 			listItem.shoppingListId AS shoppingListId
 			FROM article
 			LEFT OUTER JOIN category
