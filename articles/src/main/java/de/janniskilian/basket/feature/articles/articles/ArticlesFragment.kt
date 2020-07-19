@@ -26,9 +26,12 @@ class ArticlesFragment : BaseFragment() {
 
     override val menuRes get() = R.menu.search
 
+    override val titleTextRes get() = R.string.articles_title
+
     override val fabTextRes get() = R.string.fab_create_article
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setup.run()
     }
 

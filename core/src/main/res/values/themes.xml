@@ -30,7 +30,7 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
-    <style name="ThemeOverlay.Basket.DayNight" parent="ThemeOverlay.MaterialComponents.Light" />
+    <style name="ThemeOverlay.Basket.DayNight" parent="ThemeOverlay.MaterialComponents.Light"/>
 
     <style name="Theme.Basket.BottomSheetDialog" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="colorPrimary">@color/primary</item>

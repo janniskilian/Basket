@@ -10,30 +10,30 @@ import timber.log.Timber
 
 class BasketApp : Application() {
 
-	val appModule by lazy {
-		val androidModule = AndroidModule(this)
-		val localDatabase = LocalDatabase.create(androidModule.applicationContext)
+    val appModule by lazy {
+        val androidModule = AndroidModule(this)
+        val localDatabase = LocalDatabase.create(androidModule.applicationContext)
 
-		AppModule(
-			androidModule,
-			DataModule(localDatabase)
-		)
-	}
+        AppModule(
+            androidModule,
+            DataModule(localDatabase)
+        )
+    }
 
-	override fun onCreate() {
-		super.onCreate()
+    override fun onCreate() {
+        super.onCreate()
 
-			setupLogging()
-			setupDayNightMode()
-	}
+        setupLogging()
+        setupDayNightMode()
+    }
 
-	private fun setupLogging() {
-		if (BuildConfig.DEBUG) {
-			Timber.plant(Timber.DebugTree())
-		}
-	}
+    private fun setupLogging() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+    }
 
-	private fun setupDayNightMode() {
+    private fun setupDayNightMode() {
         val sharedPrefs = appModule.androidModule.sharedPrefs
         val autoDayNightMode = sharedPrefs.getBoolean(
             getString(R.string.pref_key_system_day_night_mode),
@@ -45,5 +45,5 @@ class BasketApp : Application() {
         )
 
         setDayNightMode(autoDayNightMode, dayNightMode)
-	}
+    }
 }

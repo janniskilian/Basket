@@ -8,6 +8,11 @@
     <string name="action_menu_search">Search</string>
 
     <string name="list_item_article_name_hint">Name</string>
+    <string name="list_item_article_quantity_hint">Quantity</string>
+    <string name="list_item_comment_hint">Comment</string>
+    <string name="save_list_item_button">Save</string>
+
+    <string name="article_name_error">The article needs a name</string>
 
     <string name="up_button_desc">Back button</string>
     <string name="speech_input_button_desc">Speech input</string>

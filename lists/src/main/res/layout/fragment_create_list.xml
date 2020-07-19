@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -19,7 +19,7 @@
 
             <include
                 android:id="@+id/appBarLayout"
-                layout="@layout/headline_app_bar"/>
+                layout="@layout/app_bar_no_scroll"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameLayout"
@@ -65,5 +65,5 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

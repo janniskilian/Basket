@@ -1,6 +1,5 @@
 package de.janniskilian.basket.feature.categories.category
 
-import android.widget.TextView
 import androidx.core.view.isVisible
 import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
 import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
@@ -18,25 +17,11 @@ class CategoryFragmentSetup(
     private val categoryId = args.categoryId.minusOneAsNull()
 
     fun run() {
-        setupHeadline()
         setupButtons()
         setClickListeners()
         setupNameEditText()
 
         viewModelObserver.observe()
-    }
-
-    private fun setupHeadline() {
-        val headlineTextRes = if (categoryId == null) {
-            R.string.create_category_headline
-        } else {
-            R.string.edit_category_headline
-        }
-
-        fragment
-            .requireView()
-            .findViewById<TextView>(R.id.headline)
-            .setText(headlineTextRes)
     }
 
     private fun setupButtons() {

@@ -15,9 +15,7 @@ class CategoriesViewModel(
 ) : ViewModel(), SearchBarViewModel by DefaultSearchBarViewModel() {
 
     val categories: LiveData<List<Category>> =
-        searchBarInput.switchMap { input ->
-            dataClient.category.get(input).map { categories ->
-                categories.sortedByName()
-            }
-        }
+        searchBarInput
+            .switchMap { dataClient.category.get(it) }
+            .map { it.sortedByName() }
 }

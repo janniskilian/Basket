@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 
 interface SearchBarViewModel {
 
-	val searchBarVisible: LiveData<Boolean>
+    val searchBarVisible: LiveData<Boolean>
 
-	val searchBarInput: LiveData<String>
+    val searchBarInput: LiveData<String>
 
-	fun setSearchBarVisible(visible: Boolean)
+    fun setSearchBarVisible(visible: Boolean)
 
-	fun setSearchBarInput(input: String)
+    fun setSearchBarInput(input: String)
 }

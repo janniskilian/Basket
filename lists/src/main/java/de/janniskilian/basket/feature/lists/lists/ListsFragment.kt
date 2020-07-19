@@ -31,9 +31,13 @@ class ListsFragment : BaseFragment() {
 
     override val layoutRes get() = R.layout.fragment_lists
 
+    override val titleTextRes get() = R.string.shopping_lists_title
+
     override val fabTextRes get() = R.string.fab_create_shopping_list
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         setupRecyclerView()
         setClickListeners()
         viewModel.shoppingLists.observe(viewLifecycleOwner, ::shoppingListsObserver)
@@ -78,7 +82,7 @@ class ListsFragment : BaseFragment() {
         }
 
         emptyGroup.isVisible = shoppingLists.isEmpty()
-        toolbar.setScrollable(shoppingLists.isEmpty())
+        toolbar?.setScrollable(shoppingLists.isEmpty())
     }
 
     private fun showListPopupMenu(position: Int) {

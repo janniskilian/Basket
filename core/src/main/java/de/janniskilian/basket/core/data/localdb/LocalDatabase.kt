@@ -15,32 +15,32 @@ import de.janniskilian.basket.core.data.localdb.entity.RoomShoppingList
 import de.janniskilian.basket.core.data.localdb.entity.RoomShoppingListItem
 
 @Database(
-	entities = [
-		RoomArticle::class,
-		RoomCategory::class,
-		RoomShoppingList::class,
-		RoomShoppingListItem::class
-	],
-	version = DB_VERSION
+    entities = [
+        RoomArticle::class,
+        RoomCategory::class,
+        RoomShoppingList::class,
+        RoomShoppingListItem::class
+    ],
+    version = DB_VERSION
 )
 abstract class LocalDatabase : RoomDatabase() {
 
-	abstract fun articleDao(): RoomArticleDao
+    abstract fun articleDao(): RoomArticleDao
 
-	abstract fun categoryDao(): RoomCategoryDao
+    abstract fun categoryDao(): RoomCategoryDao
 
-	abstract fun shoppingListDao(): RoomShoppingListDao
+    abstract fun shoppingListDao(): RoomShoppingListDao
 
-	abstract fun shoppingListItemDao(): RoomShoppingListItemDao
+    abstract fun shoppingListItemDao(): RoomShoppingListItemDao
 
-	companion object {
+    companion object {
 
-		const val DB_VERSION = 1
-		private const val DB_NAME = "APP_DATABASE"
+        const val DB_VERSION = 1
+        private const val DB_NAME = "APP_DATABASE"
 
-		fun create(context: Context): LocalDatabase =
-			Room
-				.databaseBuilder(context, LocalDatabase::class.java, DB_NAME)
-				.build()
-	}
+        fun create(context: Context): LocalDatabase =
+            Room
+                .databaseBuilder(context, LocalDatabase::class.java, DB_NAME)
+                .build()
+    }
 }

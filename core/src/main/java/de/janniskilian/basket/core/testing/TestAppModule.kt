@@ -8,14 +8,14 @@ import de.janniskilian.basket.core.module.AppModule
 import de.janniskilian.basket.core.module.DataModule
 
 fun createTestAppModule(application: Application): AppModule {
-	val androidModule = AndroidModule(application)
-	val localDatabase = Room
-		.inMemoryDatabaseBuilder(application, LocalDatabase::class.java)
-		.allowMainThreadQueries()
-		.build()
+    val androidModule = AndroidModule(application)
+    val localDatabase = Room
+        .inMemoryDatabaseBuilder(application, LocalDatabase::class.java)
+        .allowMainThreadQueries()
+        .build()
 
-	return AppModule(
-		androidModule,
-		DataModule(localDatabase)
-	)
+    return AppModule(
+        androidModule,
+        DataModule(localDatabase)
+    )
 }

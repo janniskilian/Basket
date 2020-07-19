@@ -8,8 +8,8 @@ import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.fragment_create_list.*
 
 class CreateListViewModelObserver(
-    viewModel: CreateListViewModel,
-    private val fragment: CreateListFragment
+    private val fragment: CreateListFragment,
+    viewModel: CreateListViewModel
 ) : ViewModelObserver<CreateListViewModel>(viewModel) {
 
     override fun observe() {

@@ -17,30 +17,30 @@ fun roomToModel(category: RoomCategory): Category =
     Category(CategoryId(category.id), category.name)
 
 fun roomToModel(articleResult: RoomArticleResult): Article {
-	val category = articleResult.category?.let { roomToModel(it) }
+    val category = articleResult.category?.let { roomToModel(it) }
 
-	return Article(
-		ArticleId(articleResult.articleId),
-		articleResult.articleName,
-		category
-	)
+    return Article(
+        ArticleId(articleResult.articleId),
+        articleResult.articleName,
+        category
+    )
 }
 
 fun roomToModel(result: List<RoomShoppingListResult>): ShoppingList =
-	ShoppingList(
-		ShoppingListId(result.first().shoppingListId),
-		result.first().shoppingListName,
-		result.first().color,
-		result.mapNotNull { resultItem ->
-			resultItem.shoppingListItem?.let {
-				val category = if (it.categoryId == null
-					|| it.categoryName == null
-				) {
-					null
-				} else {
-					Category(CategoryId(it.categoryId), it.categoryName)
-				}
-				ShoppingListItem(
+    ShoppingList(
+        ShoppingListId(result.first().shoppingListId),
+        result.first().shoppingListName,
+        result.first().color,
+        result.mapNotNull { resultItem ->
+            resultItem.shoppingListItem?.let {
+                val category = if (it.categoryId == null
+                    || it.categoryName == null
+                ) {
+                    null
+                } else {
+                    Category(CategoryId(it.categoryId), it.categoryName)
+                }
+                ShoppingListItem(
                     ShoppingListItemId(it.id),
                     ShoppingListId(result.first().shoppingListId),
                     Article(
@@ -52,23 +52,23 @@ fun roomToModel(result: List<RoomShoppingListResult>): ShoppingList =
                     it.comment,
                     it.checked
                 )
-			}
-		}
-	)
+            }
+        }
+    )
 
 fun roomToModel(shoppingListItem: RoomShoppingListItemResult): ShoppingListItem {
-	val category = if (shoppingListItem.categoryId == null
-		|| shoppingListItem.categoryName == null
-	) {
-		null
-	} else {
-		Category(
-			CategoryId(shoppingListItem.categoryId),
-			shoppingListItem.categoryName
-		)
-	}
+    val category = if (shoppingListItem.categoryId == null
+        || shoppingListItem.categoryName == null
+    ) {
+        null
+    } else {
+        Category(
+            CategoryId(shoppingListItem.categoryId),
+            shoppingListItem.categoryName
+        )
+    }
 
-	return ShoppingListItem(
+    return ShoppingListItem(
         ShoppingListItemId(shoppingListItem.id),
         ShoppingListId(shoppingListItem.shoppingListId),
         Article(

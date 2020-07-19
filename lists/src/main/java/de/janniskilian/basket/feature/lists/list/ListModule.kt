@@ -25,6 +25,6 @@ class ListModule(
     }
 
     private val listViewModelObserver by lazy {
-        ListViewModelObserver(listViewModel, fragment)
+        ListViewModelObserver(fragment, listViewModel)
     }
 }

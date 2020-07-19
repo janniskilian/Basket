@@ -58,6 +58,8 @@ class OnboardingFragment : BaseFragment() {
     override val animateAppBarColor get() = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         setClickListeners()
 
         locales.forEach { locale ->

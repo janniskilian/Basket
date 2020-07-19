@@ -9,10 +9,17 @@ class ListItemModule(
     args: ListItemFragmentArgs
 ) {
 
-    val listItemViewModel by lazy {
+    val viewModel by lazy {
         createViewModel(fragment) {
             ListItemViewModel(args, appModule.dataModule.dataClient)
         }
     }
 
+    val setup by lazy {
+        ListItemFragmentSetup(fragment, viewModel, viewModelObserver)
+    }
+
+    private val viewModelObserver by lazy {
+        ListItemViewModelObserver(fragment, viewModel)
+    }
 }

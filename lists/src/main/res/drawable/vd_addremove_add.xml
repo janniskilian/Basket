@@ -6,14 +6,12 @@
     android:viewportHeight="24">
 
     <group
-        android:name="addCheckedGroup"
+        android:name="addRemoveGroup"
         android:pivotX="12"
         android:pivotY="12">
         <path
-            android:name="addPath"
-            android:pathData="@string/avd_path_add"
-            android:strokeWidth="2"
-            android:strokeColor="@color/black"
-            android:strokeLineCap="square"/>
+            android:name="addRemovePath"
+            android:fillColor="@color/green"
+            android:pathData="@string/avd_path_add"/>
     </group>
 </vector>

@@ -6,21 +6,21 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(
-	tableName = "shoppingListItem",
-	foreignKeys = [
-		ForeignKey(
-			entity = RoomShoppingList::class,
-			parentColumns = ["id"],
-			childColumns = ["shoppingListId"],
-			onDelete = ForeignKey.CASCADE
-		),
-		ForeignKey(
-			entity = RoomArticle::class,
-			parentColumns = ["id"],
-			childColumns = ["articleId"],
-			onDelete = ForeignKey.CASCADE
-		)
-	]
+    tableName = "shoppingListItem",
+    foreignKeys = [
+        ForeignKey(
+            entity = RoomShoppingList::class,
+            parentColumns = ["id"],
+            childColumns = ["shoppingListId"],
+            onDelete = ForeignKey.CASCADE
+        ),
+        ForeignKey(
+            entity = RoomArticle::class,
+            parentColumns = ["id"],
+            childColumns = ["articleId"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
 )
 class RoomShoppingListItem(
 

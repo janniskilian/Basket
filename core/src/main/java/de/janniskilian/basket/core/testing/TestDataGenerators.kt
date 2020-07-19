@@ -27,10 +27,10 @@ fun createTestCategory(): Category =
 
 fun createTestArticle(category: Category? = createTestCategory()): Article =
     Article(
-		ArticleId(Random.nextLong()),
-		Random.nextString(),
-		category
-	)
+        ArticleId(Random.nextLong()),
+        Random.nextString(),
+        category
+    )
 
 fun createTestShoppingListItem(
     shoppingList: ShoppingList,
@@ -39,7 +39,7 @@ fun createTestShoppingListItem(
     comment: String = "",
     checked: Boolean = Random.nextBoolean()
 ): ShoppingListItem =
-	ShoppingListItem(
+    ShoppingListItem(
         ShoppingListItemId(Random.nextLong()),
         shoppingList.id,
         article,
@@ -49,18 +49,18 @@ fun createTestShoppingListItem(
     )
 
 fun createTestShoppingList(items: List<ShoppingListItem> = emptyList()): ShoppingList =
-	ShoppingList(
-		ShoppingListId(Random.nextLong()),
-		Random.nextString(),
-		Random.nextInt(),
-		items
-	)
+    ShoppingList(
+        ShoppingListId(Random.nextLong()),
+        Random.nextString(),
+        Random.nextInt(),
+        items
+    )
 
 fun createTestShoppingList(itemCount: Int): ShoppingList =
-	createTestShoppingList().apply {
-		copy(
-			items = List(itemCount) {
-				createTestShoppingListItem(this)
-			}
-		)
-	}
+    createTestShoppingList().apply {
+        copy(
+            items = List(itemCount) {
+                createTestShoppingListItem(this)
+            }
+        )
+    }

@@ -37,6 +37,7 @@ class AddListItemFragment : BaseFragment() {
     override val showAppBar get() = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setup.run()
     }
 

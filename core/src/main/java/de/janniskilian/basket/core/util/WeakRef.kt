@@ -10,4 +10,4 @@ class WeakRef<T>(reference: T) {
 }
 
 fun <T : Any> T.weakRef(): WeakRef<T> =
-	WeakRef(this)
+    WeakRef(this)

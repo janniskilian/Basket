@@ -14,8 +14,8 @@
         <item quantity="other">%d checked</item>
     </plurals>
 
-    <string name="create_list_headline">Create List</string>
-    <string name="edit_list_headline">Edit List</string>
+    <string name="create_list_title">Create List</string>
+    <string name="edit_list_title">Edit List</string>
 
     <string name="list_name_hint">List name</string>
     <string name="create_list_button">Create</string>

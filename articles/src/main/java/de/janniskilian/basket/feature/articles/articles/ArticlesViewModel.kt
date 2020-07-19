@@ -18,11 +18,9 @@ class ArticlesViewModel(dataClient: DataClient) : ViewModel(), SearchBarViewMode
     private val _searchBarInput = DefaultMutableLiveData("")
 
     val articles: LiveData<List<Article>> =
-        searchBarInput.switchMap { input ->
-            dataClient.article.get(input).map { articles ->
-                articles.sortedByName()
-            }
-        }
+        searchBarInput
+            .switchMap { dataClient.article.get(it) }
+            .map { it.sortedByName() }
 
     override val searchBarVisible: LiveData<Boolean>
         get() = _searchBarVisible

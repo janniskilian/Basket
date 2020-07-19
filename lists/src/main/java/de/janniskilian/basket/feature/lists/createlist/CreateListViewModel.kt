@@ -13,75 +13,75 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CreateListViewModel(
-	private val shoppingListId: ShoppingListId?,
-	val colors: List<Int>,
-	private val useCases: CreateListFragmentUseCases,
-	dataClient: DataClient
+    private val shoppingListId: ShoppingListId?,
+    val colors: List<Int>,
+    private val useCases: CreateListFragmentUseCases,
+    dataClient: DataClient
 ) : ViewModel() {
 
-	private val _name = MutableLiveData<String>()
+    private val _name = MutableLiveData<String>()
 
-	private val _selectedColor =
-		DefaultMutableLiveData(colors.first())
+    private val _selectedColor =
+        DefaultMutableLiveData(colors.first())
 
-	private val _error = createMutableLiveData(false)
+    private val _error = createMutableLiveData(false)
 
-	private val _startList = SingleLiveEvent<ShoppingListId>()
+    private val _startList = SingleLiveEvent<ShoppingListId>()
 
-	private val _dismiss = SingleLiveEvent<Unit>()
+    private val _dismiss = SingleLiveEvent<Unit>()
 
-	init {
-		if (shoppingListId != null) {
-			viewModelScope.launch(Dispatchers.Main) {
-				dataClient.shoppingList.get(shoppingListId)?.let {
-					setName(it.name)
-					setSelectedColor(it.color)
-				}
-			}
-		}
-	}
+    init {
+        if (shoppingListId != null) {
+            viewModelScope.launch(Dispatchers.Main) {
+                dataClient.shoppingList.get(shoppingListId)?.let {
+                    setName(it.name)
+                    setSelectedColor(it.color)
+                }
+            }
+        }
+    }
 
-	val name: LiveData<String>
-		get() = _name
+    val name: LiveData<String>
+        get() = _name
 
-	val selectedColor: LiveData<Int>
-		get() = _selectedColor
+    val selectedColor: LiveData<Int>
+        get() = _selectedColor
 
-	val error: LiveData<Boolean>
-		get() = _error
+    val error: LiveData<Boolean>
+        get() = _error
 
-	val startList: LiveData<ShoppingListId>
-		get() = _startList
+    val startList: LiveData<ShoppingListId>
+        get() = _startList
 
-	val dismiss: LiveData<Unit>
-		get() = _dismiss
+    val dismiss: LiveData<Unit>
+        get() = _dismiss
 
-	fun setName(name: String) {
-		_name.value = name
-		_error.value = false
-	}
+    fun setName(name: String) {
+        _name.value = name
+        _error.value = false
+    }
 
-	fun setSelectedColor(color: Int) {
-		_selectedColor.value = color
-	}
+    fun setSelectedColor(color: Int) {
+        _selectedColor.value = color
+    }
 
-	fun submitButtonClicked() {
-		val name = name.value
-		when {
-			name.isNullOrBlank() -> _error.value = true
+    fun submitButtonClicked() {
+        val name = name.value
+        when {
+            name.isNullOrBlank() -> _error.value = true
 
-			shoppingListId == null ->
+            shoppingListId == null ->
                 viewModelScope.launch {
-					val id = useCases.createList(name, _selectedColor.value)
+                    val id = useCases.createList(name, _selectedColor.value)
                     _startList.postValue(id)
-				}
+                }
 
-			else -> {
+            else -> {
                 viewModelScope.launch {
                     useCases.updateList(shoppingListId, name, _selectedColor.value)
                     _dismiss.postValue(Unit)
                 }
-			}
-		}
-	}
+            }
+        }
+    }
 }

@@ -11,45 +11,56 @@ import de.janniskilian.basket.core.data.localdb.result.RoomShoppingListItemResul
 @Dao
 interface RoomShoppingListItemDao {
 
-	@Insert
-	fun insert(shoppingListItem: RoomShoppingListItem)
+    @Insert
+    fun insert(shoppingListItem: RoomShoppingListItem)
 
-	@Insert
-	fun insert(shoppingListItems: List<RoomShoppingListItem>)
+    @Insert
+    fun insert(shoppingListItems: List<RoomShoppingListItem>)
 
-	@Query(
-		"""SELECT shoppingListItem.id AS id, shoppingListItem.shoppingListId AS shoppingListId,
-			shoppingListItem.quantity AS quantity, shoppingListItem.comment AS comment, 
-			shoppingListItem.checked AS checked,
-			article.id AS articleId, article.name AS articleName, article.categoryId AS categoryId,
-			category.name AS categoryName
-			FROM shoppingListItem
-			LEFT OUTER JOIN article
-			ON shoppingListItem.articleId = article.id
-			LEFT OUTER JOIN category
-			ON article.categoryId = category.id
-			WHERE shoppingListItem.id = :id"""
-	)
-	fun select(id: Long): LiveData<RoomShoppingListItemResult>
+    @Query(SELECT_QUERY)
+    fun select(id: Long): RoomShoppingListItemResult?
 
-	@Update
-	fun update(shoppingListItem: RoomShoppingListItem)
+    @Query(SELECT_QUERY)
+    fun selectLiveData(id: Long): LiveData<RoomShoppingListItemResult>
 
-	@Query("UPDATE shoppingListItem SET checked = :checked WHERE shoppingListId = :shoppingListId")
-	fun setAllCheckedForShoppingList(
-		shoppingListId: Long,
-		checked: Boolean
-	)
+    @Update
+    fun update(shoppingListItem: RoomShoppingListItem)
 
-	@Query(
-		"""DELETE FROM shoppingListItem
+    @Query("UPDATE shoppingListItem SET checked = :checked WHERE shoppingListId = :shoppingListId")
+    fun setAllCheckedForShoppingList(
+        shoppingListId: Long,
+        checked: Boolean
+    )
+
+    @Query(
+        """DELETE FROM shoppingListItem
 			WHERE shoppingListId = :shoppingListId AND articleId = :articleId"""
-	)
-	fun delete(shoppingListId: Long, articleId: Long)
+    )
+    fun delete(shoppingListId: Long, articleId: Long)
 
-	@Query("DELETE FROM shoppingListItem WHERE shoppingListId = :shoppingListId")
-	fun deleteAllForShoppingList(shoppingListId: Long)
+    @Query("DELETE FROM shoppingListItem WHERE shoppingListId = :shoppingListId")
+    fun deleteAllForShoppingList(shoppingListId: Long)
 
-	@Query("DELETE FROM shoppingListItem WHERE shoppingListId = :shoppingListId AND checked = 1")
-	fun deleteAllCheckedForShoppingList(shoppingListId: Long)
+    @Query("DELETE FROM shoppingListItem WHERE shoppingListId = :shoppingListId AND checked = 1")
+    fun deleteAllCheckedForShoppingList(shoppingListId: Long)
+
+    companion object {
+
+        private const val SELECT_QUERY =
+            """SELECT shoppingListItem.id AS id,
+                shoppingListItem.shoppingListId AS shoppingListId,
+                shoppingListItem.quantity AS quantity,
+                shoppingListItem.comment AS comment, 
+                shoppingListItem.checked AS checked,
+                article.id AS articleId,
+                article.name AS articleName,
+                article.categoryId AS categoryId,
+                category.name AS categoryName
+                FROM shoppingListItem
+                LEFT OUTER JOIN article
+                ON shoppingListItem.articleId = article.id
+                LEFT OUTER JOIN category
+                ON article.categoryId = category.id
+                WHERE shoppingListItem.id = :id"""
+    }
 }

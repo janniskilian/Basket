@@ -70,6 +70,8 @@ class ShoppingListAdapter(private val displayCompact: Boolean) :
             name.text = shoppingListItem.article.name
             quantity.isVisible = shoppingListItem.quantity.isNotBlank()
             quantity.text = shoppingListItem.quantity
+            comment.isVisible = shoppingListItem.comment.isNotBlank()
+            comment.text = shoppingListItem.comment
         }
     }
 

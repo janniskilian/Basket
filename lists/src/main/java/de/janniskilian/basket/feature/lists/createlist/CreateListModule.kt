@@ -34,7 +34,7 @@ class CreateListModule(
     }
 
     private val createListViewModelObserver by lazy {
-        CreateListViewModelObserver(viewModel, fragment)
+        CreateListViewModelObserver(fragment, viewModel)
     }
 
     private val createListFragmentUseCases by lazy {

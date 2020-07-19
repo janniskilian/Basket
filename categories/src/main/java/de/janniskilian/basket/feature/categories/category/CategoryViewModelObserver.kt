@@ -7,8 +7,8 @@ import de.janniskilian.basket.feature.categories.R
 import kotlinx.android.synthetic.main.fragment_category.*
 
 class CategoryViewModelObserver(
-    viewModel: CategoryViewModel,
-    private val fragment: CategoryFragment
+    private val fragment: CategoryFragment,
+    viewModel: CategoryViewModel
 ) : ViewModelObserver<CategoryViewModel>(viewModel) {
 
     override fun observe() {

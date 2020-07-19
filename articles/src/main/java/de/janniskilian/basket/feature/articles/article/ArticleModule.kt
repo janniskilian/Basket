@@ -31,6 +31,6 @@ class ArticleModule(
     }
 
     private val articleViewModelObserver by lazy {
-        ArticleViewModelObserver(articleViewModel, fragment)
+        ArticleViewModelObserver(fragment, articleViewModel)
     }
 }

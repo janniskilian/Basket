@@ -27,9 +27,12 @@ class CategoriesFragment : BaseFragment() {
 
     override val menuRes get() = R.menu.search
 
+    override val titleTextRes get() = R.string.categories_title
+
     override val fabTextRes get() = R.string.fab_create_category
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setup.run()
     }
 

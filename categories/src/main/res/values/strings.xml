@@ -1,8 +1,8 @@
 <resources>
 
     <string name="categories_title">Categories</string>
-    <string name="create_category_headline">Create Category</string>
-    <string name="edit_category_headline">Edit Category</string>
+    <string name="create_category_title">Create Category</string>
+    <string name="edit_category_title">Edit Category</string>
 
     <string name="category_name_hint">Category name</string>
     <string name="create_category_button">Create</string>

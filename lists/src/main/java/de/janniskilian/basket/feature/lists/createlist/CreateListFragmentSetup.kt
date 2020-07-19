@@ -1,6 +1,5 @@
 package de.janniskilian.basket.feature.lists.createlist
 
-import android.widget.TextView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,26 +21,12 @@ class CreateListFragmentSetup(
     private val shoppingListId = args.shoppingListId.minusOneAsNull()
 
     fun run() {
-        setupHeadline()
         setupNameEditText()
         setupButton()
         setupRecyclerView()
         setClickListeners()
 
         viewModelObserver.observe()
-    }
-
-    private fun setupHeadline() {
-        val headlineTextRes = if (shoppingListId == null) {
-            R.string.create_list_headline
-        } else {
-            R.string.edit_list_headline
-        }
-
-        fragment
-            .requireView()
-            .findViewById<TextView>(R.id.headline)
-            .setText(headlineTextRes)
     }
 
     private fun setupNameEditText() {
@@ -89,7 +74,8 @@ class CreateListFragmentSetup(
         with(fragment) {
             createButton.setOnClickListener { viewModel.submitButtonClicked() }
             nameEditText.onDone(viewModel::submitButtonClicked)
-            (recyclerView.adapter as? ColorsAdapter)?.itemClickListener = viewModel::setSelectedColor
+            (recyclerView.adapter as? ColorsAdapter)?.itemClickListener =
+                viewModel::setSelectedColor
         }
     }
 }

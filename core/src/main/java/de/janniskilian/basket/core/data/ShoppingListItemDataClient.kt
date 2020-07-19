@@ -9,7 +9,7 @@ import de.janniskilian.basket.core.type.domain.ShoppingListItemId
 
 interface ShoppingListItemDataClient {
 
-	suspend fun create(
+    suspend fun create(
         shoppingListId: ShoppingListId,
         article: Article,
         quantity: String = "",
@@ -17,17 +17,19 @@ interface ShoppingListItemDataClient {
         checked: Boolean = false
     )
 
-	suspend fun create(shoppingListItems: List<ShoppingListItem>)
+    suspend fun create(shoppingListItems: List<ShoppingListItem>)
 
-	fun get(shoppingListItemId: ShoppingListItemId): LiveData<ShoppingListItem>
+    suspend fun get(shoppingListItemId: ShoppingListItemId): ShoppingListItem?
 
-	suspend fun update(shoppingListItem: ShoppingListItem)
+    fun getLiveData(shoppingListItemId: ShoppingListItemId): LiveData<ShoppingListItem>
 
-	suspend fun setAllCheckedForShoppingList(shoppingListId: ShoppingListId, checked: Boolean)
+    suspend fun update(shoppingListItem: ShoppingListItem)
 
-	suspend fun delete(shoppingListId: ShoppingListId, articleId: ArticleId)
+    suspend fun setAllCheckedForShoppingList(shoppingListId: ShoppingListId, checked: Boolean)
 
-	suspend fun deleteAllForShoppingList(shoppingListId: ShoppingListId)
+    suspend fun delete(shoppingListId: ShoppingListId, articleId: ArticleId)
 
-	suspend fun deleteAllCheckedForShoppingList(shoppingListId: ShoppingListId)
+    suspend fun deleteAllForShoppingList(shoppingListId: ShoppingListId)
+
+    suspend fun deleteAllCheckedForShoppingList(shoppingListId: ShoppingListId)
 }

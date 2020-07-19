@@ -39,9 +39,13 @@ class ShoppingListItemDataClientImpl(localDb: LocalDatabase) : ShoppingListItemD
         dao.insert(shoppingListItems.map { modelToRoom(it) })
     }
 
-    override fun get(shoppingListItemId: ShoppingListItemId): LiveData<ShoppingListItem> =
+    override suspend fun get(shoppingListItemId: ShoppingListItemId) = withIOContext {
+        dao.select(shoppingListItemId.value)?.let(::roomToModel)
+    }
+
+    override fun getLiveData(shoppingListItemId: ShoppingListItemId): LiveData<ShoppingListItem> =
         dao
-            .select(shoppingListItemId.value)
+            .selectLiveData(shoppingListItemId.value)
             .map { roomToModel(it) }
 
     override suspend fun update(shoppingListItem: ShoppingListItem) = withIOContext {

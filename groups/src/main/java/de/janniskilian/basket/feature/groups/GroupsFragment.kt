@@ -7,5 +7,7 @@ class GroupsFragment : BaseFragment() {
 
     override val layoutRes get() = R.layout.fragment_groups
 
+    override val titleTextRes get() = R.string.groups_title
+
     override val fabTextRes get() = R.string.fab_create_group
 }

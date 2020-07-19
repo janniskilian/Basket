@@ -14,29 +14,29 @@ import de.janniskilian.basket.core.data.localdb.LocalDatabase
 
 class DataModule(private val localDatabase: LocalDatabase) {
 
-	val dataClient: DataClient by lazy {
-		DataClientImpl(
-			articleDataClient,
-			categoryDataClient,
-			shoppingListDataClient,
-			shoppingListItemDataClient,
-			localDatabase
-		)
-	}
+    val dataClient: DataClient by lazy {
+        DataClientImpl(
+            articleDataClient,
+            categoryDataClient,
+            shoppingListDataClient,
+            shoppingListItemDataClient,
+            localDatabase
+        )
+    }
 
-	private val articleDataClient: ArticleDataClient by lazy {
-		ArticleDataClientImpl(localDatabase)
-	}
+    private val articleDataClient: ArticleDataClient by lazy {
+        ArticleDataClientImpl(localDatabase)
+    }
 
-	private val categoryDataClient: CategoryDataClient by lazy {
-		CategoryDataClientImpl(localDatabase)
-	}
+    private val categoryDataClient: CategoryDataClient by lazy {
+        CategoryDataClientImpl(localDatabase)
+    }
 
-	private val shoppingListDataClient: ShoppingListDataClient by lazy {
-		ShoppingListDataClientImpl(localDatabase)
-	}
+    private val shoppingListDataClient: ShoppingListDataClient by lazy {
+        ShoppingListDataClientImpl(localDatabase)
+    }
 
-	private val shoppingListItemDataClient: ShoppingListItemDataClient by lazy {
-		ShoppingListItemDataClientImpl(localDatabase)
-	}
+    private val shoppingListItemDataClient: ShoppingListItemDataClient by lazy {
+        ShoppingListItemDataClientImpl(localDatabase)
+    }
 }

@@ -31,6 +31,6 @@ class CategoryModule(
     }
 
     private val categoryViewModelObserver by lazy {
-        CategoryViewModelObserver(categoryViewModel, fragment)
+        CategoryViewModelObserver(fragment, categoryViewModel)
     }
 }

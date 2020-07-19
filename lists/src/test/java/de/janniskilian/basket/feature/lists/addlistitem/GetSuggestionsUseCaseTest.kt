@@ -5,7 +5,12 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import de.janniskilian.basket.core.data.ArticleDataClient
 import de.janniskilian.basket.core.data.DataClient
-import de.janniskilian.basket.core.type.domain.*
+import de.janniskilian.basket.core.type.domain.Article
+import de.janniskilian.basket.core.type.domain.ArticleId
+import de.janniskilian.basket.core.type.domain.ArticleSuggestion
+import de.janniskilian.basket.core.type.domain.Category
+import de.janniskilian.basket.core.type.domain.CategoryId
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.extension.extern.nextValue
 import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
 import kotlinx.coroutines.runBlocking

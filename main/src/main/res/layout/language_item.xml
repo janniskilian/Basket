@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/two"
-        android:clickable="false" />
+        android:clickable="false"/>
 
     <TextView
         android:id="@+id/name"
@@ -22,5 +22,5 @@
         android:layout_marginStart="@dimen/one"
         android:layout_marginEnd="@dimen/two"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        tools:text="English" />
+        tools:text="English"/>
 </LinearLayout>

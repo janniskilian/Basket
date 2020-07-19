@@ -6,17 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout style="@style/Widget.Basket.AppBarLayout">
-
-        <androidx.appcompat.widget.Toolbar
-            style="@style/Widget.Basket.Toolbar"
-            android:id="@+id/toolbar">
-
-            <TextView
-                android:id="@+id/headline"
-                style="@style/Widget.Basket.ToolbarTitle"/>
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+    <include layout="@layout/app_bar"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -11,7 +11,7 @@
         android:pivotY="12">
         <path
             android:name="menuPath"
-            android:pathData="@string/avd_path_menu"
-            android:fillColor="@color/white"/>
+            android:fillColor="@color/white"
+            android:pathData="@string/avd_path_menu"/>
     </group>
 </vector>

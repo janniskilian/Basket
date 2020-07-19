@@ -9,7 +9,7 @@
         android:id="@+id/onboardingFragment"
         android:name="de.janniskilian.basket.feature.main.OnboardingFragment"
         android:label="Lists"
-        tools:layout="@layout/fragment_onboarding" />
+        tools:layout="@layout/fragment_onboarding"/>
 
     <dialog
         android:id="@+id/bottomNavigationDrawerFragment"
@@ -20,7 +20,7 @@
         <argument
             android:name="currentDestinationId"
             android:defaultValue="-1"
-            app:argType="integer" />
+            app:argType="integer"/>
     </dialog>
 
     <fragment
@@ -32,7 +32,7 @@
         <argument
             android:name="shoppingListId"
             android:defaultValue="-1L"
-            app:argType="long" />
+            app:argType="long"/>
     </fragment>
 
     <fragment
@@ -47,7 +47,7 @@
             app:enterAnim="@anim/nav_slide_enter"
             app:exitAnim="@anim/nav_slide_exit"
             app:popEnterAnim="@anim/nav_slide_pop_enter"
-            app:popExitAnim="@anim/nav_slide_pop_exit" />
+            app:popExitAnim="@anim/nav_slide_pop_exit"/>
 
         <action
             android:id="@+id/action_listsFragment_to_listFragment"
@@ -55,7 +55,7 @@
             app:enterAnim="@anim/nav_slide_enter"
             app:exitAnim="@anim/nav_slide_exit"
             app:popEnterAnim="@anim/nav_slide_pop_enter"
-            app:popExitAnim="@anim/nav_slide_pop_exit" />
+            app:popExitAnim="@anim/nav_slide_pop_exit"/>
     </fragment>
 
     <fragment
@@ -67,7 +67,7 @@
         <argument
             android:name="shoppingListId"
             android:defaultValue="-1L"
-            app:argType="long" />
+            app:argType="long"/>
 
         <action
             android:id="@+id/action_createListFragment_to_listFragment"
@@ -76,7 +76,7 @@
             app:exitAnim="@anim/nav_slide_exit"
             app:popEnterAnim="@anim/nav_slide_pop_enter"
             app:popExitAnim="@anim/nav_slide_pop_exit"
-            app:popUpTo="@id/listsFragment" />
+            app:popUpTo="@id/listsFragment"/>
     </fragment>
 
     <fragment
@@ -87,7 +87,7 @@
 
         <argument
             android:name="shoppingListId"
-            app:argType="long" />
+            app:argType="long"/>
 
         <action
             android:id="@+id/action_listFragment_to_addListItemFragment"
@@ -95,7 +95,7 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
 
         <action
             android:id="@+id/action_listFragment_to_listItemFragment"
@@ -103,7 +103,7 @@
             app:enterAnim="@anim/nav_slide_enter"
             app:exitAnim="@anim/nav_slide_exit"
             app:popEnterAnim="@anim/nav_slide_pop_enter"
-            app:popExitAnim="@anim/nav_slide_pop_exit" />
+            app:popExitAnim="@anim/nav_slide_pop_exit"/>
     </fragment>
 
     <fragment
@@ -115,14 +115,14 @@
         <argument
             android:name="listItemId"
             android:defaultValue="-1L"
-            app:argType="long" />
+            app:argType="long"/>
     </fragment>
 
     <fragment
         android:id="@+id/groupsFragment"
         android:name="de.janniskilian.basket.feature.groups.GroupsFragment"
         android:label="Groups"
-        tools:layout="@layout/fragment_groups" />
+        tools:layout="@layout/fragment_groups"/>
 
     <fragment
         android:id="@+id/articlesFragment"
@@ -136,7 +136,7 @@
             app:enterAnim="@anim/nav_slide_enter"
             app:exitAnim="@anim/nav_slide_exit"
             app:popEnterAnim="@anim/nav_slide_pop_enter"
-            app:popExitAnim="@anim/nav_slide_pop_exit" />
+            app:popExitAnim="@anim/nav_slide_pop_exit"/>
     </fragment>
 
     <fragment
@@ -148,7 +148,7 @@
         <argument
             android:name="articleId"
             android:defaultValue="-1L"
-            app:argType="long" />
+            app:argType="long"/>
     </fragment>
 
     <fragment
@@ -163,7 +163,7 @@
             app:enterAnim="@anim/nav_slide_enter"
             app:exitAnim="@anim/nav_slide_exit"
             app:popEnterAnim="@anim/nav_slide_pop_enter"
-            app:popExitAnim="@anim/nav_slide_pop_exit" />
+            app:popExitAnim="@anim/nav_slide_pop_exit"/>
     </fragment>
 
     <fragment
@@ -175,12 +175,12 @@
         <argument
             android:name="categoryId"
             android:defaultValue="-1L"
-            app:argType="long" />
+            app:argType="long"/>
     </fragment>
 
     <fragment
         android:id="@+id/settingsFragment"
         android:name="de.janniskilian.basket.feature.settings.SettingsFragment"
         android:label="Settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings"/>
 </navigation>

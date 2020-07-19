@@ -1,6 +1,5 @@
 package de.janniskilian.basket.feature.articles.article
 
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,30 +21,17 @@ class ArticleFragmentSetup(
     private val articleId = args.articleId.minusOneAsNull()
 
     fun run() {
-        setupHeadline()
         setupButtons()
-        setClickListeners()
         setupNameEditText()
+        setupCategoryEditText()
         setupCategoriesRecyclerView()
 
         viewModelObserver.observe()
     }
 
-    private fun setupHeadline() {
-        val headlineTextRes = if (articleId == null) {
-            R.string.create_article_headline
-        } else {
-            R.string.edit_article_headline
-        }
-
-        fragment
-            .requireView()
-            .findViewById<TextView>(R.id.headline)
-            .setText(headlineTextRes)
-    }
-
     private fun setupButtons() {
         fragment.deleteButton.isVisible = articleId != null
+        fragment.deleteButton.setOnClickListener { viewModel.deleteButtonClicked() }
 
         val buttonTextRes = if (articleId == null) {
             R.string.create_article_button
@@ -53,17 +39,16 @@ class ArticleFragmentSetup(
             R.string.save_article_button
         }
         fragment.submitButton.setText(buttonTextRes)
-    }
-
-    private fun setClickListeners() {
-        fragment.nameEditText.onDone(viewModel::submitButtonClicked)
-        fragment.categoryEditText.setOnClickListener { viewModel.editCategoryClicked() }
-        fragment.deleteButton.setOnClickListener { viewModel.deleteButtonClicked() }
         fragment.submitButton.setOnClickListener { viewModel.submitButtonClicked() }
     }
 
     private fun setupNameEditText() {
         fragment.nameEditText.doOnTextChanged(viewModel::setName)
+        fragment.nameEditText.onDone(viewModel::submitButtonClicked)
+    }
+
+    private fun setupCategoryEditText() {
+        fragment.categoryEditText.setOnClickListener { viewModel.editCategoryClicked() }
     }
 
     private fun setupCategoriesRecyclerView() {

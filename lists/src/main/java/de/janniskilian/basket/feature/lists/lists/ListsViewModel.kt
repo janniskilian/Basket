@@ -14,9 +14,10 @@ class ListsViewModel(private val dataClient: DataClient) : ViewModel() {
 
     private var _shoppingListDeleted = SingleLiveEvent<ShoppingList>()
 
-    val shoppingLists = dataClient.shoppingList.getAll().map { shoppingList ->
-        shoppingList.sortedByName()
-    }
+    val shoppingLists = dataClient
+        .shoppingList
+        .getAll()
+        .map { it.sortedByName() }
 
     val shoppingListDeleted: LiveData<ShoppingList>
         get() = _shoppingListDeleted

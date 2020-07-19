@@ -15,8 +15,8 @@ import de.janniskilian.basket.feature.articles.article.ArticleFragmentMode.EDIT
 import kotlinx.android.synthetic.main.fragment_article.*
 
 class ArticleViewModelObserver(
-    viewModel: ArticleViewModel,
-    private val fragment: ArticleFragment
+    private val fragment: ArticleFragment,
+    viewModel: ArticleViewModel
 ) : ViewModelObserver<ArticleViewModel>(viewModel) {
 
     override fun observe() {
@@ -30,7 +30,7 @@ class ArticleViewModelObserver(
             mode.observe(fragment.viewLifecycleOwner, ::renderMode)
             error.observe(fragment.viewLifecycleOwner, ::renderError)
             dismiss.observe(fragment.viewLifecycleOwner) {
-                fragment.findNavController().navigateUp()
+                fragment.findNavController().popBackStack()
             }
         }
     }

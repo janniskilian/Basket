@@ -3,12 +3,10 @@ package de.janniskilian.basket.core.listitem
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.map
-import androidx.lifecycle.observe
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.R
 import de.janniskilian.basket.core.util.extension.extern.appModule
 import de.janniskilian.basket.core.util.function.createUiListColor
-import kotlinx.android.synthetic.main.fragment_list_item.*
 
 class ListItemFragment : BaseFragment() {
 
@@ -18,7 +16,9 @@ class ListItemFragment : BaseFragment() {
         ListItemModule(appModule, this, args)
     }
 
-    private val viewModel get() = module.listItemViewModel
+    private val setup get() = module.setup
+
+    private val viewModel get() = module.viewModel
 
     override val layoutRes get() = R.layout.fragment_list_item
 
@@ -28,9 +28,10 @@ class ListItemFragment : BaseFragment() {
         }
     }
 
+    override val titleTextRes get() = R.string.list_item_title
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.shoppingListItem.observe(viewLifecycleOwner) {
-            articleNameEditText.setText(it.article.name)
-        }
+        super.onViewCreated(view, savedInstanceState)
+        setup.run()
     }
 }
