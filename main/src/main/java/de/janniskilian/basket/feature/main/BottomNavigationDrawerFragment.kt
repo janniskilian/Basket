@@ -29,37 +29,18 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(
+    ): View? =
+        inflater.inflate(
             R.layout.fragment_bottom_navigation_drawer,
             container,
             false
-        )
-
-        createNavigationItems(view)
-
-        return view
-    }
+        ).also {
+            setupBackground(it)
+            createNavigationItems(it)
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (view.parent as? View)?.background = MaterialShapeDrawable(
-            ShapeAppearanceModel
-                .builder(
-                    requireContext(),
-                    requireContext().getThemeResource(R.attr.shapeAppearanceLargeComponent),
-                    requireContext().getThemeResource(R.attr.shapeAppearanceOverlay)
-                )
-                .setBottomLeftCornerSize(0f)
-                .setBottomRightCornerSize(0f)
-                .build()
-        ).apply {
-            fillColor = ColorStateList.valueOf(
-                requireContext().getThemeColor(R.attr.colorSurface)
-            )
-        }
-
         setSelectedItem(currentDestinationId)
     }
 
@@ -98,5 +79,23 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
         setSelectedItem(navId)
         dismiss()
+    }
+
+    private fun setupBackground(view: View) {
+        view.background = MaterialShapeDrawable(
+            ShapeAppearanceModel
+                .builder(
+                    requireContext(),
+                    requireContext().getThemeResource(R.attr.shapeAppearanceLargeComponent),
+                    requireContext().getThemeResource(R.attr.shapeAppearanceOverlay)
+                )
+                .setBottomLeftCornerSize(0f)
+                .setBottomRightCornerSize(0f)
+                .build()
+        ).apply {
+            fillColor = ColorStateList.valueOf(
+                requireContext().getThemeColor(R.attr.colorSurface)
+            )
+        }
     }
 }

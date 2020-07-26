@@ -94,7 +94,7 @@ ext.conf = [
         targetSdk    : 29,
         minSdk       : 21,
         versionCode  : commitCount(),
-        versionName  : "1.0.0",
+        versionName  : "2.0.0",
         applicationId: "de.janniskilian.basket"
 ]
 
