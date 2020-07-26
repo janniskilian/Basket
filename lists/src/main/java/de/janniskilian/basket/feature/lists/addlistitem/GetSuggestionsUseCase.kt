@@ -9,14 +9,14 @@ import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.function.addToFront
 import java.util.*
 
-class GetSuggestionsUseCase(
-    private val shoppingListId: ShoppingListId,
-    private val dataClient: DataClient
-) {
+class GetSuggestionsUseCase(private val dataClient: DataClient) {
 
     private val parser = ListItemInputParser()
 
-    fun run(input: String): LiveData<List<ShoppingListItemSuggestion>> {
+    fun run(
+        shoppingListId: ShoppingListId,
+        input: String
+    ): LiveData<List<ShoppingListItemSuggestion>> {
         val parsedInput = parser.parse(input)
         val articles = dataClient.article.get(parsedInput.name, shoppingListId)
         val amount = parsedInput.quantity.orEmpty() +

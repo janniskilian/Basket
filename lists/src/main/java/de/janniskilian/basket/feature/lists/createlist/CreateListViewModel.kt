@@ -1,5 +1,6 @@
 package de.janniskilian.basket.feature.lists.createlist
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,34 +13,23 @@ import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CreateListViewModel(
-    private val shoppingListId: ShoppingListId?,
+class CreateListViewModel @ViewModelInject constructor(
     val colors: List<Int>,
     private val useCases: CreateListFragmentUseCases,
-    dataClient: DataClient
+    private val dataClient: DataClient
 ) : ViewModel() {
+
+    private var shoppingListId: ShoppingListId? = null
 
     private val _name = MutableLiveData<String>()
 
-    private val _selectedColor =
-        DefaultMutableLiveData(colors.first())
+    private val _selectedColor = DefaultMutableLiveData(colors.first())
 
     private val _error = createMutableLiveData(false)
 
     private val _startList = SingleLiveEvent<ShoppingListId>()
 
     private val _dismiss = SingleLiveEvent<Unit>()
-
-    init {
-        if (shoppingListId != null) {
-            viewModelScope.launch(Dispatchers.Main) {
-                dataClient.shoppingList.get(shoppingListId)?.let {
-                    setName(it.name)
-                    setSelectedColor(it.color)
-                }
-            }
-        }
-    }
 
     val name: LiveData<String>
         get() = _name
@@ -56,6 +46,17 @@ class CreateListViewModel(
     val dismiss: LiveData<Unit>
         get() = _dismiss
 
+    fun setShoppingListId(id: ShoppingListId) {
+        shoppingListId = id
+
+        viewModelScope.launch(Dispatchers.Main) {
+            dataClient.shoppingList.get(id)?.let {
+                setName(it.name)
+                setSelectedColor(it.color)
+            }
+        }
+    }
+
     fun setName(name: String) {
         _name.value = name
         _error.value = false
@@ -66,19 +67,20 @@ class CreateListViewModel(
     }
 
     fun submitButtonClicked() {
+        val id = shoppingListId
         val name = name.value
         when {
             name.isNullOrBlank() -> _error.value = true
 
-            shoppingListId == null ->
+            id == null ->
                 viewModelScope.launch {
-                    val id = useCases.createList(name, _selectedColor.value)
-                    _startList.postValue(id)
+                    val createdListId = useCases.createList(name, _selectedColor.value)
+                    _startList.postValue(createdListId)
                 }
 
             else -> {
                 viewModelScope.launch {
-                    useCases.updateList(shoppingListId, name, _selectedColor.value)
+                    useCases.updateList(id, name, _selectedColor.value)
                     _dismiss.postValue(Unit)
                 }
             }

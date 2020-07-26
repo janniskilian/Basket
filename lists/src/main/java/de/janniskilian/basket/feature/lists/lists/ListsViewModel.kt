@@ -1,5 +1,6 @@
 package de.janniskilian.basket.feature.lists.lists
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
@@ -10,7 +11,9 @@ import de.janniskilian.basket.core.util.sortedByName
 import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.launch
 
-class ListsViewModel(private val dataClient: DataClient) : ViewModel() {
+class ListsViewModel @ViewModelInject constructor(
+    private val dataClient: DataClient
+) : ViewModel() {
 
     private var _shoppingListDeleted = SingleLiveEvent<ShoppingList>()
 

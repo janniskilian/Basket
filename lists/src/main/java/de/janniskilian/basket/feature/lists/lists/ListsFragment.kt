@@ -5,27 +5,25 @@ import android.os.Bundle
 import android.view.View
 import android.widget.PopupMenu
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.type.domain.ShoppingList
-import de.janniskilian.basket.core.util.extension.extern.appModule
 import de.janniskilian.basket.core.util.extension.extern.setScrollable
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.core.util.recyclerview.ItemSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.fragment_lists.*
 
+@AndroidEntryPoint
 class ListsFragment : BaseFragment() {
 
-    private val module by lazy {
-        ListsModule(appModule, this)
-    }
-
-    private val viewModel get() = module.listsViewModel
+    private val viewModel: ListsViewModel by viewModels()
 
     private val listsAdapter get() = recyclerView.adapter as? ListsAdapter
 

@@ -5,23 +5,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
-import de.janniskilian.basket.core.util.extension.extern.appModule
 import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
 import de.janniskilian.basket.core.util.function.getSpeechInputResult
 import de.janniskilian.basket.feature.categories.R
 import kotlinx.android.synthetic.main.fragment_categories.*
 
+@AndroidEntryPoint
 class CategoriesFragment : BaseFragment() {
 
-    private val module by lazy {
-        CategoriesModule(appModule, this)
+    private val viewModel: CategoriesViewModel by viewModels()
+
+    private val setup by lazy {
+        CategoriesFragmentSetup(this, viewModel)
     }
-
-    private val setup get() = module.categoriesSetup
-
-    private val viewModel get() = module.categoriesViewModel
 
     override val layoutRes get() = R.layout.fragment_categories
 

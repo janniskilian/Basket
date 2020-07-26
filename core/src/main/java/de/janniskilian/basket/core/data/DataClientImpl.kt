@@ -1,8 +1,9 @@
 package de.janniskilian.basket.core.data
 
 import de.janniskilian.basket.core.data.localdb.LocalDatabase
+import javax.inject.Inject
 
-class DataClientImpl(
+class DataClientImpl @Inject constructor(
     override val article: ArticleDataClient,
     override val category: CategoryDataClient,
     override val shoppingList: ShoppingListDataClient,

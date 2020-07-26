@@ -1,5 +1,6 @@
 package de.janniskilian.basket.feature.articles.articles
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +12,9 @@ import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.util.sortedByName
 import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
 
-class ArticlesViewModel(dataClient: DataClient) : ViewModel(), SearchBarViewModel {
+class ArticlesViewModel @ViewModelInject constructor(
+    dataClient: DataClient
+) : ViewModel(), SearchBarViewModel {
 
     private val _searchBarVisible = MutableLiveData<Boolean>()
 

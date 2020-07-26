@@ -1,24 +1,19 @@
-package de.janniskilian.basket.core
+package de.janniskilian.basket.feature
 
 import android.app.Application
-import de.janniskilian.basket.core.data.localdb.LocalDatabase
-import de.janniskilian.basket.core.module.AndroidModule
-import de.janniskilian.basket.core.module.AppModule
-import de.janniskilian.basket.core.module.DataModule
+import android.content.SharedPreferences
+import dagger.hilt.android.HiltAndroidApp
+import de.janniskilian.basket.core.BuildConfig
+import de.janniskilian.basket.core.R
 import de.janniskilian.basket.core.util.function.setDayNightMode
 import timber.log.Timber
+import javax.inject.Inject
 
+@HiltAndroidApp
 class BasketApp : Application() {
 
-    val appModule by lazy {
-        val androidModule = AndroidModule(this)
-        val localDatabase = LocalDatabase.create(androidModule.applicationContext)
-
-        AppModule(
-            androidModule,
-            DataModule(localDatabase)
-        )
-    }
+    @Inject
+    lateinit var sharedPrefs: SharedPreferences
 
     override fun onCreate() {
         super.onCreate()
@@ -34,7 +29,6 @@ class BasketApp : Application() {
     }
 
     private fun setupDayNightMode() {
-        val sharedPrefs = appModule.androidModule.sharedPrefs
         val autoDayNightMode = sharedPrefs.getBoolean(
             getString(R.string.pref_key_system_day_night_mode),
             resources.getBoolean(R.bool.pref_def_system_day_night_mode)

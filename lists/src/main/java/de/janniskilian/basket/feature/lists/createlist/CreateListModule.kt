@@ -1,47 +1,25 @@
 package de.janniskilian.basket.feature.lists.createlist
 
+import android.content.Context
 import androidx.core.content.ContextCompat
-import de.janniskilian.basket.core.module.AppModule
-import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
-import de.janniskilian.basket.core.util.function.createViewModel
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.feature.lists.R
 
-class CreateListModule(
-    private val appModule: AppModule,
-    private val fragment: CreateListFragment,
-    private val args: CreateListFragmentArgs
-) {
+@InstallIn(ActivityRetainedComponent::class)
+@Module
+class CreateListModule {
 
-    val createListFragmentSetup by lazy {
-        CreateListFragmentSetup(
-            fragment,
-            args,
-            viewModel,
-            createListViewModelObserver
-        )
-    }
+    @Provides
+    fun provideCreateListFragmentUseCases(dataClient: DataClient) =
+        CreateListFragmentUseCases(dataClient)
 
-    private val viewModel by lazy {
-        createViewModel(fragment) {
-            CreateListViewModel(
-                args.shoppingListId.minusOneAsNull()?.let(::ShoppingListId),
-                colors,
-                createListFragmentUseCases,
-                appModule.dataModule.dataClient
-            )
-        }
-    }
-
-    private val createListViewModelObserver by lazy {
-        CreateListViewModelObserver(fragment, viewModel)
-    }
-
-    private val createListFragmentUseCases by lazy {
-        CreateListFragmentUseCases(appModule.dataModule.dataClient)
-    }
-
-    private val colors by lazy {
+    @Provides
+    fun provideColors(@ApplicationContext context: Context): List<Int> =
         listOf(
             R.color.orange,
             R.color.red,
@@ -54,7 +32,6 @@ class CreateListModule(
             R.color.brown,
             R.color.grey
         ).map {
-            ContextCompat.getColor(appModule.androidModule.applicationContext, it)
+            ContextCompat.getColor(context, it)
         }
-    }
 }

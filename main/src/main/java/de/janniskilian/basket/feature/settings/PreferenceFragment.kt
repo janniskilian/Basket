@@ -1,5 +1,6 @@
 package de.janniskilian.basket.feature.settings
 
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.annotation.StringRes
@@ -7,14 +8,17 @@ import androidx.core.content.edit
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
+import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.R
-import de.janniskilian.basket.core.util.extension.extern.appModule
 import de.janniskilian.basket.core.util.function.getBoolean
 import de.janniskilian.basket.core.util.function.setDayNightMode
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class PreferenceFragment : PreferenceFragmentCompat() {
 
-    private val sharedPrefs get() = appModule.androidModule.sharedPrefs
+    @Inject
+    lateinit var sharedPrefs: SharedPreferences
 
     private val systemDayNightModeSwitch
         get() = get<SwitchPreferenceCompat>(R.string.pref_key_system_day_night_mode)

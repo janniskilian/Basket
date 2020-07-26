@@ -43,13 +43,8 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setSelectedItem(currentDestinationId)
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        (view?.parent as? View)?.background = MaterialShapeDrawable(
+        (view.parent as? View)?.background = MaterialShapeDrawable(
             ShapeAppearanceModel
                 .builder(
                     requireContext(),
@@ -64,6 +59,8 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                 requireContext().getThemeColor(R.attr.colorSurface)
             )
         }
+
+        setSelectedItem(currentDestinationId)
     }
 
     private fun createNavigationItems(view: View) {

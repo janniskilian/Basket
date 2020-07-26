@@ -1,16 +1,12 @@
 package de.janniskilian.basket.feature.lists.lists
 
-import android.app.Application
 import android.graphics.Color
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.annotation.UiThreadTest
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import de.janniskilian.basket.core.data.DefaultDataImporter
-import de.janniskilian.basket.core.data.DefaultDataLoader
-import de.janniskilian.basket.core.module.AppModule
-import de.janniskilian.basket.core.testing.createTestAppModule
+import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.util.extension.extern.nextValue
+import de.janniskilian.basket.test.createTestDataClient
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -21,24 +17,17 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ListsViewModelTest {
 
-    private lateinit var appModule: AppModule
 
     private lateinit var viewModel: ListsViewModel
 
-    private val dataClient get() = appModule.dataModule.dataClient
+    private lateinit var dataClient: DataClient
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setup() {
-        val context = ApplicationProvider.getApplicationContext<Application>()
-        appModule = createTestAppModule(context)
-
-        runBlocking {
-            DefaultDataImporter(dataClient, DefaultDataLoader(context)).run()
-        }
-
+        dataClient = createTestDataClient()
         viewModel = ListsViewModel(dataClient)
     }
 

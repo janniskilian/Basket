@@ -1,36 +1,16 @@
 package de.janniskilian.basket.feature.articles.article
 
-import de.janniskilian.basket.core.module.AppModule
-import de.janniskilian.basket.core.type.domain.ArticleId
-import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
-import de.janniskilian.basket.core.util.function.createViewModel
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityRetainedComponent
+import de.janniskilian.basket.core.data.DataClient
 
-class ArticleModule(
-    private val appModule: AppModule,
-    private val fragment: ArticleFragment,
-    private val args: ArticleFragmentArgs
-) {
+@InstallIn(ActivityRetainedComponent::class)
+@Module
+class ArticleModule {
 
-    val articleSetup by lazy {
-        ArticleFragmentSetup(
-            fragment,
-            args,
-            articleViewModel,
-            articleViewModelObserver
-        )
-    }
-
-    val articleViewModel by lazy {
-        createViewModel(fragment) {
-            ArticleViewModel(
-                args.articleId.minusOneAsNull()?.let(::ArticleId),
-                ArticleFragmentUseCases(appModule.dataModule.dataClient),
-                appModule.dataModule.dataClient
-            )
-        }
-    }
-
-    private val articleViewModelObserver by lazy {
-        ArticleViewModelObserver(fragment, articleViewModel)
-    }
+    @Provides
+    fun provideArticleFragmentUseCases(dataClient: DataClient): ArticleFragmentUseCases =
+        ArticleFragmentUseCases(dataClient)
 }

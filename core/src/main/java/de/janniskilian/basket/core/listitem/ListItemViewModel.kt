@@ -1,5 +1,6 @@
 package de.janniskilian.basket.core.listitem
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,12 +11,11 @@ import de.janniskilian.basket.core.type.domain.ShoppingListItemId
 import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.launch
 
-class ListItemViewModel(
-    args: ListItemFragmentArgs,
+class ListItemViewModel @ViewModelInject constructor(
     private val dataClient: DataClient
 ) : ViewModel() {
 
-    private val listItemId = ShoppingListItemId(args.listItemId)
+    private val listItemId = MutableLiveData<ShoppingListItemId>()
 
     private val _name = MutableLiveData<String>()
 
@@ -27,17 +27,9 @@ class ListItemViewModel(
 
     private val _dismiss = SingleLiveEvent<Unit>()
 
-    init {
-        viewModelScope.launch {
-            dataClient.shoppingListItem.get(listItemId)?.let {
-                setName(it.name)
-                setQuantity(it.quantity)
-                setComment(it.comment)
-            }
-        }
+    val shoppingListItem = listItemId.switchMap {
+        dataClient.shoppingListItem.getLiveData(it)
     }
-
-    val shoppingListItem = dataClient.shoppingListItem.getLiveData(listItemId)
 
     val shoppingList = shoppingListItem.switchMap {
         dataClient.shoppingList.getLiveData(it.shoppingListId)
@@ -57,6 +49,10 @@ class ListItemViewModel(
 
     val dismiss: LiveData<Unit>
         get() = _dismiss
+
+    fun setListItemId(id: ShoppingListItemId) {
+        listItemId.value = id
+    }
 
     fun setName(name: String) {
         _name.value = name

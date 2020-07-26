@@ -1,5 +1,6 @@
 package de.janniskilian.basket.feature.articles.article
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,11 +14,12 @@ import de.janniskilian.basket.core.util.function.createMutableLiveData
 import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.launch
 
-class ArticleViewModel(
-    private val articleId: ArticleId?,
+class ArticleViewModel @ViewModelInject constructor(
     private val useCases: ArticleFragmentUseCases,
-    dataClient: DataClient
+    private val dataClient: DataClient
 ) : ViewModel() {
+
+    private var articleId: ArticleId? = null
 
     private val _name = MutableLiveData<String>()
 
@@ -28,19 +30,6 @@ class ArticleViewModel(
     private val _error = MutableLiveData<Boolean>()
 
     private val _dismiss = SingleLiveEvent<Unit>()
-
-    init {
-        if (articleId == null) {
-            setCategory(null)
-        } else {
-            viewModelScope.launch {
-                dataClient.article.get(articleId)?.let {
-                    setName(it.name)
-                    setCategory(it.category)
-                }
-            }
-        }
-    }
 
     val name: LiveData<String>
         get() = _name
@@ -60,6 +49,17 @@ class ArticleViewModel(
 
     val dismiss: LiveData<Unit>
         get() = _dismiss
+
+    fun setArticleId(id: ArticleId) {
+        articleId = id
+
+        viewModelScope.launch {
+            dataClient.article.get(id)?.let {
+                setName(it.name)
+                setCategory(it.category)
+            }
+        }
+    }
 
     fun setName(name: String) {
         _name.value = name
@@ -84,9 +84,9 @@ class ArticleViewModel(
         }
 
     fun deleteButtonClicked() {
-        if (articleId != null) {
+        articleId?.let {
             viewModelScope.launch {
-                useCases.deleteArticle(articleId)
+                useCases.deleteArticle(it)
                 _dismiss.postValue(Unit)
             }
         }
@@ -98,10 +98,11 @@ class ArticleViewModel(
             _error.value = true
         } else {
             viewModelScope.launch {
-                if (articleId == null) {
+                val id = articleId
+                if (id == null) {
                     useCases.createArticle(name, category.value)
                 } else {
-                    useCases.editArticle(articleId, name, category.value)
+                    useCases.editArticle(id, name, category.value)
                 }
 
                 _dismiss.postValue(Unit)

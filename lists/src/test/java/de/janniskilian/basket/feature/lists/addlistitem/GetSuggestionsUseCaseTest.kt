@@ -46,11 +46,13 @@ class GetSuggestionsUseCaseTest {
         on { article } doReturn articleDataClient
     }
 
-    private val useCase = GetSuggestionsUseCase(ShoppingListId(1), dataClient)
+    private val shoppingListId = ShoppingListId(1)
+
+    private val useCase = GetSuggestionsUseCase(dataClient)
 
     @Test
     fun `ascending ordering by article name`() = runBlocking {
-        useCase.run("").nextValue { result ->
+        useCase.run(shoppingListId, "").nextValue { result ->
             assertEquals(
                 listOf(
                     ShoppingListItemSuggestion(
@@ -76,7 +78,7 @@ class GetSuggestionsUseCaseTest {
 
     @Test
     fun `create article suggestion`() = runBlocking {
-        useCase.run("apple").nextValue { result ->
+        useCase.run(shoppingListId, "apple").nextValue { result ->
             assertEquals(
                 ShoppingListItemSuggestion(
                     Article(ArticleId(0), "apple", null),
@@ -87,7 +89,7 @@ class GetSuggestionsUseCaseTest {
             )
         }
 
-        useCase.run(apples.name).nextValue { result ->
+        useCase.run(shoppingListId, apples.name).nextValue { result ->
             assertEquals(
                 ShoppingListItemSuggestion(apples, existingListItem = true, existingArticle = true),
                 result.first()
@@ -99,7 +101,7 @@ class GetSuggestionsUseCaseTest {
     fun `add quantity to suggestions`() = runBlocking {
         val formatedQuantity = "2 kg"
 
-        useCase.run("a 2kg").nextValue { result ->
+        useCase.run(shoppingListId, "a 2kg").nextValue { result ->
             assertEquals(
                 listOf(
                     ShoppingListItemSuggestion(

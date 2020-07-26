@@ -2,7 +2,7 @@ package de.janniskilian.basket.core.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import de.janniskilian.basket.core.data.localdb.LocalDatabase
+import de.janniskilian.basket.core.data.localdb.dao.RoomArticleDao
 import de.janniskilian.basket.core.data.localdb.entity.RoomArticle
 import de.janniskilian.basket.core.data.localdb.transformation.modelToRoom
 import de.janniskilian.basket.core.data.localdb.transformation.roomToModel
@@ -14,10 +14,11 @@ import de.janniskilian.basket.core.type.domain.CategoryId
 import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.extension.extern.withoutSpecialChars
 import de.janniskilian.basket.core.util.function.withIOContext
+import javax.inject.Inject
 
-class ArticleDataClientImpl(localDb: LocalDatabase) : ArticleDataClient {
-
-    private val dao = localDb.articleDao()
+class ArticleDataClientImpl @Inject constructor(
+    private val dao: RoomArticleDao
+) : ArticleDataClient {
 
     override suspend fun create(name: String, category: Category?) = withIOContext {
         val id = dao.insert(RoomArticle(name, name.withoutSpecialChars(), category?.id?.value))

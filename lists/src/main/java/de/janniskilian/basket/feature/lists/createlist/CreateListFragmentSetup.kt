@@ -3,6 +3,7 @@ package de.janniskilian.basket.feature.lists.createlist
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
 import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.extension.extern.onDone
@@ -14,13 +15,16 @@ import kotlinx.android.synthetic.main.fragment_create_list.*
 class CreateListFragmentSetup(
     private val fragment: CreateListFragment,
     args: CreateListFragmentArgs,
-    private val viewModel: CreateListViewModel,
-    private val viewModelObserver: CreateListViewModelObserver
+    private val viewModel: CreateListViewModel
 ) {
 
-    private val shoppingListId = args.shoppingListId.minusOneAsNull()
+    private val shoppingListId = args.shoppingListId.minusOneAsNull()?.let(::ShoppingListId)
+
+    private val viewModelObserver = CreateListViewModelObserver(fragment, viewModel)
 
     fun run() {
+        shoppingListId?.let(viewModel::setShoppingListId)
+
         setupNameEditText()
         setupButton()
         setupRecyclerView()

@@ -4,29 +4,27 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
-import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.core.util.extension.extern.appModule
 import de.janniskilian.basket.core.util.extension.extern.getThemeColor
 import de.janniskilian.basket.core.util.function.createMutableLiveData
 import de.janniskilian.basket.core.util.function.getSpeechInputResult
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.fragment_lists.*
 
+@AndroidEntryPoint
 class AddListItemFragment : BaseFragment() {
 
-    private val shoppingListId by lazy {
-        ShoppingListId(AddListItemFragmentArgs.fromBundle(requireArguments()).shoppingListId)
+    private val args: AddListItemFragmentArgs by navArgs()
+
+    private val viewModel: AddListItemViewModel by viewModels()
+
+    private val setup by lazy {
+        AddListItemFragmentSetup(this, args, viewModel)
     }
-
-    private val module by lazy {
-        AddListItemModule(appModule, this, shoppingListId)
-    }
-
-    private val setup get() = module.addListItemSetup
-
-    private val viewModel get() = module.addListItemViewModel
 
     override val layoutRes get() = R.layout.fragment_add_list_item
 

@@ -1,19 +1,23 @@
 package de.janniskilian.basket.feature.lists.addlistitem
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.function.createMutableLiveData
 import de.janniskilian.basket.core.util.sortedByName
 import kotlinx.coroutines.launch
 
-class AddListItemViewModel(
+class AddListItemViewModel @ViewModelInject constructor(
     private val getSuggestionsUseCase: GetSuggestionsUseCase,
     private val listItemSuggestionClickedUseCase: ListItemSuggestionClickedUseCase
 ) : ViewModel() {
+
+    private val shoppingListId = MutableLiveData<ShoppingListId>()
 
     private val _input: MutableLiveData<String> = createMutableLiveData("")
 
@@ -22,8 +26,16 @@ class AddListItemViewModel(
 
     val items: LiveData<List<ShoppingListItemSuggestion>> =
         _input
-            .switchMap { getSuggestionsUseCase.run(it) }
+            .switchMap { inputValue ->
+                shoppingListId.switchMap {
+                    getSuggestionsUseCase.run(it, inputValue)
+                }
+            }
             .map { it.sortedByName() }
+
+    fun setShoppingListId(id: ShoppingListId) {
+        shoppingListId.value = id
+    }
 
     fun setInput(input: String) {
         _input.value = input
@@ -34,8 +46,12 @@ class AddListItemViewModel(
     }
 
     fun suggestionItemClicked(position: Int) {
-        items.value?.getOrNull(position)?.let {
-            viewModelScope.launch { listItemSuggestionClickedUseCase.run(it) }
+        val id = shoppingListId.value
+        val item = items.value?.getOrNull(position)
+        if (id != null && item != null) {
+            viewModelScope.launch {
+                listItemSuggestionClickedUseCase.run(id, item)
+            }
         }
     }
 

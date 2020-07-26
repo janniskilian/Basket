@@ -2,7 +2,7 @@ package de.janniskilian.basket.core.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import de.janniskilian.basket.core.data.localdb.LocalDatabase
+import de.janniskilian.basket.core.data.localdb.dao.RoomShoppingListDao
 import de.janniskilian.basket.core.data.localdb.entity.RoomShoppingList
 import de.janniskilian.basket.core.data.localdb.transformation.modelToRoom
 import de.janniskilian.basket.core.data.localdb.transformation.roomToModel
@@ -10,14 +10,15 @@ import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.extension.extern.withoutSpecialChars
 import de.janniskilian.basket.core.util.function.withIOContext
+import javax.inject.Inject
 
-class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClient {
-
-    private val shoppingListDao = localDb.shoppingListDao()
+class ShoppingListDataClientImpl @Inject constructor(
+    private val dao: RoomShoppingListDao
+) : ShoppingListDataClient {
 
     override suspend fun create(name: String, color: Int) = withIOContext {
         ShoppingListId(
-            shoppingListDao.insert(
+            dao.insert(
                 RoomShoppingList(
                     name,
                     name.withoutSpecialChars(),
@@ -28,11 +29,11 @@ class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClien
     }
 
     override suspend fun create(shoppingList: ShoppingList) = withIOContext {
-        ShoppingListId(shoppingListDao.insert(modelToRoom(shoppingList)))
+        ShoppingListId(dao.insert(modelToRoom(shoppingList)))
     }
 
     override suspend fun get(shoppingListId: ShoppingListId) = withIOContext {
-        val result = shoppingListDao.select(shoppingListId.value)
+        val result = dao.select(shoppingListId.value)
         if (result.isEmpty()) {
             null
         } else {
@@ -41,12 +42,12 @@ class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClien
     }
 
     override fun getLiveData(shoppingListId: ShoppingListId): LiveData<ShoppingList> =
-        shoppingListDao
+        dao
             .selectLiveData(shoppingListId.value)
             .map { roomToModel(it) }
 
     override fun getAll(): LiveData<List<ShoppingList>> =
-        shoppingListDao
+        dao
             .selectAll()
             .map { results ->
                 results
@@ -56,7 +57,7 @@ class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClien
 
     override suspend fun update(shoppingListId: ShoppingListId, name: String, color: Int) =
         withIOContext {
-            shoppingListDao.update(
+            dao.update(
                 shoppingListId.value,
                 name,
                 name.withoutSpecialChars(),
@@ -65,6 +66,6 @@ class ShoppingListDataClientImpl(localDb: LocalDatabase) : ShoppingListDataClien
         }
 
     override suspend fun delete(shoppingListId: ShoppingListId) = withIOContext {
-        shoppingListDao.delete(shoppingListId.value)
+        dao.delete(shoppingListId.value)
     }
 }

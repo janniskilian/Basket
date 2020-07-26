@@ -5,22 +5,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
-import de.janniskilian.basket.core.util.extension.extern.appModule
 import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
 import de.janniskilian.basket.core.util.function.getSpeechInputResult
 import de.janniskilian.basket.feature.articles.R
 
+@AndroidEntryPoint
 class ArticlesFragment : BaseFragment() {
 
-    private val module by lazy {
-        ArticlesModule(appModule, this)
+    private val viewModel: ArticlesViewModel by viewModels()
+
+    private val setup by lazy {
+        ArticlesFragmentSetup(this, viewModel)
     }
-
-    private val setup get() = module.articlesSetup
-
-    private val viewModel get() = module.articlesViewModel
 
     override val layoutRes get() = R.layout.fragment_articles
 

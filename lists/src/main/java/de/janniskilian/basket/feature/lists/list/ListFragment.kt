@@ -1,27 +1,32 @@
 package de.janniskilian.basket.feature.lists.list
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.map
+import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
-import de.janniskilian.basket.core.util.extension.extern.appModule
 import de.janniskilian.basket.core.util.function.createUiListColor
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.fragment_list.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ListFragment : BaseFragment() {
 
     private val args by lazy { ListFragmentArgs.fromBundle(requireArguments()) }
 
-    private val module by lazy {
-        ListModule(appModule, this, args)
+    private val viewModel: ListViewModel by viewModels()
+
+    private val setup by lazy {
+        ListFragmentSetup(this, args, viewModel)
     }
 
-    private val viewModel get() = module.listViewModel
-
-    private val setup get() = module.listSetup
+    @Inject
+    lateinit var sharedPrefs: SharedPreferences
 
     val shoppingListAdapter get() = recyclerView.adapter as? ShoppingListAdapter
 

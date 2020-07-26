@@ -1,5 +1,6 @@
 package de.janniskilian.basket.feature.categories.category
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,27 +11,18 @@ import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CategoryViewModel(
-    private val categoryId: CategoryId?,
+class CategoryViewModel @ViewModelInject constructor(
     private val useCases: CategoryFragmentUseCases,
-    dataClient: DataClient
+    private val dataClient: DataClient
 ) : ViewModel() {
+
+    private var categoryId: CategoryId? = null
 
     private val _name = MutableLiveData<String>()
 
     private val _error = MutableLiveData<Boolean>()
 
     private val _dismiss = SingleLiveEvent<Unit>()
-
-    init {
-        if (categoryId != null) {
-            viewModelScope.launch(Dispatchers.Main) {
-                dataClient.category.getSuspend(categoryId)?.let {
-                    setName(it.name)
-                }
-            }
-        }
-    }
 
     val name: LiveData<String>
         get() = _name
@@ -41,15 +33,25 @@ class CategoryViewModel(
     val dismiss: LiveData<Unit>
         get() = _dismiss
 
+    fun setCategoryId(id: CategoryId) {
+        categoryId = id
+
+        viewModelScope.launch(Dispatchers.Main) {
+            dataClient.category.getSuspend(id)?.let {
+                setName(it.name)
+            }
+        }
+    }
+
     fun setName(name: String) {
         _name.value = name
         _error.value = false
     }
 
     fun deleteButtonClicked() {
-        if (categoryId != null) {
+        categoryId?.let {
             viewModelScope.launch {
-                useCases.deleteCategory(categoryId)
+                useCases.deleteCategory(it)
                 _dismiss.postValue(Unit)
             }
         }
@@ -61,10 +63,11 @@ class CategoryViewModel(
             _error.value = true
         } else {
             viewModelScope.launch {
-                if (categoryId == null) {
+                val id = categoryId
+                if (id == null) {
                     useCases.createCategory(name)
                 } else {
-                    useCases.editCategory(categoryId, name)
+                    useCases.editCategory(id, name)
                 }
 
                 _dismiss.postValue(Unit)

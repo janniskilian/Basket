@@ -4,24 +4,25 @@ import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.type.domain.ShoppingListId
 
-class ListItemSuggestionClickedUseCase(
-    private val shoppingListId: ShoppingListId,
-    private val dataClient: DataClient
-) {
+class ListItemSuggestionClickedUseCase(private val dataClient: DataClient) {
 
-    suspend fun run(suggestion: ShoppingListItemSuggestion) {
+    suspend fun run(shoppingListId: ShoppingListId, suggestion: ShoppingListItemSuggestion) {
         when {
             suggestion.existingListItem ->
                 dataClient.shoppingListItem.delete(shoppingListId, suggestion.article.id)
 
             suggestion.existingArticle ->
-                createShoppingListItem(suggestion.article, suggestion.quantity)
+                createShoppingListItem(shoppingListId, suggestion.article, suggestion.quantity)
 
-            else -> createArticleAndShoppingListItem(suggestion)
+            else -> createArticleAndShoppingListItem(shoppingListId, suggestion)
         }
     }
 
-    private suspend fun createShoppingListItem(article: Article, quantity: String = "") {
+    private suspend fun createShoppingListItem(
+        shoppingListId: ShoppingListId,
+        article: Article,
+        quantity: String = ""
+    ) {
         dataClient.shoppingListItem.create(
             shoppingListId,
             article,
@@ -29,12 +30,15 @@ class ListItemSuggestionClickedUseCase(
         )
     }
 
-    private suspend fun createArticleAndShoppingListItem(suggestion: ShoppingListItemSuggestion) {
+    private suspend fun createArticleAndShoppingListItem(
+        shoppingListId: ShoppingListId,
+        suggestion: ShoppingListItemSuggestion
+    ) {
         dataClient.article.create(
             suggestion.article.name,
             suggestion.article.category
         )?.let {
-            createShoppingListItem(it, suggestion.quantity)
+            createShoppingListItem(shoppingListId, it, suggestion.quantity)
         }
     }
 }

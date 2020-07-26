@@ -1,37 +1,25 @@
 package de.janniskilian.basket
 
-import androidx.core.content.edit
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.rule.ActivityTestRule
-import de.janniskilian.basket.core.BasketApp
-import de.janniskilian.basket.feature.main.MainActivity
+import com.schibsted.spain.barista.rule.cleardata.ClearDatabaseRule
+import com.schibsted.spain.barista.rule.cleardata.ClearFilesRule
+import com.schibsted.spain.barista.rule.cleardata.ClearPreferencesRule
+import org.junit.rules.RuleChain
+import org.junit.rules.TestRule
+import org.junit.runner.Description
+import org.junit.runners.model.Statement
 
-class UiTestRule(
-    private val skipOnboarding: Boolean = true
-) : ActivityTestRule<MainActivity>(MainActivity::class.java) {
+class UiTestRule(isSkipOnboarding: Boolean = true) : TestRule {
 
-    override fun beforeActivityLaunched() {
-        super.beforeActivityLaunched()
+    private val activityTestRule = ActivityRule(isSkipOnboarding)
+    private val clearPreferencesRule = ClearPreferencesRule()
+    private val clearDatabaseRule = ClearDatabaseRule()
+    private val clearFilesRule = ClearFilesRule()
 
-        val app = ApplicationProvider.getApplicationContext<BasketApp>()
-        val appModule = app.appModule
-
-        appModule
-            .dataModule
-            .dataClient
-            .clear()
-
-        appModule.androidModule.sharedPrefs.edit {
-            clear()
-        }
-    }
-
-    override fun afterActivityLaunched() {
-        if (skipOnboarding) {
-            onView(withId(R.id.button)).perform(click())
-        }
-    }
+    override fun apply(base: Statement, description: Description): Statement =
+        RuleChain
+            .outerRule(clearPreferencesRule)
+            .around(clearDatabaseRule)
+            .around(clearFilesRule)
+            .around(activityTestRule)
+            .apply(base, description)
 }

@@ -6,4 +6,6 @@ import de.janniskilian.basket.core.BaseFragment
 class SettingsFragment : BaseFragment() {
 
     override val layoutRes get() = R.layout.fragment_settings
+
+    override val titleTextRes get() = R.string.settings_title
 }

@@ -1,9 +1,9 @@
 package de.janniskilian.basket.feature.lists.list
 
-import android.content.SharedPreferences
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.extension.extern.keepScreenOn
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
@@ -11,12 +11,15 @@ import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListFragmentSetup(
     private val fragment: ListFragment,
-    private val viewModel: ListViewModel,
-    private val viewModelObserver: ListViewModelObserver,
-    private val sharedPrefs: SharedPreferences
+    private val args: ListFragmentArgs,
+    private val viewModel: ListViewModel
 ) {
 
+    private val viewModelObserver = ListViewModelObserver(fragment, viewModel)
+
     fun run() {
+        viewModel.setShoppingListId(ShoppingListId(args.shoppingListId))
+
         setupWindow()
         setupRecyclerView()
         viewModelObserver.observe()

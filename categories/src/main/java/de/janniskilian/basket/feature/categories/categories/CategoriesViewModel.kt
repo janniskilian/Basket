@@ -1,5 +1,6 @@
 package de.janniskilian.basket.feature.categories.categories
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
@@ -10,7 +11,7 @@ import de.janniskilian.basket.core.navigationcontainer.SearchBarViewModel
 import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.util.sortedByName
 
-class CategoriesViewModel(
+class CategoriesViewModel @ViewModelInject constructor(
     dataClient: DataClient
 ) : ViewModel(), SearchBarViewModel by DefaultSearchBarViewModel() {
 

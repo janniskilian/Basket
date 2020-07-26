@@ -7,6 +7,7 @@ buildscript {
         classpath deps.plugins.kotlin
         classpath deps.plugins.android
         classpath deps.plugins.navSafeArgs
+        classpath deps.plugins.hilt
     }
 }
 
@@ -14,8 +15,6 @@ plugins {
     id "com.github.ben-manes.versions" version "0.29.0"
     id "io.gitlab.arturbosch.detekt" version "1.10.0"
 }
-
-apply plugin: "io.gitlab.arturbosch.detekt"
 
 allprojects {
     addRepos(repositories)
@@ -32,8 +31,10 @@ subprojects {
         apply plugin: "com.android.library"
     }
     apply plugin: "kotlin-android"
+    apply plugin: "kotlin-kapt"
     apply plugin: "kotlin-android-extensions"
     apply plugin: "androidx.navigation.safeargs.kotlin"
+    apply plugin: "dagger.hilt.android.plugin"
 
     android {
         buildToolsVersion conf.buildTools
@@ -87,6 +88,11 @@ subprojects {
         implementation deps.androidx.navFragment
         implementation deps.androidx.navUi
 
+        implementation deps.hilt.android
+        implementation deps.hilt.viewmodel
+        kapt deps.hilt.compiler
+        kapt deps.hilt.androidXCompiler
+
         implementation deps.timber
 
         testImplementation deps.testing.junit
@@ -101,10 +107,17 @@ subprojects {
         androidTestImplementation deps.androidTesting.rules
         androidTestImplementation deps.androidTesting.livedata
         androidTestImplementation deps.androidTesting.room
+        androidTestImplementation deps.androidTesting.hilt
+        kaptAndroidTest deps.androidTesting.hiltCompiler
+        androidTestImplementation deps.androidTesting.barista
 
         if (name != "core") {
             implementation project(path: ":core")
         }
+    }
+
+    kapt {
+        correctErrorTypes true
     }
 }
 

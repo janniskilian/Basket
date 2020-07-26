@@ -1,26 +1,23 @@
 package de.janniskilian.basket
 
-import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import de.janniskilian.basket.core.CategoriesAdapter
+import com.schibsted.spain.barista.interaction.BaristaClickInteractions.clickOn
+import com.schibsted.spain.barista.interaction.BaristaEditTextInteractions.writeTo
+import com.schibsted.spain.barista.interaction.BaristaKeyboardInteractions.closeKeyboard
+import com.schibsted.spain.barista.interaction.BaristaListInteractions.clickListItem
 import org.hamcrest.Matchers.allOf
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class ArticlesUiTest {
-
-    @get:Rule
-    val activityRule = UiTestRule()
+class ArticlesUiTest : BaseUiTest() {
 
     @Test
     fun createAndEditAndDeleteArticle() {
@@ -36,18 +33,16 @@ class ArticlesUiTest {
     }
 
     private fun createArticle(name: String) {
-        onView(withId(R.id.navigationButton)).perform(click())
-        onView(withText(R.string.navigation_articles)).perform(click())
+        navigateToBottomNavigationDrawerDestination(R.string.navigation_articles)
 
-        onView(withId(R.id.fab)).perform(click())
+        clickOn(R.string.fab_create_article)
 
-        onView(withId(R.id.nameEditText)).perform(typeText(name))
-        closeSoftKeyboard()
-        onView(withId(R.id.categoryEditText)).perform(click())
-        onView(withId(R.id.recyclerView)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<CategoriesAdapter.ViewHolder>(1, click())
-        )
-        onView(withId(R.id.submitButton)).perform(click())
+        writeTo(R.id.nameEditText, name)
+        closeKeyboard()
+        clickOn(R.id.categoryEditText)
+
+        clickListItem(R.id.recyclerView, 1)
+        clickOn(R.string.create_article_button)
     }
 
     private fun editArticle(name: String, editedName: String) {
@@ -56,13 +51,11 @@ class ArticlesUiTest {
 
         getArticleItemViewInteraction(name).perform(click())
 
-        onView(withId(R.id.nameEditText)).perform(replaceText(editedName))
-        closeSoftKeyboard()
-        onView(withId(R.id.categoryEditText)).perform(click())
-        onView(withId(R.id.recyclerView)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<CategoriesAdapter.ViewHolder>(0, click())
-        )
-        onView(withId(R.id.submitButton)).perform(click())
+        writeTo(R.id.nameEditText, editedName)
+        closeKeyboard()
+        clickOn(R.id.categoryEditText)
+        clickListItem(R.id.recyclerView, 0)
+        clickOn(R.string.save_article_button)
     }
 
     private fun deleteArticle(name: String) {
@@ -71,12 +64,12 @@ class ArticlesUiTest {
 
         getArticleItemViewInteraction(name).perform(click())
 
-        onView(withId(R.id.deleteButton)).perform(click())
+        clickOn(R.string.delete_article_button)
     }
 
     private fun findArticleItem(name: String) {
-        onView(withId(R.id.action_search)).perform(click())
-        onView(withId(R.id.searchBarEditText)).perform(typeText(name))
+        clickOn(R.id.action_search)
+        writeTo(R.id.searchBarEditText, name)
     }
 
     private fun getArticleItemViewInteraction(name: String) =

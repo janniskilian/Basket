@@ -3,7 +3,7 @@
     package="de.janniskilian.basket">
 
     <application
-        android:name=".core.BasketApp"
+        android:name=".feature.BasketApp"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

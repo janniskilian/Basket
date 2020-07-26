@@ -2,20 +2,23 @@ package de.janniskilian.basket.feature.lists.createlist
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.BaseFragment
-import de.janniskilian.basket.core.util.extension.extern.appModule
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.feature.lists.R
 
+@AndroidEntryPoint
 class CreateListFragment : BaseFragment() {
 
     private val args by lazy { CreateListFragmentArgs.fromBundle(requireArguments()) }
 
-    private val module by lazy {
-        CreateListModule(appModule, this, args)
-    }
+    private val viewModel: CreateListViewModel by viewModels()
 
-    private val setup get() = module.createListFragmentSetup
+    private val setup by lazy {
+        CreateListFragmentSetup(this, args, viewModel)
+    }
 
     override val layoutRes get() = R.layout.fragment_create_list
 
@@ -28,6 +31,9 @@ class CreateListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        args.shoppingListId.minusOneAsNull()?.let {
+            viewModel.setShoppingListId(ShoppingListId(it))
+        }
         setup.run()
     }
 }

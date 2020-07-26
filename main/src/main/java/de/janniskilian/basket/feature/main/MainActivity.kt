@@ -1,20 +1,23 @@
 package de.janniskilian.basket.feature.main
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.R
 import de.janniskilian.basket.core.BaseFragment
-import de.janniskilian.basket.core.BasketApp
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainerProvider
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationContainerProvider {
 
-    private val sharedPrefs
-        get() = (application as BasketApp).appModule.androidModule.sharedPrefs
+    @Inject
+    lateinit var sharedPrefs: SharedPreferences
 
     private val uiController = MainActivityUiController(this)
     private val setup = MainActivitySetup(this, uiController)

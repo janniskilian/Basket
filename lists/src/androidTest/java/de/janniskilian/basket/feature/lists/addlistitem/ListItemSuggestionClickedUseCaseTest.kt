@@ -1,19 +1,15 @@
 package de.janniskilian.basket.feature.lists.addlistitem
 
-import android.app.Application
 import android.graphics.Color
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.annotation.UiThreadTest
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import de.janniskilian.basket.core.data.DefaultDataImporter
-import de.janniskilian.basket.core.data.DefaultDataLoader
-import de.janniskilian.basket.core.module.AppModule
-import de.janniskilian.basket.core.testing.createTestAppModule
+import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.type.domain.ArticleId
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListId
+import de.janniskilian.basket.test.createTestDataClient
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -27,28 +23,24 @@ import kotlin.test.assertNotNull
 @RunWith(AndroidJUnit4::class)
 class ListItemSuggestionClickedUseCaseTest {
 
-    private lateinit var appModule: AppModule
-
     private lateinit var useCase: ListItemSuggestionClickedUseCase
 
     private var shoppingListId = ShoppingListId(0)
 
-    private val dataClient get() = appModule.dataModule.dataClient
+    private lateinit var dataClient: DataClient
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setup() {
-        val context = ApplicationProvider.getApplicationContext<Application>()
-        appModule = createTestAppModule(context)
+        dataClient = createTestDataClient()
 
         runBlocking {
-            DefaultDataImporter(dataClient, DefaultDataLoader(context)).run()
             shoppingListId = dataClient.shoppingList.create("Test", Color.RED)
         }
 
-        useCase = ListItemSuggestionClickedUseCase(shoppingListId, appModule.dataModule.dataClient)
+        useCase = ListItemSuggestionClickedUseCase(dataClient)
     }
 
     @After
@@ -90,6 +82,7 @@ class ListItemSuggestionClickedUseCaseTest {
         assertEquals(3, getShoppingList().items.size)
 
         useCase.run(
+            shoppingListId,
             ShoppingListItemSuggestion(
                 article1,
                 existingListItem = true,
@@ -97,6 +90,7 @@ class ListItemSuggestionClickedUseCaseTest {
             )
         )
         useCase.run(
+            shoppingListId,
             ShoppingListItemSuggestion(
                 article2,
                 existingListItem = true,
@@ -104,6 +98,7 @@ class ListItemSuggestionClickedUseCaseTest {
             )
         )
         useCase.run(
+            shoppingListId,
             ShoppingListItemSuggestion(
                 article3,
                 existingListItem = true,
@@ -121,6 +116,7 @@ class ListItemSuggestionClickedUseCaseTest {
         val article = dataClient.article.get(articleId)
         assertNotNull(article)
         useCase.run(
+            shoppingListId,
             ShoppingListItemSuggestion(
                 article,
                 existingListItem = false,
@@ -133,6 +129,7 @@ class ListItemSuggestionClickedUseCaseTest {
     private suspend fun createListItemWithNewArticle(articleName: String): Article {
         val article = Article(ArticleId(0), articleName, null)
         useCase.run(
+            shoppingListId,
             ShoppingListItemSuggestion(
                 article,
                 existingListItem = false,

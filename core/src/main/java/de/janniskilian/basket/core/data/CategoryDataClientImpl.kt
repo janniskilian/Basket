@@ -1,7 +1,7 @@
 package de.janniskilian.basket.core.data
 
 import androidx.lifecycle.map
-import de.janniskilian.basket.core.data.localdb.LocalDatabase
+import de.janniskilian.basket.core.data.localdb.dao.RoomCategoryDao
 import de.janniskilian.basket.core.data.localdb.entity.RoomCategory
 import de.janniskilian.basket.core.data.localdb.transformation.modelToRoom
 import de.janniskilian.basket.core.data.localdb.transformation.roomToModel
@@ -9,10 +9,11 @@ import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.type.domain.CategoryId
 import de.janniskilian.basket.core.util.extension.extern.withoutSpecialChars
 import de.janniskilian.basket.core.util.function.withIOContext
+import javax.inject.Inject
 
-class CategoryDataClientImpl(localDb: LocalDatabase) : CategoryDataClient {
-
-    private val dao = localDb.categoryDao()
+class CategoryDataClientImpl @Inject constructor(
+    private val dao: RoomCategoryDao
+) : CategoryDataClient {
 
     override suspend fun create(name: String) = withIOContext {
         dao.insert(RoomCategory(name, name.withoutSpecialChars()))

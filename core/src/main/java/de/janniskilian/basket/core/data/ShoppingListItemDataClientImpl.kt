@@ -2,7 +2,7 @@ package de.janniskilian.basket.core.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import de.janniskilian.basket.core.data.localdb.LocalDatabase
+import de.janniskilian.basket.core.data.localdb.dao.RoomShoppingListItemDao
 import de.janniskilian.basket.core.data.localdb.entity.RoomShoppingListItem
 import de.janniskilian.basket.core.data.localdb.transformation.modelToRoom
 import de.janniskilian.basket.core.data.localdb.transformation.roomToModel
@@ -12,10 +12,11 @@ import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
 import de.janniskilian.basket.core.type.domain.ShoppingListItemId
 import de.janniskilian.basket.core.util.function.withIOContext
+import javax.inject.Inject
 
-class ShoppingListItemDataClientImpl(localDb: LocalDatabase) : ShoppingListItemDataClient {
-
-    private val dao = localDb.shoppingListItemDao()
+class ShoppingListItemDataClientImpl @Inject constructor(
+    private val dao: RoomShoppingListItemDao
+) : ShoppingListItemDataClient {
 
     override suspend fun create(
         shoppingListId: ShoppingListId,

@@ -9,7 +9,7 @@
 
         <TextView
             android:id="@+id/title"
-            style="@style/Widget.Basket.ToolbarTitle"/>
+            style="@style/TextAppearance.Basket.ToolbarTitle"/>
     </com.google.android.material.appbar.MaterialToolbar>
 </com.google.android.material.appbar.AppBarLayout>
 

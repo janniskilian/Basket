@@ -1,4 +1,4 @@
-package de.janniskilian.basket.core.testing
+package de.janniskilian.basket.core.test
 
 import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.type.domain.ArticleId

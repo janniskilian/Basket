@@ -1,15 +1,17 @@
 package de.janniskilian.basket.feature.main
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.edit
 import androidx.core.view.children
 import androidx.core.view.forEach
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.R
 import de.janniskilian.basket.core.BaseFragment
-import de.janniskilian.basket.core.BasketApp
 import de.janniskilian.basket.core.KEY_DEFAULT_DATA_IMPORTED
+import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.data.DefaultDataImporter
 import de.janniskilian.basket.core.data.DefaultDataLoader
 import de.janniskilian.basket.core.util.extension.extern.getThemeColor
@@ -20,14 +22,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class OnboardingFragment : BaseFragment() {
 
-    private val appModule get() = (requireActivity().application as BasketApp).appModule
+    @Inject
+    lateinit var sharedPrefs: SharedPreferences
 
-    private val sharedPrefs get() = appModule.androidModule.sharedPrefs
-
-    private val dataClient get() = appModule.dataModule.dataClient
+    @Inject
+    lateinit var dataClient: DataClient
 
     private val locales by lazy {
         resources

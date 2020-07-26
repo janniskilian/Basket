@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
 import de.janniskilian.basket.core.util.extension.extern.onDone
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_add_list_item.*
 
 class AddListItemFragmentSetup(
     private val fragment: AddListItemFragment,
+    private val args: AddListItemFragmentArgs,
     private val viewModel: AddListItemViewModel
 ) {
 
@@ -23,6 +25,8 @@ class AddListItemFragmentSetup(
         get() = fragment.recyclerView.adapter as? ShoppingListItemSuggestionsAdapter
 
     fun run() {
+        viewModel.setShoppingListId(ShoppingListId(args.shoppingListId))
+
         setupRecyclerView()
         setupInputEditText()
         setClickListeners()
