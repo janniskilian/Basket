@@ -2,14 +2,13 @@
 
     <style name="Widget.Basket" parent="android:Widget"/>
 
-    <style name="Widget.Basket.AppBarLayout">
+    <style name="Widget.Basket.AppBarLayout" parent="Widget.MaterialComponents.AppBarLayout.Surface">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/transparent</item>
-        <item name="elevation">0dp</item>
+        <item name="liftOnScroll">true</item>
     </style>
 
-    <style name="Widget.Basket.Toolbar">
+    <style name="Widget.Basket.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="layout_scrollFlags">scroll|enterAlways</item>
@@ -71,8 +70,7 @@
 
     <style name="Widget.Basket.IconButton" parent="Widget.AppCompat.Toolbar.Button.Navigation">
         <item name="android:layout_width">@dimen/increment</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:maxHeight">@dimen/increment</item>
+        <item name="android:layout_height">@dimen/increment</item>
         <item name="tint">?attr/colorControlNormal</item>
     </style>
 

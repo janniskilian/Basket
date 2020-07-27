@@ -53,12 +53,7 @@ class ListsFragment : BaseFragment() {
             adapter = ListsAdapter()
             (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
             val spacing = resources.getDimensionPixelSize(R.dimen.shopping_list_item_spacing)
-            addItemDecoration(
-                ItemSpacingDecoration(
-                    spacing,
-                    RecyclerView.VERTICAL
-                )
-            )
+            addItemDecoration(ItemSpacingDecoration(spacing, RecyclerView.VERTICAL))
             addItemDecoration(
                 EndSpacingDecoration(
                     spacing,
@@ -79,8 +74,8 @@ class ListsFragment : BaseFragment() {
             recyclerView.invalidateItemDecorations()
         }
 
-        emptyGroup.isVisible = shoppingLists.isEmpty()
-        toolbar?.setScrollable(shoppingLists.isEmpty())
+        emptyLayout.isVisible = shoppingLists.isEmpty()
+        toolbar?.setScrollable(shoppingLists.isNotEmpty())
     }
 
     private fun showListPopupMenu(position: Int) {

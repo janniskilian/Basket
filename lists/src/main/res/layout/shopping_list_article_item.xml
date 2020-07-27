@@ -72,6 +72,7 @@
     <ImageButton
         android:id="@+id/infoButton"
         style="@style/Widget.Basket.IconButton"
+        android:layout_height="0dp"
         android:contentDescription="@string/edit_item_button_desc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

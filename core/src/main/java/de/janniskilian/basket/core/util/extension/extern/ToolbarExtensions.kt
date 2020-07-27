@@ -7,7 +7,8 @@ import com.google.android.material.appbar.AppBarLayout
 fun Toolbar.setScrollable(scrollable: Boolean) {
     updateLayoutParams<AppBarLayout.LayoutParams> {
         scrollFlags = if (scrollable) {
-            AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+            AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or
+                    AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
         } else {
             0
         }

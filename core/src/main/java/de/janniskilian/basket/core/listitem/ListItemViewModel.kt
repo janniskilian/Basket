@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.ShoppingListItemId
 import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ListItemViewModel @ViewModelInject constructor(
@@ -27,7 +28,7 @@ class ListItemViewModel @ViewModelInject constructor(
 
     private val _dismiss = SingleLiveEvent<Unit>()
 
-    val shoppingListItem = listItemId.switchMap {
+    private val shoppingListItem = listItemId.switchMap {
         dataClient.shoppingListItem.getLiveData(it)
     }
 
@@ -52,6 +53,16 @@ class ListItemViewModel @ViewModelInject constructor(
 
     fun setListItemId(id: ShoppingListItemId) {
         listItemId.value = id
+
+        viewModelScope.launch {
+            dataClient.shoppingListItem.get(id)?.let {
+                launch(Dispatchers.Main) {
+                    setName(it.name)
+                    setQuantity(it.quantity)
+                    setComment(it.comment)
+                }
+            }
+        }
     }
 
     fun setName(name: String) {
