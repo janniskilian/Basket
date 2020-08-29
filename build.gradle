@@ -39,6 +39,7 @@ subprojects {
     android {
         buildToolsVersion conf.buildTools
         compileSdkVersion conf.targetSdk
+
         defaultConfig {
             minSdkVersion conf.minSdk
             targetSdkVersion conf.targetSdk
@@ -46,6 +47,18 @@ subprojects {
             versionName conf.versionName
             testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         }
+
+        signingConfigs {
+            release {
+                keyAlias System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
+                keyPassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+                storeFile file(System.getenv("HOME") + "/keystores/basket_keystore.jks")
+                storePassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
+                v1SigningEnabled true
+                v2SigningEnabled true
+            }
+        }
+
         buildTypes {
             debug {
                 multiDexEnabled true
@@ -56,8 +69,10 @@ subprojects {
                     shrinkResources true
                 }
                 proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+                signingConfig signingConfigs.release
             }
         }
+
         kotlinOptions {
             jvmTarget = "1.8"
             freeCompilerArgs += [
@@ -65,10 +80,12 @@ subprojects {
                     "-progressive"
             ]
         }
+
         compileOptions {
             sourceCompatibility 1.8
             targetCompatibility 1.8
         }
+
         testOptions {
             unitTests {
                 includeAndroidResources = true
