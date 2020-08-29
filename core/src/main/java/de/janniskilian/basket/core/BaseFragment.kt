@@ -86,7 +86,10 @@ abstract class BaseFragment : Fragment() {
 
     open fun onBackPressed(): Boolean = false
 
-    open fun onFabClicked() {}
+    open fun onFabClicked() {
+        // This is a click listener for the FAB
+        // that should be overridden by fragments where the FAB is displayed.
+    }
 
     fun navigate(directions: NavDirections, navOptions: NavOptions? = null) {
         if (!pendingNavigation) {

@@ -30,7 +30,7 @@
     </style>
 
     <style name="Widget.Basket.EmptyHeadline">
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/three</item>
         <item name="android:layout_marginStart">@dimen/two</item>
@@ -42,7 +42,7 @@
     </style>
 
     <style name="Widget.Basket.EmptyInfo">
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/one</item>
         <item name="android:layout_marginStart">@dimen/two</item>

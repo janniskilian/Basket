@@ -51,7 +51,7 @@ class GetSuggestionsUseCaseTest {
     private val useCase = GetSuggestionsUseCase(dataClient)
 
     @Test
-    fun `ascending ordering by article name`() = runBlocking {
+    fun ascendingOrderingByArticleName() = runBlocking {
         useCase.run(shoppingListId, "").nextValue { result ->
             assertEquals(
                 listOf(
@@ -77,7 +77,7 @@ class GetSuggestionsUseCaseTest {
     }
 
     @Test
-    fun `create article suggestion`() = runBlocking {
+    fun createArticleSuggestion() = runBlocking {
         useCase.run(shoppingListId, "apple").nextValue { result ->
             assertEquals(
                 ShoppingListItemSuggestion(
@@ -98,7 +98,7 @@ class GetSuggestionsUseCaseTest {
     }
 
     @Test
-    fun `add quantity to suggestions`() = runBlocking {
+    fun addQuantityToSuggestions() = runBlocking {
         val formatedQuantity = "2 kg"
 
         useCase.run(shoppingListId, "a 2kg").nextValue { result ->

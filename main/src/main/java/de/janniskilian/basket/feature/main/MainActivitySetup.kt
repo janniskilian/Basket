@@ -35,37 +35,7 @@ class MainActivitySetup(
         }
 
         navHostFragment.childFragmentManager.registerFragmentLifecycleCallbacks(
-            object : FragmentManager.FragmentLifecycleCallbacks() {
-
-                override fun onFragmentStarted(fm: FragmentManager, fragment: Fragment) {
-                    if (fragment is BaseFragment) {
-                        invalidateOptionsMenu()
-
-                        fragment.appBarColor.observe(fragment.viewLifecycleOwner) {
-                            setAppBarColor(it, fragment.animateAppBarColor)
-                        }
-
-                        val fabTextRes = fragment.fabTextRes
-                        if (fabTextRes == null) {
-                            fab.hide()
-                        } else {
-                            fab.show()
-                            uiController.setFabText(fabTextRes)
-                        }
-
-                        appBar.isVisible = fragment.showAppBar
-                        navHost.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                            val marginBottom = if (fragment.showAppBar) {
-                                activity.getThemeDimen(R.attr.actionBarSize)
-                            } else {
-                                0
-                            }
-
-                            updateMargins(bottom = marginBottom)
-                        }
-                    }
-                }
-            },
+            NavHostFragmentLifecycleCallback(),
             false
         )
 
@@ -113,6 +83,49 @@ class MainActivitySetup(
             }
         } else {
             activity.appBar.backgroundTint = ColorStateList.valueOf(color)
+        }
+    }
+
+    private inner class NavHostFragmentLifecycleCallback :
+        FragmentManager.FragmentLifecycleCallbacks() {
+
+        override fun onFragmentStarted(fm: FragmentManager, fragment: Fragment) {
+            if (fragment is BaseFragment) {
+                activity.invalidateOptionsMenu()
+
+                updateNavHostMargins(fragment)
+                updateAppBar(fragment)
+                updateFab(fragment)
+            }
+        }
+
+        private fun updateNavHostMargins(fragment: BaseFragment) {
+            activity.navHost.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                val bottom = if (fragment.showAppBar) {
+                    activity.getThemeDimen(R.attr.actionBarSize)
+                } else {
+                    0
+                }
+                updateMargins(bottom = bottom)
+            }
+        }
+
+        private fun updateAppBar(fragment: BaseFragment) {
+            activity.appBar.isVisible = fragment.showAppBar
+
+            fragment.appBarColor.observe(fragment.viewLifecycleOwner) {
+                setAppBarColor(it, fragment.animateAppBarColor)
+            }
+        }
+
+        private fun updateFab(fragment: BaseFragment) {
+            val fabTextRes = fragment.fabTextRes
+            if (fabTextRes == null) {
+                activity.fab.hide()
+            } else {
+                activity.fab.show()
+                uiController.setFabText(fabTextRes)
+            }
         }
     }
 }

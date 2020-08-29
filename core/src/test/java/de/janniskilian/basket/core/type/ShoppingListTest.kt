@@ -8,7 +8,7 @@ import kotlin.test.assertEquals
 class ShoppingListTest {
 
     @Test
-    fun `test checkedItemCount`() {
+    fun testCheckedItemCount() {
         val list = createTestShoppingList().let {
             val item1 =
                 createTestShoppingListItem(

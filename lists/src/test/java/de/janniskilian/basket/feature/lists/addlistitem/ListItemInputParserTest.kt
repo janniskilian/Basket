@@ -8,7 +8,7 @@ class ListItemInputParserTest {
     private val parser = ListItemInputParser()
 
     @Test
-    fun `parse input with name only`() {
+    fun parseInputWithNameOnly() {
         checkResult("Apples", "Apples")
         checkResult("Apple Pie", "Apple Pie")
         checkResult("Apple Pie   ", "Apple Pie")
@@ -20,7 +20,7 @@ class ListItemInputParserTest {
     }
 
     @Test
-    fun `parse input with name and quantity`() {
+    fun parseInputWithNameAndQuantity() {
         checkResult("Bananas 2", "Bananas", "2")
         checkResult("Bananas, 2", "Bananas", "2")
         checkResult("Banana Bread 2", "Banana Bread", "2")
@@ -31,7 +31,7 @@ class ListItemInputParserTest {
     }
 
     @Test
-    fun `parse input with name and quantity and unit`() {
+    fun parseInputWithNameAndQuantityAndUnit() {
         checkResult("Clementines 2kg", "Clementines", "2", "kg")
         checkResult("Clementines 2 kg", "Clementines", "2", "kg")
         checkResult("Clementines, 2kg", "Clementines", "2", "kg")

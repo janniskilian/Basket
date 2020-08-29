@@ -5,8 +5,7 @@ import android.util.AttributeSet
 import android.view.KeyEvent
 import androidx.appcompat.widget.AppCompatEditText
 
-class EnhancedEditText(context: Context?, attrs: AttributeSet?) :
-    AppCompatEditText(context, attrs) {
+class EnhancedEditText(context: Context, attrs: AttributeSet?) : AppCompatEditText(context, attrs) {
 
     var backPressedListener: (() -> Unit)? = null
 

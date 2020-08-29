@@ -13,7 +13,7 @@ buildscript {
 
 plugins {
     id "com.github.ben-manes.versions" version "0.29.0"
-    id "io.gitlab.arturbosch.detekt" version "1.10.0"
+    id "io.gitlab.arturbosch.detekt" version "1.12.0"
 }
 
 allprojects {
@@ -81,7 +81,6 @@ subprojects {
     dependencies {
         implementation fileTree(dir: "libs", include: ["*.jar"])
 
-        implementation deps.kotlin.stdlib
         implementation deps.kotlin.coroutines
         implementation deps.kotlin.coroutinesAndroid
 

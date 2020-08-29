@@ -49,16 +49,12 @@ class DefaultDataLoader(context: Context, locale: Locale = Locale.getDefault()) 
             var name: String? = null
             var categoryId: Long? = null
 
-            while (reader.hasNext()) {
+            while (reader.hasNext() && (name == null || categoryId == null)) {
                 when (reader.nextName()) {
                     NAME -> name = reader.nextString()
 
-                    CATEGORY_ID -> {
-                        if (reader.peek() == JsonToken.NUMBER) {
-                            categoryId = reader.nextLong()
-                        } else {
-                            reader.skipValue()
-                        }
+                    CATEGORY_ID -> readArticleCategoryId(reader)?.let {
+                        categoryId = it
                     }
 
                     else -> reader.skipValue()
@@ -72,6 +68,14 @@ class DefaultDataLoader(context: Context, locale: Locale = Locale.getDefault()) 
             }
         }
     }
+
+    private fun readArticleCategoryId(reader: JsonReader): Long? =
+        if (reader.peek() == JsonToken.NUMBER) {
+            reader.nextLong()
+        } else {
+            reader.skipValue()
+            null
+        }
 
     private inline fun <T> readArray(
         @RawRes resId: Int,

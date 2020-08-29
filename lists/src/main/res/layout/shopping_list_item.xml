@@ -11,6 +11,7 @@
     android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
     app:cardElevation="@dimen/card_elevation"
     app:cardMaxElevation="@dimen/card_elevation"
+    app:strokeColor="@color/stroke_shade"
     app:strokeWidth="@dimen/card_border_width"
     tools:cardBackgroundColor="@color/indigo">
 
