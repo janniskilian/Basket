@@ -55,13 +55,15 @@ class ListItemViewModel @ViewModelInject constructor(
         listItemId.value = id
 
         viewModelScope.launch {
-            dataClient.shoppingListItem.get(id)?.let {
-                launch(Dispatchers.Main) {
-                    setName(it.name)
-                    setQuantity(it.quantity)
-                    setComment(it.comment)
+            dataClient.shoppingListItem
+                .get(id)
+                ?.let {
+                    launch(Dispatchers.Main) {
+                        setName(it.name)
+                        setQuantity(it.quantity)
+                        setComment(it.comment)
+                    }
                 }
-            }
         }
     }
 

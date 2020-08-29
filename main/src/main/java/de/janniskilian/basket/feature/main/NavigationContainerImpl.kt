@@ -49,7 +49,9 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
     }
 
     override fun dismissSnackbar() {
-        snackbar?.invoke()?.dismiss()
+        snackbar
+            ?.invoke()
+            ?.dismiss()
     }
 
     override fun attachSearchBar(viewModel: SearchBarViewModel) {

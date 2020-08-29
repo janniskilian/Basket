@@ -19,7 +19,9 @@ class CreateListViewModelObserver(
             error.observe(fragment.viewLifecycleOwner, ::renderError)
             startList.observe(fragment.viewLifecycleOwner, ::startListFragment)
             dismiss.observe(fragment.viewLifecycleOwner) {
-                fragment.findNavController().navigateUp()
+                fragment
+                    .findNavController()
+                    .navigateUp()
             }
         }
     }

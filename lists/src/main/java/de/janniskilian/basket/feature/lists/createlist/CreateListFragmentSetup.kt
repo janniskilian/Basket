@@ -18,7 +18,9 @@ class CreateListFragmentSetup(
     private val viewModel: CreateListViewModel
 ) {
 
-    private val shoppingListId = args.shoppingListId.minusOneAsNull()?.let(::ShoppingListId)
+    private val shoppingListId = args.shoppingListId
+        .minusOneAsNull()
+        ?.let(::ShoppingListId)
 
     private val viewModelObserver = CreateListViewModelObserver(fragment, viewModel)
 

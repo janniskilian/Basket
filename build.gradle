@@ -12,8 +12,8 @@ buildscript {
 }
 
 plugins {
-    id "com.github.ben-manes.versions" version "0.29.0"
-    id "io.gitlab.arturbosch.detekt" version "1.12.0"
+    id "io.gitlab.arturbosch.detekt" version "$detektVersion"
+    id "com.github.ben-manes.versions" version "$versionsVersion"
 }
 
 allprojects {
@@ -22,6 +22,12 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+tasks.named("dependencyUpdates").configure {
+    rejectVersionIf {
+        isNonStable(it.candidate.version) && !isNonStable(it.currentVersion)
+    }
 }
 
 subprojects {

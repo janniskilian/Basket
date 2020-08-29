@@ -30,7 +30,9 @@ class ArticleDataClientImpl @Inject constructor(
     }
 
     override suspend fun get(articleId: ArticleId): Article? = withIOContext {
-        dao.select(articleId.value)?.let(::roomToModel)
+        dao
+            .select(articleId.value)
+            ?.let(::roomToModel)
     }
 
     override fun get(

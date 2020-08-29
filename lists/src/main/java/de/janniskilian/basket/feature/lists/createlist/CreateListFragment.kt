@@ -31,9 +31,11 @@ class CreateListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        args.shoppingListId.minusOneAsNull()?.let {
-            viewModel.setShoppingListId(ShoppingListId(it))
-        }
+        args.shoppingListId
+            .minusOneAsNull()
+            ?.let {
+                viewModel.setShoppingListId(ShoppingListId(it))
+            }
         setup.run()
     }
 }

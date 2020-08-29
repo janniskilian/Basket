@@ -50,10 +50,12 @@ class CreateListViewModel @ViewModelInject constructor(
         shoppingListId = id
 
         viewModelScope.launch(Dispatchers.Main) {
-            dataClient.shoppingList.get(id)?.let {
-                setName(it.name)
-                setSelectedColor(it.color)
-            }
+            dataClient.shoppingList
+                .get(id)
+                ?.let {
+                    setName(it.name)
+                    setSelectedColor(it.color)
+                }
         }
     }
 

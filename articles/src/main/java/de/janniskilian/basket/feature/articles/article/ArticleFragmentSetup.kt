@@ -18,7 +18,9 @@ class ArticleFragmentSetup(
     private val viewModel: ArticleViewModel
 ) {
 
-    private val articleId = args.articleId.minusOneAsNull()?.let(::ArticleId)
+    private val articleId = args.articleId
+        .minusOneAsNull()
+        ?.let(::ArticleId)
 
     private val viewModelObserver = ArticleViewModelObserver(fragment, viewModel)
 

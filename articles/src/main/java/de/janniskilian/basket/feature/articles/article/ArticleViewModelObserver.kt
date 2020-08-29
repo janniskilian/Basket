@@ -30,7 +30,9 @@ class ArticleViewModelObserver(
             mode.observe(fragment.viewLifecycleOwner, ::renderMode)
             error.observe(fragment.viewLifecycleOwner, ::renderError)
             dismiss.observe(fragment.viewLifecycleOwner) {
-                fragment.findNavController().popBackStack()
+                fragment
+                    .findNavController()
+                    .popBackStack()
             }
         }
     }

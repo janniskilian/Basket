@@ -30,14 +30,12 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? =
-        inflater.inflate(
-            R.layout.fragment_bottom_navigation_drawer,
-            container,
-            false
-        ).also {
-            setupBackground(it)
-            createNavigationItems(it)
-        }
+        inflater
+            .inflate(R.layout.fragment_bottom_navigation_drawer, container, false)
+            .also {
+                setupBackground(it)
+                createNavigationItems(it)
+            }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,15 +45,19 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
     private fun createNavigationItems(view: View) {
         val container = view.navigationItemContainer
 
-        MainPage.values().forEach { page ->
-            layoutInflater.inflate(R.layout.navigation_item, container, false).run {
-                id = page.navId
-                title.setText(page.titleRes)
-                icon.setImageResource(page.iconRes)
-                setOnClickListener { itemClicked(id) }
-                container.addView(this)
+        MainPage
+            .values()
+            .forEach { page ->
+                layoutInflater
+                    .inflate(R.layout.navigation_item, container, false)
+                    .run {
+                        id = page.navId
+                        title.setText(page.titleRes)
+                        icon.setImageResource(page.iconRes)
+                        setOnClickListener { itemClicked(id) }
+                        container.addView(this)
+                    }
             }
-        }
     }
 
     private fun setSelectedItem(@IdRes navId: Int) {
@@ -65,7 +67,8 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
     }
 
     private fun itemClicked(navId: Int) {
-        val options = NavOptions.Builder()
+        val options = NavOptions
+            .Builder()
             .setPopUpTo(currentDestinationId, true)
             .setEnterAnim(R.anim.nav_default_enter_anim)
             .setExitAnim(R.anim.nav_default_exit_anim)

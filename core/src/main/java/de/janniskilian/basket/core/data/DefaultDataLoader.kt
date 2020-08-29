@@ -84,7 +84,11 @@ class DefaultDataLoader(context: Context, locale: Locale = Locale.getDefault()) 
         val list = mutableListOf<T>()
         var index = 0
 
-        JsonReader(localizedContext.resources.openRawResource(resId).reader()).use { reader ->
+        JsonReader(
+            localizedContext.resources
+                .openRawResource(resId)
+                .reader()
+        ).use { reader ->
             reader.beginArray()
 
             while (reader.hasNext()) {

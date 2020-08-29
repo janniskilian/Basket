@@ -16,7 +16,9 @@ class CategoryViewModelObserver(
             name.observe(fragment.viewLifecycleOwner, ::renderName)
             error.observe(fragment.viewLifecycleOwner, ::renderError)
             dismiss.observe(fragment.viewLifecycleOwner) {
-                fragment.findNavController().navigateUp()
+                fragment
+                    .findNavController()
+                    .navigateUp()
             }
         }
     }

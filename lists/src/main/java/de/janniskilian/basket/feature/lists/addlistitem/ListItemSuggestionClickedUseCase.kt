@@ -34,11 +34,13 @@ class ListItemSuggestionClickedUseCase(private val dataClient: DataClient) {
         shoppingListId: ShoppingListId,
         suggestion: ShoppingListItemSuggestion
     ) {
-        dataClient.article.create(
-            suggestion.article.name,
-            suggestion.article.category
-        )?.let {
-            createShoppingListItem(shoppingListId, it, suggestion.quantity)
-        }
+        dataClient.article
+            .create(
+                suggestion.article.name,
+                suggestion.article.category
+            )
+            ?.let {
+                createShoppingListItem(shoppingListId, it, suggestion.quantity)
+            }
     }
 }

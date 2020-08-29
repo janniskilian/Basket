@@ -22,11 +22,7 @@ class ListsAdapter : ListAdapter<ShoppingList, ListsAdapter.ViewHolder>(
         ViewHolder(
             LayoutInflater
                 .from(parent.context)
-                .inflate(
-                    R.layout.shopping_list_item,
-                    parent,
-                    false
-                )
+                .inflate(R.layout.shopping_list_item, parent, false)
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

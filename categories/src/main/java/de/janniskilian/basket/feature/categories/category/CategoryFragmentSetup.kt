@@ -14,7 +14,9 @@ class CategoryFragmentSetup(
     private val viewModel: CategoryViewModel
 ) {
 
-    private val categoryId = args.categoryId.minusOneAsNull()?.let(::CategoryId)
+    private val categoryId = args.categoryId
+        .minusOneAsNull()
+        ?.let(::CategoryId)
 
     private val viewModelObserver = CategoryViewModelObserver(fragment, viewModel)
 

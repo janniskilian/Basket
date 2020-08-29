@@ -41,7 +41,9 @@ class ShoppingListItemDataClientImpl @Inject constructor(
     }
 
     override suspend fun get(shoppingListItemId: ShoppingListItemId) = withIOContext {
-        dao.select(shoppingListItemId.value)?.let(::roomToModel)
+        dao
+            .select(shoppingListItemId.value)
+            ?.let(::roomToModel)
     }
 
     override fun getLiveData(shoppingListItemId: ShoppingListItemId): LiveData<ShoppingListItem> =

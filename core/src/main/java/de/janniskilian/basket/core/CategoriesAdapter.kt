@@ -22,11 +22,7 @@ class CategoriesAdapter : ListAdapter<CategoriesAdapter.Item, CategoriesAdapter.
         ViewHolder(
             LayoutInflater
                 .from(parent.context)
-                .inflate(
-                    R.layout.category_item,
-                    parent,
-                    false
-                )
+                .inflate(R.layout.category_item, parent, false)
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

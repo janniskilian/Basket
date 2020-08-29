@@ -22,11 +22,7 @@ class ArticlesAdapter : ListAdapter<Article, ArticlesAdapter.ViewHolder>(
         ViewHolder(
             LayoutInflater
                 .from(parent.context)
-                .inflate(
-                    R.layout.article_item,
-                    parent,
-                    false
-                )
+                .inflate(R.layout.article_item, parent, false)
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

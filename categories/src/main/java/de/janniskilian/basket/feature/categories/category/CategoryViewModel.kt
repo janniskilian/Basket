@@ -37,9 +37,11 @@ class CategoryViewModel @ViewModelInject constructor(
         categoryId = id
 
         viewModelScope.launch(Dispatchers.Main) {
-            dataClient.category.getSuspend(id)?.let {
-                setName(it.name)
-            }
+            dataClient.category
+                .getSuspend(id)
+                ?.let {
+                    setName(it.name)
+                }
         }
     }
 

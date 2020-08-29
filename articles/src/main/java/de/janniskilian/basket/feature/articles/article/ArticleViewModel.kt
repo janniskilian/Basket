@@ -37,9 +37,11 @@ class ArticleViewModel @ViewModelInject constructor(
     val category: LiveData<Category?>
         get() = _category
 
-    val categories = dataClient.category.get().map {
-        it.addToFront(null)
-    }
+    val categories = dataClient.category
+        .get()
+        .map {
+            it.addToFront(null)
+        }
 
     val mode: LiveData<ArticleFragmentMode>
         get() = _mode
@@ -54,10 +56,12 @@ class ArticleViewModel @ViewModelInject constructor(
         articleId = id
 
         viewModelScope.launch {
-            dataClient.article.get(id)?.let {
-                setName(it.name)
-                setCategory(it.category)
-            }
+            dataClient.article
+                .get(id)
+                ?.let {
+                    setName(it.name)
+                    setCategory(it.category)
+                }
         }
     }
 

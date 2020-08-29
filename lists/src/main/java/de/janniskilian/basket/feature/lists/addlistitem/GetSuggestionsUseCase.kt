@@ -20,7 +20,9 @@ class GetSuggestionsUseCase(private val dataClient: DataClient) {
         val parsedInput = parser.parse(input)
         val articles = dataClient.article.get(parsedInput.name, shoppingListId)
         val amount = parsedInput.quantity.orEmpty() +
-                parsedInput.unit?.let { " $it" }.orEmpty()
+                parsedInput.unit
+                    ?.let { " $it" }
+                    .orEmpty()
 
         return articles.map { result ->
             val itemSuggestions = result

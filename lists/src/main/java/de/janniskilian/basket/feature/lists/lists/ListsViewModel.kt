@@ -26,10 +26,12 @@ class ListsViewModel @ViewModelInject constructor(
         get() = _shoppingListDeleted
 
     fun deleteList(position: Int) {
-        shoppingLists.value?.getOrNull(position)?.let {
-            viewModelScope.launch { dataClient.shoppingList.delete(it.id) }
-            _shoppingListDeleted.setValue(it)
-        }
+        shoppingLists.value
+            ?.getOrNull(position)
+            ?.let {
+                viewModelScope.launch { dataClient.shoppingList.delete(it.id) }
+                _shoppingListDeleted.setValue(it)
+            }
     }
 
     fun restoreShoppingList() {

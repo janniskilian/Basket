@@ -67,16 +67,14 @@ class OnboardingFragment : BaseFragment() {
         setClickListeners()
 
         locales.forEach { locale ->
-            val item = layoutInflater.inflate(
-                R.layout.language_item,
-                radioGroup,
-                false
-            ).apply {
-                id = locale.hashCode()
-                name.text = locale.displayLanguage
+            val item = layoutInflater
+                .inflate(R.layout.language_item, radioGroup, false)
+                .apply {
+                    id = locale.hashCode()
+                    name.text = locale.displayLanguage
 
-                setOnClickListener { selectedLocale = locale }
-            }
+                    setOnClickListener { selectedLocale = locale }
+                }
 
             radioGroup.addView(item)
         }

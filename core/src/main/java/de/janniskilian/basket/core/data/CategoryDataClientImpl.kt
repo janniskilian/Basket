@@ -20,7 +20,9 @@ class CategoryDataClientImpl @Inject constructor(
     }
 
     override suspend fun create(categories: List<RoomCategory>) = withIOContext {
-        dao.insert(categories).map(::CategoryId)
+        dao
+            .insert(categories)
+            .map(::CategoryId)
     }
 
     override fun get(categoryId: CategoryId) =
@@ -29,7 +31,9 @@ class CategoryDataClientImpl @Inject constructor(
             .map { roomToModel(it) }
 
     override suspend fun getSuspend(categoryId: CategoryId) = withIOContext {
-        dao.selectSuspend(categoryId.value)?.let(::roomToModel)
+        dao
+            .selectSuspend(categoryId.value)
+            ?.let(::roomToModel)
     }
 
     override fun get(name: String) =

@@ -79,34 +79,39 @@ class ListsFragment : BaseFragment() {
     }
 
     private fun showListPopupMenu(position: Int) {
-        recyclerView.findViewHolderForAdapterPosition(position)?.let { viewHolder ->
-            with(
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-                    PopupMenu(
-                        requireContext(),
-                        viewHolder.itemView.findViewById(R.id.moreButton),
-                        0,
-                        androidx.appcompat.R.attr.actionOverflowMenuStyle,
-                        0
-                    )
-                } else {
-                    PopupMenu(requireContext(), viewHolder.itemView.findViewById(R.id.moreButton))
-                }
-            ) {
-                inflate(R.menu.shopping_list_item)
-                setOnMenuItemClickListener {
-                    when (it.itemId) {
-                        R.id.action_edit_list -> editList(position)
-                        R.id.action_delete_list -> {
-                            viewModel.deleteList(position)
-                        }
+        recyclerView
+            .findViewHolderForAdapterPosition(position)
+            ?.let { viewHolder ->
+                with(
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+                        PopupMenu(
+                            requireContext(),
+                            viewHolder.itemView.findViewById(R.id.moreButton),
+                            0,
+                            androidx.appcompat.R.attr.actionOverflowMenuStyle,
+                            0
+                        )
+                    } else {
+                        PopupMenu(
+                            requireContext(),
+                            viewHolder.itemView.findViewById(R.id.moreButton)
+                        )
                     }
+                ) {
+                    inflate(R.menu.shopping_list_item)
+                    setOnMenuItemClickListener {
+                        when (it.itemId) {
+                            R.id.action_edit_list -> editList(position)
+                            R.id.action_delete_list -> {
+                                viewModel.deleteList(position)
+                            }
+                        }
 
-                    true
+                        true
+                    }
+                    show()
                 }
-                show()
             }
-        }
     }
 
     private fun showListDeletedSnackbar() {
@@ -116,14 +121,18 @@ class ListsFragment : BaseFragment() {
     }
 
     private fun startList(position: Int) {
-        viewModel.shoppingLists.value?.getOrNull(position)?.let {
-            navigate(ListsFragmentDirections.actionListsFragmentToListFragment(it.id.value))
-        }
+        viewModel.shoppingLists.value
+            ?.getOrNull(position)
+            ?.let {
+                navigate(ListsFragmentDirections.actionListsFragmentToListFragment(it.id.value))
+            }
     }
 
     private fun editList(position: Int) {
-        viewModel.shoppingLists.value?.getOrNull(position)?.let {
-            navigate(ListsFragmentDirections.actionListsFragmentToCreateListFragment(it.id.value))
-        }
+        viewModel.shoppingLists.value
+            ?.getOrNull(position)
+            ?.let {
+                navigate(ListsFragmentDirections.actionListsFragmentToCreateListFragment(it.id.value))
+            }
     }
 }

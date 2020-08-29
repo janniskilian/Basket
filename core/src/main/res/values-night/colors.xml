@@ -6,6 +6,7 @@
     <color name="secondary">#fff64f</color>
     <color name="secondary_dark">#ffc400</color>
 
+    <color name="shade_primary">#1f6abf69</color>
     <color name="stroke_shade">#33ffffff</color>
 
     <color name="orange">#ff833a</color>

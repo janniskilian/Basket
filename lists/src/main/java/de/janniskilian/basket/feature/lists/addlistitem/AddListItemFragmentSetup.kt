@@ -84,7 +84,9 @@ class AddListItemFragmentSetup(
         suggestionsAdapter?.clickListener = viewModel::suggestionItemClicked
 
         fragment.upButton.setOnClickListener {
-            fragment.findNavController().popBackStack()
+            fragment
+                .findNavController()
+                .popBackStack()
         }
 
         fragment.searchBarSpeechInputButton.setOnClickListener {

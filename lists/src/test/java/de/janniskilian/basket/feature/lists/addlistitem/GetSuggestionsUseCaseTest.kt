@@ -52,85 +52,97 @@ class GetSuggestionsUseCaseTest {
 
     @Test
     fun ascendingOrderingByArticleName() = runBlocking {
-        useCase.run(shoppingListId, "").nextValue { result ->
-            assertEquals(
-                listOf(
+        useCase
+            .run(shoppingListId, "")
+            .nextValue { result ->
+                assertEquals(
+                    listOf(
+                        ShoppingListItemSuggestion(
+                            apples,
+                            existingListItem = true,
+                            existingArticle = true
+                        ),
+                        ShoppingListItemSuggestion(
+                            bananas,
+                            existingListItem = false,
+                            existingArticle = true
+                        ),
+                        ShoppingListItemSuggestion(
+                            clementines,
+                            existingListItem = false,
+                            existingArticle = true
+                        )
+                    ),
+                    result
+                )
+            }
+    }
+
+    @Test
+    fun createArticleSuggestion() = runBlocking {
+        useCase
+            .run(shoppingListId, "apple")
+            .nextValue { result ->
+                assertEquals(
+                    ShoppingListItemSuggestion(
+                        Article(ArticleId(0), "apple", null),
+                        existingListItem = false,
+                        existingArticle = false
+                    ),
+                    result.first()
+                )
+            }
+
+        useCase
+            .run(shoppingListId, apples.name)
+            .nextValue { result ->
+                assertEquals(
                     ShoppingListItemSuggestion(
                         apples,
                         existingListItem = true,
                         existingArticle = true
                     ),
-                    ShoppingListItemSuggestion(
-                        bananas,
-                        existingListItem = false,
-                        existingArticle = true
-                    ),
-                    ShoppingListItemSuggestion(
-                        clementines,
-                        existingListItem = false,
-                        existingArticle = true
-                    )
-                ),
-                result
-            )
-        }
-    }
-
-    @Test
-    fun createArticleSuggestion() = runBlocking {
-        useCase.run(shoppingListId, "apple").nextValue { result ->
-            assertEquals(
-                ShoppingListItemSuggestion(
-                    Article(ArticleId(0), "apple", null),
-                    existingListItem = false,
-                    existingArticle = false
-                ),
-                result.first()
-            )
-        }
-
-        useCase.run(shoppingListId, apples.name).nextValue { result ->
-            assertEquals(
-                ShoppingListItemSuggestion(apples, existingListItem = true, existingArticle = true),
-                result.first()
-            )
-        }
+                    result.first()
+                )
+            }
     }
 
     @Test
     fun addQuantityToSuggestions() = runBlocking {
         val formatedQuantity = "2 kg"
 
-        useCase.run(shoppingListId, "a 2kg").nextValue { result ->
-            assertEquals(
-                listOf(
-                    ShoppingListItemSuggestion(
-                        Article(ArticleId(0), "a", null),
-                        existingListItem = false,
-                        existingArticle = false,
-                        quantity = formatedQuantity
+        useCase
+            .run(shoppingListId, "a 2kg")
+            .nextValue { result ->
+                assertEquals(
+                    listOf(
+                        ShoppingListItemSuggestion(
+                            Article(ArticleId(0), "a", null),
+                            existingListItem = false,
+                            existingArticle = false,
+                            quantity = formatedQuantity
+                        ),
+                        ShoppingListItemSuggestion(
+                            apples,
+                            existingListItem = true,
+                            existingArticle = true,
+                            quantity = formatedQuantity
+                        ),
+                        ShoppingListItemSuggestion(
+                            bananas,
+                            existingListItem = false,
+                            existingArticle = true,
+                            quantity = formatedQuantity
+                        ),
+                        ShoppingListItemSuggestion(
+                            clementines,
+                            existingListItem = false,
+                            existingArticle = true,
+                            quantity = formatedQuantity
+                        )
                     ),
-                    ShoppingListItemSuggestion(
-                        apples,
-                        existingListItem = true,
-                        existingArticle = true,
-                        quantity = formatedQuantity
-                    ),
-                    ShoppingListItemSuggestion(
-                        bananas,
-                        existingListItem = false,
-                        existingArticle = true,
-                        quantity = formatedQuantity
-                    ),
-                    ShoppingListItemSuggestion(
-                        clementines,
-                        existingListItem = false,
-                        existingArticle = true,
-                        quantity = formatedQuantity
-                    )
-                ),
-                result
-            )
-        }
+                    result
+                )
+            }
     }
 }
