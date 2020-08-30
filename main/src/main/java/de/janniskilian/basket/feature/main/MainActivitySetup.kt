@@ -3,6 +3,7 @@ package de.janniskilian.basket.feature.main
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.content.res.ColorStateList
+import android.os.Build
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.core.content.ContextCompat
@@ -27,6 +28,7 @@ class MainActivitySetup(
         setSupportActionBar(appBar)
         setupNavigation()
         setupFab()
+        setupWindowInsets()
     }
 
     private fun setupNavigation() = with(activity) {
@@ -60,6 +62,16 @@ class MainActivitySetup(
 
     private fun setupFab() = with(activity) {
         fab.setOnClickListener { currentFragment?.onFabClicked() }
+    }
+
+    private fun setupWindowInsets() = with(activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+
+            val handler = WindowInsetsHandler()
+            coordinatorLayout.setWindowInsetsAnimationCallback(handler)
+            coordinatorLayout.setOnApplyWindowInsetsListener(handler)
+        }
     }
 
     private fun setAppBarColor(color: Int, animate: Boolean) {
