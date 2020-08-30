@@ -35,7 +35,7 @@ class OnboardingFragment : BaseFragment() {
 
     private val locales by lazy {
         resources
-            .getStringArray(R.array.presets_languages)
+            .getStringArray(R.array.onboarding_presets_languages)
             .map { Locale.forLanguageTag(it) }
     }
 
@@ -53,7 +53,7 @@ class OnboardingFragment : BaseFragment() {
 
     override val layoutRes get() = R.layout.fragment_onboarding
 
-    override val showAppBar get() = false
+    override val isShowAppBar get() = false
 
     override val appBarColor by lazy {
         createMutableLiveData(requireContext().getThemeColor(android.R.attr.colorBackground))

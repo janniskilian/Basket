@@ -65,22 +65,22 @@ class ArticleViewModelObserver(
         toggleRecyclerView(mode != EDIT)
     }
 
-    private fun renderError(error: Boolean) {
-        fragment.nameLayout.error = if (error) {
+    private fun renderError(isError: Boolean) {
+        fragment.nameLayout.error = if (isError) {
             fragment.getString(R.string.article_name_error)
         } else {
             null
         }
     }
 
-    private fun toggleRecyclerView(visible: Boolean) {
-        if (visible == fragment.recyclerView.isVisible) return
+    private fun toggleRecyclerView(isVisible: Boolean) {
+        if (isVisible == fragment.recyclerView.isVisible) return
 
         TransitionManager.beginDelayedTransition(
             fragment.content,
             AutoTransition().setDuration(ANIMATION_DURATION_S)
         )
-        fragment.constraintLayout.isVisible = !visible
-        fragment.recyclerView.isVisible = visible
+        fragment.constraintLayout.isVisible = !isVisible
+        fragment.recyclerView.isVisible = isVisible
     }
 }

@@ -74,8 +74,8 @@ class MainActivitySetup(
         }
     }
 
-    private fun setAppBarColor(color: Int, animate: Boolean) {
-        if (animate && activity.window.navigationBarColor != color) {
+    private fun setAppBarColor(color: Int, isAnimate: Boolean) {
+        if (isAnimate && activity.window.navigationBarColor != color) {
             val initialColor = activity.appBar.backgroundTint?.defaultColor
                 ?: ContextCompat.getColor(activity, R.color.primary)
 
@@ -113,7 +113,7 @@ class MainActivitySetup(
 
         private fun updateNavHostMargins(fragment: BaseFragment) {
             activity.navHost.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                val bottom = if (fragment.showAppBar) {
+                val bottom = if (fragment.isShowAppBar) {
                     activity.getThemeDimen(R.attr.actionBarSize)
                 } else {
                     0
@@ -123,7 +123,7 @@ class MainActivitySetup(
         }
 
         private fun updateAppBar(fragment: BaseFragment) {
-            activity.appBar.isVisible = fragment.showAppBar
+            activity.appBar.isVisible = fragment.isShowAppBar
 
             fragment.appBarColor.observe(fragment.viewLifecycleOwner) {
                 setAppBarColor(it, fragment.animateAppBarColor)

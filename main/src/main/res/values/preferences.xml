@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="preferences_title">Settings</string>
+    <string name="preferences_title_category_lists">Lists</string>
+    <string name="preferences_title_prevent_sleep">Prevent sleep</string>
+    <string name="preferences_summary_prevent_sleep">Prevent the screen from automatically turning off while a list is displayed</string>
+    <string name="preferences_title_compact_lists">Display lists compactly</string>
+    <string name="preferences_title_category_day_night_mode">Night Mode</string>
+    <string name="preferences_title_system_day_night_mode">Use night mode system setting</string>
+    <string name="preferences_title_day_night_mode">Enable night mode</string>
+
+</resources>

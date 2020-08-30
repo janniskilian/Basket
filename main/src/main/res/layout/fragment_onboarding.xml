@@ -14,8 +14,9 @@
         android:paddingBottom="@dimen/two">
 
         <ImageView
-            android:id="@+id/image"
-            style="@style/Widget.Basket.EmptyImage"
+            android:id="@+id/languageImage"
+            style="@style/Widget.Basket.LeadImage"
+            android:contentDescription="@string/onboarding_language_image_desc"
             app:layout_constraintBottom_toTopOf="@id/headline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,12 +29,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/three"
-            android:text="@string/import_presets_headline"
+            android:text="@string/onboarding_headline"
             android:textAppearance="@style/TextAppearance.Basket.Headline"
             app:layout_constraintBottom_toTopOf="@id/info"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image"/>
+            app:layout_constraintTop_toBottomOf="@+id/languageImage"/>
 
         <TextView
             android:id="@+id/info"
@@ -43,7 +44,7 @@
             android:layout_marginTop="@dimen/one"
             android:layout_marginEnd="@dimen/two"
             android:gravity="center_horizontal"
-            android:text="@string/import_presets_info"
+            android:text="@string/onboarding_info"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintBottom_toTopOf="@id/radioGroup"
             app:layout_constraintTop_toBottomOf="@id/headline"/>
@@ -64,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/three"
-            android:text="@string/import_presets_button"
+            android:text="@string/onboarding_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -13,27 +13,27 @@ class ShoppingListTest {
             val item1 =
                 createTestShoppingListItem(
                     it,
-                    checked = false
+                    isChecked = false
                 )
             val item2 =
                 createTestShoppingListItem(
                     it,
-                    checked = false
+                    isChecked = false
                 )
             val item3 =
                 createTestShoppingListItem(
                     it,
-                    checked = false
+                    isChecked = false
                 )
             val item4 =
                 createTestShoppingListItem(
                     it,
-                    checked = true
+                    isChecked = true
                 )
             val item5 =
                 createTestShoppingListItem(
                     it,
-                    checked = true
+                    isChecked = true
                 )
 
             it.copy(

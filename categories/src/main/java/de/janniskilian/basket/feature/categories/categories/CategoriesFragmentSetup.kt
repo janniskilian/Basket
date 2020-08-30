@@ -16,43 +16,39 @@ class CategoriesFragmentSetup(
     private val viewModel: CategoriesViewModel
 ) {
 
-    private val categoriesAdapter get() = fragment.recyclerView.adapter as? CategoriesAdapter
+    private val categoriesAdapter
+        get() = fragment.recyclerView.adapter as? CategoriesAdapter
 
     fun run() {
         setupRecyclerView()
 
         categoriesAdapter?.clickListener = ::categoryClicked
 
-        viewModel.categories.observe(fragment.viewLifecycleOwner) { categories ->
-            categoriesAdapter?.submitList(
-                categories.map { CategoriesAdapter.Item(it) }
-            ) {
-                fragment.recyclerView.invalidateItemDecorations()
-            }
-        }
+        viewModel.categories.observe(fragment.viewLifecycleOwner, ::renderRecyclerView)
 
         fragment.navigationContainer.attachSearchBar(viewModel)
     }
 
-    private fun setupRecyclerView() {
-        with(fragment.recyclerView) {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(fragment.requireContext())
-            adapter = CategoriesAdapter()
-            (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
-            addItemDecoration(
-                DividerItemDecoration(
-                    fragment.requireContext(),
-                    DividerItemDecoration.VERTICAL
-                )
+    private fun setupRecyclerView() = with(fragment.recyclerView) {
+        setHasFixedSize(true)
+        layoutManager = LinearLayoutManager(context)
+        adapter = CategoriesAdapter()
+        (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
+        addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        addItemDecoration(
+            EndSpacingDecoration(
+                0,
+                resources.getDimensionPixelSize(R.dimen.fab_spacing),
+                RecyclerView.VERTICAL
             )
-            addItemDecoration(
-                EndSpacingDecoration(
-                    0,
-                    resources.getDimensionPixelSize(R.dimen.fab_spacing),
-                    RecyclerView.VERTICAL
-                )
-            )
+        )
+    }
+
+    private fun renderRecyclerView(categories: List<Category>) {
+        categoriesAdapter?.submitList(
+            categories.map { CategoriesAdapter.Item(it) }
+        ) {
+            fragment.recyclerView.invalidateItemDecorations()
         }
     }
 

@@ -39,6 +39,6 @@ fun modelToRoom(shoppingListItem: ShoppingListItem): RoomShoppingListItem =
         shoppingListItem.article.id.value,
         shoppingListItem.quantity,
         shoppingListItem.comment,
-        shoppingListItem.checked,
+        shoppingListItem.isChecked,
         shoppingListItem.id.value
     )

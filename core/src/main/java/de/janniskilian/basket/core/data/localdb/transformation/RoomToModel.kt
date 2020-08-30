@@ -50,7 +50,7 @@ fun roomToModel(result: List<RoomShoppingListResult>): ShoppingList =
                     ),
                     it.quantity,
                     it.comment,
-                    it.checked
+                    it.isChecked
                 )
             }
         }
@@ -78,6 +78,6 @@ fun roomToModel(shoppingListItem: RoomShoppingListItemResult): ShoppingListItem 
         ),
         shoppingListItem.quantity,
         shoppingListItem.comment,
-        shoppingListItem.checked
+        shoppingListItem.isChecked
     )
 }

@@ -17,16 +17,17 @@
         android:gravity="center_vertical"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/selectedIcon"
+        app:layout_constraintEnd_toStartOf="@id/checkmarkIcon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Category name"/>
 
     <ImageView
-        android:id="@+id/selectedIcon"
+        android:id="@+id/checkmarkIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/two"
+        android:contentDescription="@string/category_checkmark_icon_desc"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

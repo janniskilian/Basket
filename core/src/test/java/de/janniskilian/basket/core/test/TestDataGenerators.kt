@@ -37,7 +37,7 @@ fun createTestShoppingListItem(
     article: Article = createTestArticle(),
     quantity: Int = Random.nextInt(),
     comment: String = "",
-    checked: Boolean = Random.nextBoolean()
+    isChecked: Boolean = Random.nextBoolean()
 ): ShoppingListItem =
     ShoppingListItem(
         ShoppingListItemId(Random.nextLong()),
@@ -45,7 +45,7 @@ fun createTestShoppingListItem(
         article,
         quantity.toString(),
         comment,
-        checked
+        isChecked
     )
 
 fun createTestShoppingList(items: List<ShoppingListItem> = emptyList()): ShoppingList =
@@ -56,11 +56,3 @@ fun createTestShoppingList(items: List<ShoppingListItem> = emptyList()): Shoppin
         items
     )
 
-fun createTestShoppingList(itemCount: Int): ShoppingList =
-    createTestShoppingList().apply {
-        copy(
-            items = List(itemCount) {
-                createTestShoppingListItem(this)
-            }
-        )
-    }

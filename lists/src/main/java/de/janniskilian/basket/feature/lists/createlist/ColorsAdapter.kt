@@ -34,8 +34,8 @@ class ColorsAdapter : ListAdapter<ColorsAdapter.Item, ColorsAdapter.ViewHolder>(
             (backgroundView.background as LayerDrawable)
                 .getDrawable(0)
                 .colorFilter = createTintColorFilter(item.color)
-            backgroundView.isSelected = item.selected
-            checkedIcon.isVisible = item.selected
+            backgroundView.isSelected = item.isSelected
+            checkedIcon.isVisible = item.isSelected
 
             setOnClickListener { itemClickListener?.invoke(item.color) }
         }
@@ -45,6 +45,6 @@ class ColorsAdapter : ListAdapter<ColorsAdapter.Item, ColorsAdapter.ViewHolder>(
 
     data class Item(
         val color: Int,
-        val selected: Boolean
+        val isSelected: Boolean
     )
 }

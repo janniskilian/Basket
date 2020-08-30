@@ -23,7 +23,7 @@ class ShoppingListItemDataClientImpl @Inject constructor(
         article: Article,
         quantity: String,
         comment: String,
-        checked: Boolean
+        isChecked: Boolean
     ) = withIOContext {
         dao.insert(
             RoomShoppingListItem(
@@ -31,7 +31,7 @@ class ShoppingListItemDataClientImpl @Inject constructor(
                 article.id.value,
                 quantity,
                 comment,
-                checked
+                isChecked
             )
         )
     }
@@ -57,9 +57,9 @@ class ShoppingListItemDataClientImpl @Inject constructor(
 
     override suspend fun setAllCheckedForShoppingList(
         shoppingListId: ShoppingListId,
-        checked: Boolean
+        isChecked: Boolean
     ) = withIOContext {
-        dao.setAllCheckedForShoppingList(shoppingListId.value, checked)
+        dao.setAllCheckedForShoppingList(shoppingListId.value, isChecked)
     }
 
     override suspend fun delete(shoppingListId: ShoppingListId, articleId: ArticleId) =

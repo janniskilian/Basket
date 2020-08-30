@@ -26,10 +26,10 @@ interface RoomShoppingListItemDao {
     @Update
     fun update(shoppingListItem: RoomShoppingListItem)
 
-    @Query("UPDATE shoppingListItem SET checked = :checked WHERE shoppingListId = :shoppingListId")
+    @Query("UPDATE shoppingListItem SET checked = :isChecked WHERE shoppingListId = :shoppingListId")
     fun setAllCheckedForShoppingList(
         shoppingListId: Long,
-        checked: Boolean
+        isChecked: Boolean
     )
 
     @Query(

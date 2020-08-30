@@ -14,7 +14,7 @@ interface ShoppingListItemDataClient {
         article: Article,
         quantity: String = "",
         comment: String = "",
-        checked: Boolean = false
+        isChecked: Boolean = false
     )
 
     suspend fun create(shoppingListItems: List<ShoppingListItem>)
@@ -25,7 +25,7 @@ interface ShoppingListItemDataClient {
 
     suspend fun update(shoppingListItem: ShoppingListItem)
 
-    suspend fun setAllCheckedForShoppingList(shoppingListId: ShoppingListId, checked: Boolean)
+    suspend fun setAllCheckedForShoppingList(shoppingListId: ShoppingListId, isChecked: Boolean)
 
     suspend fun delete(shoppingListId: ShoppingListId, articleId: ArticleId)
 

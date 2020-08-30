@@ -13,7 +13,7 @@ import de.janniskilian.basket.core.util.extension.extern.getThemeColor
 import de.janniskilian.basket.core.util.function.createMutableLiveData
 import de.janniskilian.basket.core.util.function.getSpeechInputResult
 import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.synthetic.main.fragment_lists.*
+import kotlinx.android.synthetic.main.fragment_add_list_item.*
 
 @AndroidEntryPoint
 class AddListItemFragment : BaseFragment() {
@@ -26,13 +26,16 @@ class AddListItemFragment : BaseFragment() {
         AddListItemFragmentSetup(this, args, viewModel)
     }
 
+    val suggestionsAdapter
+        get() = recyclerView.adapter as? ShoppingListItemSuggestionsAdapter
+
     override val layoutRes get() = R.layout.fragment_add_list_item
 
     override val appBarColor by lazy {
         createMutableLiveData(requireContext().getThemeColor(R.attr.colorSurface))
     }
 
-    override val showAppBar get() = false
+    override val isShowAppBar get() = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

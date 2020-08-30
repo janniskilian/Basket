@@ -25,15 +25,15 @@ class ListViewModel @ViewModelInject constructor(
     fun listItemClicked(shoppingListItem: ShoppingListItem) {
         viewModelScope.launch {
             dataClient.shoppingListItem.update(
-                shoppingListItem.copy(checked = !shoppingListItem.checked)
+                shoppingListItem.copy(isChecked = !shoppingListItem.isChecked)
             )
         }
     }
 
-    fun setAllListItemsChecked(checked: Boolean) {
+    fun setAllListItemsChecked(isChecked: Boolean) {
         shoppingListId.value?.let {
             viewModelScope.launch {
-                dataClient.shoppingListItem.setAllCheckedForShoppingList(it, checked)
+                dataClient.shoppingListItem.setAllCheckedForShoppingList(it, isChecked)
             }
         }
     }

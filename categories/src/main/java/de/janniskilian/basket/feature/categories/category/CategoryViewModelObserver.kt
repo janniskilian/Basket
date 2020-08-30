@@ -29,8 +29,8 @@ class CategoryViewModelObserver(
         }
     }
 
-    private fun renderError(error: Boolean) {
-        fragment.nameLayout.error = if (error) {
+    private fun renderError(isError: Boolean) {
+        fragment.nameLayout.error = if (isError) {
             fragment.getString(R.string.category_name_error)
         } else {
             null

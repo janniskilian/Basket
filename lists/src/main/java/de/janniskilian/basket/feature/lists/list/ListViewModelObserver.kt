@@ -32,7 +32,7 @@ class ListViewModelObserver(
         fragment.emptyGroup.isVisible = shoppingList.isEmpty
         fragment.recyclerView.isVisible = !shoppingList.isEmpty
 
-        val (checkedItems, uncheckedItems) = shoppingList.items.partition { it.checked }
+        val (checkedItems, uncheckedItems) = shoppingList.items.partition { it.isChecked }
 
         val uncheckedItemGroups = uncheckedItems.groupBy { it.article.category }
         val categories = uncheckedItemGroups.keys.sortedBy { it?.name }

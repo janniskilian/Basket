@@ -37,7 +37,7 @@ class RoomShoppingListItem(
     val comment: String = "",
 
     @ColumnInfo(name = "checked")
-    val checked: Boolean = false,
+    val isChecked: Boolean = false,
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

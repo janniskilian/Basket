@@ -27,7 +27,7 @@ class ListFragmentSetup(
 
     private fun setupWindow() = with(fragment) {
         val preventSleep = sharedPrefs.getBoolean(
-            fragment.getString(R.string.pref_key_prevent_sleep),
+            getString(R.string.pref_key_prevent_sleep),
             resources.getBoolean(R.bool.pref_def_prevent_sleep)
         )
         requireActivity()
@@ -37,7 +37,7 @@ class ListFragmentSetup(
 
     private fun setupRecyclerView() = with(fragment) {
         val displayCompact = sharedPrefs.getBoolean(
-            fragment.getString(R.string.pref_key_compact_lists),
+            getString(R.string.pref_key_compact_lists),
             resources.getBoolean(R.bool.pref_def_compact_lists)
         )
 

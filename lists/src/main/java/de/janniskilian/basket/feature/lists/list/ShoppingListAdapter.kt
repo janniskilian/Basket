@@ -14,7 +14,7 @@ import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.shopping_list_article_item.view.*
 
-class ShoppingListAdapter(private val displayCompact: Boolean) :
+class ShoppingListAdapter(private val isDisplayCompact: Boolean) :
     ListAdapter<ShoppingListAdapter.Item, ShoppingListAdapter.ViewHolder>(
         GenericDiffItemCallback { oldItem, newItem ->
             oldItem.id == newItem.id
@@ -58,7 +58,7 @@ class ShoppingListAdapter(private val displayCompact: Boolean) :
                 listItemClickListener?.invoke(shoppingListItem)
             }
             checkbox.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked != shoppingListItem.checked) {
+                if (isChecked != shoppingListItem.isChecked) {
                     listItemClickListener?.invoke(shoppingListItem)
                 }
             }
@@ -66,7 +66,7 @@ class ShoppingListAdapter(private val displayCompact: Boolean) :
                 editButtonClickListener?.invoke(shoppingListItem)
             }
 
-            checkbox.isChecked = shoppingListItem.checked
+            checkbox.isChecked = shoppingListItem.isChecked
             name.text = shoppingListItem.article.name
             quantity.isVisible = shoppingListItem.quantity.isNotBlank()
             quantity.text = shoppingListItem.quantity
@@ -78,10 +78,10 @@ class ShoppingListAdapter(private val displayCompact: Boolean) :
     private fun bindCategoryItem(holder: ViewHolder, item: Item.Group) {
         (holder.itemView as TextView).text = item.name
 
-        val topMargin = if (item.atTop) {
+        val topMargin = if (item.isAtTop) {
             0
         } else {
-            val resId = if (displayCompact) {
+            val resId = if (isDisplayCompact) {
                 R.dimen.list_spacing_compact
             } else {
                 R.dimen.list_spacing_default
@@ -104,7 +104,7 @@ class ShoppingListAdapter(private val displayCompact: Boolean) :
         data class Group(
             val groupId: Long,
             val name: String,
-            val atTop: Boolean
+            val isAtTop: Boolean
         ) : Item(GROUP_ID_PREFIX + groupId)
 
         companion object {

@@ -3,6 +3,8 @@ package de.janniskilian.basket.feature.lists.addlistitem
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
@@ -36,13 +38,25 @@ class ShoppingListItemSuggestionsAdapter :
 
             name.text = formatItemSuggestion(item.item)
 
-            val iconRes = when {
-                item.item.existingListItem -> R.drawable.asl_addremove
-                item.item.existingArticle -> R.drawable.asl_addremove
-                else -> R.drawable.ic_create_24
+            @DrawableRes val iconRes: Int
+            @StringRes val contentDescriptionRes: Int
+            when {
+                item.item.isExistingListItem -> {
+                    iconRes = R.drawable.asl_addremove
+                    contentDescriptionRes = R.string.existing_list_item_icon_desc
+                }
+                item.item.isExistingArticle -> {
+                    iconRes = R.drawable.asl_addremove
+                    contentDescriptionRes = R.string.existing_article_icon_desc
+                }
+                else -> {
+                    iconRes = R.drawable.ic_create_24
+                    contentDescriptionRes = R.string.create_new_article_icon_desc
+                }
             }
             icon.setImageResource(iconRes)
-            icon.setSelectedImageState(item.item.existingListItem)
+            icon.setSelectedImageState(item.item.isExistingListItem)
+            icon.contentDescription = context.getString(contentDescriptionRes)
         }
     }
 

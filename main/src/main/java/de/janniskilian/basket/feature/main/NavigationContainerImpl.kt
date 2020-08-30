@@ -17,9 +17,8 @@ import de.janniskilian.basket.core.util.WeakRef
 import de.janniskilian.basket.core.util.extension.extern.contentView
 import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
 import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
-import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
-import de.janniskilian.basket.core.util.extension.extern.showKeyboard
+import de.janniskilian.basket.core.util.extension.extern.toggleSoftKeyboard
 import de.janniskilian.basket.core.util.function.createSpeechInputIntent
 import de.janniskilian.basket.core.util.weakRef
 import kotlinx.android.synthetic.main.activity_main.*
@@ -101,12 +100,12 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
         }
     }
 
-    private fun toggleSearchBar(visible: Boolean) {
-        if (activity.searchBarContainer.isVisible == visible) return
+    private fun toggleSearchBar(isVisible: Boolean) {
+        if (activity.searchBarContainer.isVisible == isVisible) return
 
         val fabEndAlpha: Float
         val searchBarEndAlpha: Float
-        if (visible) {
+        if (isVisible) {
             fabEndAlpha = 0f
             searchBarEndAlpha = 1f
 
@@ -127,7 +126,7 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
             .alpha(fabEndAlpha)
             .setDuration(ANIMATION_DURATION_S)
             .withEndAction {
-                if (visible) {
+                if (isVisible) {
                     activity.fab.isVisible = false
                 }
             }
@@ -138,19 +137,13 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
             .alpha(searchBarEndAlpha)
             .setDuration(ANIMATION_DURATION_S)
             .withEndAction {
-                if (!visible) {
+                if (!isVisible) {
                     activity.searchBarContainer.isVisible = false
                 }
             }
             .start()
 
-        if (visible) {
-            activity.searchBarEditText.requestFocus()
-            activity.showKeyboard(activity.searchBarEditText)
-        } else {
-            activity.searchBarEditText.clearFocus()
-            activity.hideKeyboard()
-        }
+        activity.searchBarEditText.toggleSoftKeyboard(isVisible)
     }
 
     private fun searchBarInputObserver(input: String) {

@@ -6,7 +6,7 @@ data class ShoppingListItem(
     val article: Article,
     val quantity: String = "",
     val comment: String = "",
-    val checked: Boolean = false
+    val isChecked: Boolean = false
 ) : NamedItem {
 
     override val name: String

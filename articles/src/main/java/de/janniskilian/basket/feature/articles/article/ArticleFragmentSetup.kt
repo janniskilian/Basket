@@ -9,6 +9,7 @@ import de.janniskilian.basket.core.type.domain.ArticleId
 import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
 import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.extension.extern.onDone
+import de.janniskilian.basket.core.util.extension.extern.toggleSoftKeyboard
 import de.janniskilian.basket.feature.articles.R
 import kotlinx.android.synthetic.main.fragment_article.*
 
@@ -35,41 +36,46 @@ class ArticleFragmentSetup(
         viewModelObserver.observe()
     }
 
-    private fun setupButtons() {
-        fragment.deleteButton.isVisible = articleId != null
-        fragment.deleteButton.setOnClickListener { viewModel.deleteButtonClicked() }
+    private fun setupButtons() = with(fragment) {
+        deleteButton.isVisible = articleId != null
+        deleteButton.setOnClickListener { viewModel.deleteButtonClicked() }
 
         val buttonTextRes = if (articleId == null) {
             R.string.create_article_button
         } else {
             R.string.save_article_button
         }
-        fragment.submitButton.setText(buttonTextRes)
-        fragment.submitButton.setOnClickListener { viewModel.submitButtonClicked() }
+        submitButton.setText(buttonTextRes)
+        submitButton.setOnClickListener { viewModel.submitButtonClicked() }
     }
 
-    private fun setupNameEditText() {
-        fragment.nameEditText.doOnTextChanged(viewModel::setName)
-        fragment.nameEditText.onDone(viewModel::submitButtonClicked)
+    private fun setupNameEditText() = with(fragment) {
+        nameEditText.doOnTextChanged(viewModel::setName)
+        nameEditText.onDone(viewModel::submitButtonClicked)
+
+        if (articleId == null) {
+            nameEditText.toggleSoftKeyboard(true)
+        }
     }
 
-    private fun setupCategoryEditText() {
-        fragment.categoryEditText.setOnClickListener { viewModel.editCategoryClicked() }
+    private fun setupCategoryEditText() = with(fragment) {
+        categoryEditText.setText(R.string.category_default)
+        categoryEditText.setOnClickListener { viewModel.editCategoryClicked() }
     }
 
-    private fun setupCategoriesRecyclerView() {
+    private fun setupCategoriesRecyclerView() = with(fragment) {
         val categoriesAdapter = CategoriesAdapter()
 
-        with(fragment.recyclerView) {
+        with(recyclerView) {
             layoutManager = LinearLayoutManager(
-                fragment.requireContext(),
+                requireContext(),
                 RecyclerView.VERTICAL,
                 false
             )
             adapter = categoriesAdapter
             addItemDecoration(
                 DividerItemDecoration(
-                    fragment.requireContext(),
+                    requireContext(),
                     DividerItemDecoration.VERTICAL
                 )
             )

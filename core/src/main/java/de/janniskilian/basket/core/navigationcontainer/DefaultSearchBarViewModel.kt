@@ -16,9 +16,9 @@ class DefaultSearchBarViewModel : SearchBarViewModel {
     override val searchBarInput: LiveData<String>
         get() = _searchBarInput
 
-    override fun setSearchBarVisible(visible: Boolean) {
-        _searchBarVisible.value = visible
-        if (!visible) {
+    override fun setSearchBarVisible(isVisible: Boolean) {
+        _searchBarVisible.value = isVisible
+        if (!isVisible) {
             setSearchBarInput("")
         }
     }

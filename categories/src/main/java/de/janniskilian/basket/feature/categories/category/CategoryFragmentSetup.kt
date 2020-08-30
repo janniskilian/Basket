@@ -30,7 +30,7 @@ class CategoryFragmentSetup(
         viewModelObserver.observe()
     }
 
-    private fun setupButtons() {
+    private fun setupButtons() = with(fragment) {
         fragment.deleteButton.isVisible = categoryId != null
 
         val buttonTextRes = if (categoryId == null) {
@@ -38,17 +38,17 @@ class CategoryFragmentSetup(
         } else {
             R.string.save_category_button
         }
-        fragment.submitButton.setText(buttonTextRes)
+        submitButton.setText(buttonTextRes)
     }
 
-    private fun setClickListeners() {
-        fragment.nameEditText.onDone(viewModel::submitButtonClicked)
-        fragment.submitButton.setOnClickListener { viewModel.submitButtonClicked() }
-        fragment.deleteButton.setOnClickListener { viewModel.deleteButtonClicked() }
-        fragment.submitButton.setOnClickListener { viewModel.submitButtonClicked() }
+    private fun setClickListeners() = with(fragment) {
+        nameEditText.onDone(viewModel::submitButtonClicked)
+        submitButton.setOnClickListener { viewModel.submitButtonClicked() }
+        deleteButton.setOnClickListener { viewModel.deleteButtonClicked() }
+        submitButton.setOnClickListener { viewModel.submitButtonClicked() }
     }
 
-    private fun setupNameEditText() {
-        fragment.nameEditText.doOnTextChanged(viewModel::setName)
+    private fun setupNameEditText() = with(fragment) {
+        nameEditText.doOnTextChanged(viewModel::setName)
     }
 }

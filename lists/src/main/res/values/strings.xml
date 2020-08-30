@@ -43,5 +43,10 @@
     <string name="options_menu_button_desc">Options menu button</string>
     <string name="color_selector_item_desc">Color selector item</string>
     <string name="restore_button">Restore</string>
+    <string name="existing_list_item_icon_desc">Article is in list icon</string>
+    <string name="existing_article_icon_desc">Article is not in list icon</string>
+    <string name="create_new_article_icon_desc">Create new article icon</string>
+    <string name="list_lead_image_desc">Icon that symbolises an empty list</string>
+    <string name="lists_lead_image_desc">Icon that symbolises a shopping list</string>
 
 </resources>

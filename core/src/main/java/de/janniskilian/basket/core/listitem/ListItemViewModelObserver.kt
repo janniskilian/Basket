@@ -39,8 +39,8 @@ class ListItemViewModelObserver(
         }
     }
 
-    private fun renderError(error: Boolean) = with(fragment) {
-        articleNameEditText.error = if (error) {
+    private fun renderError(isError: Boolean) = with(fragment) {
+        articleNameEditText.error = if (isError) {
             fragment.getString(R.string.article_name_error)
         } else {
             null

@@ -29,7 +29,7 @@ class GetSuggestionsUseCase(private val dataClient: DataClient) {
                 .map {
                     ShoppingListItemSuggestion(
                         it.article,
-                        it.existingListItem,
+                        it.isExistingListItem,
                         true,
                         amount
                     )
@@ -53,8 +53,8 @@ class GetSuggestionsUseCase(private val dataClient: DataClient) {
                             parsedInput.name,
                             null
                         ),
-                        existingListItem = false,
-                        existingArticle = false,
+                        isExistingListItem = false,
+                        isExistingArticle = false,
                         quantity = amount
                     )
                 )

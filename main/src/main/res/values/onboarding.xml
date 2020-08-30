@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="onboarding_headline">Presets Language</string>
+    <string name="onboarding_info">Select the language for preset articles.</string>
+    <string name="onboarding_button">Start</string>
+
+    <string-array name="onboarding_presets_languages">
+        <item>en</item>
+        <item>de</item>
+    </string-array>
+
+    <string name="onboarding_language_image_desc">Icon that symbolises language</string>
+
+</resources>

@@ -8,7 +8,7 @@ interface SearchBarViewModel {
 
     val searchBarInput: LiveData<String>
 
-    fun setSearchBarVisible(visible: Boolean)
+    fun setSearchBarVisible(isVisible: Boolean)
 
     fun setSearchBarInput(input: String)
 }

@@ -2,7 +2,9 @@ package de.janniskilian.basket.feature.lists.createlist
 
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.ShoppingListId
+import de.janniskilian.basket.core.util.extension.extern.centerItem
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.fragment_create_list.*
@@ -39,11 +41,16 @@ class CreateListViewModelObserver(
             viewModel.colors.map {
                 ColorsAdapter.Item(it, it == selectedColor)
             }
-        )
+        ) {
+            fragment.recyclerView.centerItem(
+                viewModel.colors.indexOf(selectedColor),
+                RecyclerView.HORIZONTAL
+            )
+        }
     }
 
-    private fun renderError(error: Boolean) {
-        fragment.nameLayout.error = if (error) {
+    private fun renderError(isError: Boolean) {
+        fragment.nameLayout.error = if (isError) {
             fragment.getString(R.string.shopping_list_name_error)
         } else {
             null

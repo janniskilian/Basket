@@ -5,5 +5,6 @@
     <string name="groups_empty_info">A group can contain multiple articles that you regularly buy at the same time. You can then add the whole group to a list in one go.</string>
 
     <string name="fab_create_group">Create Group</string>
+    <string name="groups_lead_image_desc">Icon that symbolises groups</string>
 
 </resources>

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.feature.articles.R
 import kotlinx.android.synthetic.main.fragment_articles.*
@@ -14,33 +15,25 @@ class ArticlesFragmentSetup(
     private val viewModel: ArticlesViewModel
 ) {
 
-    private val articlesAdapter get() = fragment.recyclerView.adapter as? ArticlesAdapter
+    private val articlesAdapter
+        get() = fragment.recyclerView.adapter as? ArticlesAdapter
 
     fun run() {
         setupRecyclerView()
 
         articlesAdapter?.clickListener = ::articleClicked
 
-        viewModel.articles.observe(fragment.viewLifecycleOwner) {
-            articlesAdapter?.submitList(it) {
-                fragment.recyclerView.invalidateItemDecorations()
-            }
-        }
+        viewModel.articles.observe(fragment.viewLifecycleOwner, ::renderRecyclerView)
 
         fragment.navigationContainer.attachSearchBar(viewModel)
     }
 
     private fun setupRecyclerView() = with(fragment.recyclerView) {
         setHasFixedSize(true)
-        layoutManager = LinearLayoutManager(fragment.requireContext())
+        layoutManager = LinearLayoutManager(context)
         adapter = ArticlesAdapter()
         (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
-        addItemDecoration(
-            DividerItemDecoration(
-                fragment.requireContext(),
-                DividerItemDecoration.VERTICAL
-            )
-        )
+        addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         addItemDecoration(
             EndSpacingDecoration(
                 0,
@@ -48,6 +41,12 @@ class ArticlesFragmentSetup(
                 RecyclerView.VERTICAL
             )
         )
+    }
+
+    private fun renderRecyclerView(it: List<Article>) {
+        articlesAdapter?.submitList(it) {
+            fragment.recyclerView.invalidateItemDecorations()
+        }
     }
 
     private fun articleClicked(position: Int) {

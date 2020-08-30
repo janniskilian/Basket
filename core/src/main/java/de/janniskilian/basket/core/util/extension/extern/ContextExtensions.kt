@@ -1,6 +1,7 @@
 package de.janniskilian.basket.core.util.extension.extern
 
 import android.content.Context
+import android.content.res.Configuration
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.view.inputmethod.InputMethodManager
@@ -10,6 +11,9 @@ import androidx.core.content.res.use
 
 val Context.inputMethodManager: InputMethodManager
     get() = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+val Context.hasHardwareKeyboard
+    get() = resources.configuration.keyboard != Configuration.KEYBOARD_NOKEYS
 
 @ColorInt
 fun Context.getThemeColor(@AttrRes resId: Int): Int =

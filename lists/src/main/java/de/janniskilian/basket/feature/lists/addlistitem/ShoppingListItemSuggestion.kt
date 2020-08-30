@@ -5,8 +5,8 @@ import de.janniskilian.basket.core.type.domain.NamedItem
 
 data class ShoppingListItemSuggestion(
     val article: Article,
-    val existingListItem: Boolean,
-    val existingArticle: Boolean,
+    val isExistingListItem: Boolean,
+    val isExistingArticle: Boolean,
     val quantity: String = ""
 ) : NamedItem {
 

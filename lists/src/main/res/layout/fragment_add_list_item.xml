@@ -46,10 +46,7 @@
                 android:inputType="textCapSentences"
                 android:singleLine="true"
                 app:layout_constraintEnd_toStartOf="@id/searchBarSpeechInputButton"
-                app:layout_constraintStart_toEndOf="@id/upButton">
-
-                <requestFocus/>
-            </de.janniskilian.basket.core.view.EnhancedEditText>
+                app:layout_constraintStart_toEndOf="@id/upButton"/>
 
             <ImageButton
                 android:id="@+id/searchBarSpeechInputButton"

@@ -22,8 +22,8 @@ class NavigationUiTest : BaseUiTest() {
         navigateToBottomNavigationDrawerDestination(R.string.categories_title)
         assertDisplayed(R.string.categories_title)
 
-        navigateToBottomNavigationDrawerDestination(R.string.settings_title)
-        assertDisplayed(R.string.settings_title)
+        navigateToBottomNavigationDrawerDestination(R.string.preferences_title)
+        assertDisplayed(R.string.preferences_title)
 
         navigateToBottomNavigationDrawerDestination(R.string.shopping_lists_title)
         assertDisplayed(R.string.shopping_lists_title)

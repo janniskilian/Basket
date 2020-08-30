@@ -8,10 +8,10 @@ class ListItemSuggestionClickedUseCase(private val dataClient: DataClient) {
 
     suspend fun run(shoppingListId: ShoppingListId, suggestion: ShoppingListItemSuggestion) {
         when {
-            suggestion.existingListItem ->
+            suggestion.isExistingListItem ->
                 dataClient.shoppingListItem.delete(shoppingListId, suggestion.article.id)
 
-            suggestion.existingArticle ->
+            suggestion.isExistingArticle ->
                 createShoppingListItem(shoppingListId, suggestion.article, suggestion.quantity)
 
             else -> createArticleAndShoppingListItem(shoppingListId, suggestion)

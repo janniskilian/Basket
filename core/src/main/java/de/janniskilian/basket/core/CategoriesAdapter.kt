@@ -32,11 +32,11 @@ class CategoriesAdapter : ListAdapter<CategoriesAdapter.Item, CategoriesAdapter.
             setOnClickListener { clickListener?.invoke(item.category) }
 
             name.text = item?.category?.name ?: context.getString(R.string.category_default)
-            selectedIcon.isVisible = item.selected
+            checkmarkIcon.isVisible = item.isSelected
         }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    class Item(val category: Category?, val selected: Boolean = false)
+    class Item(val category: Category?, val isSelected: Boolean = false)
 }
