@@ -3,7 +3,7 @@ package de.janniskilian.basket.core.util.extension.extern
 import java.text.Normalizer
 
 private val specialCharsRegex by lazy {
-    "[\\p{InCombiningDiacriticalMarks}\\p{IsLm}\\p{IsSk}]+".toRegex()
+    "[\\p{InCombiningDiacriticalMarks}]+".toRegex()
 }
 
 fun String.withoutSpecialChars(): String =
