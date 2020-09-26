@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
+import androidx.core.os.bundleOf
 import androidx.core.view.forEach
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
@@ -13,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 import de.janniskilian.basket.R
+import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.util.extension.extern.getThemeColor
 import de.janniskilian.basket.core.util.extension.extern.getThemeResource
 import kotlinx.android.synthetic.main.fragment_bottom_navigation_drawer.*
@@ -66,21 +68,27 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun itemClicked(navId: Int) {
-        val options = NavOptions
-            .Builder()
-            .setPopUpTo(currentDestinationId, true)
-            .setEnterAnim(R.anim.nav_default_enter_anim)
-            .setExitAnim(R.anim.nav_default_exit_anim)
-            .setPopEnterAnim(R.anim.nav_default_pop_enter_anim)
-            .setPopExitAnim(R.anim.nav_default_pop_exit_anim)
-            .build()
+    private fun itemClicked(destinationId: Int) {
+        with(requireActivity() as MainActivity) {
+            // Do not perform a navigation if we are already at the destination.
+            if (findNavController().previousBackStackEntry?.destination?.id != destinationId) {
+                currentFragment?.enableFadeThroughExitTransition()
 
-        (requireActivity() as MainActivity)
-            .findNavController(R.id.navHost)
-            .navigate(navId, null, options)
+                val options = NavOptions
+                    .Builder()
+                    .setPopUpTo(currentDestinationId, true)
+                    .build()
 
-        setSelectedItem(navId)
+                findNavController(R.id.navHost).navigate(
+                    destinationId,
+                    bundleOf(BaseFragment.KEY_STARTED_FROM_ROOT_DESTINATION to true),
+                    options
+                )
+
+                setSelectedItem(destinationId)
+            }
+        }
+
         dismiss()
     }
 

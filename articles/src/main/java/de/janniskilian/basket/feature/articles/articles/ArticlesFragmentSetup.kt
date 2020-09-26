@@ -1,6 +1,7 @@
 package de.janniskilian.basket.feature.articles.articles
 
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,14 +51,17 @@ class ArticlesFragmentSetup(
     }
 
     private fun articleClicked(position: Int) {
-        viewModel.articles.value
+        viewModel
+            .articles
+            .value
             ?.getOrNull(position)
             ?.let {
-                fragment.navigate(
-                    ArticlesFragmentDirections.actionArticlesFragmentToArticleFragment(
-                        it.id.value
+                fragment
+                    .findNavController()
+                    .navigate(
+                        ArticlesFragmentDirections
+                            .actionArticlesFragmentToArticleFragment(it.id.value),
                     )
-                )
             }
     }
 }

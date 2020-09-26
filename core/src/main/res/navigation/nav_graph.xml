@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navGraph"
     app:startDestination="@id/listsFragment">
 
     <fragment
@@ -43,19 +44,11 @@
 
         <action
             android:id="@+id/action_listsFragment_to_createListFragment"
-            app:destination="@id/createListFragment"
-            app:enterAnim="@anim/nav_slide_enter"
-            app:exitAnim="@anim/nav_slide_exit"
-            app:popEnterAnim="@anim/nav_slide_pop_enter"
-            app:popExitAnim="@anim/nav_slide_pop_exit"/>
+            app:destination="@id/createListFragment"/>
 
         <action
             android:id="@+id/action_listsFragment_to_listFragment"
-            app:destination="@id/listFragment"
-            app:enterAnim="@anim/nav_slide_enter"
-            app:exitAnim="@anim/nav_slide_exit"
-            app:popEnterAnim="@anim/nav_slide_pop_enter"
-            app:popExitAnim="@anim/nav_slide_pop_exit"/>
+            app:destination="@id/listFragment"/>
     </fragment>
 
     <fragment
@@ -71,12 +64,7 @@
 
         <action
             android:id="@+id/action_createListFragment_to_listFragment"
-            app:destination="@id/listFragment"
-            app:enterAnim="@anim/nav_slide_enter"
-            app:exitAnim="@anim/nav_slide_exit"
-            app:popEnterAnim="@anim/nav_slide_pop_enter"
-            app:popExitAnim="@anim/nav_slide_pop_exit"
-            app:popUpTo="@id/listsFragment"/>
+            app:destination="@id/listFragment"/>
     </fragment>
 
     <fragment
@@ -91,19 +79,11 @@
 
         <action
             android:id="@+id/action_listFragment_to_addListItemFragment"
-            app:destination="@id/addListItemFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+            app:destination="@id/addListItemFragment"/>
 
         <action
             android:id="@+id/action_listFragment_to_listItemFragment"
-            app:destination="@id/listItemFragment"
-            app:enterAnim="@anim/nav_slide_enter"
-            app:exitAnim="@anim/nav_slide_exit"
-            app:popEnterAnim="@anim/nav_slide_pop_enter"
-            app:popExitAnim="@anim/nav_slide_pop_exit"/>
+            app:destination="@id/listItemFragment"/>
     </fragment>
 
     <fragment
@@ -132,11 +112,7 @@
 
         <action
             android:id="@+id/action_articlesFragment_to_articleFragment"
-            app:destination="@id/articleFragment"
-            app:enterAnim="@anim/nav_slide_enter"
-            app:exitAnim="@anim/nav_slide_exit"
-            app:popEnterAnim="@anim/nav_slide_pop_enter"
-            app:popExitAnim="@anim/nav_slide_pop_exit"/>
+            app:destination="@id/articleFragment"/>
     </fragment>
 
     <fragment
@@ -159,11 +135,7 @@
 
         <action
             android:id="@+id/action_categoriesFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment"
-            app:enterAnim="@anim/nav_slide_enter"
-            app:exitAnim="@anim/nav_slide_exit"
-            app:popEnterAnim="@anim/nav_slide_pop_enter"
-            app:popExitAnim="@anim/nav_slide_pop_exit"/>
+            app:destination="@id/categoryFragment"/>
     </fragment>
 
     <fragment

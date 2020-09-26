@@ -14,12 +14,21 @@ import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.transition.MaterialFadeThrough
+import com.google.android.material.transition.MaterialSharedAxis
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainerProvider
+import de.janniskilian.basket.core.util.extension.extern.addListener
 import de.janniskilian.basket.core.util.extension.extern.getThemeColor
 import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
 import de.janniskilian.basket.core.util.function.createMutableLiveData
+import de.janniskilian.basket.core.util.function.getLong
 
+@Suppress("TooManyFunctions")
 abstract class BaseFragment : Fragment() {
+
+    private val transitionDuration by lazy {
+        getLong(requireContext(), R.integer.transition_duration)
+    }
 
     private var pendingNavigation = false
 
@@ -54,6 +63,12 @@ abstract class BaseFragment : Fragment() {
     }
 
     open val animateAppBarColor get() = true
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setupTransitions()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -96,5 +111,51 @@ abstract class BaseFragment : Fragment() {
             pendingNavigation = true
             findNavController().navigate(directions, navOptions)
         }
+    }
+
+    fun enableFadeThroughExitTransition() {
+        exitTransition = MaterialFadeThrough().apply {
+            duration = transitionDuration
+            setListener()
+        }
+    }
+
+    private fun setupTransitions() {
+        val isRootDestinationStartedFromRootDestination =
+            (arguments?.getBoolean(KEY_STARTED_FROM_ROOT_DESTINATION) ?: false
+                    && findNavController().currentDestination?.parent?.id == R.id.navGraph)
+        arguments?.remove(KEY_STARTED_FROM_ROOT_DESTINATION)
+        updateTransitions(isRootDestinationStartedFromRootDestination)
+    }
+
+    private fun updateTransitions(enableRootNavigationTransition: Boolean) {
+        if (enableRootNavigationTransition) {
+            enterTransition = MaterialFadeThrough().apply {
+                duration = transitionDuration
+                setListener()
+            }
+        } else {
+            enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+                duration = transitionDuration
+            }
+            exitTransition = enterTransition
+
+            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+                duration = transitionDuration
+            }
+            returnTransition = reenterTransition
+        }
+    }
+
+    private fun MaterialFadeThrough.setListener() {
+        addListener(
+            onEnd = { updateTransitions(false) },
+            onCancel = { updateTransitions(false) }
+        )
+    }
+
+    companion object {
+
+        const val KEY_STARTED_FROM_ROOT_DESTINATION = "KEY_STARTED_FROM_ROOT_DESTINATION"
     }
 }

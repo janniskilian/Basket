@@ -24,7 +24,6 @@ def androidx = [
         lifecycleExt    : "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle",
         navFragment     : "androidx.navigation:navigation-fragment-ktx:$versions.nav",
         navUi           : "androidx.navigation:navigation-ui-ktx:$versions.nav",
-        dataStore       : "androidx.datastore:datastore-preferences:1.0.0-alpha01",
         roomRuntime     : "androidx.room:room-runtime:$versions.room",
         roomKtx         : "androidx.room:room-ktx:$versions.room",
         roomCompiler    : "androidx.room:room-compiler:$versions.room",
@@ -70,7 +69,7 @@ def androidTesting = [
 
 def plugins = [
         kotlin     : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
-        android    : "com.android.tools.build:gradle:4.2.0-alpha11",
+        android    : "com.android.tools.build:gradle:4.2.0-alpha12",
         navSafeArgs: "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.nav",
         hilt       : "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt",
 ]
