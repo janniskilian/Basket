@@ -80,6 +80,8 @@ abstract class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (view as? ViewGroup)?.isTransitionGroup = true
+
         titleTextRes?.let {
             titleTextView?.text = getString(it)
         }

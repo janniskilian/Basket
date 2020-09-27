@@ -24,12 +24,6 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-tasks.named("dependencyUpdates").configure {
-    rejectVersionIf {
-        isNonStable(it.candidate.version) && !isNonStable(it.currentVersion)
-    }
-}
-
 subprojects {
     if (name == "main") {
         apply plugin: "com.android.application"
@@ -121,6 +115,7 @@ subprojects {
         testImplementation deps.testing.kotlinTest
         testImplementation deps.testing.mockito
         testImplementation deps.testing.robolectric
+        testImplementation deps.androidTesting.livedata
 
         androidTestImplementation deps.testing.kotlinTest
         androidTestImplementation deps.androidTesting.core

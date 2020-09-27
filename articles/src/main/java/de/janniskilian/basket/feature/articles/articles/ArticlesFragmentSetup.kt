@@ -60,7 +60,7 @@ class ArticlesFragmentSetup(
                     .findNavController()
                     .navigate(
                         ArticlesFragmentDirections
-                            .actionArticlesFragmentToArticleFragment(it.id.value),
+                            .actionArticlesFragmentToArticleFragment(it.id.value)
                     )
             }
     }

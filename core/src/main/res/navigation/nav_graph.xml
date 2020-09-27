@@ -64,7 +64,8 @@
 
         <action
             android:id="@+id/action_createListFragment_to_listFragment"
-            app:destination="@id/listFragment"/>
+            app:destination="@id/listFragment"
+            app:popUpTo="@id/listsFragment"/>
     </fragment>
 
     <fragment
