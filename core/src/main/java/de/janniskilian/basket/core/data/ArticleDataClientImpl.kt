@@ -1,7 +1,5 @@
 package de.janniskilian.basket.core.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import de.janniskilian.basket.core.data.localdb.dao.RoomArticleDao
 import de.janniskilian.basket.core.data.localdb.entity.RoomArticle
 import de.janniskilian.basket.core.data.localdb.transformation.modelToRoom
@@ -14,6 +12,8 @@ import de.janniskilian.basket.core.type.domain.CategoryId
 import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.extension.extern.withoutSpecialChars
 import de.janniskilian.basket.core.util.function.withIOContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class ArticleDataClientImpl @Inject constructor(
@@ -38,7 +38,7 @@ class ArticleDataClientImpl @Inject constructor(
     override fun get(
         name: String,
         shoppingListId: ShoppingListId
-    ): LiveData<List<ArticleSuggestion>> =
+    ): Flow<List<ArticleSuggestion>> =
         dao
             .select("${name.withoutSpecialChars()}%", shoppingListId.value)
             .map { result ->
@@ -54,7 +54,7 @@ class ArticleDataClientImpl @Inject constructor(
                 }
             }
 
-    override fun get(name: String): LiveData<List<Article>> {
+    override fun get(name: String): Flow<List<Article>> {
         val withoutSpecialChars = name.withoutSpecialChars()
         return dao
             .select("$withoutSpecialChars%")

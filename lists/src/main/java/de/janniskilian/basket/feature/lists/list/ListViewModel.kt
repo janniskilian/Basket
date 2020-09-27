@@ -3,6 +3,7 @@ package de.janniskilian.basket.feature.lists.list
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
@@ -16,7 +17,12 @@ class ListViewModel @ViewModelInject constructor(
 
     private val shoppingListId = MutableLiveData<ShoppingListId>()
 
-    val shoppingList = shoppingListId.switchMap(dataClient.shoppingList::getLiveData)
+    val shoppingList = shoppingListId.switchMap {
+        dataClient
+            .shoppingList
+            .getAsFlow(it)
+            .asLiveData()
+    }
 
     fun setShoppingListId(id: ShoppingListId) {
         shoppingListId.value = id

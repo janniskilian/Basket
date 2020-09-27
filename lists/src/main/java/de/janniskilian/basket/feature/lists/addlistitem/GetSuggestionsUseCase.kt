@@ -1,12 +1,12 @@
 package de.janniskilian.basket.feature.lists.addlistitem
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.type.domain.ArticleId
 import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.function.addToFront
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import java.util.*
 
 class GetSuggestionsUseCase(private val dataClient: DataClient) {
@@ -16,7 +16,7 @@ class GetSuggestionsUseCase(private val dataClient: DataClient) {
     fun run(
         shoppingListId: ShoppingListId,
         input: String
-    ): LiveData<List<ShoppingListItemSuggestion>> {
+    ): Flow<List<ShoppingListItemSuggestion>> {
         val parsedInput = parser.parse(input)
         val articles = dataClient.article.get(parsedInput.name, shoppingListId)
         val amount = parsedInput.quantity.orEmpty() +
@@ -61,5 +61,4 @@ class GetSuggestionsUseCase(private val dataClient: DataClient) {
             }
         }
     }
-
 }

@@ -3,12 +3,13 @@ package de.janniskilian.basket.feature.lists.lists
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.util.sortedByName
 import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class ListsViewModel @ViewModelInject constructor(
@@ -21,6 +22,7 @@ class ListsViewModel @ViewModelInject constructor(
         .shoppingList
         .getAll()
         .map { it.sortedByName() }
+        .asLiveData()
 
     val shoppingListDeleted: LiveData<ShoppingList>
         get() = _shoppingListDeleted

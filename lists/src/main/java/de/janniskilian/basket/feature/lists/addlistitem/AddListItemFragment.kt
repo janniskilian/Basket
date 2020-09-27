@@ -10,8 +10,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.util.extension.extern.getThemeColor
-import de.janniskilian.basket.core.util.function.createMutableLiveData
 import de.janniskilian.basket.core.util.function.getSpeechInputResult
+import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.fragment_add_list_item.*
 
@@ -32,7 +32,7 @@ class AddListItemFragment : BaseFragment() {
     override val layoutRes get() = R.layout.fragment_add_list_item
 
     override val appBarColor by lazy {
-        createMutableLiveData(requireContext().getThemeColor(R.attr.colorSurface))
+        DefaultMutableLiveData(requireContext().getThemeColor(R.attr.colorSurface))
     }
 
     override val isShowAppBar get() = false

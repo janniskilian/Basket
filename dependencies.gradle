@@ -48,8 +48,7 @@ def leakCanary = "com.squareup.leakcanary:leakcanary-android:2.4"
 def testing = [
         junit      : "junit:junit:4.13",
         kotlinTest : "org.jetbrains.kotlin:kotlin-test-junit:1.4.10",
-        mockito    : "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0",
-        robolectric: "org.robolectric:robolectric:4.4"
+        mockito    : "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 ]
 
 def androidTesting = [

@@ -4,14 +4,15 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.ArticleId
 import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.util.function.addToFront
-import de.janniskilian.basket.core.util.function.createMutableLiveData
+import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
 import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class ArticleViewModel @ViewModelInject constructor(
@@ -25,7 +26,7 @@ class ArticleViewModel @ViewModelInject constructor(
 
     private val _category = MutableLiveData<Category?>()
 
-    private val _mode = createMutableLiveData(ArticleFragmentMode.EDIT)
+    private val _mode = DefaultMutableLiveData(ArticleFragmentMode.EDIT)
 
     private val _error = MutableLiveData<Boolean>()
 
@@ -42,6 +43,7 @@ class ArticleViewModel @ViewModelInject constructor(
         .map {
             it.addToFront(null)
         }
+        .asLiveData()
 
     val mode: LiveData<ArticleFragmentMode>
         get() = _mode

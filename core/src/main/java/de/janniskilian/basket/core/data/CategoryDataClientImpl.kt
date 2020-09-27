@@ -1,6 +1,5 @@
 package de.janniskilian.basket.core.data
 
-import androidx.lifecycle.map
 import de.janniskilian.basket.core.data.localdb.dao.RoomCategoryDao
 import de.janniskilian.basket.core.data.localdb.entity.RoomCategory
 import de.janniskilian.basket.core.data.localdb.transformation.modelToRoom
@@ -9,6 +8,7 @@ import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.type.domain.CategoryId
 import de.janniskilian.basket.core.util.extension.extern.withoutSpecialChars
 import de.janniskilian.basket.core.util.function.withIOContext
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class CategoryDataClientImpl @Inject constructor(

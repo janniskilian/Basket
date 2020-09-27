@@ -1,7 +1,5 @@
 package de.janniskilian.basket.core.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import de.janniskilian.basket.core.data.localdb.dao.RoomShoppingListItemDao
 import de.janniskilian.basket.core.data.localdb.entity.RoomShoppingListItem
 import de.janniskilian.basket.core.data.localdb.transformation.modelToRoom
@@ -12,6 +10,8 @@ import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
 import de.janniskilian.basket.core.type.domain.ShoppingListItemId
 import de.janniskilian.basket.core.util.function.withIOContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class ShoppingListItemDataClientImpl @Inject constructor(
@@ -46,7 +46,7 @@ class ShoppingListItemDataClientImpl @Inject constructor(
             ?.let(::roomToModel)
     }
 
-    override fun getLiveData(shoppingListItemId: ShoppingListItemId): LiveData<ShoppingListItem> =
+    override fun getAsFlow(shoppingListItemId: ShoppingListItemId): Flow<ShoppingListItem> =
         dao
             .selectLiveData(shoppingListItemId.value)
             .map { roomToModel(it) }

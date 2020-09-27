@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.core.util.function.createMutableLiveData
 import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
 import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +24,7 @@ class CreateListViewModel @ViewModelInject constructor(
 
     private val _selectedColor = DefaultMutableLiveData(colors.first())
 
-    private val _error = createMutableLiveData(false)
+    private val _error = DefaultMutableLiveData(false)
 
     private val _startList = SingleLiveEvent<ShoppingListId>()
 

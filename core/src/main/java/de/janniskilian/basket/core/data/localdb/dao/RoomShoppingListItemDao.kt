@@ -1,12 +1,12 @@
 package de.janniskilian.basket.core.data.localdb.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import de.janniskilian.basket.core.data.localdb.entity.RoomShoppingListItem
 import de.janniskilian.basket.core.data.localdb.result.RoomShoppingListItemResult
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RoomShoppingListItemDao {
@@ -21,7 +21,7 @@ interface RoomShoppingListItemDao {
     fun select(id: Long): RoomShoppingListItemResult?
 
     @Query(SELECT_QUERY)
-    fun selectLiveData(id: Long): LiveData<RoomShoppingListItemResult>
+    fun selectLiveData(id: Long): Flow<RoomShoppingListItemResult>
 
     @Update
     fun update(shoppingListItem: RoomShoppingListItem)

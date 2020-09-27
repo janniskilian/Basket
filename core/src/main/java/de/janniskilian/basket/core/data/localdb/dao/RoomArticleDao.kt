@@ -1,6 +1,5 @@
 package de.janniskilian.basket.core.data.localdb.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -8,6 +7,7 @@ import androidx.room.Update
 import de.janniskilian.basket.core.data.localdb.entity.RoomArticle
 import de.janniskilian.basket.core.data.localdb.result.RoomArticleResult
 import de.janniskilian.basket.core.data.localdb.result.RoomArticleSuggestionResult
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RoomArticleDao {
@@ -46,10 +46,10 @@ interface RoomArticleDao {
     fun select(
         searchName: String,
         shoppingListId: Long
-    ): LiveData<List<RoomArticleSuggestionResult>>
+    ): Flow<List<RoomArticleSuggestionResult>>
 
     @Query(SELECT_BY_NAME)
-    fun select(searchName: String): LiveData<List<RoomArticleResult>>
+    fun select(searchName: String): Flow<List<RoomArticleResult>>
 
     @Query(SELECT_BY_NAME)
     fun selectSuspend(searchName: String): List<RoomArticleResult>

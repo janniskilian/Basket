@@ -4,12 +4,13 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.core.util.function.createMutableLiveData
 import de.janniskilian.basket.core.util.sortedByName
+import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
 import kotlinx.coroutines.launch
 
 class AddListItemViewModel @ViewModelInject constructor(
@@ -19,7 +20,7 @@ class AddListItemViewModel @ViewModelInject constructor(
 
     private val shoppingListId = MutableLiveData<ShoppingListId>()
 
-    private val _input: MutableLiveData<String> = createMutableLiveData("")
+    private val _input: MutableLiveData<String> = DefaultMutableLiveData("")
 
     val input: LiveData<String>
         get() = _input
@@ -28,7 +29,9 @@ class AddListItemViewModel @ViewModelInject constructor(
         _input
             .switchMap { inputValue ->
                 shoppingListId.switchMap {
-                    getSuggestionsUseCase.run(it, inputValue)
+                    getSuggestionsUseCase
+                        .run(it, inputValue)
+                        .asLiveData()
                 }
             }
             .map { it.sortedByName() }

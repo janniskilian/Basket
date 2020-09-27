@@ -15,7 +15,7 @@ import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.data.DefaultDataImporter
 import de.janniskilian.basket.core.data.DefaultDataLoader
 import de.janniskilian.basket.core.util.extension.extern.getThemeColor
-import de.janniskilian.basket.core.util.function.createMutableLiveData
+import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
 import kotlinx.android.synthetic.main.fragment_onboarding.*
 import kotlinx.android.synthetic.main.language_item.view.*
 import kotlinx.coroutines.Dispatchers
@@ -56,7 +56,7 @@ class OnboardingFragment : BaseFragment() {
     override val isShowAppBar get() = false
 
     override val appBarColor by lazy {
-        createMutableLiveData(requireContext().getThemeColor(android.R.attr.colorBackground))
+        DefaultMutableLiveData(requireContext().getThemeColor(android.R.attr.colorBackground))
     }
 
     override val animateAppBarColor get() = false

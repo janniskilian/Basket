@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
@@ -29,11 +30,17 @@ class ListItemViewModel @ViewModelInject constructor(
     private val _dismiss = SingleLiveEvent<Unit>()
 
     private val shoppingListItem = listItemId.switchMap {
-        dataClient.shoppingListItem.getLiveData(it)
+        dataClient
+            .shoppingListItem
+            .getAsFlow(it)
+            .asLiveData()
     }
 
     val shoppingList = shoppingListItem.switchMap {
-        dataClient.shoppingList.getLiveData(it.shoppingListId)
+        dataClient
+            .shoppingList
+            .getAsFlow(it.shoppingListId)
+            .asLiveData()
     }
 
     val name: LiveData<String>

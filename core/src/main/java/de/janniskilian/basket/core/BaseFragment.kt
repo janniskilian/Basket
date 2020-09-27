@@ -20,8 +20,8 @@ import de.janniskilian.basket.core.navigationcontainer.NavigationContainerProvid
 import de.janniskilian.basket.core.util.extension.extern.addListener
 import de.janniskilian.basket.core.util.extension.extern.getThemeColor
 import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
-import de.janniskilian.basket.core.util.function.createMutableLiveData
 import de.janniskilian.basket.core.util.function.getLong
+import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
 
 @Suppress("TooManyFunctions")
 abstract class BaseFragment : Fragment() {
@@ -59,7 +59,7 @@ abstract class BaseFragment : Fragment() {
     open val isShowAppBar: Boolean get() = true
 
     open val appBarColor: LiveData<Int> by lazy {
-        createMutableLiveData(requireContext().getThemeColor(R.attr.colorPrimarySurface))
+        DefaultMutableLiveData(requireContext().getThemeColor(R.attr.colorPrimarySurface))
     }
 
     open val animateAppBarColor get() = true

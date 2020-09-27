@@ -114,7 +114,6 @@ subprojects {
         testImplementation deps.testing.junit
         testImplementation deps.testing.kotlinTest
         testImplementation deps.testing.mockito
-        testImplementation deps.testing.robolectric
         testImplementation deps.androidTesting.livedata
 
         androidTestImplementation deps.testing.kotlinTest

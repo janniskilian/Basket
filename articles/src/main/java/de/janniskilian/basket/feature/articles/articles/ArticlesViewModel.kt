@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
 import de.janniskilian.basket.core.data.DataClient
@@ -22,7 +23,12 @@ class ArticlesViewModel @ViewModelInject constructor(
 
     val articles: LiveData<List<Article>> =
         searchBarInput
-            .switchMap { dataClient.article.get(it) }
+            .switchMap {
+                dataClient
+                    .article
+                    .get(it)
+                    .asLiveData()
+            }
             .map { it.sortedByName() }
 
     override val searchBarVisible: LiveData<Boolean>

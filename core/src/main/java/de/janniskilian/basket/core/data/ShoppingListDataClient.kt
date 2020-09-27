@@ -1,8 +1,8 @@
 package de.janniskilian.basket.core.data
 
-import androidx.lifecycle.LiveData
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListId
+import kotlinx.coroutines.flow.Flow
 
 interface ShoppingListDataClient {
 
@@ -12,9 +12,9 @@ interface ShoppingListDataClient {
 
     suspend fun get(shoppingListId: ShoppingListId): ShoppingList?
 
-    fun getLiveData(shoppingListId: ShoppingListId): LiveData<ShoppingList>
+    fun getAsFlow(shoppingListId: ShoppingListId): Flow<ShoppingList>
 
-    fun getAll(): LiveData<List<ShoppingList>>
+    fun getAll(): Flow<List<ShoppingList>>
 
     suspend fun update(shoppingListId: ShoppingListId, name: String, color: Int)
 

@@ -1,6 +1,5 @@
 package de.janniskilian.basket.feature.lists.addlistitem
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
@@ -12,19 +11,13 @@ import de.janniskilian.basket.core.type.domain.ArticleSuggestion
 import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.type.domain.CategoryId
 import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.core.util.extension.extern.getOrAwaitValue
-import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
-import org.junit.Rule
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.single
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import kotlin.test.assertEquals
 
-@RunWith(RobolectricTestRunner::class)
 class GetSuggestionsUseCaseTest {
-
-    @get:Rule
-    val rule = InstantTaskExecutorRule()
 
     private val bananas = Article(ArticleId(1), "Bananas", Category(CategoryId(1), "Produce"))
     private val apples = Article(ArticleId(2), "Apples", Category(CategoryId(1), "Produce"))
@@ -34,7 +27,7 @@ class GetSuggestionsUseCaseTest {
         Category(CategoryId(1), "Produce")
     )
 
-    private val articleDataClientResult = DefaultMutableLiveData(
+    private val articleDataClientResult = flowOf(
         listOf(
             ArticleSuggestion(bananas, false),
             ArticleSuggestion(apples, true),
@@ -55,7 +48,7 @@ class GetSuggestionsUseCaseTest {
     private val useCase = GetSuggestionsUseCase(dataClient)
 
     @Test
-    fun ascendingOrderingByArticleName() {
+    fun ascendingOrderingByArticleName() = runBlocking {
         assertEquals(
             listOf(
                 ShoppingListItemSuggestion(
@@ -76,12 +69,12 @@ class GetSuggestionsUseCaseTest {
             ),
             useCase
                 .run(shoppingListId, "")
-                .getOrAwaitValue()
+                .single()
         )
     }
 
     @Test
-    fun createArticleSuggestion() {
+    fun createArticleSuggestion() = runBlocking {
         assertEquals(
             ShoppingListItemSuggestion(
                 Article(ArticleId(0), "apple", null),
@@ -90,7 +83,7 @@ class GetSuggestionsUseCaseTest {
             ),
             useCase
                 .run(shoppingListId, "apple")
-                .getOrAwaitValue()
+                .single()
                 .first()
         )
 
@@ -103,13 +96,13 @@ class GetSuggestionsUseCaseTest {
             ),
             useCase
                 .run(shoppingListId, apples.name)
-                .getOrAwaitValue()
+                .single()
                 .first()
         )
     }
 
     @Test
-    fun addQuantityToSuggestions() {
+    fun addQuantityToSuggestions() = runBlocking {
         val formatedQuantity = "2 kg"
 
         assertEquals(
@@ -141,7 +134,7 @@ class GetSuggestionsUseCaseTest {
             ),
             useCase
                 .run(shoppingListId, "a 2kg")
-                .getOrAwaitValue()
+                .single()
         )
     }
 }
