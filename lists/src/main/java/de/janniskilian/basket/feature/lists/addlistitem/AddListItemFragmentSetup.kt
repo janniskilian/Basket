@@ -31,7 +31,7 @@ class AddListItemFragmentSetup(
         viewModelObserver.observe()
     }
 
-    private fun setupRecyclerView() = with(fragment.colorsRecyclerView) {
+    private fun setupRecyclerView() = with(fragment.recyclerView) {
         layoutManager = LinearLayoutManager(
             context,
             RecyclerView.VERTICAL,

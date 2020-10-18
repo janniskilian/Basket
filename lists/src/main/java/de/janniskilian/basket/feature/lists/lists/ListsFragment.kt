@@ -17,7 +17,7 @@ class ListsFragment : BaseFragment() {
 
     private val viewModel: ListsViewModel by viewModels()
 
-    val listsAdapter get() = colorsRecyclerView.adapter as? ListsAdapter
+    val listsAdapter get() = recyclerView.adapter as? ListsAdapter
 
     private val setup by lazy {
         ListsFragmentSetup(this, viewModel)

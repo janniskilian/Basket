@@ -22,5 +22,6 @@
     <string name="category_checkmark_icon_desc">Checkmark icon</string>
 
     <string name="apply">Apply</string>
+    <string name="undo">Undo</string>
 
 </resources>

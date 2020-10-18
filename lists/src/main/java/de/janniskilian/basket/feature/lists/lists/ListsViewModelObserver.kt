@@ -25,7 +25,7 @@ class ListsViewModelObserver(
 
     private fun shoppingListsObserver(shoppingLists: List<ShoppingList>) = with(fragment) {
         listsAdapter?.submitList(shoppingLists) {
-            colorsRecyclerView.invalidateItemDecorations()
+            recyclerView.invalidateItemDecorations()
         }
 
         emptyLayout.isVisible = shoppingLists.isEmpty()
@@ -40,7 +40,7 @@ class ListsViewModelObserver(
                 R.string.list_deleted_snackbar,
                 Snackbar.LENGTH_LONG
             )
-            .setAction(R.string.restore_button) { viewModel.restoreShoppingList() }
+            .setAction(R.string.undo) { viewModel.restoreShoppingList() }
             .setAnchorView(navigationContainer.fab)
             .apply {
                 show()

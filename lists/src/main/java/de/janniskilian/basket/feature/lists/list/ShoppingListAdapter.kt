@@ -116,7 +116,7 @@ class ShoppingListAdapter(private val isDisplayCompact: Boolean) :
 
     companion object {
 
-        private const val VIEW_TYPE_SHOPPING_LIST_ITEM = 1
-        private const val VIEW_TYPE_CATEGORY = 2
+        const val VIEW_TYPE_SHOPPING_LIST_ITEM = 1
+        const val VIEW_TYPE_CATEGORY = 2
     }
 }

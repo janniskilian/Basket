@@ -6,7 +6,6 @@
     <string name="shopping_lists_empty_info">Let\'s change that by tapping the create list button</string>
     <string name="fab_create_shopping_list">Create List</string>
     <string name="list_deleted_snackbar">List deleted</string>
-    <string name="restore_button">Restore</string>
 
     <plurals name="shopping_list_items_total">
         <item quantity="one">%d item total</item>

@@ -22,7 +22,7 @@ class ListsFragmentSetup(
     }
 
     private fun setupRecyclerView() {
-        with(fragment.colorsRecyclerView) {
+        with(fragment.recyclerView) {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = ListsAdapter()

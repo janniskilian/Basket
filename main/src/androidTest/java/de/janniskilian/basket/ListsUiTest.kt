@@ -44,7 +44,7 @@ class ListsUiTest : BaseUiTest() {
 
         assertNotExist(newName)
 
-        clickOn(R.string.restore_button)
+        clickOn(R.string.undo)
 
         assertDisplayed(newName)
     }

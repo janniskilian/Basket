@@ -1,6 +1,7 @@
 package de.janniskilian.basket.feature.lists.list
 
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.ShoppingListId
@@ -41,7 +42,7 @@ class ListFragmentSetup(
             resources.getBoolean(R.bool.pref_def_compact_lists)
         )
 
-        with(colorsRecyclerView) {
+        with(recyclerView) {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(
                 requireContext(),
@@ -63,5 +64,21 @@ class ListFragmentSetup(
             listItemClickListener = viewModel::listItemClicked
             editButtonClickListener = { startListItem(it) }
         }
+
+        val itemTouchHelperCallback = ListRecyclerViewItemTouchHelperCallback(
+            requireContext(),
+            ::onListItemSwiped
+        )
+        ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView)
+    }
+
+    private fun onListItemSwiped(itemAdapterPosition: Int) {
+        (fragment
+            .shoppingListAdapter
+            ?.currentList
+            ?.getOrNull(itemAdapterPosition) as? ShoppingListAdapter.Item.ListItem)
+            ?.let {
+                viewModel.removeListItem(it.shoppingListItem)
+            }
     }
 }

@@ -1,6 +1,7 @@
 package de.janniskilian.basket.feature.lists.list
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -9,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
+import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 class ListViewModel @ViewModelInject constructor(
@@ -17,12 +19,21 @@ class ListViewModel @ViewModelInject constructor(
 
     private val shoppingListId = MutableLiveData<ShoppingListId>()
 
+    private var _listItemsRemoved = SingleLiveEvent<List<ShoppingListItem>>()
+    private var _allListItemsSetIsChecked = SingleLiveEvent<List<ShoppingListItem>>()
+
     val shoppingList = shoppingListId.switchMap {
         dataClient
             .shoppingList
             .getAsFlow(it)
             .asLiveData()
     }
+
+    val listItemsRemoved: LiveData<List<ShoppingListItem>>
+        get() = _listItemsRemoved
+
+    val allListItemsSetToChecked: LiveData<List<ShoppingListItem>>
+        get() = _allListItemsSetIsChecked
 
     fun setShoppingListId(id: ShoppingListId) {
         shoppingListId.value = id
@@ -37,25 +48,58 @@ class ListViewModel @ViewModelInject constructor(
     }
 
     fun setAllListItemsChecked(isChecked: Boolean) {
-        shoppingListId.value?.let {
+        shoppingList.value?.let { list ->
             viewModelScope.launch {
-                dataClient.shoppingListItem.setAllCheckedForShoppingList(it, isChecked)
+                dataClient.shoppingListItem.setAllCheckedForShoppingList(list.id, isChecked)
             }
+
+            _allListItemsSetIsChecked.setValue(
+                list.items.filter { it.isChecked != isChecked }
+            )
         }
     }
 
+    fun removeListItem(listItem: ShoppingListItem) {
+        viewModelScope.launch {
+            dataClient.shoppingListItem.delete(listItem.shoppingListId, listItem.article.id)
+        }
+
+        _listItemsRemoved.setValue(listOf(listItem))
+    }
+
     fun removeAllListItems() {
-        shoppingListId.value?.let {
+        shoppingList.value?.let {
             viewModelScope.launch {
-                dataClient.shoppingListItem.deleteAllForShoppingList(it)
+                dataClient.shoppingListItem.deleteAllForShoppingList(it.id)
             }
+
+            _listItemsRemoved.setValue(it.items)
         }
     }
 
     fun removeAllCheckedListItems() {
-        shoppingListId.value?.let {
+        shoppingList.value?.let { list ->
             viewModelScope.launch {
-                dataClient.shoppingListItem.deleteAllCheckedForShoppingList(it)
+                dataClient.shoppingListItem.deleteAllCheckedForShoppingList(list.id)
+            }
+
+            val checkedListItems = list.items.filter { it.isChecked }
+            _listItemsRemoved.setValue(checkedListItems)
+        }
+    }
+
+    fun undoRemoveListItems() {
+        listItemsRemoved.value?.let {
+            viewModelScope.launch {
+                dataClient.shoppingListItem.create(it)
+            }
+        }
+    }
+
+    fun undoSetAllListItemsIsChecked() {
+        allListItemsSetToChecked.value?.let {
+            viewModelScope.launch {
+                dataClient.shoppingListItem.update(it)
             }
         }
     }

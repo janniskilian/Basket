@@ -34,7 +34,7 @@ class ListFragment : BaseFragment() {
     @Inject
     lateinit var sharedPrefs: SharedPreferences
 
-    val shoppingListAdapter get() = colorsRecyclerView.adapter as? ShoppingListAdapter
+    val shoppingListAdapter get() = recyclerView.adapter as? ShoppingListAdapter
 
     private var isRecreated = false
 

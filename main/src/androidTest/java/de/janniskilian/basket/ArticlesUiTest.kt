@@ -41,7 +41,7 @@ class ArticlesUiTest : BaseUiTest() {
         closeKeyboard()
         clickOn(R.id.categoryEditText)
 
-        clickListItem(R.id.colorsRecyclerView, 1)
+        clickListItem(R.id.recyclerView, 1)
         clickOn(R.string.create_article_button)
     }
 
@@ -54,7 +54,7 @@ class ArticlesUiTest : BaseUiTest() {
         writeTo(R.id.nameEditText, editedName)
         closeKeyboard()
         clickOn(R.id.categoryEditText)
-        clickListItem(R.id.colorsRecyclerView, 0)
+        clickListItem(R.id.recyclerView, 0)
         clickOn(R.string.save_article_button)
     }
 
@@ -73,7 +73,7 @@ class ArticlesUiTest : BaseUiTest() {
     }
 
     private fun getArticleItemViewInteraction(name: String) =
-        onView(allOf(withChild(withText(name)), isDescendantOfA(withId(R.id.colorsRecyclerView))))
+        onView(allOf(withChild(withText(name)), isDescendantOfA(withId(R.id.recyclerView))))
 
     private fun assertArticleIsDisplayed(editedName: String) {
         getArticleItemViewInteraction(editedName).check(matches(isDisplayed()))

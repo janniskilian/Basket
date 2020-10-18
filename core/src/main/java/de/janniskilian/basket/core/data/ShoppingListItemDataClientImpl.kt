@@ -55,6 +55,12 @@ class ShoppingListItemDataClientImpl @Inject constructor(
         dao.update(modelToRoom(shoppingListItem))
     }
 
+    override suspend fun update(shoppingListItems: List<ShoppingListItem>) = withIOContext {
+        dao.update(
+            shoppingListItems.map { modelToRoom(it) }
+        )
+    }
+
     override suspend fun setAllCheckedForShoppingList(
         shoppingListId: ShoppingListId,
         isChecked: Boolean

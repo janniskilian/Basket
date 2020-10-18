@@ -2,6 +2,7 @@ package de.janniskilian.basket.feature.lists.list
 
 import androidx.core.view.isVisible
 import androidx.lifecycle.observe
+import com.google.android.material.snackbar.Snackbar
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
 import de.janniskilian.basket.core.util.extension.extern.flatMapIndexed
@@ -16,11 +17,23 @@ class ListViewModelObserver(
     viewModel: ListViewModel
 ) : ViewModelObserver<ListViewModel>(viewModel) {
 
+    private var snackbar: Snackbar? = null
+
     override fun observe() {
-        viewModel.shoppingList.observe(fragment.viewLifecycleOwner) {
-            renderTitle(it)
-            renderList(it)
-        }
+        viewModel
+            .shoppingList
+            .observe(fragment.viewLifecycleOwner) {
+                renderTitle(it)
+                renderList(it)
+            }
+
+        viewModel
+            .listItemsRemoved
+            .observe(fragment.viewLifecycleOwner, ::listItemsRemovedObserver)
+
+        viewModel
+            .allListItemsSetToChecked
+            .observe(fragment.viewLifecycleOwner, ::allListItemsSetToCheckedObserver)
     }
 
     private fun renderTitle(shoppingList: ShoppingList) {
@@ -30,7 +43,7 @@ class ListViewModelObserver(
 
     private fun renderList(shoppingList: ShoppingList) {
         fragment.emptyGroup.isVisible = shoppingList.isEmpty
-        fragment.colorsRecyclerView.isVisible = !shoppingList.isEmpty
+        fragment.recyclerView.isVisible = !shoppingList.isEmpty
 
         val (checkedItems, uncheckedItems) = shoppingList.items.partition { it.isChecked }
 
@@ -81,8 +94,58 @@ class ListViewModelObserver(
         fragment.shoppingListAdapter?.submitList(uncheckedAdapterItems + checkedAdapterItems)
     }
 
+    private fun listItemsRemovedObserver(removedListItems: List<ShoppingListItem>) =
+        with(fragment) {
+            val snackbarText = if (removedListItems.size == 1) {
+                getString(
+                    R.string.list_item_removed_snackbar,
+                    removedListItems.first().name
+                )
+            } else {
+                getString(
+                    R.string.list_items_removed_snackbar,
+                    removedListItems.size
+                )
+            }
+
+            showSnackbar(snackbarText) {
+                viewModel.undoRemoveListItems()
+            }
+        }
+
+    private fun allListItemsSetToCheckedObserver(
+        listItems: List<ShoppingListItem>
+    ) = with(fragment) {
+        val snackbarText = if (listItems.firstOrNull()?.isChecked == true) {
+            getString(R.string.all_list_items_unchecked_snackbar)
+        } else {
+            getString(R.string.all_list_items_checked_snackbar)
+        }
+
+        showSnackbar(snackbarText) {
+            viewModel.undoSetAllListItemsIsChecked()
+        }
+    }
+
     private fun selectArticleName(item: ShoppingListItem): String =
         item.article.name
+
+    private fun showSnackbar(text: String, actionListener: () -> Unit) {
+        snackbar?.dismiss()
+        snackbar = Snackbar
+            .make(
+                fragment.requireView(),
+                text,
+                Snackbar.LENGTH_LONG
+            )
+            .setAction(R.string.undo) {
+                actionListener()
+            }
+            .setAnchorView(fragment.navigationContainer.fab)
+            .apply {
+                show()
+            }
+    }
 
     companion object {
 

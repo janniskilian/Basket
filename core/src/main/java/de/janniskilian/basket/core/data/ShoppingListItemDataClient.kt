@@ -25,6 +25,8 @@ interface ShoppingListItemDataClient {
 
     suspend fun update(shoppingListItem: ShoppingListItem)
 
+    suspend fun update(shoppingListItems: List<ShoppingListItem>)
+
     suspend fun setAllCheckedForShoppingList(shoppingListId: ShoppingListId, isChecked: Boolean)
 
     suspend fun delete(shoppingListId: ShoppingListId, articleId: ArticleId)
