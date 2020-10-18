@@ -41,7 +41,7 @@ class ListFragmentSetup(
             resources.getBoolean(R.bool.pref_def_compact_lists)
         )
 
-        with(recyclerView) {
+        with(colorsRecyclerView) {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(
                 requireContext(),

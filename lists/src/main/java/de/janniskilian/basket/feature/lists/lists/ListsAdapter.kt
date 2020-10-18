@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import de.janniskilian.basket.core.type.domain.ShoppingList
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.shopping_list_item.view.*
@@ -15,8 +16,8 @@ class ListsAdapter : ListAdapter<ShoppingList, ListsAdapter.ViewHolder>(
     GenericDiffItemCallback { oldItem, newItem -> oldItem.id == newItem.id }
 ) {
 
-    var itemClickListener: ((position: Int) -> Unit)? = null
-    var moreButtonClickListener: ((position: Int) -> Unit)? = null
+    var itemClickListener: ((shoppingListId: ShoppingListId) -> Unit)? = null
+    var moreButtonClickListener: ((shoppingListId: ShoppingListId) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -29,9 +30,9 @@ class ListsAdapter : ListAdapter<ShoppingList, ListsAdapter.ViewHolder>(
         val item = getItem(position)
 
         with(holder.itemView as MaterialCardView) {
-            setOnClickListener { itemClickListener?.invoke(holder.adapterPosition) }
+            setOnClickListener { itemClickListener?.invoke(item.id) }
             moreButton.setOnClickListener {
-                moreButtonClickListener?.invoke(holder.adapterPosition)
+                moreButtonClickListener?.invoke(item.id)
             }
 
             setCardBackgroundColor(item.color)

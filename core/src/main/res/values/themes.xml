@@ -12,17 +12,19 @@
         <item name="colorOnSecondary">@android:color/primary_text_light</item>
 
         <item name="shapeAppearanceSmallComponent">
-            @style/ShapeAppearance.App.SmallComponent
+            @style/ShapeAppearance.Basket.SmallComponent
         </item>
         <item name="shapeAppearanceMediumComponent">
-            @style/ShapeAppearance.App.MediumComponent
+            @style/ShapeAppearance.Basket.MediumComponent
         </item>
         <item name="shapeAppearanceLargeComponent">
-            @style/ShapeAppearance.App.LargeComponent
+            @style/ShapeAppearance.Basket.LargeComponent
         </item>
 
-        <item name="actionOverflowButtonStyle">@style/Widget.Basket.ActionButton.Overflow</item>
         <item name="bottomSheetDialogTheme">@style/Theme.Basket.BottomSheetDialog</item>
+
+        <item name="actionOverflowButtonStyle">@style/Widget.Basket.ActionButton.Overflow</item>
+        <item name="checkboxStyle">@style/Widget.Basket.Checkbox</item>
     </style>
 
     <style name="Theme.Basket.DayNight" parent="Theme.Basket.Base">
@@ -41,7 +43,11 @@
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="android:windowIsFloating">false</item>
 
-        <item name="bottomSheetStyle">@style/Widget.Myposter.BottomSheet</item>
+        <item name="bottomSheetStyle">@style/Widget.Basket.BottomSheet</item>
+    </style>
+
+    <style name="Theme.Basket.TransparentHighlight" parent="Theme.Basket.DayNight">
+        <item name="colorControlHighlight">@color/transparent</item>
     </style>
 
 </resources>

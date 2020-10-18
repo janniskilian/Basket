@@ -21,6 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/one"
         android:layout_marginEnd="@dimen/two"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textAppearance="?attr/textAppearanceBody1"
         tools:text="English"/>
 </LinearLayout>

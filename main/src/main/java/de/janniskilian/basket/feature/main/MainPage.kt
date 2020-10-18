@@ -57,6 +57,17 @@ enum class MainPage {
 
         override val iconRes: Int
             get() = R.drawable.ic_settings_24
+    },
+
+    HELP_AND_FEEDBACK {
+        override val navId: Int
+            get() = R.id.helpAndFeedbackFragment
+
+        override val titleRes: Int
+            get() = R.string.navigation_help_and_feedback
+
+        override val iconRes: Int
+            get() = R.drawable.ic_help_24
     };
 
     abstract val navId: Int

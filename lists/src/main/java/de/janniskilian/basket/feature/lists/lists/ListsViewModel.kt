@@ -7,6 +7,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.ShoppingList
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.sortedByName
 import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.flow.map
@@ -27,9 +28,10 @@ class ListsViewModel @ViewModelInject constructor(
     val shoppingListDeleted: LiveData<ShoppingList>
         get() = _shoppingListDeleted
 
-    fun deleteList(position: Int) {
-        shoppingLists.value
-            ?.getOrNull(position)
+    fun deleteList(shoppingListId: ShoppingListId) {
+        shoppingLists
+            .value
+            ?.find { it.id == shoppingListId }
             ?.let {
                 viewModelScope.launch { dataClient.shoppingList.delete(it.id) }
                 _shoppingListDeleted.setValue(it)

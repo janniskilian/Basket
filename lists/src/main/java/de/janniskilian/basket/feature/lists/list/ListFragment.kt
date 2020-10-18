@@ -6,9 +6,14 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.map
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import de.janniskilian.basket.core.ActionMenuBottomSheetDialog
 import de.janniskilian.basket.core.BaseFragment
+import de.janniskilian.basket.core.NavGraphDirections
+import de.janniskilian.basket.core.ResultCode
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
+import de.janniskilian.basket.core.util.extension.extern.keepScreenOn
 import de.janniskilian.basket.core.util.function.createUiListColor
 import de.janniskilian.basket.feature.lists.R
 import kotlinx.android.synthetic.main.fragment_list.*
@@ -28,7 +33,7 @@ class ListFragment : BaseFragment() {
     @Inject
     lateinit var sharedPrefs: SharedPreferences
 
-    val shoppingListAdapter get() = recyclerView.adapter as? ShoppingListAdapter
+    val shoppingListAdapter get() = colorsRecyclerView.adapter as? ShoppingListAdapter
 
     private var isRecreated = false
 
@@ -51,20 +56,56 @@ class ListFragment : BaseFragment() {
         setup.run()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        requireActivity()
+            .window
+            .keepScreenOn(false)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_check_all_list_items -> viewModel.setAllListItemsChecked(true)
+            R.id.action_select_item_order -> {
+                viewModel
+                    .shoppingList
+                    .value
+                    ?.let {
+                        findNavController().navigate(
+                            ListFragmentDirections
+                                .actionListFragmentToListItemOrderDialog(it.id.value)
+                        )
+                    }
+            }
 
-            R.id.action_uncheck_all_list_items -> viewModel.setAllListItemsChecked(false)
-
-            R.id.action_remove_all_checked_list_items -> viewModel.removeAllCheckedListItems()
-
-            R.id.action_remove_all_list_items -> viewModel.removeAllListItems()
+            R.id.action_overflow -> {
+                navigateWithResult(
+                    NavGraphDirections.toActionMenuBottomSheetDialog(R.menu.list_overflow),
+                    REQ_OVERFLOW
+                )
+            }
 
             else -> return false
         }
 
         return true
+    }
+
+    override fun onNavigationResult(requestCode: Int, resultCode: ResultCode, data: Any?) {
+        if (requestCode == REQ_OVERFLOW
+            && resultCode == ResultCode.SUCCESS
+            && data is ActionMenuBottomSheetDialog.Result
+        ) {
+            when (data.menuItemId) {
+                R.id.action_check_all_list_items -> viewModel.setAllListItemsChecked(true)
+
+                R.id.action_uncheck_all_list_items -> viewModel.setAllListItemsChecked(false)
+
+                R.id.action_remove_all_checked_list_items -> viewModel.removeAllCheckedListItems()
+
+                R.id.action_remove_all_list_items -> viewModel.removeAllListItems()
+            }
+        }
     }
 
     override fun onFabClicked() {
@@ -75,5 +116,10 @@ class ListFragment : BaseFragment() {
 
     fun startListItem(listItem: ShoppingListItem) {
         navigate(ListFragmentDirections.actionListFragmentToListItemFragment(listItem.id.value))
+    }
+
+    companion object {
+
+        private const val REQ_OVERFLOW = 1
     }
 }

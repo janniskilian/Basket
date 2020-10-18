@@ -30,6 +30,7 @@ fun modelToRoom(shoppingList: ShoppingList): RoomShoppingList =
         shoppingList.name,
         shoppingList.name.withoutSpecialChars(),
         shoppingList.color,
+        shoppingList.isGroupedByCategory,
         shoppingList.id.value
     )
 

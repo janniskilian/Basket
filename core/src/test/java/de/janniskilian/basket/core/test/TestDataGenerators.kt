@@ -53,6 +53,7 @@ fun createTestShoppingList(items: List<ShoppingListItem> = emptyList()): Shoppin
         ShoppingListId(Random.nextLong()),
         Random.nextString(),
         Random.nextInt(),
+        true,
         items
     )
 

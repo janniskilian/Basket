@@ -10,7 +10,7 @@
 
         <TextView
             android:id="@+id/title"
-            style="@style/TextAppearance.Basket.ToolbarTitle"/>
+            style="@style/Widget.Basket.CenteredHeadline"/>
     </com.google.android.material.appbar.MaterialToolbar>
 </com.google.android.material.appbar.AppBarLayout>
 

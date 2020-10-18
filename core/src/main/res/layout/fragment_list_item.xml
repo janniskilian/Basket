@@ -81,8 +81,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/list_item_comment_hint"
                     android:imeOptions="actionDone"
-                    android:inputType="textCapSentences"
-                    android:singleLine="true"/>
+                    android:inputType="textCapSentences|textImeMultiLine"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton

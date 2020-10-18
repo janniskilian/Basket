@@ -27,7 +27,7 @@ class AddListItemFragment : BaseFragment() {
     }
 
     val suggestionsAdapter
-        get() = recyclerView.adapter as? ShoppingListItemSuggestionsAdapter
+        get() = colorsRecyclerView.adapter as? ShoppingListItemSuggestionsAdapter
 
     override val layoutRes get() = R.layout.fragment_add_list_item
 
@@ -43,7 +43,7 @@ class AddListItemFragment : BaseFragment() {
     }
 
     override fun onDestroyView() {
-        recyclerView.adapter = null
+        colorsRecyclerView.adapter = null
         super.onDestroyView()
     }
 

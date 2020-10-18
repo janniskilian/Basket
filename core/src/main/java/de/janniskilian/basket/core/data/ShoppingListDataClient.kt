@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ShoppingListDataClient {
 
-    suspend fun create(name: String, color: Int): ShoppingListId
+    suspend fun create(name: String, color: Int, isGroupedByCategory: Boolean): ShoppingListId
 
     suspend fun create(shoppingList: ShoppingList): ShoppingListId
 
@@ -16,7 +16,12 @@ interface ShoppingListDataClient {
 
     fun getAll(): Flow<List<ShoppingList>>
 
-    suspend fun update(shoppingListId: ShoppingListId, name: String, color: Int)
+    suspend fun update(
+        shoppingListId: ShoppingListId,
+        name: String,
+        color: Int,
+        isGroupedByCategory: Boolean
+    )
 
     suspend fun delete(shoppingListId: ShoppingListId)
 }

@@ -1,13 +1,10 @@
 package de.janniskilian.basket.core.navigationcontainer
 
-import androidx.annotation.StringRes
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 interface NavigationContainer {
 
-    fun showSnackbar(@StringRes resId: Int, duration: Int, configure: Snackbar.() -> Unit)
-
-    fun dismissSnackbar()
+    val fab: ExtendedFloatingActionButton
 
     fun attachSearchBar(viewModel: SearchBarViewModel)
 }

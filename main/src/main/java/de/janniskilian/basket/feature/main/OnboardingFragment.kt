@@ -84,6 +84,8 @@ class OnboardingFragment : BaseFragment() {
 
     private fun setClickListeners() {
         button.setOnClickListener {
+            progressIndicator.show()
+
             GlobalScope.launch {
                 DefaultDataImporter(
                     dataClient,

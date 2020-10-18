@@ -6,6 +6,7 @@ data class RoomShoppingListResult(
     val shoppingListId: Long,
     val shoppingListName: String,
     val color: Int,
+    val isGroupedByCategory: Boolean,
     @Embedded(prefix = "shoppingListItem_")
     val shoppingListItem: RoomShoppingListItemResult?
 )

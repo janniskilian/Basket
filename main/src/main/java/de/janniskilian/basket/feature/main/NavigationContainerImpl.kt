@@ -1,20 +1,17 @@
 package de.janniskilian.basket.feature.main
 
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
-import androidx.core.view.updateMargins
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.observe
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import de.janniskilian.basket.R
 import de.janniskilian.basket.core.ANIMATION_DURATION_S
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
 import de.janniskilian.basket.core.navigationcontainer.SearchBarViewModel
 import de.janniskilian.basket.core.util.WeakRef
-import de.janniskilian.basket.core.util.extension.extern.contentView
 import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
 import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
@@ -22,36 +19,11 @@ import de.janniskilian.basket.core.util.extension.extern.toggleSoftKeyboard
 import de.janniskilian.basket.core.util.function.createSpeechInputIntent
 import de.janniskilian.basket.core.util.weakRef
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.math.roundToInt
 
 class NavigationContainerImpl(private val activity: MainActivity) : NavigationContainer {
 
-    private var snackbar: WeakRef<Snackbar>? = null
-
-    override fun showSnackbar(resId: Int, duration: Int, configure: Snackbar.() -> Unit) {
-        snackbar = Snackbar
-            .make(activity.contentView, resId, duration)
-            .apply {
-                configure()
-
-                view.post {
-                    view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                        val appBarHeight = activity.appBar.height + activity.fab.height / 2f
-                        val margin = activity.resources.getDimension(R.dimen.half)
-                        updateMargins(bottom = (appBarHeight + margin).roundToInt())
-                    }
-                }
-
-                show()
-            }
-            .weakRef()
-    }
-
-    override fun dismissSnackbar() {
-        snackbar
-            ?.invoke()
-            ?.dismiss()
-    }
+    override val fab: ExtendedFloatingActionButton
+        get() = activity.fab
 
     override fun attachSearchBar(viewModel: SearchBarViewModel) {
         val fragment = activity.currentFragment ?: return

@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/four"
         android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:textAppearance="?attr/textAppearanceSubtitle2"
         android:textColor="@color/navigation_item_text_color"
         app:textAllCaps="false"
         tools:text="Lorem ipsum"/>

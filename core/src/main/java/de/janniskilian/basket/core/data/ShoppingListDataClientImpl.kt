@@ -10,19 +10,25 @@ import de.janniskilian.basket.core.util.extension.extern.withoutSpecialChars
 import de.janniskilian.basket.core.util.function.withIOContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapNotNull
 import javax.inject.Inject
 
 class ShoppingListDataClientImpl @Inject constructor(
     private val dao: RoomShoppingListDao
 ) : ShoppingListDataClient {
 
-    override suspend fun create(name: String, color: Int) = withIOContext {
+    override suspend fun create(
+        name: String,
+        color: Int,
+        isGroupedByCategory: Boolean
+    ) = withIOContext {
         ShoppingListId(
             dao.insert(
                 RoomShoppingList(
                     name,
                     name.withoutSpecialChars(),
-                    color
+                    color,
+                    isGroupedByCategory
                 )
             )
         )
@@ -44,7 +50,7 @@ class ShoppingListDataClientImpl @Inject constructor(
     override fun getAsFlow(shoppingListId: ShoppingListId): Flow<ShoppingList> =
         dao
             .selectLiveData(shoppingListId.value)
-            .map { roomToModel(it) }
+            .mapNotNull { roomToModel(it) }
 
     override fun getAll(): Flow<List<ShoppingList>> =
         dao
@@ -52,16 +58,22 @@ class ShoppingListDataClientImpl @Inject constructor(
             .map { results ->
                 results
                     .groupBy { it.shoppingListId }
-                    .map { (_, value) -> roomToModel(value) }
+                    .mapNotNull { (_, value) -> roomToModel(value) }
             }
 
-    override suspend fun update(shoppingListId: ShoppingListId, name: String, color: Int) =
+    override suspend fun update(
+        shoppingListId: ShoppingListId,
+        name: String,
+        color: Int,
+        isGroupedByCategory: Boolean
+    ) =
         withIOContext {
             dao.update(
                 shoppingListId.value,
                 name,
                 name.withoutSpecialChars(),
-                color
+                color,
+                isGroupedByCategory
             )
         }
 

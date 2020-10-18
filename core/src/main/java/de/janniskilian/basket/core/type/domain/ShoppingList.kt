@@ -4,6 +4,7 @@ data class ShoppingList(
     val id: ShoppingListId,
     override val name: String,
     val color: Int,
+    val isGroupedByCategory: Boolean,
     val items: List<ShoppingListItem>
 ) : NamedItem {
 

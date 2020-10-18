@@ -30,6 +30,8 @@ class CreateListViewModel @ViewModelInject constructor(
 
     private val _dismiss = SingleLiveEvent<Unit>()
 
+    private var isGroupedByCategory = true
+
     val name: LiveData<String>
         get() = _name
 
@@ -49,11 +51,13 @@ class CreateListViewModel @ViewModelInject constructor(
         shoppingListId = id
 
         viewModelScope.launch(Dispatchers.Main) {
-            dataClient.shoppingList
+            dataClient
+                .shoppingList
                 .get(id)
                 ?.let {
                     setName(it.name)
                     setSelectedColor(it.color)
+                    isGroupedByCategory = it.isGroupedByCategory
                 }
         }
     }
@@ -75,13 +79,17 @@ class CreateListViewModel @ViewModelInject constructor(
 
             id == null ->
                 viewModelScope.launch {
-                    val createdListId = useCases.createList(name, _selectedColor.value)
+                    val createdListId = useCases.createList(
+                        name,
+                        _selectedColor.value,
+                        isGroupedByCategory
+                    )
                     _startList.postValue(createdListId)
                 }
 
             else -> {
                 viewModelScope.launch {
-                    useCases.updateList(id, name, _selectedColor.value)
+                    useCases.updateList(id, name, _selectedColor.value, isGroupedByCategory)
                     _dismiss.postValue(Unit)
                 }
             }

@@ -58,7 +58,8 @@ class ArticleViewModel @ViewModelInject constructor(
         articleId = id
 
         viewModelScope.launch {
-            dataClient.article
+            dataClient
+                .article
                 .get(id)
                 ?.let {
                     setName(it.name)

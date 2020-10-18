@@ -37,12 +37,12 @@ class CreateListViewModelObserver(
     private fun renderColors() {
         val selectedColor = viewModel.selectedColor.value
 
-        (fragment.recyclerView.adapter as? ColorsAdapter)?.submitList(
+        (fragment.colorsRecyclerView.adapter as? ColorsAdapter)?.submitList(
             viewModel.colors.map {
                 ColorsAdapter.Item(it, it == selectedColor)
             }
         ) {
-            fragment.recyclerView.centerItem(
+            fragment.colorsRecyclerView.centerItem(
                 viewModel.colors.indexOf(selectedColor),
                 RecyclerView.HORIZONTAL
             )

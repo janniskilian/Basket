@@ -8,5 +8,5 @@
     android:paddingTop="@dimen/one"
     android:paddingEnd="@dimen/two"
     android:paddingBottom="@dimen/one"
-    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+    android:textAppearance="?attr/textAppearanceSubtitle2"
     tools:text="Lorem ipsum"/>

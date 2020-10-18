@@ -54,7 +54,7 @@ class CreateListFragmentSetup(
         createButton.setText(textRes)
     }
 
-    private fun setupRecyclerView() = with(fragment.recyclerView) {
+    private fun setupRecyclerView() = with(fragment.colorsRecyclerView) {
         setHasFixedSize(true)
         layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         adapter = ColorsAdapter()
@@ -79,7 +79,7 @@ class CreateListFragmentSetup(
     private fun setClickListeners() = with(fragment) {
         createButton.setOnClickListener { viewModel.submitButtonClicked() }
         nameEditText.onDone(viewModel::submitButtonClicked)
-        (recyclerView.adapter as? ColorsAdapter)?.itemClickListener =
+        (colorsRecyclerView.adapter as? ColorsAdapter)?.itemClickListener =
             viewModel::setSelectedColor
     }
 }

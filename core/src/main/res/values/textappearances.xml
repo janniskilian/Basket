@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="TextAppearance.Basket.ToolbarTitle" parent="TextAppearance.Basket.Headline">
-        <item name="android:gravity">center_horizontal</item>
-    </style>
-
     <style name="TextAppearance.Basket.Headline" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">@font/roboto_slab_700</item>
         <item name="fontFamily">@font/roboto_slab_700</item>
         <item name="android:textSize">26sp</item>

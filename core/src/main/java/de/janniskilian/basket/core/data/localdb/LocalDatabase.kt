@@ -35,12 +35,13 @@ abstract class LocalDatabase : RoomDatabase() {
 
     companion object {
 
-        const val DB_VERSION = 1
+        const val DB_VERSION = 2
         private const val DB_NAME = "APP_DATABASE"
 
         fun create(context: Context): LocalDatabase =
             Room
                 .databaseBuilder(context, LocalDatabase::class.java, DB_NAME)
+                .addMigrations(LocalDatabaseMigration1To2())
                 .build()
     }
 }

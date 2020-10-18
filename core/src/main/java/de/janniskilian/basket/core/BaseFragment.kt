@@ -5,19 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
+import androidx.navigation.Navigator
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainerProvider
 import de.janniskilian.basket.core.util.extension.extern.addListener
+import de.janniskilian.basket.core.util.extension.extern.doOnEvent
 import de.janniskilian.basket.core.util.extension.extern.getThemeColor
 import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
 import de.janniskilian.basket.core.util.function.getLong
@@ -30,7 +35,8 @@ abstract class BaseFragment : Fragment() {
         getLong(requireContext(), R.integer.transition_duration)
     }
 
-    private var pendingNavigation = false
+    @IdRes
+    private var navDestinationId = 0
 
     val navigationContainer
         get() = (requireActivity() as NavigationContainerProvider).navigationContainer
@@ -80,6 +86,9 @@ abstract class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        saveNavDestinationId(savedInstanceState)
+        setupNavigationResultHandling()
+
         (view as? ViewGroup)?.isTransitionGroup = true
 
         titleTextRes?.let {
@@ -87,15 +96,18 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        pendingNavigation = false
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         hideKeyboard()
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putInt(KEY_NAV_DESTINATION_ID, navDestinationId)
+    }
+
+    open fun onNavigationResult(requestCode: Int, resultCode: ResultCode, data: Any?) {}
 
     open fun onNavigateUpAction(): Boolean = false
 
@@ -108,11 +120,32 @@ abstract class BaseFragment : Fragment() {
         // that should be overridden by fragments where the FAB is displayed.
     }
 
+    fun navigate(
+        @IdRes resId: Int,
+        args: Bundle? = null,
+        navOptions: NavOptions? = null,
+        navigatorExtras: Navigator.Extras? = null
+    ) {
+        findNavController().navigate(
+            resId,
+            args,
+            navOptions,
+            navigatorExtras
+        )
+    }
+
     fun navigate(directions: NavDirections, navOptions: NavOptions? = null) {
-        if (!pendingNavigation) {
-            pendingNavigation = true
-            findNavController().navigate(directions, navOptions)
-        }
+        findNavController().navigate(directions, navOptions)
+    }
+
+    fun navigateWithResult(
+        directions: NavDirections,
+        requestCode: Int,
+        navOptions: NavOptions? = null
+    ) {
+        val args = directions.arguments
+        addRequestCodeToBundle(args, requestCode)
+        navigate(directions.actionId, args, navOptions)
     }
 
     fun enableFadeThroughExitTransition() {
@@ -125,7 +158,7 @@ abstract class BaseFragment : Fragment() {
     private fun setupTransitions() {
         val isRootDestinationStartedFromRootDestination =
             (arguments?.getBoolean(KEY_STARTED_FROM_ROOT_DESTINATION) ?: false
-                    && findNavController().currentDestination?.parent?.id == R.id.navGraph)
+                    && findNavController().currentDestination?.parent?.id == R.id.nav_graph)
         arguments?.remove(KEY_STARTED_FROM_ROOT_DESTINATION)
         updateTransitions(isRootDestinationStartedFromRootDestination)
     }
@@ -156,8 +189,49 @@ abstract class BaseFragment : Fragment() {
         )
     }
 
+    private fun saveNavDestinationId(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            findNavController().currentDestination?.let {
+                navDestinationId = it.id
+            }
+        } else {
+            navDestinationId = savedInstanceState.getInt(KEY_NAV_DESTINATION_ID)
+        }
+    }
+
+    private fun setupNavigationResultHandling() {
+        if (navDestinationId != 0) {
+            val backStackEntry = try {
+                findNavController().getBackStackEntry(navDestinationId)
+            } catch (e: IllegalArgumentException) {
+                return
+            }
+
+            val observer = LifecycleEventObserver { _, event ->
+                if (event == Lifecycle.Event.ON_RESUME) {
+                    backStackEntry.getNavigationResult { requestCode, resultCode, data ->
+                        clearResult()
+                        onNavigationResult(requestCode, resultCode, data)
+                    }
+                }
+            }
+
+            backStackEntry.lifecycle.addObserver(observer)
+
+            viewLifecycleOwner.lifecycle.doOnEvent(Lifecycle.Event.ON_DESTROY) {
+                backStackEntry.lifecycle.removeObserver(observer)
+            }
+        }
+    }
+
+    private fun addRequestCodeToBundle(bundle: Bundle, requestCode: Int) {
+        bundle.putInt(KEY_REQUEST_CODE, requestCode)
+    }
+
     companion object {
 
         const val KEY_STARTED_FROM_ROOT_DESTINATION = "KEY_STARTED_FROM_ROOT_DESTINATION"
+
+        private const val KEY_NAV_DESTINATION_ID = "KEY_NAV_DESTINATION_ID"
     }
 }

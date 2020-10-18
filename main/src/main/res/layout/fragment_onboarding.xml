@@ -26,11 +26,9 @@
 
         <TextView
             android:id="@+id/headline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Basket.CenteredHeadline"
             android:layout_marginTop="@dimen/three"
             android:text="@string/onboarding_headline"
-            android:textAppearance="@style/TextAppearance.Basket.Headline"
             app:layout_constraintBottom_toTopOf="@id/info"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +43,7 @@
             android:layout_marginEnd="@dimen/two"
             android:gravity="center_horizontal"
             android:text="@string/onboarding_info"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
             app:layout_constraintBottom_toTopOf="@id/radioGroup"
             app:layout_constraintTop_toBottomOf="@id/headline"/>
 
@@ -55,20 +53,34 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/three"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@id/button"
+            app:layout_constraintBottom_toTopOf="@id/progressIndicator"
             app:layout_constraintTop_toBottomOf="@id/info"
             tools:layout_height="128dp"/>
+
+        <com.google.android.material.progressindicator.ProgressIndicator
+            android:id="@+id/progressIndicator"
+            style="@style/Widget.MaterialComponents.ProgressIndicator.Circular.Indeterminate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/three"
+            android:visibility="invisible"
+            app:indicatorColor="?attr/colorSecondary"
+            app:layout_constraintBottom_toTopOf="@id/button"
+            app:layout_constraintEnd_toEndOf="@id/button"
+            app:layout_constraintStart_toStartOf="@id/button"
+            app:layout_constraintTop_toBottomOf="@id/radioGroup"
+            tools:visibility="visible"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button"
             style="@style/Widget.Basket.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/three"
+            android:layout_marginTop="@dimen/two"
             android:text="@string/onboarding_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radioGroup"/>
+            app:layout_constraintTop_toBottomOf="@id/progressIndicator"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

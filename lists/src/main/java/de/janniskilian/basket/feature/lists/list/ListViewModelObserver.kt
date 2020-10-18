@@ -30,26 +30,36 @@ class ListViewModelObserver(
 
     private fun renderList(shoppingList: ShoppingList) {
         fragment.emptyGroup.isVisible = shoppingList.isEmpty
-        fragment.recyclerView.isVisible = !shoppingList.isEmpty
+        fragment.colorsRecyclerView.isVisible = !shoppingList.isEmpty
 
         val (checkedItems, uncheckedItems) = shoppingList.items.partition { it.isChecked }
 
-        val uncheckedItemGroups = uncheckedItems.groupBy { it.article.category }
-        val categories = uncheckedItemGroups.keys.sortedBy { it?.name }
-        val uncheckedAdapterItems = categories.flatMapIndexed { i, category ->
-            val groupItem = ShoppingListAdapter.Item.Group(
-                category?.id?.value ?: NO_CATEGORY_ID,
-                category?.name ?: fragment.getString(R.string.category_default),
-                i == 0
-            )
-            uncheckedItemGroups[category]
-                .orEmpty()
-                .sortedBy(::selectArticleName)
-                .map {
-                    ShoppingListAdapter.Item.ListItem(it)
+        val uncheckedAdapterItems: List<ShoppingListAdapter.Item> =
+            if (shoppingList.isGroupedByCategory) {
+                val uncheckedItemGroups = uncheckedItems.groupBy { it.article.category }
+                val categories = uncheckedItemGroups.keys.sortedBy { it?.name }
+
+                categories.flatMapIndexed { i, category ->
+                    val groupItem = ShoppingListAdapter.Item.Group(
+                        category?.id?.value ?: NO_CATEGORY_ID,
+                        category?.name ?: fragment.getString(R.string.category_default),
+                        i == 0
+                    )
+                    uncheckedItemGroups[category]
+                        .orEmpty()
+                        .sortedBy(::selectArticleName)
+                        .map {
+                            ShoppingListAdapter.Item.ListItem(it)
+                        }
+                        .addToFront(groupItem)
                 }
-                .addToFront(groupItem)
-        }
+            } else {
+                uncheckedItems
+                    .sortedBy(::selectArticleName)
+                    .map {
+                        ShoppingListAdapter.Item.ListItem(it)
+                    }
+            }
 
         val checkedListItems = checkedItems.sortedBy { it.article.name }
         val checkedAdapterItems = if (checkedListItems.isEmpty()) {

@@ -5,11 +5,11 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.annotation.UiThreadTest
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import de.janniskilian.basket.core.data.DataClient
+import de.janniskilian.basket.core.test.createTestDataClient
 import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.type.domain.ArticleId
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.test.createTestDataClient
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -37,7 +37,7 @@ class ListItemSuggestionClickedUseCaseTest {
         dataClient = createTestDataClient()
 
         runBlocking {
-            shoppingListId = dataClient.shoppingList.create("Test", Color.RED)
+            shoppingListId = dataClient.shoppingList.create("Test", Color.RED, true)
         }
 
         useCase = ListItemSuggestionClickedUseCase(dataClient)
@@ -56,7 +56,7 @@ class ListItemSuggestionClickedUseCaseTest {
 
         assertEquals(1, shoppingList.items.size)
         assertEquals(article, shoppingList.items.first().article)
-        assertFalse(shoppingList.items.first().checked)
+        assertFalse(shoppingList.items.first().isChecked)
         assertEquals(shoppingListId, shoppingList.items.first().shoppingListId)
     }
 
@@ -68,7 +68,7 @@ class ListItemSuggestionClickedUseCaseTest {
 
         assertEquals(1, shoppingList.items.size)
         assertEquals(article.name, shoppingList.items.first().article.name)
-        assertFalse(shoppingList.items.first().checked)
+        assertFalse(shoppingList.items.first().isChecked)
         assertEquals(shoppingListId, shoppingList.items.first().shoppingListId)
     }
 
@@ -85,24 +85,24 @@ class ListItemSuggestionClickedUseCaseTest {
             shoppingListId,
             ShoppingListItemSuggestion(
                 article1,
-                existingListItem = true,
-                existingArticle = true
+                isExistingListItem = true,
+                isExistingArticle = true
             )
         )
         useCase.run(
             shoppingListId,
             ShoppingListItemSuggestion(
                 article2,
-                existingListItem = true,
-                existingArticle = true
+                isExistingListItem = true,
+                isExistingArticle = true
             )
         )
         useCase.run(
             shoppingListId,
             ShoppingListItemSuggestion(
                 article3,
-                existingListItem = true,
-                existingArticle = true
+                isExistingListItem = true,
+                isExistingArticle = true
             )
         )
 
@@ -119,8 +119,8 @@ class ListItemSuggestionClickedUseCaseTest {
             shoppingListId,
             ShoppingListItemSuggestion(
                 article,
-                existingListItem = false,
-                existingArticle = true
+                isExistingListItem = false,
+                isExistingArticle = true
             )
         )
         return article
@@ -132,8 +132,8 @@ class ListItemSuggestionClickedUseCaseTest {
             shoppingListId,
             ShoppingListItemSuggestion(
                 article,
-                existingListItem = false,
-                existingArticle = false
+                isExistingListItem = false,
+                isExistingArticle = false
             )
         )
         return article

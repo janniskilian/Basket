@@ -6,6 +6,7 @@
     <string name="category_default">No Category</string>
 
     <string name="action_menu_search">Search</string>
+    <string name="action_menu_overflow">Other options</string>
 
     <string name="list_item_article_name_hint">Name</string>
     <string name="list_item_article_quantity_hint">Quantity</string>
@@ -19,5 +20,7 @@
     <string name="clear_input_button_desc">Clear input</string>
     <string name="lead_image_desc">Background image</string>
     <string name="category_checkmark_icon_desc">Checkmark icon</string>
+
+    <string name="apply">Apply</string>
 
 </resources>

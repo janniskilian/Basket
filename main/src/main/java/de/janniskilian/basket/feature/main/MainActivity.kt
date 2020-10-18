@@ -11,8 +11,6 @@ import de.janniskilian.basket.R
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainerProvider
-import de.janniskilian.basket.core.util.extension.extern.withoutSpecialChars
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="shopping_lists_title">Lists</string>
+    <string name="shopping_lists_empty_title">You have no lists</string>
+    <string name="shopping_lists_empty_info">Let\'s change that by tapping the create list button</string>
+    <string name="fab_create_shopping_list">Create List</string>
+    <string name="list_deleted_snackbar">List deleted</string>
+    <string name="restore_button">Restore</string>
+
+    <plurals name="shopping_list_items_total">
+        <item quantity="one">%d item total</item>
+        <item quantity="other">%d items total</item>
+    </plurals>
+
+    <plurals name="shopping_list_items_checked">
+        <item quantity="one">%d checked</item>
+        <item quantity="other">%d checked</item>
+    </plurals>
+
+    <string name="action_menu_edit_list">Edit list</string>
+    <string name="action_menu_delete_list">Delete list</string>
+
+    <string name="lists_lead_image_desc">Icon that symbolises a shopping list</string>
+    <string name="options_menu_button_desc">Options menu button</string>
+
+    <dimen name="shopping_list_item_spacing">@dimen/two</dimen>
+
+</resources>

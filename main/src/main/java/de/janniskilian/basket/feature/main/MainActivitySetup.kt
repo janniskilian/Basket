@@ -32,10 +32,6 @@ class MainActivitySetup(
     }
 
     private fun setupNavigation() = with(activity) {
-        findNavController().addOnDestinationChangedListener { _, _, _ ->
-            navigationContainer.dismissSnackbar()
-        }
-
         navHostFragment.childFragmentManager.registerFragmentLifecycleCallbacks(
             NavHostFragmentLifecycleCallback(),
             false

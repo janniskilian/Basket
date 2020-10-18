@@ -16,6 +16,9 @@ data class RoomShoppingList(
     @ColumnInfo(name = "color")
     val color: Int,
 
+    @ColumnInfo(name = "isGroupedByCategory")
+    val isGroupedByCategory: Boolean,
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Long = 0

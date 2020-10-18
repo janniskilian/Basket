@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="item_order_headline">Item order</string>
+    <string name="item_order_group_by_category">Group by category</string>
+
+</resources>

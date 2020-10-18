@@ -26,35 +26,40 @@ fun roomToModel(articleResult: RoomArticleResult): Article {
     )
 }
 
-fun roomToModel(result: List<RoomShoppingListResult>): ShoppingList =
-    ShoppingList(
-        ShoppingListId(result.first().shoppingListId),
-        result.first().shoppingListName,
-        result.first().color,
-        result.mapNotNull { resultItem ->
-            resultItem.shoppingListItem?.let {
-                val category = if (it.categoryId == null
-                    || it.categoryName == null
-                ) {
-                    null
-                } else {
-                    Category(CategoryId(it.categoryId), it.categoryName)
+fun roomToModel(result: List<RoomShoppingListResult>): ShoppingList? =
+    if (result.isEmpty()) {
+        null
+    } else {
+        ShoppingList(
+            ShoppingListId(result.first().shoppingListId),
+            result.first().shoppingListName,
+            result.first().color,
+            result.first().isGroupedByCategory,
+            result.mapNotNull { resultItem ->
+                resultItem.shoppingListItem?.let {
+                    val category = if (it.categoryId == null
+                        || it.categoryName == null
+                    ) {
+                        null
+                    } else {
+                        Category(CategoryId(it.categoryId), it.categoryName)
+                    }
+                    ShoppingListItem(
+                        ShoppingListItemId(it.id),
+                        ShoppingListId(result.first().shoppingListId),
+                        Article(
+                            ArticleId(it.articleId),
+                            it.articleName,
+                            category
+                        ),
+                        it.quantity,
+                        it.comment,
+                        it.isChecked
+                    )
                 }
-                ShoppingListItem(
-                    ShoppingListItemId(it.id),
-                    ShoppingListId(result.first().shoppingListId),
-                    Article(
-                        ArticleId(it.articleId),
-                        it.articleName,
-                        category
-                    ),
-                    it.quantity,
-                    it.comment,
-                    it.isChecked
-                )
             }
-        }
-    )
+        )
+    }
 
 fun roomToModel(shoppingListItem: RoomShoppingListItemResult): ShoppingListItem {
     val category = if (shoppingListItem.categoryId == null

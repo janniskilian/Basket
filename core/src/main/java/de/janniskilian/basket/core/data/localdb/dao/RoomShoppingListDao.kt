@@ -24,10 +24,13 @@ interface RoomShoppingListDao {
 
     @Query(
         """UPDATE shoppingList 
-			SET name = :name, searchName = :searchName, color = :color
+			SET name = :name,
+            searchName = :searchName,
+            color = :color,
+            isGroupedByCategory = :isGroupedByCategory
 			WHERE id = :id"""
     )
-    fun update(id: Long, name: String, searchName: String, color: Int)
+    fun update(id: Long, name: String, searchName: String, color: Int, isGroupedByCategory: Boolean)
 
     @Query("DELETE FROM shoppingList WHERE id = :id")
     fun delete(id: Long)
@@ -38,6 +41,7 @@ interface RoomShoppingListDao {
             """SELECT shoppingList.id AS shoppingListId,
 				shoppingList.name AS shoppingListName,
 				shoppingList.color AS color,
+				shoppingList.isGroupedByCategory AS isGroupedByCategory,
 				shoppingListItem.id AS shoppingListItem_id,
 				shoppingListItem.shoppingListId AS shoppingListItem_shoppingListId,
 				shoppingListItem.quantity AS shoppingListItem_quantity,
