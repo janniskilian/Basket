@@ -107,7 +107,9 @@ abstract class BaseFragment : Fragment() {
         outState.putInt(KEY_NAV_DESTINATION_ID, navDestinationId)
     }
 
-    open fun onNavigationResult(requestCode: Int, resultCode: ResultCode, data: Any?) {}
+    open fun onNavigationResult(requestCode: Int, resultCode: ResultCode, data: Any?) {
+        // Override this method to receive navigation results.
+    }
 
     open fun onNavigateUpAction(): Boolean = false
 

@@ -6,8 +6,10 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.ResultCode
+import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.feature.lists.R
+import de.janniskilian.basket.feature.lists.sendShoppingList
 import kotlinx.android.synthetic.main.fragment_lists.*
 
 @AndroidEntryPoint
@@ -52,41 +54,42 @@ class ListsFragment : BaseFragment() {
         when (data.menuItemId) {
             R.id.action_edit_list -> editList(shoppingListId)
             R.id.action_delete_list -> viewModel.deleteList(shoppingListId)
+            R.id.action_send_list -> sendList(shoppingListId)
         }
     }
 
     fun showListMenu(shoppingListId: ShoppingListId) {
-        viewModel
-            .shoppingLists
-            .value
-            ?.find { it.id == shoppingListId }
-            ?.let {
-                navigateWithResult(
-                    ListsFragmentDirections.actionListsFragmentToListsItemMenuDialog(it.id.value),
-                    REQ_LIST_MENU
-                )
-            }
+        findShoppingList(shoppingListId)?.let {
+            navigateWithResult(
+                ListsFragmentDirections.actionListsFragmentToListsItemMenuDialog(it.id.value),
+                REQ_LIST_MENU
+            )
+        }
     }
 
     fun startList(shoppingListId: ShoppingListId) {
-        viewModel
-            .shoppingLists
-            .value
-            ?.find { it.id == shoppingListId }
-            ?.let {
-                navigate(ListsFragmentDirections.actionListsFragmentToListFragment(it.id.value))
-            }
+        findShoppingList(shoppingListId)?.let {
+            navigate(ListsFragmentDirections.actionListsFragmentToListFragment(it.id.value))
+        }
     }
 
     private fun editList(shoppingListId: ShoppingListId) {
+        findShoppingList(shoppingListId)?.let {
+            navigate(ListsFragmentDirections.actionListsFragmentToCreateListFragment(it.id.value))
+        }
+    }
+
+    private fun sendList(shoppingListId: ShoppingListId) {
+        findShoppingList(shoppingListId)?.let {
+            sendShoppingList(requireContext(), it)
+        }
+    }
+
+    private fun findShoppingList(shoppingListId: ShoppingListId): ShoppingList? =
         viewModel
             .shoppingLists
             .value
             ?.find { it.id == shoppingListId }
-            ?.let {
-                navigate(ListsFragmentDirections.actionListsFragmentToCreateListFragment(it.id.value))
-            }
-    }
 
     companion object {
 

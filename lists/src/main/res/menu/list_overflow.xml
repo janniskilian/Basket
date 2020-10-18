@@ -21,4 +21,9 @@
         android:id="@+id/action_remove_all_list_items"
         android:icon="@drawable/ic_delete_all_24"
         android:title="@string/action_menu_remove_all_items"/>
+
+    <item
+        android:id="@+id/action_send_list"
+        android:icon="@drawable/ic_send_24"
+        android:title="@string/action_menu_send_list"/>
 </menu>

@@ -16,6 +16,7 @@ import de.janniskilian.basket.core.type.domain.ShoppingListItem
 import de.janniskilian.basket.core.util.extension.extern.keepScreenOn
 import de.janniskilian.basket.core.util.function.createUiListColor
 import de.janniskilian.basket.feature.lists.R
+import de.janniskilian.basket.feature.lists.sendShoppingList
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
 
@@ -66,24 +67,9 @@ class ListFragment : BaseFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_select_item_order -> {
-                viewModel
-                    .shoppingList
-                    .value
-                    ?.let {
-                        findNavController().navigate(
-                            ListFragmentDirections
-                                .actionListFragmentToListItemOrderDialog(it.id.value)
-                        )
-                    }
-            }
+            R.id.action_select_item_order -> startItemOrderDialog()
 
-            R.id.action_overflow -> {
-                navigateWithResult(
-                    NavGraphDirections.toActionMenuBottomSheetDialog(R.menu.list_overflow),
-                    REQ_OVERFLOW
-                )
-            }
+            R.id.action_overflow -> startOverflowDialog()
 
             else -> return false
         }
@@ -104,6 +90,8 @@ class ListFragment : BaseFragment() {
                 R.id.action_remove_all_checked_list_items -> viewModel.removeAllCheckedListItems()
 
                 R.id.action_remove_all_list_items -> viewModel.removeAllListItems()
+
+                R.id.action_send_list -> sendList()
             }
         }
     }
@@ -116,6 +104,34 @@ class ListFragment : BaseFragment() {
 
     fun startListItem(listItem: ShoppingListItem) {
         navigate(ListFragmentDirections.actionListFragmentToListItemFragment(listItem.id.value))
+    }
+
+    private fun startItemOrderDialog() {
+        viewModel
+            .shoppingList
+            .value
+            ?.let {
+                findNavController().navigate(
+                    ListFragmentDirections
+                        .actionListFragmentToListItemOrderDialog(it.id.value)
+                )
+            }
+    }
+
+    private fun startOverflowDialog() {
+        navigateWithResult(
+            NavGraphDirections.toActionMenuBottomSheetDialog(R.menu.list_overflow),
+            REQ_OVERFLOW
+        )
+    }
+
+    private fun sendList() {
+        viewModel
+            .shoppingList
+            .value
+            ?.let {
+                sendShoppingList(requireContext(), it)
+            }
     }
 
     companion object {
