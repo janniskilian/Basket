@@ -1,7 +1,6 @@
 package de.janniskilian.basket.feature.lists.lists
 
 import androidx.core.view.isVisible
-import androidx.lifecycle.observe
 import com.google.android.material.snackbar.Snackbar
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.util.extension.extern.setScrollable

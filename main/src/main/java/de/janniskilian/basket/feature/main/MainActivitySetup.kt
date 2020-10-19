@@ -12,7 +12,6 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.observe
 import de.janniskilian.basket.R
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.util.extension.extern.getThemeDimen

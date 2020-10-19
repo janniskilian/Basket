@@ -1,6 +1,5 @@
 package de.janniskilian.basket.core.listitem
 
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import de.janniskilian.basket.core.R
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver

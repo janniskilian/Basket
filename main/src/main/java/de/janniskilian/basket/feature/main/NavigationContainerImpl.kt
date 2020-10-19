@@ -4,7 +4,6 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.observe
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import de.janniskilian.basket.R
 import de.janniskilian.basket.core.ANIMATION_DURATION_S

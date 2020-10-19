@@ -1,6 +1,5 @@
 package de.janniskilian.basket.feature.lists.createlist
 
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.ShoppingListId

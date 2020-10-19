@@ -1,6 +1,5 @@
 package de.janniskilian.basket.feature.lists.addlistitem
 
-import androidx.lifecycle.observe
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.lists.R

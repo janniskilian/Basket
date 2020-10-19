@@ -1,6 +1,5 @@
 package de.janniskilian.basket.feature.articles.articles
 
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration

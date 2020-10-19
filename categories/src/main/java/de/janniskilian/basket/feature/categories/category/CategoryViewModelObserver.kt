@@ -1,6 +1,5 @@
 package de.janniskilian.basket.feature.categories.category
 
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.categories.R

@@ -1,7 +1,6 @@
 package de.janniskilian.basket.feature.articles.article
 
 import androidx.core.view.isVisible
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager

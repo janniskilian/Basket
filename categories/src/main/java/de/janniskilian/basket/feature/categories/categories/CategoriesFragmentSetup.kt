@@ -1,6 +1,5 @@
 package de.janniskilian.basket.feature.categories.categories
 
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
