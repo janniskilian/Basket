@@ -56,6 +56,8 @@ abstract class BaseBottomSheetDialogFragment<VB : ViewBinding> : BottomSheetDial
             fillColor = ColorStateList.valueOf(
                 requireContext().getThemeColor(R.attr.colorSurface)
             )
+            initializeElevationOverlay(view.context)
+            elevation = resources.getDimension(R.dimen.bottom_sheet_dialog_elevation)
         }
     }
 }
