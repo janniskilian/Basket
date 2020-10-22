@@ -1,24 +1,26 @@
 package de.janniskilian.basket.feature.lists.list.itemorder
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.BaseBottomSheetDialogFragment
 import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.synthetic.main.fragment_list_item_order.*
+import de.janniskilian.basket.feature.lists.databinding.ListItemOrderDialogBinding
 
 @AndroidEntryPoint
-class ListItemOrderDialog : BaseBottomSheetDialogFragment() {
+class ListItemOrderDialog : BaseBottomSheetDialogFragment<ListItemOrderDialogBinding>() {
 
     private val args by navArgs<ListItemOrderDialogArgs>()
 
     private val viewModel: ListItemOrderViewModel by viewModels()
 
-    override val layoutRes get() = R.layout.fragment_list_item_order
+    override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        ListItemOrderDialogBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,15 +28,15 @@ class ListItemOrderDialog : BaseBottomSheetDialogFragment() {
         viewModel.setShoppingListId(ShoppingListId(args.shoppingListId))
 
         viewModel.isGroupedByCategory.observe(viewLifecycleOwner) {
-            isGroupedByCategoryCheckBox.isChecked = it
+            binding.isGroupedByCategoryCheckBox.isChecked = it
         }
 
         viewModel.dismiss.observe(viewLifecycleOwner) {
             findNavController().popBackStack()
         }
 
-        button.setOnClickListener {
-            viewModel.submit(isGroupedByCategoryCheckBox.isChecked)
+        binding.button.setOnClickListener {
+            viewModel.submit(binding.isGroupedByCategoryCheckBox.isChecked)
         }
     }
 }

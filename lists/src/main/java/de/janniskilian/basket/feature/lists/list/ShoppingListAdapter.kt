@@ -1,21 +1,20 @@
 package de.janniskilian.basket.feature.lists.list
 
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
+import de.janniskilian.basket.core.util.extension.extern.layoutInflater
 import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.synthetic.main.shopping_list_article_item.view.*
+import de.janniskilian.basket.feature.lists.databinding.ShoppingListGroupHeaderItemBinding
+import de.janniskilian.basket.feature.lists.databinding.ShoppingListItemItemBinding
 
 class ShoppingListAdapter(private val isDisplayCompact: Boolean) :
-    ListAdapter<ShoppingListAdapter.Item, ShoppingListAdapter.ViewHolder>(
+    ListAdapter<ShoppingListAdapter.Item, RecyclerView.ViewHolder>(
         GenericDiffItemCallback { oldItem, newItem ->
             oldItem.id == newItem.id
         }
@@ -24,37 +23,45 @@ class ShoppingListAdapter(private val isDisplayCompact: Boolean) :
     var listItemClickListener: ((shoppingListItem: ShoppingListItem) -> Unit)? = null
     var editButtonClickListener: ((shoppingListItem: ShoppingListItem) -> Unit)? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutRes = when (viewType) {
-            VIEW_TYPE_SHOPPING_LIST_ITEM -> R.layout.shopping_list_article_item
-            else -> R.layout.shopping_list_category_item
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
+        when (viewType) {
+            VIEW_TYPE_LIST_ITEM -> ListItemViewHolder(
+                ShoppingListItemItemBinding.inflate(
+                    parent.layoutInflater,
+                    parent,
+                    false
+                )
+            )
+
+            VIEW_TYPE_GROUP_HEADER -> GroupHeaderViewHolder(
+                ShoppingListGroupHeaderItemBinding.inflate(
+                    parent.layoutInflater,
+                    parent,
+                    false
+                )
+            )
+
+            else -> throw NoWhenBranchMatchedException()
         }
 
-        return ViewHolder(
-            LayoutInflater
-                .from(parent.context)
-                .inflate(layoutRes, parent, false)
-        )
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (val item = getItem(position)) {
-            is Item.ListItem -> bindArticleItem(holder, item)
-            is Item.Group -> bindCategoryItem(holder, item)
+            is Item.ListItem -> bindListItemItem(holder as ListItemViewHolder, item)
+            is Item.GroupHeader -> bindGroupHeaderItem(holder as GroupHeaderViewHolder, item)
         }
     }
 
     override fun getItemViewType(position: Int): Int =
         when (getItem(position)) {
-            is Item.ListItem -> VIEW_TYPE_SHOPPING_LIST_ITEM
-            is Item.Group -> VIEW_TYPE_CATEGORY
+            is Item.ListItem -> VIEW_TYPE_LIST_ITEM
+            is Item.GroupHeader -> VIEW_TYPE_GROUP_HEADER
         }
 
-    private fun bindArticleItem(holder: ViewHolder, item: Item.ListItem) {
-        with(holder.itemView) {
+    private fun bindListItemItem(holder: ListItemViewHolder, item: Item.ListItem) {
+        with(holder.binding) {
             val shoppingListItem = item.shoppingListItem
 
-            setOnClickListener {
+            root.setOnClickListener {
                 listItemClickListener?.invoke(shoppingListItem)
             }
             checkbox.setOnCheckedChangeListener { _, isChecked ->
@@ -75,8 +82,8 @@ class ShoppingListAdapter(private val isDisplayCompact: Boolean) :
         }
     }
 
-    private fun bindCategoryItem(holder: ViewHolder, item: Item.Group) {
-        (holder.itemView as TextView).text = item.name
+    private fun bindGroupHeaderItem(holder: GroupHeaderViewHolder, item: Item.GroupHeader) {
+        holder.binding.root.text = item.name
 
         val topMargin = if (item.isAtTop) {
             0
@@ -88,12 +95,18 @@ class ShoppingListAdapter(private val isDisplayCompact: Boolean) :
             }
             holder.itemView.context.resources.getDimensionPixelSize(resId)
         }
-        holder.itemView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+        holder.binding.root.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             updateMargins(top = topMargin)
         }
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ListItemViewHolder(
+        val binding: ShoppingListItemItemBinding
+    ) : RecyclerView.ViewHolder(binding.root)
+
+    class GroupHeaderViewHolder(
+        val binding: ShoppingListGroupHeaderItemBinding
+    ) : RecyclerView.ViewHolder(binding.root)
 
     sealed class Item(val id: String) {
 
@@ -101,7 +114,7 @@ class ShoppingListAdapter(private val isDisplayCompact: Boolean) :
             val shoppingListItem: ShoppingListItem
         ) : Item(LIST_ITEM_ID_PREFIX + shoppingListItem.id)
 
-        data class Group(
+        data class GroupHeader(
             val groupId: Long,
             val name: String,
             val isAtTop: Boolean
@@ -116,7 +129,7 @@ class ShoppingListAdapter(private val isDisplayCompact: Boolean) :
 
     companion object {
 
-        const val VIEW_TYPE_SHOPPING_LIST_ITEM = 1
-        const val VIEW_TYPE_CATEGORY = 2
+        const val VIEW_TYPE_LIST_ITEM = 1
+        const val VIEW_TYPE_GROUP_HEADER = 2
     }
 }

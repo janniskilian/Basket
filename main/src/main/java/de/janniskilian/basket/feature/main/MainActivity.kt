@@ -11,6 +11,7 @@ import de.janniskilian.basket.R
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainerProvider
+import de.janniskilian.basket.databinding.MainActivityBinding
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -21,19 +22,23 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
 
     private val uiController = MainActivityUiController(this)
     private val setup = MainActivitySetup(this, uiController)
+    lateinit var binding: MainActivityBinding
+        private set
 
     val navHostFragment
         get() = supportFragmentManager
             .findFragmentByTag(getString(R.string.tag_nav_host_fragment))!!
 
-    val currentFragment: BaseFragment?
-        get() = navHostFragment.childFragmentManager.primaryNavigationFragment as? BaseFragment
+    val currentFragment: BaseFragment<*>?
+        get() = navHostFragment.childFragmentManager.primaryNavigationFragment as? BaseFragment<*>
 
     override val navigationContainer: NavigationContainer = NavigationContainerImpl(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = MainActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setup.run()
 

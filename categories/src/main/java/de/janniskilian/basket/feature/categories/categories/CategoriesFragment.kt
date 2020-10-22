@@ -3,8 +3,10 @@ package de.janniskilian.basket.feature.categories.categories
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.BaseFragment
@@ -12,10 +14,10 @@ import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
 import de.janniskilian.basket.core.util.function.getSpeechInputResult
 import de.janniskilian.basket.feature.categories.R
-import kotlinx.android.synthetic.main.fragment_categories.*
+import de.janniskilian.basket.feature.categories.databinding.CategoriesFragmentBinding
 
 @AndroidEntryPoint
-class CategoriesFragment : BaseFragment() {
+class CategoriesFragment : BaseFragment<CategoriesFragmentBinding>() {
 
     private val viewModel: CategoriesViewModel by viewModels()
 
@@ -23,13 +25,14 @@ class CategoriesFragment : BaseFragment() {
         CategoriesFragmentSetup(this, viewModel)
     }
 
-    override val layoutRes get() = R.layout.fragment_categories
-
     override val menuRes get() = R.menu.search
 
     override val titleTextRes get() = R.string.categories_title
 
     override val fabTextRes get() = R.string.fab_create_category
+
+    override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        CategoriesFragmentBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,7 +40,7 @@ class CategoriesFragment : BaseFragment() {
     }
 
     override fun onDestroyView() {
-        recyclerView.adapter = null
+        binding.recyclerView.adapter = null
         super.onDestroyView()
     }
 

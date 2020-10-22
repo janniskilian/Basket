@@ -11,7 +11,6 @@ import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.extension.extern.onDone
 import de.janniskilian.basket.core.util.extension.extern.toggleSoftKeyboard
 import de.janniskilian.basket.feature.articles.R
-import kotlinx.android.synthetic.main.fragment_article.*
 
 class ArticleFragmentSetup(
     private val fragment: ArticleFragment,
@@ -36,7 +35,7 @@ class ArticleFragmentSetup(
         viewModelObserver.observe()
     }
 
-    private fun setupButtons() = with(fragment) {
+    private fun setupButtons() = with(fragment.binding) {
         deleteButton.isVisible = articleId != null
         deleteButton.setOnClickListener { viewModel.deleteButtonClicked() }
 
@@ -49,7 +48,7 @@ class ArticleFragmentSetup(
         submitButton.setOnClickListener { viewModel.submitButtonClicked() }
     }
 
-    private fun setupNameEditText() = with(fragment) {
+    private fun setupNameEditText() = with(fragment.binding) {
         nameEditText.doOnTextChanged(viewModel::setName)
         nameEditText.onDone(viewModel::submitButtonClicked)
 
@@ -58,7 +57,7 @@ class ArticleFragmentSetup(
         }
     }
 
-    private fun setupCategoryEditText() = with(fragment) {
+    private fun setupCategoryEditText() = with(fragment.binding) {
         categoryEditText.setText(R.string.category_default)
         categoryEditText.setOnClickListener { viewModel.editCategoryClicked() }
     }
@@ -66,7 +65,7 @@ class ArticleFragmentSetup(
     private fun setupCategoriesRecyclerView() = with(fragment) {
         val categoriesAdapter = CategoriesAdapter()
 
-        with(recyclerView) {
+        with(binding.recyclerView) {
             layoutManager = LinearLayoutManager(
                 requireContext(),
                 RecyclerView.VERTICAL,

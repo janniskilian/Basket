@@ -6,7 +6,6 @@ import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.extension.extern.centerItem
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.synthetic.main.fragment_create_list.*
 
 class CreateListViewModelObserver(
     private val fragment: CreateListFragment,
@@ -27,29 +26,29 @@ class CreateListViewModelObserver(
         }
     }
 
-    private fun renderName(name: String) {
-        if (name != fragment.nameEditText.text.toString()) {
-            fragment.nameEditText.setText(name)
+    private fun renderName(name: String) = with(fragment.binding) {
+        if (name != nameEditText.text.toString()) {
+            nameEditText.setText(name)
         }
     }
 
-    private fun renderColors() {
+    private fun renderColors() = with(fragment.binding) {
         val selectedColor = viewModel.selectedColor.value
 
-        (fragment.colorsRecyclerView.adapter as? ColorsAdapter)?.submitList(
+        (colorsRecyclerView.adapter as? ColorsAdapter)?.submitList(
             viewModel.colors.map {
                 ColorsAdapter.Item(it, it == selectedColor)
             }
         ) {
-            fragment.colorsRecyclerView.centerItem(
+            colorsRecyclerView.centerItem(
                 viewModel.colors.indexOf(selectedColor),
                 RecyclerView.HORIZONTAL
             )
         }
     }
 
-    private fun renderError(isError: Boolean) {
-        fragment.nameLayout.error = if (isError) {
+    private fun renderError(isError: Boolean) = with(fragment.binding) {
+        nameLayout.error = if (isError) {
             fragment.getString(R.string.shopping_list_name_error)
         } else {
             null

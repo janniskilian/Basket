@@ -2,7 +2,11 @@ package de.janniskilian.basket.feature.main
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.TextView
 import androidx.core.content.edit
 import androidx.core.view.children
 import androidx.core.view.forEach
@@ -16,8 +20,7 @@ import de.janniskilian.basket.core.data.DefaultDataImporter
 import de.janniskilian.basket.core.data.DefaultDataLoader
 import de.janniskilian.basket.core.util.extension.extern.getThemeColor
 import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
-import kotlinx.android.synthetic.main.fragment_onboarding.*
-import kotlinx.android.synthetic.main.language_item.view.*
+import de.janniskilian.basket.databinding.OnboardingFragmentBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -25,7 +28,7 @@ import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class OnboardingFragment : BaseFragment() {
+class OnboardingFragment : BaseFragment<OnboardingFragmentBinding>() {
 
     @Inject
     lateinit var sharedPrefs: SharedPreferences
@@ -41,17 +44,17 @@ class OnboardingFragment : BaseFragment() {
 
     private var selectedLocale: Locale
         get() {
-            val position = radioGroup.children.indexOfFirst { it.radioButton.isChecked }
+            val position = binding.radioGroup.children.indexOfFirst {
+                it.findViewById<RadioButton>(R.id.radioButton).isChecked
+            }
             return locales.getOrNull(position) ?: Locale.getDefault()
         }
         set(value) {
             val id = value.hashCode()
-            radioGroup.forEach {
-                it.radioButton.isChecked = it.id == id
+            binding.radioGroup.forEach {
+                it.findViewById<RadioButton>(R.id.radioButton).isChecked = it.id == id
             }
         }
-
-    override val layoutRes get() = R.layout.fragment_onboarding
 
     override val isShowAppBar get() = false
 
@@ -61,6 +64,9 @@ class OnboardingFragment : BaseFragment() {
 
     override val animateAppBarColor get() = false
 
+    override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        OnboardingFragmentBinding.inflate(inflater, container, false)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -68,23 +74,23 @@ class OnboardingFragment : BaseFragment() {
 
         locales.forEach { locale ->
             val item = layoutInflater
-                .inflate(R.layout.language_item, radioGroup, false)
+                .inflate(R.layout.language_item, binding.radioGroup, false)
                 .apply {
                     id = locale.hashCode()
-                    name.text = locale.displayLanguage
+                    findViewById<TextView>(R.id.name).text = locale.displayLanguage
 
                     setOnClickListener { selectedLocale = locale }
                 }
 
-            radioGroup.addView(item)
+            binding.radioGroup.addView(item)
         }
 
         selectedLocale = locales.first()
     }
 
     private fun setClickListeners() {
-        button.setOnClickListener {
-            progressIndicator.show()
+        binding.button.setOnClickListener {
+            binding.progressIndicator.show()
 
             GlobalScope.launch {
                 DefaultDataImporter(

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -14,24 +14,27 @@ import de.janniskilian.basket.core.util.extension.extern.getThemeColor
 import de.janniskilian.basket.core.util.extension.extern.getThemeResource
 import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
 
-abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
+abstract class BaseBottomSheetDialogFragment<VB : ViewBinding> : BottomSheetDialogFragment() {
+
+    lateinit var binding: VB
+        private set
 
     val navigationContainer
         get() = (requireActivity() as NavigationContainerProvider).navigationContainer
 
-    @get:LayoutRes
-    abstract val layoutRes: Int
+    abstract fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? =
-        inflater
-            .inflate(layoutRes, container, false)
+        createViewBinding(inflater, container)
             .also {
-                setupBackground(it)
+                binding = it
+                setupBackground(it.root)
             }
+            .root
 
     override fun onDestroy() {
         super.onDestroy()

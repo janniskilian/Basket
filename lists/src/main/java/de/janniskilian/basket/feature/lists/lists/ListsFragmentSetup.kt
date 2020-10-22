@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.core.util.recyclerview.ItemSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.synthetic.main.fragment_lists.*
 
 class ListsFragmentSetup(
     private val fragment: ListsFragment,
@@ -22,7 +21,7 @@ class ListsFragmentSetup(
     }
 
     private fun setupRecyclerView() {
-        with(fragment.recyclerView) {
+        with(fragment.binding.recyclerView) {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = ListsAdapter()

@@ -41,7 +41,7 @@ class ListRecyclerViewItemTouchHelperCallback(
         viewHolder: RecyclerView.ViewHolder
     ): Int {
         val swipeDirs = if (viewHolder.itemViewType ==
-            ShoppingListAdapter.VIEW_TYPE_SHOPPING_LIST_ITEM
+            ShoppingListAdapter.VIEW_TYPE_LIST_ITEM
         ) {
             ItemTouchHelper.START or ItemTouchHelper.END
         } else {

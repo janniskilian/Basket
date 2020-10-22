@@ -8,7 +8,6 @@ import de.janniskilian.basket.core.CategoriesAdapter
 import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.feature.categories.R
-import kotlinx.android.synthetic.main.fragment_categories.*
 
 class CategoriesFragmentSetup(
     private val fragment: CategoriesFragment,
@@ -16,7 +15,7 @@ class CategoriesFragmentSetup(
 ) {
 
     private val categoriesAdapter
-        get() = fragment.recyclerView.adapter as? CategoriesAdapter
+        get() = fragment.binding.recyclerView.adapter as? CategoriesAdapter
 
     fun run() {
         setupRecyclerView()
@@ -28,7 +27,7 @@ class CategoriesFragmentSetup(
         fragment.navigationContainer.attachSearchBar(viewModel)
     }
 
-    private fun setupRecyclerView() = with(fragment.recyclerView) {
+    private fun setupRecyclerView() = with(fragment.binding.recyclerView) {
         setHasFixedSize(true)
         layoutManager = LinearLayoutManager(context)
         adapter = CategoriesAdapter()
@@ -47,7 +46,7 @@ class CategoriesFragmentSetup(
         categoriesAdapter?.submitList(
             categories.map { CategoriesAdapter.Item(it) }
         ) {
-            fragment.recyclerView.invalidateItemDecorations()
+            fragment.binding.recyclerView.invalidateItemDecorations()
         }
     }
 

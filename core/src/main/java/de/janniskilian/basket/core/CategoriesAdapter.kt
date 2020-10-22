@@ -1,14 +1,13 @@
 package de.janniskilian.basket.core
 
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import de.janniskilian.basket.core.databinding.CategoryItemBinding
 import de.janniskilian.basket.core.type.domain.Category
+import de.janniskilian.basket.core.util.extension.extern.layoutInflater
 import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
-import kotlinx.android.synthetic.main.category_item.view.*
 
 class CategoriesAdapter : ListAdapter<CategoriesAdapter.Item, CategoriesAdapter.ViewHolder>(
     GenericDiffItemCallback { oldItem, newItem ->
@@ -20,23 +19,21 @@ class CategoriesAdapter : ListAdapter<CategoriesAdapter.Item, CategoriesAdapter.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
-            LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.category_item, parent, false)
+            CategoryItemBinding.inflate(parent.layoutInflater, parent, false)
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
 
-        with(holder.itemView) {
-            setOnClickListener { clickListener?.invoke(item.category) }
+        with(holder.binding) {
+            root.setOnClickListener { clickListener?.invoke(item.category) }
 
-            name.text = item?.category?.name ?: context.getString(R.string.category_default)
+            name.text = item?.category?.name ?: root.context.getString(R.string.category_default)
             checkmarkIcon.isVisible = item.isSelected
         }
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ViewHolder(val binding: CategoryItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     class Item(val category: Category?, val isSelected: Boolean = false)
 }

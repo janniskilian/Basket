@@ -8,7 +8,6 @@ import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.extension.extern.keepScreenOn
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListFragmentSetup(
     private val fragment: ListFragment,
@@ -42,7 +41,7 @@ class ListFragmentSetup(
             resources.getBoolean(R.bool.pref_def_compact_lists)
         )
 
-        with(recyclerView) {
+        with(binding.recyclerView) {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(
                 requireContext(),
@@ -69,7 +68,7 @@ class ListFragmentSetup(
             requireContext(),
             ::onListItemSwiped
         )
-        ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView)
+        ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(binding.recyclerView)
     }
 
     private fun onListItemSwiped(itemAdapterPosition: Int) {

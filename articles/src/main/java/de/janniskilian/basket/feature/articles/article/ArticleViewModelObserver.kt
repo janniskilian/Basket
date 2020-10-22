@@ -11,45 +11,42 @@ import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.articles.R
 import de.janniskilian.basket.feature.articles.article.ArticleFragmentMode.EDIT
-import kotlinx.android.synthetic.main.fragment_article.*
 
 class ArticleViewModelObserver(
     private val fragment: ArticleFragment,
     viewModel: ArticleViewModel
 ) : ViewModelObserver<ArticleViewModel>(viewModel) {
 
-    override fun observe() {
+    override fun observe() = with(fragment) {
         with(viewModel) {
-            name.observe(fragment.viewLifecycleOwner, ::renderName)
-            category.observe(fragment.viewLifecycleOwner) {
+            name.observe(viewLifecycleOwner, ::renderName)
+            category.observe(viewLifecycleOwner) {
                 renderCategory(it)
                 renderCategories()
             }
-            categories.observe(fragment.viewLifecycleOwner) { renderCategories() }
-            mode.observe(fragment.viewLifecycleOwner, ::renderMode)
-            error.observe(fragment.viewLifecycleOwner, ::renderError)
-            dismiss.observe(fragment.viewLifecycleOwner) {
-                fragment
-                    .findNavController()
-                    .popBackStack()
+            categories.observe(viewLifecycleOwner) { renderCategories() }
+            mode.observe(viewLifecycleOwner, ::renderMode)
+            error.observe(viewLifecycleOwner, ::renderError)
+            dismiss.observe(viewLifecycleOwner) {
+                findNavController().popBackStack()
             }
         }
     }
 
-    private fun renderName(name: String) {
-        if (name != fragment.nameEditText.text.toString()) {
-            fragment.nameEditText.setText(name)
+    private fun renderName(name: String) = with(fragment.binding) {
+        if (name != nameEditText.text.toString()) {
+            nameEditText.setText(name)
         }
     }
 
     private fun renderCategory(category: Category?) {
-        fragment.categoryEditText.setText(
+        fragment.binding.categoryEditText.setText(
             category?.name ?: fragment.getString(R.string.category_default)
         )
     }
 
     private fun renderCategories() {
-        (fragment.recyclerView.adapter as? CategoriesAdapter)?.submitList(
+        (fragment.binding.recyclerView.adapter as? CategoriesAdapter)?.submitList(
             viewModel.categories.value?.map {
                 CategoriesAdapter.Item(it, it == viewModel.category.value)
             }
@@ -65,21 +62,21 @@ class ArticleViewModelObserver(
     }
 
     private fun renderError(isError: Boolean) {
-        fragment.nameLayout.error = if (isError) {
+        fragment.binding.nameLayout.error = if (isError) {
             fragment.getString(R.string.article_name_error)
         } else {
             null
         }
     }
 
-    private fun toggleRecyclerView(isVisible: Boolean) {
-        if (isVisible == fragment.recyclerView.isVisible) return
+    private fun toggleRecyclerView(isVisible: Boolean) = with(fragment.binding) {
+        if (isVisible == recyclerView.isVisible) return
 
         TransitionManager.beginDelayedTransition(
-            fragment.content,
+            root,
             AutoTransition().setDuration(ANIMATION_DURATION_S)
         )
-        fragment.constraintLayout.isVisible = !isVisible
-        fragment.recyclerView.isVisible = isVisible
+        constraintLayout.isVisible = !isVisible
+        recyclerView.isVisible = isVisible
     }
 }

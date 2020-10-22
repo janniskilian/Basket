@@ -3,7 +3,9 @@ package de.janniskilian.basket.feature.lists.addlistitem
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
@@ -13,10 +15,10 @@ import de.janniskilian.basket.core.util.extension.extern.getThemeColor
 import de.janniskilian.basket.core.util.function.getSpeechInputResult
 import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
 import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.synthetic.main.fragment_add_list_item.*
+import de.janniskilian.basket.feature.lists.databinding.AddListItemFragmentBinding
 
 @AndroidEntryPoint
-class AddListItemFragment : BaseFragment() {
+class AddListItemFragment : BaseFragment<AddListItemFragmentBinding>() {
 
     private val args: AddListItemFragmentArgs by navArgs()
 
@@ -27,9 +29,7 @@ class AddListItemFragment : BaseFragment() {
     }
 
     val suggestionsAdapter
-        get() = recyclerView.adapter as? ShoppingListItemSuggestionsAdapter
-
-    override val layoutRes get() = R.layout.fragment_add_list_item
+        get() = binding.recyclerView.adapter as? ShoppingListItemSuggestionsAdapter
 
     override val appBarColor by lazy {
         DefaultMutableLiveData(requireContext().getThemeColor(R.attr.colorSurface))
@@ -37,13 +37,16 @@ class AddListItemFragment : BaseFragment() {
 
     override val isShowAppBar get() = false
 
+    override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        AddListItemFragmentBinding.inflate(inflater, container, false)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setup.run()
     }
 
     override fun onDestroyView() {
-        recyclerView.adapter = null
+        binding.recyclerView.adapter = null
         super.onDestroyView()
     }
 

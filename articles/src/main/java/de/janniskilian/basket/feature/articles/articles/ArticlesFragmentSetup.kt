@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.Article
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.feature.articles.R
-import kotlinx.android.synthetic.main.fragment_articles.*
 
 class ArticlesFragmentSetup(
     private val fragment: ArticlesFragment,
@@ -16,7 +15,7 @@ class ArticlesFragmentSetup(
 ) {
 
     private val articlesAdapter
-        get() = fragment.recyclerView.adapter as? ArticlesAdapter
+        get() = fragment.binding.recyclerView.adapter as? ArticlesAdapter
 
     fun run() {
         setupRecyclerView()
@@ -28,7 +27,7 @@ class ArticlesFragmentSetup(
         fragment.navigationContainer.attachSearchBar(viewModel)
     }
 
-    private fun setupRecyclerView() = with(fragment.recyclerView) {
+    private fun setupRecyclerView() = with(fragment.binding.recyclerView) {
         setHasFixedSize(true)
         layoutManager = LinearLayoutManager(context)
         adapter = ArticlesAdapter()
@@ -45,7 +44,7 @@ class ArticlesFragmentSetup(
 
     private fun renderRecyclerView(it: List<Article>) {
         articlesAdapter?.submitList(it) {
-            fragment.recyclerView.invalidateItemDecorations()
+            fragment.binding.recyclerView.invalidateItemDecorations()
         }
     }
 

@@ -11,7 +11,6 @@ import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
 import de.janniskilian.basket.core.util.extension.extern.onDone
 import de.janniskilian.basket.core.util.extension.extern.toggleSoftKeyboard
 import de.janniskilian.basket.core.util.function.createSpeechInputIntent
-import kotlinx.android.synthetic.main.fragment_add_list_item.*
 
 class AddListItemFragmentSetup(
     private val fragment: AddListItemFragment,
@@ -31,7 +30,7 @@ class AddListItemFragmentSetup(
         viewModelObserver.observe()
     }
 
-    private fun setupRecyclerView() = with(fragment.recyclerView) {
+    private fun setupRecyclerView() = with(fragment.binding.recyclerView) {
         layoutManager = LinearLayoutManager(
             context,
             RecyclerView.VERTICAL,
@@ -45,7 +44,7 @@ class AddListItemFragmentSetup(
         )
     }
 
-    private fun setupInputEditText() = with(fragment.inputEditText) {
+    private fun setupInputEditText() = with(fragment.binding.inputEditText) {
         doOnTextChanged(viewModel::setInput)
         onDone { viewModel.inputDoneButtonClicked() }
         toggleSoftKeyboard(true)
@@ -54,13 +53,13 @@ class AddListItemFragmentSetup(
     private fun setClickListeners() = with(fragment) {
         suggestionsAdapter?.clickListener = viewModel::suggestionItemClicked
 
-        upButton.setOnClickListener {
+        binding.upButton.setOnClickListener {
             fragment
                 .findNavController()
                 .popBackStack()
         }
 
-        searchBarSpeechInputButton.setOnClickListener {
+        binding.searchBarSpeechInputButton.setOnClickListener {
             if (viewModel.input.value.isNullOrEmpty()) {
                 startActivityForResult(createSpeechInputIntent(), REQ_SPEECH_INPUT)
             } else {

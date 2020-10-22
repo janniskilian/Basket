@@ -11,7 +11,6 @@ import de.janniskilian.basket.core.util.extension.extern.toggleSoftKeyboard
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.core.util.recyclerview.ItemSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.synthetic.main.fragment_create_list.*
 
 class CreateListFragmentSetup(
     private val fragment: CreateListFragment,
@@ -36,7 +35,7 @@ class CreateListFragmentSetup(
         viewModelObserver.observe()
     }
 
-    private fun setupNameEditText() = with(fragment) {
+    private fun setupNameEditText() = with(fragment.binding) {
         nameEditText.doOnTextChanged(viewModel::setName)
         nameEditText.onDone(viewModel::submitButtonClicked)
 
@@ -45,7 +44,7 @@ class CreateListFragmentSetup(
         }
     }
 
-    private fun setupButton() = with(fragment) {
+    private fun setupButton() = with(fragment.binding) {
         val textRes = if (shoppingListId == null) {
             R.string.create_list_button
         } else {
@@ -54,7 +53,7 @@ class CreateListFragmentSetup(
         createButton.setText(textRes)
     }
 
-    private fun setupRecyclerView() = with(fragment.colorsRecyclerView) {
+    private fun setupRecyclerView() = with(fragment.binding.colorsRecyclerView) {
         setHasFixedSize(true)
         layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         adapter = ColorsAdapter()
@@ -76,7 +75,7 @@ class CreateListFragmentSetup(
         )
     }
 
-    private fun setClickListeners() = with(fragment) {
+    private fun setClickListeners() = with(fragment.binding) {
         createButton.setOnClickListener { viewModel.submitButtonClicked() }
         nameEditText.onDone(viewModel::submitButtonClicked)
         (colorsRecyclerView.adapter as? ColorsAdapter)?.itemClickListener =

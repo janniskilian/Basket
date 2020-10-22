@@ -2,8 +2,10 @@ package de.janniskilian.basket.feature.lists.list
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
@@ -16,12 +18,12 @@ import de.janniskilian.basket.core.type.domain.ShoppingListItem
 import de.janniskilian.basket.core.util.extension.extern.keepScreenOn
 import de.janniskilian.basket.core.util.function.createUiListColor
 import de.janniskilian.basket.feature.lists.R
+import de.janniskilian.basket.feature.lists.databinding.ListFragmentBinding
 import de.janniskilian.basket.feature.lists.sendShoppingList
-import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ListFragment : BaseFragment() {
+class ListFragment : BaseFragment<ListFragmentBinding>() {
 
     private val args by lazy { ListFragmentArgs.fromBundle(requireArguments()) }
 
@@ -34,11 +36,9 @@ class ListFragment : BaseFragment() {
     @Inject
     lateinit var sharedPrefs: SharedPreferences
 
-    val shoppingListAdapter get() = recyclerView.adapter as? ShoppingListAdapter
+    val shoppingListAdapter get() = binding.recyclerView.adapter as? ShoppingListAdapter
 
     private var isRecreated = false
-
-    override val layoutRes get() = R.layout.fragment_list
 
     override val menuRes get() = R.menu.list
 
@@ -49,6 +49,9 @@ class ListFragment : BaseFragment() {
             createUiListColor(requireContext(), it.color)
         }
     }
+
+    override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        ListFragmentBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

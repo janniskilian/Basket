@@ -3,7 +3,6 @@ package de.janniskilian.basket.feature.categories.category
 import androidx.navigation.fragment.findNavController
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.categories.R
-import kotlinx.android.synthetic.main.fragment_category.*
 
 class CategoryViewModelObserver(
     private val fragment: CategoryFragment,
@@ -22,14 +21,14 @@ class CategoryViewModelObserver(
         }
     }
 
-    private fun renderName(name: String) {
-        if (name != fragment.nameEditText.text.toString()) {
-            fragment.nameEditText.setText(name)
+    private fun renderName(name: String) = with(fragment.binding) {
+        if (name != nameEditText.text.toString()) {
+            nameEditText.setText(name)
         }
     }
 
-    private fun renderError(isError: Boolean) {
-        fragment.nameLayout.error = if (isError) {
+    private fun renderError(isError: Boolean) = with(fragment.binding) {
+        nameLayout.error = if (isError) {
             fragment.getString(R.string.category_name_error)
         } else {
             null

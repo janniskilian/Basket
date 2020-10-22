@@ -1,16 +1,14 @@
 package de.janniskilian.basket.feature.lists.createlist
 
 import android.graphics.drawable.LayerDrawable
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import de.janniskilian.basket.core.util.extension.extern.layoutInflater
 import de.janniskilian.basket.core.util.function.createTintColorFilter
 import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
-import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.synthetic.main.color_item.view.*
+import de.janniskilian.basket.feature.lists.databinding.ColorItemBinding
 
 class ColorsAdapter : ListAdapter<ColorsAdapter.Item, ColorsAdapter.ViewHolder>(
     GenericDiffItemCallback { oldItem, newItem ->
@@ -22,26 +20,24 @@ class ColorsAdapter : ListAdapter<ColorsAdapter.Item, ColorsAdapter.ViewHolder>(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
-            LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.color_item, parent, false)
+            ColorItemBinding.inflate(parent.layoutInflater, parent, false)
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
 
-        with(holder.itemView) {
+        with(holder.binding) {
+            root.setOnClickListener { itemClickListener?.invoke(item.color) }
+
             (backgroundView.background as LayerDrawable)
                 .getDrawable(0)
                 .colorFilter = createTintColorFilter(item.color)
             backgroundView.isSelected = item.isSelected
             checkedIcon.isVisible = item.isSelected
-
-            setOnClickListener { itemClickListener?.invoke(item.color) }
         }
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ViewHolder(val binding: ColorItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     data class Item(
         val color: Int,

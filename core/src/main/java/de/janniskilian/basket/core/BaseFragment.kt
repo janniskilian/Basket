@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.IdRes
-import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
@@ -17,6 +16,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 import androidx.navigation.fragment.findNavController
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
@@ -29,7 +29,7 @@ import de.janniskilian.basket.core.util.function.getLong
 import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
 
 @Suppress("TooManyFunctions")
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     private val transitionDuration by lazy {
         getLong(requireContext(), R.integer.transition_duration)
@@ -37,6 +37,9 @@ abstract class BaseFragment : Fragment() {
 
     @IdRes
     private var navDestinationId = 0
+
+    lateinit var binding: VB
+        private set
 
     val navigationContainer
         get() = (requireActivity() as NavigationContainerProvider).navigationContainer
@@ -46,9 +49,6 @@ abstract class BaseFragment : Fragment() {
 
     val titleTextView: TextView?
         get() = toolbar?.findViewById(R.id.title)
-
-    @get:LayoutRes
-    abstract val layoutRes: Int
 
     @get:MenuRes
     open val menuRes: Int?
@@ -70,6 +70,8 @@ abstract class BaseFragment : Fragment() {
 
     open val animateAppBarColor get() = true
 
+    abstract fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -81,7 +83,11 @@ abstract class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? =
-        inflater.inflate(layoutRes, container, false)
+        createViewBinding(inflater, container)
+            .also {
+                binding = it
+            }
+            .root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

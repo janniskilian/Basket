@@ -1,16 +1,14 @@
 package de.janniskilian.basket.feature.lists.lists
 
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListId
+import de.janniskilian.basket.core.util.extension.extern.layoutInflater
 import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.synthetic.main.shopping_list_item.view.*
+import de.janniskilian.basket.feature.lists.databinding.ShoppingListItemBinding
 
 class ListsAdapter : ListAdapter<ShoppingList, ListsAdapter.ViewHolder>(
     GenericDiffItemCallback { oldItem, newItem -> oldItem.id == newItem.id }
@@ -21,29 +19,28 @@ class ListsAdapter : ListAdapter<ShoppingList, ListsAdapter.ViewHolder>(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
-            LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.shopping_list_item, parent, false)
+            ShoppingListItemBinding.inflate(parent.layoutInflater, parent, false)
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
 
-        with(holder.itemView as MaterialCardView) {
-            setOnClickListener { itemClickListener?.invoke(item.id) }
+        with(holder.binding) {
+            root.setOnClickListener { itemClickListener?.invoke(item.id) }
+
             moreButton.setOnClickListener {
                 moreButtonClickListener?.invoke(item.id)
             }
 
-            setCardBackgroundColor(item.color)
+            root.setCardBackgroundColor(item.color)
 
             nameTextView.text = item.name
-            itemsTotalTextView.text = resources.getQuantityString(
+            itemsTotalTextView.text = root.resources.getQuantityString(
                 R.plurals.shopping_list_items_total,
                 item.items.size,
                 item.items.size
             )
-            itemsCheckedTextView.text = resources.getQuantityString(
+            itemsCheckedTextView.text = root.resources.getQuantityString(
                 R.plurals.shopping_list_items_checked,
                 item.checkedItemCount,
                 item.checkedItemCount
@@ -51,5 +48,5 @@ class ListsAdapter : ListAdapter<ShoppingList, ListsAdapter.ViewHolder>(
         }
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ViewHolder(val binding: ShoppingListItemBinding) : RecyclerView.ViewHolder(binding.root)
 }

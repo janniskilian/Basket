@@ -3,7 +3,6 @@ package de.janniskilian.basket.core.listitem
 import de.janniskilian.basket.core.type.domain.ShoppingListItemId
 import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
 import de.janniskilian.basket.core.util.extension.extern.onDone
-import kotlinx.android.synthetic.main.fragment_list_item.*
 
 class ListItemFragmentSetup(
     private val fragment: ListItemFragment,
@@ -22,7 +21,7 @@ class ListItemFragmentSetup(
         viewModelObserver.observe()
     }
 
-    private fun setupEditTexts() = with(fragment) {
+    private fun setupEditTexts() = with(fragment.binding) {
         articleNameEditText.doOnTextChanged {
             viewModel.setName(it)
         }
@@ -39,7 +38,7 @@ class ListItemFragmentSetup(
         }
     }
 
-    private fun setupSubmitButton() = with(fragment) {
+    private fun setupSubmitButton() = with(fragment.binding) {
         submitButton.setOnClickListener {
             viewModel.submit()
         }

@@ -1,16 +1,19 @@
 package de.janniskilian.basket.core.listitem
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.map
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.R
+import de.janniskilian.basket.core.databinding.ListItemFragmentBinding
 import de.janniskilian.basket.core.util.function.createUiListColor
 
 @AndroidEntryPoint
-class ListItemFragment : BaseFragment() {
+class ListItemFragment : BaseFragment<ListItemFragmentBinding>() {
 
     private val args by lazy { ListItemFragmentArgs.fromBundle(requireArguments()) }
 
@@ -20,8 +23,6 @@ class ListItemFragment : BaseFragment() {
         ListItemFragmentSetup(this, args, viewModel)
     }
 
-    override val layoutRes get() = R.layout.fragment_list_item
-
     override val appBarColor by lazy {
         viewModel.shoppingList.map {
             createUiListColor(requireContext(), it.color)
@@ -29,6 +30,9 @@ class ListItemFragment : BaseFragment() {
     }
 
     override val titleTextRes get() = R.string.list_item_title
+
+    override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        ListItemFragmentBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

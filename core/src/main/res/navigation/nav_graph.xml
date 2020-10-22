@@ -10,7 +10,7 @@
         android:id="@+id/actionMenuBottomSheetDialog"
         android:name="de.janniskilian.basket.core.ActionMenuBottomSheetDialog"
         android:label="Action menu"
-        tools:layout="@layout/dialog_menu_bottom_sheet">
+        tools:layout="@layout/menu_bottom_sheet_dialog">
 
         <argument
             android:name="menuRes"
@@ -70,7 +70,7 @@
         android:id="@+id/listsItemMenuDialog"
         android:name="de.janniskilian.basket.feature.lists.lists.ListsItemMenuDialog"
         android:label="Lists item menu"
-        tools:layout="@layout/dialog_menu_bottom_sheet">
+        tools:layout="@layout/menu_bottom_sheet_dialog">
 
         <argument
             android:name="shoppingListId"
@@ -132,7 +132,7 @@
         android:id="@+id/listItemFragment"
         android:name="de.janniskilian.basket.core.listitem.ListItemFragment"
         android:label="Edit item"
-        tools:layout="@layout/fragment_list_item">
+        tools:layout="@layout/list_item_fragment">
 
         <argument
             android:name="listItemId"

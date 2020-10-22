@@ -3,7 +3,6 @@ package de.janniskilian.basket.feature.lists.addlistitem
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.synthetic.main.fragment_add_list_item.*
 
 class AddListItemViewModelObserver(
     private val fragment: AddListItemFragment,
@@ -15,14 +14,14 @@ class AddListItemViewModelObserver(
         viewModel.items.observe(fragment.viewLifecycleOwner, ::renderSuggestions)
     }
 
-    private fun renderInput(input: String) {
-        if (fragment.inputEditText.text.toString() != input) {
-            fragment.inputEditText.setText(input)
+    private fun renderInput(input: String) = with(fragment.binding) {
+        if (inputEditText.text.toString() != input) {
+            inputEditText.setText(input)
         }
 
         val showSpeechInput = input.isEmpty()
-        fragment.searchBarSpeechInputButton.setSelectedImageState(!showSpeechInput)
-        fragment.searchBarSpeechInputButton.contentDescription = fragment.getString(
+        searchBarSpeechInputButton.setSelectedImageState(!showSpeechInput)
+        searchBarSpeechInputButton.contentDescription = fragment.getString(
             if (showSpeechInput) {
                 R.string.speech_input_button_desc
             } else {

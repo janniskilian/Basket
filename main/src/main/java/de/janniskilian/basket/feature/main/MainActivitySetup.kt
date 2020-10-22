@@ -16,7 +16,6 @@ import de.janniskilian.basket.R
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.util.extension.extern.getThemeDimen
 import de.janniskilian.basket.core.util.function.getLong
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivitySetup(
     private val activity: MainActivity,
@@ -24,7 +23,7 @@ class MainActivitySetup(
 ) {
 
     fun run() = with(activity) {
-        setSupportActionBar(appBar)
+        setSupportActionBar(binding.appBar)
         setupNavigation()
         setupFab()
         setupWindowInsets()
@@ -40,7 +39,7 @@ class MainActivitySetup(
             uiController.updateNavigationIcon()
         }
 
-        navigationButton.setOnClickListener {
+        binding.navigationButton.setOnClickListener {
             if (navHostFragment.childFragmentManager.backStackEntryCount == 0) {
                 uiController.showNavigation()
             } else {
@@ -56,7 +55,7 @@ class MainActivitySetup(
     }
 
     private fun setupFab() = with(activity) {
-        fab.setOnClickListener { currentFragment?.onFabClicked() }
+        binding.fab.setOnClickListener { currentFragment?.onFabClicked() }
     }
 
     private fun setupWindowInsets() = with(activity) {
@@ -64,14 +63,14 @@ class MainActivitySetup(
             window.setDecorFitsSystemWindows(false)
 
             val handler = WindowInsetsHandler()
-            coordinatorLayout.setWindowInsetsAnimationCallback(handler)
-            coordinatorLayout.setOnApplyWindowInsetsListener(handler)
+            binding.coordinatorLayout.setWindowInsetsAnimationCallback(handler)
+            binding.coordinatorLayout.setOnApplyWindowInsetsListener(handler)
         }
     }
 
     private fun setAppBarColor(color: Int, isAnimate: Boolean) {
         if (isAnimate && activity.window.navigationBarColor != color) {
-            val initialColor = activity.appBar.backgroundTint?.defaultColor
+            val initialColor = activity.binding.appBar.backgroundTint?.defaultColor
                 ?: ContextCompat.getColor(activity, R.color.primary)
 
             if (color == initialColor) return
@@ -82,14 +81,14 @@ class MainActivitySetup(
                 duration = getLong(activity, R.integer.transition_duration)
                 interpolator = LinearInterpolator()
                 addUpdateListener {
-                    activity.appBar.backgroundTint = ColorStateList.valueOf(
+                    activity.binding.appBar.backgroundTint = ColorStateList.valueOf(
                         evaluator.evaluate(animatedFraction, initialColor, color) as Int
                     )
                 }
                 start()
             }
         } else {
-            activity.appBar.backgroundTint = ColorStateList.valueOf(color)
+            activity.binding.appBar.backgroundTint = ColorStateList.valueOf(color)
         }
     }
 
@@ -97,7 +96,7 @@ class MainActivitySetup(
         FragmentManager.FragmentLifecycleCallbacks() {
 
         override fun onFragmentStarted(fm: FragmentManager, fragment: Fragment) {
-            if (fragment is BaseFragment) {
+            if (fragment is BaseFragment<*>) {
                 activity.invalidateOptionsMenu()
 
                 updateNavHostMargins(fragment)
@@ -106,8 +105,8 @@ class MainActivitySetup(
             }
         }
 
-        private fun updateNavHostMargins(fragment: BaseFragment) {
-            activity.navHost.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+        private fun updateNavHostMargins(fragment: BaseFragment<*>) {
+            activity.binding.navHost.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 val bottom = if (fragment.isShowAppBar) {
                     activity.getThemeDimen(R.attr.actionBarSize)
                 } else {
@@ -117,20 +116,20 @@ class MainActivitySetup(
             }
         }
 
-        private fun updateAppBar(fragment: BaseFragment) {
-            activity.appBar.isVisible = fragment.isShowAppBar
+        private fun updateAppBar(fragment: BaseFragment<*>) {
+            activity.binding.appBar.isVisible = fragment.isShowAppBar
 
             fragment.appBarColor.observe(fragment.viewLifecycleOwner) {
                 setAppBarColor(it, fragment.animateAppBarColor)
             }
         }
 
-        private fun updateFab(fragment: BaseFragment) {
+        private fun updateFab(fragment: BaseFragment<*>) {
             val fabTextRes = fragment.fabTextRes
             if (fabTextRes == null) {
-                activity.fab.hide()
+                activity.binding.fab.hide()
             } else {
-                activity.fab.show()
+                activity.binding.fab.show()
                 uiController.setFabText(fabTextRes)
             }
         }

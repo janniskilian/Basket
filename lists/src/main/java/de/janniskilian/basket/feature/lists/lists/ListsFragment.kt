@@ -1,7 +1,9 @@
 package de.janniskilian.basket.feature.lists.lists
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.BaseFragment
@@ -9,25 +11,26 @@ import de.janniskilian.basket.core.ResultCode
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.feature.lists.R
+import de.janniskilian.basket.feature.lists.databinding.ListsFragmentBinding
 import de.janniskilian.basket.feature.lists.sendShoppingList
-import kotlinx.android.synthetic.main.fragment_lists.*
 
 @AndroidEntryPoint
-class ListsFragment : BaseFragment() {
+class ListsFragment : BaseFragment<ListsFragmentBinding>() {
 
     private val viewModel: ListsViewModel by viewModels()
 
-    val listsAdapter get() = recyclerView.adapter as? ListsAdapter
+    val listsAdapter get() = binding.recyclerView.adapter as? ListsAdapter
 
     private val setup by lazy {
         ListsFragmentSetup(this, viewModel)
     }
 
-    override val layoutRes get() = R.layout.fragment_lists
-
     override val titleTextRes get() = R.string.shopping_lists_title
 
     override val fabTextRes get() = R.string.fab_create_shopping_list
+
+    override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        ListsFragmentBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

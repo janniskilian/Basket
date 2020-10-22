@@ -5,9 +5,9 @@ import com.google.android.material.snackbar.Snackbar
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
 import de.janniskilian.basket.core.util.extension.extern.setScrollable
+import de.janniskilian.basket.core.util.function.addToFront
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListViewModelObserver(
     private val fragment: ListFragment,
@@ -38,9 +38,9 @@ class ListViewModelObserver(
         fragment.titleTextView?.text = shoppingList.name
     }
 
-    private fun renderList(shoppingList: ShoppingList) {
-        fragment.emptyGroup.isVisible = shoppingList.isEmpty
-        fragment.recyclerView.isVisible = !shoppingList.isEmpty
+    private fun renderList(shoppingList: ShoppingList) = with(fragment.binding) {
+        emptyGroup.isVisible = shoppingList.isEmpty
+        recyclerView.isVisible = !shoppingList.isEmpty
 
         val (checkedItems, uncheckedItems) = shoppingList.items.partition { it.isChecked }
 
@@ -50,7 +50,7 @@ class ListViewModelObserver(
                 val categories = uncheckedItemGroups.keys.sortedBy { it?.name }
 
                 categories.flatMapIndexed { i, category ->
-                    val groupItem = ShoppingListAdapter.Item.Group(
+                    val groupItem = ShoppingListAdapter.Item.GroupHeader(
                         category?.id?.value ?: NO_CATEGORY_ID,
                         category?.name ?: fragment.getString(R.string.category_default),
                         i == 0
@@ -75,7 +75,7 @@ class ListViewModelObserver(
         val checkedAdapterItems = if (checkedListItems.isEmpty()) {
             emptyList()
         } else {
-            val groupItem = ShoppingListAdapter.Item.Group(
+            val groupItem = ShoppingListAdapter.Item.GroupHeader(
                 CHECKED_CATEGORY_ID,
                 fragment.getString(R.string.checked_items_group),
                 uncheckedAdapterItems.isEmpty()

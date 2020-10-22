@@ -1,16 +1,15 @@
 package de.janniskilian.basket.feature.lists.addlistitem
 
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import de.janniskilian.basket.core.util.extension.extern.layoutInflater
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
 import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.synthetic.main.shopping_list_item_suggestion_item.view.*
+import de.janniskilian.basket.feature.lists.databinding.ShoppingListItemSuggestionItemBinding
 
 class ShoppingListItemSuggestionsAdapter :
     ListAdapter<ShoppingListItemSuggestionsAdapter.Item, ShoppingListItemSuggestionsAdapter.ViewHolder>(
@@ -23,16 +22,18 @@ class ShoppingListItemSuggestionsAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
-            LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.shopping_list_item_suggestion_item, parent, false)
+            ShoppingListItemSuggestionItemBinding.inflate(
+                parent.layoutInflater,
+                parent,
+                false
+            )
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
 
-        with(holder.itemView) {
-            setOnClickListener {
+        with(holder.binding) {
+            root.setOnClickListener {
                 clickListener?.invoke(holder.adapterPosition)
             }
 
@@ -56,7 +57,7 @@ class ShoppingListItemSuggestionsAdapter :
             }
             icon.setImageResource(iconRes)
             icon.setSelectedImageState(item.item.isExistingListItem)
-            icon.contentDescription = context.getString(contentDescriptionRes)
+            icon.contentDescription = icon.context.getString(contentDescriptionRes)
         }
     }
 
@@ -70,7 +71,8 @@ class ShoppingListItemSuggestionsAdapter :
         return builder.toString()
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ViewHolder(val binding: ShoppingListItemSuggestionItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     data class Item(
         val item: ShoppingListItemSuggestion

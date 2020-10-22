@@ -9,11 +9,10 @@ import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import de.janniskilian.basket.R
 import de.janniskilian.basket.core.ANIMATION_DURATION_M
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivityUiController(private val activity: MainActivity) {
 
-    fun setFabText(@StringRes buttonTextRes: Int) = with(activity) {
+    fun setFabText(@StringRes buttonTextRes: Int) = with(activity.binding) {
         if (fab.text.isNullOrEmpty()) {
             fab.setText(buttonTextRes)
             fab.updateLayoutParams {
@@ -43,7 +42,7 @@ class MainActivityUiController(private val activity: MainActivity) {
     }
 
     fun updateNavigationIcon() = with(activity) {
-        navigationButton.setSelectedImageState(
+        binding.navigationButton.setSelectedImageState(
             navHostFragment.childFragmentManager.backStackEntryCount > 0
         )
     }

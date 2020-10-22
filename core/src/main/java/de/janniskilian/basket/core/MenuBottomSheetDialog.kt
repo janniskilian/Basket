@@ -1,23 +1,27 @@
 package de.janniskilian.basket.core
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.annotation.MenuRes
 import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.dialog_menu_bottom_sheet.*
+import de.janniskilian.basket.core.databinding.MenuBottomSheetDialogBinding
 
-abstract class MenuBottomSheetDialog : BaseBottomSheetDialogFragment() {
+abstract class MenuBottomSheetDialog :
+    BaseBottomSheetDialogFragment<MenuBottomSheetDialogBinding>() {
 
     @get:MenuRes
     abstract val menuRes: Int
 
-    override val layoutRes get() = R.layout.dialog_menu_bottom_sheet
+    override fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        MenuBottomSheetDialogBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(navigationView) {
+        with(binding.navigationView) {
             inflateMenu(menuRes)
 
             setNavigationItemSelectedListener {

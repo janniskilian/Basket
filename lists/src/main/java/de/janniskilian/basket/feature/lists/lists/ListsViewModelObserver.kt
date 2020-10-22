@@ -6,7 +6,6 @@ import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.util.extension.extern.setScrollable
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.synthetic.main.fragment_lists.*
 
 class ListsViewModelObserver(
     private val fragment: ListsFragment,
@@ -24,10 +23,10 @@ class ListsViewModelObserver(
 
     private fun shoppingListsObserver(shoppingLists: List<ShoppingList>) = with(fragment) {
         listsAdapter?.submitList(shoppingLists) {
-            recyclerView.invalidateItemDecorations()
+            binding.recyclerView.invalidateItemDecorations()
         }
 
-        emptyLayout.isVisible = shoppingLists.isEmpty()
+        binding.emptyLayout.isVisible = shoppingLists.isEmpty()
         toolbar?.setScrollable(shoppingLists.isNotEmpty())
     }
 

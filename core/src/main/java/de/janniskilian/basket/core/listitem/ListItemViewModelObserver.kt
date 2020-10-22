@@ -3,7 +3,6 @@ package de.janniskilian.basket.core.listitem
 import androidx.navigation.fragment.findNavController
 import de.janniskilian.basket.core.R
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
-import kotlinx.android.synthetic.main.fragment_list_item.*
 
 class ListItemViewModelObserver(
     private val fragment: ListItemFragment,
@@ -20,25 +19,25 @@ class ListItemViewModelObserver(
         }
     }
 
-    private fun renderName(name: String) = with(fragment) {
+    private fun renderName(name: String) = with(fragment.binding) {
         if (name != articleNameEditText.text.toString()) {
             articleNameEditText.setText(name)
         }
     }
 
-    private fun renderQuantity(quantity: String) = with(fragment) {
+    private fun renderQuantity(quantity: String) = with(fragment.binding) {
         if (quantity != listItemQuantityEditText.text.toString()) {
             listItemQuantityEditText.setText(quantity)
         }
     }
 
-    private fun renderComment(comment: String) = with(fragment) {
+    private fun renderComment(comment: String) = with(fragment.binding) {
         if (comment != listItemCommentEditText.text.toString()) {
             listItemCommentEditText.setText(comment)
         }
     }
 
-    private fun renderError(isError: Boolean) = with(fragment) {
+    private fun renderError(isError: Boolean) = with(fragment.binding) {
         articleNameEditText.error = if (isError) {
             fragment.getString(R.string.article_name_error)
         } else {
