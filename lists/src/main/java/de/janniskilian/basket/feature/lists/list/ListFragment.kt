@@ -8,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.map
-import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.ActionMenuBottomSheetDialog
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.NavGraphDirections
 import de.janniskilian.basket.core.ResultCode
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
+import de.janniskilian.basket.core.util.extension.extern.createContainerTransformNavigatorExtras
 import de.janniskilian.basket.core.util.extension.extern.keepScreenOn
 import de.janniskilian.basket.core.util.function.createUiListColor
 import de.janniskilian.basket.feature.lists.R
@@ -70,9 +70,9 @@ class ListFragment : BaseFragment<ListFragmentBinding>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_select_item_order -> startItemOrderDialog()
+            R.id.action_select_item_order -> navigateToItemOrderDialog()
 
-            R.id.action_overflow -> startOverflowDialog()
+            R.id.action_overflow -> navigateToOverflowDialog()
 
             else -> return false
         }
@@ -105,23 +105,31 @@ class ListFragment : BaseFragment<ListFragmentBinding>() {
         )
     }
 
-    fun startListItem(listItem: ShoppingListItem) {
-        navigate(ListFragmentDirections.actionListFragmentToListItemFragment(listItem.id.value))
-    }
-
-    private fun startItemOrderDialog() {
-        viewModel
-            .shoppingList
-            .value
+    fun navigateToListItem(position: Int, listItem: ShoppingListItem) {
+        binding
+            .recyclerView
+            .findViewHolderForAdapterPosition(position)
+            ?.itemView
             ?.let {
-                findNavController().navigate(
-                    ListFragmentDirections
-                        .actionListFragmentToListItemOrderDialog(it.id.value)
+                navigate(
+                    ListFragmentDirections.actionListFragmentToListItemFragment(listItem.id.value),
+                    createContainerTransformNavigatorExtras(it)
                 )
             }
     }
 
-    private fun startOverflowDialog() {
+    private fun navigateToItemOrderDialog() {
+        viewModel
+            .shoppingList
+            .value
+            ?.let {
+                navigate(
+                    ListFragmentDirections.actionListFragmentToListItemOrderDialog(it.id.value)
+                )
+            }
+    }
+
+    private fun navigateToOverflowDialog() {
         navigateWithResult(
             NavGraphDirections.toActionMenuBottomSheetDialog(R.menu.list_overflow),
             REQ_OVERFLOW

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="primary">#6abf69</color>
-    <color name="primary_dark">#388e3c</color>
-    <color name="secondary">#fff64f</color>
-    <color name="secondary_dark">#ffc400</color>
+    <color name="brand_green">#6abf69</color>
+    <color name="brand_green_dark">#388e3c</color>
+    <color name="brand_yellow">#fff64f</color>
+    <color name="brand_yellow_dark">#ffc400</color>
 
     <color name="shade_primary">#1f6abf69</color>
     <color name="stroke_shade">#33ffffff</color>

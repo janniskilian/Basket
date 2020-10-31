@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
 import de.janniskilian.basket.core.util.extension.extern.layoutInflater
+import de.janniskilian.basket.core.util.extension.extern.setContainerTransformTransitionName
 import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.databinding.ShoppingListGroupHeaderItemBinding
@@ -21,7 +22,10 @@ class ShoppingListAdapter(private val isDisplayCompact: Boolean) :
     ) {
 
     var listItemClickListener: ((shoppingListItem: ShoppingListItem) -> Unit)? = null
-    var editButtonClickListener: ((shoppingListItem: ShoppingListItem) -> Unit)? = null
+    var editButtonClickListener: ((
+        position: Int,
+        shoppingListItem: ShoppingListItem
+    ) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
@@ -70,7 +74,7 @@ class ShoppingListAdapter(private val isDisplayCompact: Boolean) :
                 }
             }
             infoButton.setOnClickListener {
-                editButtonClickListener?.invoke(shoppingListItem)
+                editButtonClickListener?.invoke(holder.adapterPosition, item.shoppingListItem)
             }
 
             checkbox.isChecked = shoppingListItem.isChecked
@@ -79,6 +83,8 @@ class ShoppingListAdapter(private val isDisplayCompact: Boolean) :
             quantity.text = shoppingListItem.quantity
             comment.isVisible = shoppingListItem.comment.isNotBlank()
             comment.text = shoppingListItem.comment
+
+            root.setContainerTransformTransitionName(item.shoppingListItem.id.value)
         }
     }
 

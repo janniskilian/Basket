@@ -17,7 +17,7 @@ class CreateListViewModelObserver(
             name.observe(fragment.viewLifecycleOwner, ::renderName)
             selectedColor.observe(fragment.viewLifecycleOwner) { renderColors() }
             error.observe(fragment.viewLifecycleOwner, ::renderError)
-            startList.observe(fragment.viewLifecycleOwner, ::startListFragment)
+            startList.observe(fragment.viewLifecycleOwner, ::navigateToListFragment)
             dismiss.observe(fragment.viewLifecycleOwner) {
                 fragment
                     .findNavController()
@@ -55,7 +55,7 @@ class CreateListViewModelObserver(
         }
     }
 
-    private fun startListFragment(shoppingListId: ShoppingListId) {
+    private fun navigateToListFragment(shoppingListId: ShoppingListId) {
         fragment.navigate(
             CreateListFragmentDirections
                 .actionCreateListFragmentToListFragment(shoppingListId.value)

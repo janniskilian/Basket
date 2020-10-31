@@ -45,11 +45,6 @@ class AddListItemFragment : BaseFragment<AddListItemFragmentBinding>() {
         setup.run()
     }
 
-    override fun onDestroyView() {
-        binding.recyclerView.adapter = null
-        super.onDestroyView()
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQ_SPEECH_INPUT
             && resultCode == Activity.RESULT_OK

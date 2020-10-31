@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.extension.extern.layoutInflater
+import de.janniskilian.basket.core.util.extension.extern.setContainerTransformTransitionName
 import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.databinding.ShoppingListItemBinding
@@ -14,7 +15,7 @@ class ListsAdapter : ListAdapter<ShoppingList, ListsAdapter.ViewHolder>(
     GenericDiffItemCallback { oldItem, newItem -> oldItem.id == newItem.id }
 ) {
 
-    var itemClickListener: ((shoppingListId: ShoppingListId) -> Unit)? = null
+    var itemClickListener: ((position: Int, shoppingListId: ShoppingListId) -> Unit)? = null
     var moreButtonClickListener: ((shoppingListId: ShoppingListId) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -26,7 +27,7 @@ class ListsAdapter : ListAdapter<ShoppingList, ListsAdapter.ViewHolder>(
         val item = getItem(position)
 
         with(holder.binding) {
-            root.setOnClickListener { itemClickListener?.invoke(item.id) }
+            root.setOnClickListener { itemClickListener?.invoke(holder.adapterPosition, item.id) }
 
             moreButton.setOnClickListener {
                 moreButtonClickListener?.invoke(item.id)
@@ -45,6 +46,8 @@ class ListsAdapter : ListAdapter<ShoppingList, ListsAdapter.ViewHolder>(
                 item.checkedItemCount,
                 item.checkedItemCount
             )
+
+            root.setContainerTransformTransitionName(item.id.value)
         }
     }
 

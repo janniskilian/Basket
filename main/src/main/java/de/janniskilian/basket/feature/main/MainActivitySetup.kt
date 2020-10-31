@@ -4,29 +4,39 @@ import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.content.res.ColorStateList
 import android.os.Build
+import android.os.Bundle
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
+import androidx.datastore.DataStore
+import androidx.datastore.preferences.Preferences
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.lifecycleScope
 import de.janniskilian.basket.R
 import de.janniskilian.basket.core.BaseFragment
+import de.janniskilian.basket.core.KEY_DEFAULT_DATA_IMPORTED
 import de.janniskilian.basket.core.util.extension.extern.getThemeDimen
 import de.janniskilian.basket.core.util.function.getLong
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 class MainActivitySetup(
     private val activity: MainActivity,
-    private val uiController: MainActivityUiController
+    private val uiController: MainActivityUiController,
+    private val dataStore: DataStore<Preferences>
 ) {
 
-    fun run() = with(activity) {
+    fun run(savedInstanceState: Bundle?) = with(activity) {
         setSupportActionBar(binding.appBar)
         setupNavigation()
         setupFab()
         setupWindowInsets()
+        setupOnboarding(savedInstanceState)
     }
 
     private fun setupNavigation() = with(activity) {
@@ -68,10 +78,25 @@ class MainActivitySetup(
         }
     }
 
+    private fun setupOnboarding(savedInstanceState: Bundle?) = activity.lifecycleScope.launch {
+        dataStore
+            .data
+            .map { it[KEY_DEFAULT_DATA_IMPORTED] }
+            .collect {
+                if (savedInstanceState == null
+                    && it != true
+                ) {
+                    activity
+                        .findNavController()
+                        .navigate(R.id.onboardingFragment)
+                }
+            }
+    }
+
     private fun setAppBarColor(color: Int, isAnimate: Boolean) {
         if (isAnimate && activity.window.navigationBarColor != color) {
             val initialColor = activity.binding.appBar.backgroundTint?.defaultColor
-                ?: ContextCompat.getColor(activity, R.color.primary)
+                ?: ContextCompat.getColor(activity, R.color.brand_green)
 
             if (color == initialColor) return
 

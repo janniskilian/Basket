@@ -70,12 +70,16 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     open val animateAppBarColor get() = true
 
+    open val useDefaultTransitions get() = true
+
     abstract fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setupTransitions()
+        if (useDefaultTransitions) {
+            setupTransitions()
+        }
     }
 
     override fun onCreateView(
@@ -142,8 +146,13 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         )
     }
 
-    fun navigate(directions: NavDirections, navOptions: NavOptions? = null) {
-        findNavController().navigate(directions, navOptions)
+    fun navigate(directions: NavDirections, navigatorExtras: Navigator.Extras? = null) {
+        navigate(
+            directions.actionId,
+            directions.arguments,
+            null,
+            navigatorExtras
+        )
     }
 
     fun navigateWithResult(

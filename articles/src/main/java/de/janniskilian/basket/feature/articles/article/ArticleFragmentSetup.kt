@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.CategoriesAdapter
 import de.janniskilian.basket.core.type.domain.ArticleId
 import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
-import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.extension.extern.onDone
+import de.janniskilian.basket.core.util.extension.extern.setupDetailContainerTransformTransition
 import de.janniskilian.basket.core.util.extension.extern.toggleSoftKeyboard
 import de.janniskilian.basket.feature.articles.R
 
@@ -27,6 +27,7 @@ class ArticleFragmentSetup(
     fun run() {
         articleId?.let(viewModel::setArticleId)
 
+        fragment.setupDetailContainerTransformTransition()
         setupButtons()
         setupNameEditText()
         setupCategoryEditText()
@@ -80,8 +81,12 @@ class ArticleFragmentSetup(
             )
         }
 
-        categoriesAdapter.clickListener = {
-            viewModel.setCategory(it)
+        categoriesAdapter.clickListener = { position ->
+            viewModel
+                .categories
+                .value
+                ?.getOrNull(position)
+                ?.let(viewModel::setCategory)
         }
     }
 }

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.CategoriesAdapter
 import de.janniskilian.basket.core.type.domain.Category
+import de.janniskilian.basket.core.util.extension.extern.setupOverviewContainerTransformTransition
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.feature.categories.R
 
@@ -18,6 +19,8 @@ class CategoriesFragmentSetup(
         get() = fragment.binding.recyclerView.adapter as? CategoriesAdapter
 
     fun run() {
+        fragment.setupOverviewContainerTransformTransition(fragment.binding.recyclerView)
+
         setupRecyclerView()
 
         categoriesAdapter?.clickListener = ::categoryClicked
@@ -50,12 +53,13 @@ class CategoriesFragmentSetup(
         }
     }
 
-    private fun categoryClicked(category: Category?) {
-        if (category != null) {
-            fragment.navigate(
-                CategoriesFragmentDirections
-                    .actionCategoriesFragmentToCategoryFragment(category.id.value)
-            )
-        }
+    private fun categoryClicked(position: Int) {
+        viewModel
+            .categories
+            .value
+            ?.getOrNull(position)
+            ?.let {
+                fragment.navigateToCategory(position, it)
+            }
     }
 }

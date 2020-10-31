@@ -3,6 +3,7 @@ package de.janniskilian.basket.feature.lists.lists
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import de.janniskilian.basket.core.util.extension.extern.setupOverviewContainerTransformTransition
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.core.util.recyclerview.ItemSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
@@ -15,6 +16,8 @@ class ListsFragmentSetup(
     private val viewModelObserver = ListsViewModelObserver(fragment, viewModel)
 
     fun run() {
+        fragment.setupOverviewContainerTransformTransition(fragment.binding.recyclerView)
+
         setupRecyclerView()
         setClickListeners()
         viewModelObserver.observe()
@@ -44,7 +47,7 @@ class ListsFragmentSetup(
     }
 
     private fun setClickListeners() = with(fragment) {
-        listsAdapter?.itemClickListener = { startList(it) }
+        listsAdapter?.itemClickListener = ::navigateToList
         listsAdapter?.moreButtonClickListener = ::showListMenu
     }
 }

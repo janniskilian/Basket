@@ -11,6 +11,8 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
+import de.janniskilian.basket.core.type.domain.Category
+import de.janniskilian.basket.core.util.extension.extern.createContainerTransformNavigatorExtras
 import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
 import de.janniskilian.basket.core.util.function.getSpeechInputResult
 import de.janniskilian.basket.feature.categories.R
@@ -37,11 +39,6 @@ class CategoriesFragment : BaseFragment<CategoriesFragmentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setup.run()
-    }
-
-    override fun onDestroyView() {
-        binding.recyclerView.adapter = null
-        super.onDestroyView()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -74,6 +71,20 @@ class CategoriesFragment : BaseFragment<CategoriesFragmentBinding>() {
 
     override fun onFabClicked() {
         navigate(CategoriesFragmentDirections.actionCategoriesFragmentToCategoryFragment(-1L))
+    }
+
+    fun navigateToCategory(position: Int, category: Category) {
+        binding
+            .recyclerView
+            .findViewHolderForAdapterPosition(position)
+            ?.itemView
+            ?.let {
+                navigate(
+                    CategoriesFragmentDirections
+                        .actionCategoriesFragmentToCategoryFragment(category.id.value),
+                    createContainerTransformNavigatorExtras(it)
+                )
+            }
     }
 }
 

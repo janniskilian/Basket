@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.databinding.CategoryItemBinding
 import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.util.extension.extern.layoutInflater
+import de.janniskilian.basket.core.util.extension.extern.setContainerTransformTransitionName
 import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
 
 class CategoriesAdapter : ListAdapter<CategoriesAdapter.Item, CategoriesAdapter.ViewHolder>(
@@ -15,7 +16,7 @@ class CategoriesAdapter : ListAdapter<CategoriesAdapter.Item, CategoriesAdapter.
     }
 ) {
 
-    var clickListener: ((category: Category?) -> Unit)? = null
+    var clickListener: ((position: Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -26,10 +27,14 @@ class CategoriesAdapter : ListAdapter<CategoriesAdapter.Item, CategoriesAdapter.
         val item = getItem(position)
 
         with(holder.binding) {
-            root.setOnClickListener { clickListener?.invoke(item.category) }
+            root.setOnClickListener { clickListener?.invoke(holder.adapterPosition) }
 
             name.text = item?.category?.name ?: root.context.getString(R.string.category_default)
             checkmarkIcon.isVisible = item.isSelected
+
+            item.category?.let {
+                root.setContainerTransformTransitionName(it.id.value)
+            }
         }
     }
 

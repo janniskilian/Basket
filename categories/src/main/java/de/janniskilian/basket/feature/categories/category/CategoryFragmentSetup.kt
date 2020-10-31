@@ -5,6 +5,7 @@ import de.janniskilian.basket.core.type.domain.CategoryId
 import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
 import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.extension.extern.onDone
+import de.janniskilian.basket.core.util.extension.extern.setupDetailContainerTransformTransition
 import de.janniskilian.basket.feature.categories.R
 
 class CategoryFragmentSetup(
@@ -22,6 +23,7 @@ class CategoryFragmentSetup(
     fun run() {
         categoryId?.let(viewModel::setCategoryId)
 
+        fragment.setupDetailContainerTransformTransition()
         setupButtons()
         setClickListeners()
         setupNameEditText()

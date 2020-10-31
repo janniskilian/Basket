@@ -109,6 +109,7 @@ subprojects {
         implementation deps.kotlin.coroutinesAndroid
 
         implementation deps.androidx.navFragment
+        implementation deps.androidx.datastorePref
 
         implementation deps.hilt.android
         implementation deps.hilt.viewmodel

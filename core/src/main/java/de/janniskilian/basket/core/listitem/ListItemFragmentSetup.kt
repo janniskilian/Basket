@@ -3,6 +3,7 @@ package de.janniskilian.basket.core.listitem
 import de.janniskilian.basket.core.type.domain.ShoppingListItemId
 import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
 import de.janniskilian.basket.core.util.extension.extern.onDone
+import de.janniskilian.basket.core.util.extension.extern.setupDetailContainerTransformTransition
 
 class ListItemFragmentSetup(
     private val fragment: ListItemFragment,
@@ -14,6 +15,8 @@ class ListItemFragmentSetup(
 
     fun run() {
         viewModel.setListItemId(ShoppingListItemId(args.listItemId))
+
+        fragment.setupDetailContainerTransformTransition()
 
         setupEditTexts()
         setupSubmitButton()

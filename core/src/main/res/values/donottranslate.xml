@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="view_list_action">de.janniskilian.basket.ACTION.viewList</string>
+    <string name="key_shopping_list_id">key_shopping_list_id</string>
+
+</resources>

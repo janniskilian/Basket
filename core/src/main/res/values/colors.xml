@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="primary">#388e3c</color>
-    <color name="primary_dark">#00600f</color>
-    <color name="secondary">#ffc400</color>
-    <color name="secondary_dark">#c79400</color>
+    <color name="brand_green">#388e3c</color>
+    <color name="brand_green_dark">#00600f</color>
+    <color name="brand_yellow">#ffc400</color>
+    <color name="brand_yellow_dark">#c79400</color>
 
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>

@@ -7,5 +7,8 @@
     <integer name="animation_duration_xl">350</integer>
 
     <integer name="transition_duration">@integer/animation_duration_l</integer>
+    <integer name="shared_element_transition_duration">@integer/animation_duration_xl</integer>
+
+    <integer name="max_shopping_list_shortcuts">3</integer>
 
 </resources>

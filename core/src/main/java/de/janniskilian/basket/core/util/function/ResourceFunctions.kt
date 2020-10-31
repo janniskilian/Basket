@@ -4,10 +4,18 @@ import android.content.Context
 import androidx.annotation.BoolRes
 import androidx.annotation.IntegerRes
 
+fun getInt(context: Context, @IntegerRes resId: Int) =
+    context
+        .resources
+        .getInteger(resId)
+
 fun getLong(context: Context, @IntegerRes resId: Int) =
-    context.resources
+    context
+        .resources
         .getInteger(resId)
         .toLong()
 
 fun getBoolean(context: Context, @BoolRes resId: Int) =
-    context.resources.getBoolean(resId)
+    context
+        .resources
+        .getBoolean(resId)

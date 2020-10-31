@@ -1,11 +1,11 @@
 package de.janniskilian.basket.feature.articles.articles
 
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.Article
+import de.janniskilian.basket.core.util.extension.extern.setupOverviewContainerTransformTransition
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.feature.articles.R
 
@@ -18,6 +18,8 @@ class ArticlesFragmentSetup(
         get() = fragment.binding.recyclerView.adapter as? ArticlesAdapter
 
     fun run() {
+        fragment.setupOverviewContainerTransformTransition(fragment.binding.recyclerView)
+
         setupRecyclerView()
 
         articlesAdapter?.clickListener = ::articleClicked
@@ -54,12 +56,7 @@ class ArticlesFragmentSetup(
             .value
             ?.getOrNull(position)
             ?.let {
-                fragment
-                    .findNavController()
-                    .navigate(
-                        ArticlesFragmentDirections
-                            .actionArticlesFragmentToArticleFragment(it.id.value)
-                    )
+                fragment.navigateToArticle(position, it)
             }
     }
 }

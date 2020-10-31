@@ -17,6 +17,8 @@
         <item quantity="other">%d checked</item>
     </plurals>
 
+    <string name="shortcut_list_long_label">Open list ”%1$s“</string>
+
     <string name="action_menu_edit_list">Edit list</string>
     <string name="action_menu_delete_list">Delete list</string>
     <string name="action_menu_send_list">Send list</string>

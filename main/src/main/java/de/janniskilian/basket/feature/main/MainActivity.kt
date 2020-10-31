@@ -1,10 +1,11 @@
 package de.janniskilian.basket.feature.main
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.DataStore
+import androidx.datastore.preferences.Preferences
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.R
@@ -12,18 +13,23 @@ import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainerProvider
 import de.janniskilian.basket.databinding.MainActivityBinding
+import de.janniskilian.basket.feature.lists.list.ListFragmentArgs
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationContainerProvider {
 
     @Inject
-    lateinit var sharedPrefs: SharedPreferences
+    lateinit var dataStore: DataStore<Preferences>
 
-    private val uiController = MainActivityUiController(this)
-    private val setup = MainActivitySetup(this, uiController)
     lateinit var binding: MainActivityBinding
         private set
+
+    private val uiController = MainActivityUiController(this)
+
+    private val setup by lazy {
+        MainActivitySetup(this, uiController, dataStore)
+    }
 
     val navHostFragment
         get() = supportFragmentManager
@@ -40,12 +46,22 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setup.run()
+        setup.run(savedInstanceState)
+    }
 
-        if (savedInstanceState == null
-            && !sharedPrefs.getBoolean(KEY_DEFAULT_DATA_IMPORTED, false)
-        ) {
-            findNavController().navigate(R.id.onboardingFragment)
+    override fun onStart() {
+        super.onStart()
+
+        if (intent?.action == getString(R.string.view_list_action)) {
+            val shoppingListId = intent.getLongExtra(getString(R.string.key_shopping_list_id), -1)
+            if (shoppingListId != -1L) {
+                findNavController().navigate(
+                    R.id.listFragment,
+                    ListFragmentArgs(shoppingListId).toBundle()
+                )
+            }
+
+            intent?.action = null
         }
     }
 
@@ -73,9 +89,4 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
     }
 
     fun findNavController() = navHostFragment.findNavController()
-
-    companion object {
-
-        private const val KEY_DEFAULT_DATA_IMPORTED = "KEY_DEFAULT_DATA_IMPORTED"
-    }
 }

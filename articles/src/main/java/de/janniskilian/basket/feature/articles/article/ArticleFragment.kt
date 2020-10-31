@@ -22,6 +22,8 @@ class ArticleFragment : BaseFragment<ArticleFragmentBinding>() {
         ArticleFragmentSetup(this, args, viewModel)
     }
 
+    override val useDefaultTransitions get() = false
+
     override val titleTextRes
         get() = if (args.articleId.minusOneAsNull() == null) {
             R.string.create_article_title

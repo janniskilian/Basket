@@ -13,17 +13,21 @@ import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.databinding.ListsFragmentBinding
 import de.janniskilian.basket.feature.lists.sendShoppingList
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ListsFragment : BaseFragment<ListsFragmentBinding>() {
 
     private val viewModel: ListsViewModel by viewModels()
 
-    val listsAdapter get() = binding.recyclerView.adapter as? ListsAdapter
-
     private val setup by lazy {
         ListsFragmentSetup(this, viewModel)
     }
+
+    @Inject
+    lateinit var shortcutController: ShortcutController
+
+    val listsAdapter get() = binding.recyclerView.adapter as? ListsAdapter
 
     override val titleTextRes get() = R.string.shopping_lists_title
 
@@ -55,7 +59,7 @@ class ListsFragment : BaseFragment<ListsFragmentBinding>() {
         val shoppingListId = ShoppingListId(data.shoppingListId)
 
         when (data.menuItemId) {
-            R.id.action_edit_list -> editList(shoppingListId)
+            R.id.action_edit_list -> navigateToEditList(shoppingListId)
             R.id.action_delete_list -> viewModel.deleteList(shoppingListId)
             R.id.action_send_list -> sendList(shoppingListId)
         }
@@ -70,13 +74,24 @@ class ListsFragment : BaseFragment<ListsFragmentBinding>() {
         }
     }
 
-    fun startList(shoppingListId: ShoppingListId) {
-        findShoppingList(shoppingListId)?.let {
-            navigate(ListsFragmentDirections.actionListsFragmentToListFragment(it.id.value))
+    fun navigateToList(position: Int, shoppingListId: ShoppingListId) {
+        findShoppingList(shoppingListId)?.let { shoppingList ->
+            shortcutController.createShoppingListShortcut(shoppingList)
+
+            binding
+                .recyclerView
+                .findViewHolderForAdapterPosition(position)
+                ?.itemView
+                ?.let {
+                    navigate(
+                        ListsFragmentDirections
+                            .actionListsFragmentToListFragment(shoppingList.id.value)
+                    )
+                }
         }
     }
 
-    private fun editList(shoppingListId: ShoppingListId) {
+    private fun navigateToEditList(shoppingListId: ShoppingListId) {
         findShoppingList(shoppingListId)?.let {
             navigate(ListsFragmentDirections.actionListsFragmentToCreateListFragment(it.id.value))
         }

@@ -11,6 +11,8 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.BaseFragment
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
+import de.janniskilian.basket.core.type.domain.Article
+import de.janniskilian.basket.core.util.extension.extern.createContainerTransformNavigatorExtras
 import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
 import de.janniskilian.basket.core.util.function.getSpeechInputResult
 import de.janniskilian.basket.feature.articles.R
@@ -36,6 +38,7 @@ class ArticlesFragment : BaseFragment<ArticlesFragmentBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setup.run()
     }
 
@@ -69,5 +72,19 @@ class ArticlesFragment : BaseFragment<ArticlesFragmentBinding>() {
 
     override fun onFabClicked() {
         navigate(ArticlesFragmentDirections.actionArticlesFragmentToArticleFragment(-1L))
+    }
+
+    fun navigateToArticle(position: Int, article: Article) {
+        binding
+            .recyclerView
+            .findViewHolderForAdapterPosition(position)
+            ?.itemView
+            ?.let {
+                navigate(
+                    ArticlesFragmentDirections
+                        .actionArticlesFragmentToArticleFragment(article.id.value),
+                    createContainerTransformNavigatorExtras(it)
+                )
+            }
     }
 }

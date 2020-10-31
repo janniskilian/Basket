@@ -22,6 +22,8 @@ class CategoryFragment : BaseFragment<CategoryFragmentBinding>() {
         CategoryFragmentSetup(this, args, viewModel)
     }
 
+    override val useDefaultTransitions get() = false
+
     override val titleTextRes
         get() = if (args.categoryId.minusOneAsNull() == null) {
             R.string.create_category_title

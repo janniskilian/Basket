@@ -23,6 +23,8 @@ class ListItemFragment : BaseFragment<ListItemFragmentBinding>() {
         ListItemFragmentSetup(this, args, viewModel)
     }
 
+    override val useDefaultTransitions get() = false
+
     override val appBarColor by lazy {
         viewModel.shoppingList.map {
             createUiListColor(requireContext(), it.color)

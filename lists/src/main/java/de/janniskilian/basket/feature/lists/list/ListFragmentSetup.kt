@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.extension.extern.keepScreenOn
+import de.janniskilian.basket.core.util.extension.extern.setupOverviewContainerTransformTransition
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
 
@@ -19,6 +20,8 @@ class ListFragmentSetup(
 
     fun run() {
         viewModel.setShoppingListId(ShoppingListId(args.shoppingListId))
+
+        fragment.setupOverviewContainerTransformTransition(fragment.binding.recyclerView)
 
         setupWindow()
         setupRecyclerView()
@@ -61,7 +64,7 @@ class ListFragmentSetup(
 
         shoppingListAdapter?.apply {
             listItemClickListener = viewModel::listItemClicked
-            editButtonClickListener = { startListItem(it) }
+            editButtonClickListener = ::navigateToListItem
         }
 
         val itemTouchHelperCallback = ListRecyclerViewItemTouchHelperCallback(

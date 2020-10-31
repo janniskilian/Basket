@@ -4,10 +4,10 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
-import de.janniskilian.basket.core.ANIMATION_DURATION_S
 import de.janniskilian.basket.core.CategoriesAdapter
 import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
+import de.janniskilian.basket.core.util.function.getLong
 import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.articles.R
 import de.janniskilian.basket.feature.articles.article.ArticleFragmentMode.EDIT
@@ -74,7 +74,7 @@ class ArticleViewModelObserver(
 
         TransitionManager.beginDelayedTransition(
             root,
-            AutoTransition().setDuration(ANIMATION_DURATION_S)
+            AutoTransition().setDuration(getLong(root.context, R.integer.animation_duration_s))
         )
         constraintLayout.isVisible = !isVisible
         recyclerView.isVisible = isVisible

@@ -7,29 +7,29 @@ import androidx.annotation.StringRes
 import androidx.core.view.updateLayoutParams
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import de.janniskilian.basket.R
-import de.janniskilian.basket.core.ANIMATION_DURATION_M
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
+import de.janniskilian.basket.core.util.function.getLong
 
 class MainActivityUiController(private val activity: MainActivity) {
 
-    fun setFabText(@StringRes buttonTextRes: Int) = with(activity.binding) {
-        if (fab.text.isNullOrEmpty()) {
+    fun setFabText(@StringRes buttonTextRes: Int): Unit = with(activity.binding) {
+        if (fab.text.isNullOrEmpty() || !fab.isLaidOut) {
             fab.setText(buttonTextRes)
             fab.updateLayoutParams {
                 width = ViewGroup.LayoutParams.WRAP_CONTENT
             }
         } else {
-            fab.updateLayoutParams {
-                width = fab.width
-            }
+            val fabWidth = fab.width
+
             fab.setText(buttonTextRes)
 
             fab.measure(
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
             )
-            with(ValueAnimator.ofInt(fab.width, fab.measuredWidth)) {
-                duration = ANIMATION_DURATION_M
+
+            with(ValueAnimator.ofInt(fabWidth, fab.measuredWidth)) {
+                duration = getLong(activity, R.integer.animation_duration_m)
                 interpolator = FastOutSlowInInterpolator()
                 addUpdateListener {
                     fab.updateLayoutParams {

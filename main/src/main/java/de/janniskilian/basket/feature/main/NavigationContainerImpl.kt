@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import de.janniskilian.basket.R
-import de.janniskilian.basket.core.ANIMATION_DURATION_S
 import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
 import de.janniskilian.basket.core.navigationcontainer.SearchBarViewModel
@@ -16,6 +15,7 @@ import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
 import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
 import de.janniskilian.basket.core.util.extension.extern.toggleSoftKeyboard
 import de.janniskilian.basket.core.util.function.createSpeechInputIntent
+import de.janniskilian.basket.core.util.function.getLong
 import de.janniskilian.basket.core.util.weakRef
 
 class NavigationContainerImpl(private val activity: MainActivity) : NavigationContainer {
@@ -90,10 +90,12 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
             height = appBar.height + 2
         }
 
+        val duration = getLong(activity, R.integer.animation_duration_s)
+
         fab
             .animate()
             .alpha(fabEndAlpha)
-            .setDuration(ANIMATION_DURATION_S)
+            .setDuration(duration)
             .withEndAction {
                 if (isVisible) {
                     fab.isVisible = false
@@ -104,7 +106,7 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
         searchBarContainer
             .animate()
             .alpha(searchBarEndAlpha)
-            .setDuration(ANIMATION_DURATION_S)
+            .setDuration(duration)
             .withEndAction {
                 if (!isVisible) {
                     searchBarContainer.isVisible = false

@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.TextView
-import androidx.core.content.edit
 import androidx.core.view.children
 import androidx.core.view.forEach
+import androidx.datastore.DataStore
+import androidx.datastore.preferences.Preferences
+import androidx.datastore.preferences.edit
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.R
@@ -32,6 +34,9 @@ class OnboardingFragment : BaseFragment<OnboardingFragmentBinding>() {
 
     @Inject
     lateinit var sharedPrefs: SharedPreferences
+
+    @Inject
+    lateinit var dataStore: DataStore<Preferences>
 
     @Inject
     lateinit var dataClient: DataClient
@@ -99,8 +104,8 @@ class OnboardingFragment : BaseFragment<OnboardingFragmentBinding>() {
                 ).run()
 
                 launch(Dispatchers.Main) {
-                    sharedPrefs.edit {
-                        putBoolean(KEY_DEFAULT_DATA_IMPORTED, true)
+                    dataStore.edit {
+                        it[KEY_DEFAULT_DATA_IMPORTED] = true
                     }
 
                     findNavController().popBackStack()
