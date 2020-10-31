@@ -15,7 +15,7 @@ class ListsAdapter : ListAdapter<ShoppingList, ListsAdapter.ViewHolder>(
     GenericDiffItemCallback { oldItem, newItem -> oldItem.id == newItem.id }
 ) {
 
-    var itemClickListener: ((position: Int, shoppingListId: ShoppingListId) -> Unit)? = null
+    var itemClickListener: ((shoppingListId: ShoppingListId) -> Unit)? = null
     var moreButtonClickListener: ((shoppingListId: ShoppingListId) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -27,7 +27,7 @@ class ListsAdapter : ListAdapter<ShoppingList, ListsAdapter.ViewHolder>(
         val item = getItem(position)
 
         with(holder.binding) {
-            root.setOnClickListener { itemClickListener?.invoke(holder.adapterPosition, item.id) }
+            root.setOnClickListener { itemClickListener?.invoke(item.id) }
 
             moreButton.setOnClickListener {
                 moreButtonClickListener?.invoke(item.id)

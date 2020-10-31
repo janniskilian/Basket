@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.CategoriesAdapter
 import de.janniskilian.basket.core.type.domain.ArticleId
 import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
+import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
 import de.janniskilian.basket.core.util.extension.extern.onDone
 import de.janniskilian.basket.core.util.extension.extern.setupDetailContainerTransformTransition
 import de.janniskilian.basket.core.util.extension.extern.toggleSoftKeyboard

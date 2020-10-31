@@ -16,8 +16,6 @@ class ListsFragmentSetup(
     private val viewModelObserver = ListsViewModelObserver(fragment, viewModel)
 
     fun run() {
-        fragment.setupOverviewContainerTransformTransition(fragment.binding.recyclerView)
-
         setupRecyclerView()
         setClickListeners()
         viewModelObserver.observe()

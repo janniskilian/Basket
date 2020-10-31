@@ -74,20 +74,14 @@ class ListsFragment : BaseFragment<ListsFragmentBinding>() {
         }
     }
 
-    fun navigateToList(position: Int, shoppingListId: ShoppingListId) {
+    fun navigateToList(shoppingListId: ShoppingListId) {
         findShoppingList(shoppingListId)?.let { shoppingList ->
             shortcutController.createShoppingListShortcut(shoppingList)
 
-            binding
-                .recyclerView
-                .findViewHolderForAdapterPosition(position)
-                ?.itemView
-                ?.let {
-                    navigate(
-                        ListsFragmentDirections
-                            .actionListsFragmentToListFragment(shoppingList.id.value)
-                    )
-                }
+            navigate(
+                ListsFragmentDirections
+                    .actionListsFragmentToListFragment(shoppingList.id.value)
+            )
         }
     }
 
