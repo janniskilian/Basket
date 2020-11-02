@@ -73,7 +73,7 @@ class ShoppingListAdapter(private val isDisplayCompact: Boolean) :
                     listItemClickListener?.invoke(shoppingListItem)
                 }
             }
-            infoButton.setOnClickListener {
+            editButton.setOnClickListener {
                 editButtonClickListener?.invoke(holder.adapterPosition, item.shoppingListItem)
             }
 

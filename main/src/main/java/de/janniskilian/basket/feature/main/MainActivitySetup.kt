@@ -120,7 +120,7 @@ class MainActivitySetup(
     private inner class NavHostFragmentLifecycleCallback :
         FragmentManager.FragmentLifecycleCallbacks() {
 
-        override fun onFragmentStarted(fm: FragmentManager, fragment: Fragment) {
+        override fun onFragmentResumed(fm: FragmentManager, fragment: Fragment) {
             if (fragment is BaseFragment<*>) {
                 activity.invalidateOptionsMenu()
 

@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.core.content.pm.ShortcutManagerCompat
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.util.function.getInt
@@ -15,6 +17,7 @@ class ShortcutController(private val context: Context) {
 
     private val maxShoppingListShortcuts = getInt(context, R.integer.max_shopping_list_shortcuts)
 
+    @RequiresApi(Build.VERSION_CODES.N_MR1)
     fun createShoppingListShortcut(shoppingList: ShoppingList) {
         val shortcuts = ShortcutManagerCompat.getDynamicShortcuts(context)
         val newShortcutId = shoppingList.id.value.toString()
@@ -43,7 +46,7 @@ class ShortcutController(private val context: Context) {
                 Intent().apply {
                     component = ComponentName(
                         context,
-                        "de.janniskilian.basket"
+                        "de.janniskilian.basket.feature.main.MainActivity"
                     )
                     action = context.getString(R.string.view_list_action)
                     putExtra(

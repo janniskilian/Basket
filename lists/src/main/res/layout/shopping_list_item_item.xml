@@ -70,14 +70,14 @@
         tools:text="waxy"/>
 
     <ImageButton
-        android:id="@+id/infoButton"
+        android:id="@+id/editButton"
         style="@style/Widget.Basket.IconButton"
         android:layout_height="0dp"
         android:contentDescription="@string/edit_item_button_desc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_chevron_right_24"/>
+        app:srcCompat="@drawable/ic_edit_24"/>
 
     <View
         android:layout_width="0dp"
