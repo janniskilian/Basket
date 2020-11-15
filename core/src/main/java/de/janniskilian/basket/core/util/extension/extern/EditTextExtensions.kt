@@ -1,10 +1,10 @@
 package de.janniskilian.basket.core.util.extension.extern
 
-import android.os.Build
-import android.view.WindowInsets
+import android.app.Activity
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.widget.doOnTextChanged
 
 inline fun EditText.onDone(crossinline action: () -> Unit) {
@@ -23,25 +23,17 @@ inline fun EditText.doOnTextChanged(crossinline action: (text: String) -> Unit) 
 }
 
 fun EditText.toggleSoftKeyboard(isVisible: Boolean) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-        val insetsType = WindowInsets.Type.ime()
+    val controller = (context as? Activity)?.let {
+        WindowInsetsControllerCompat(it.window, this)
+    }
 
-        if (isVisible) {
-            windowInsetsController?.show(insetsType)
-            requestFocus()
-        } else {
-            windowInsetsController?.hide(insetsType)
-            clearFocus()
-        }
+    val insetsType = WindowInsetsCompat.Type.ime()
+
+    if (isVisible) {
+        controller?.show(insetsType)
+        requestFocus()
     } else {
-        val inputMethodManager = context.inputMethodManager
-
-        if (isVisible) {
-            requestFocus()
-            inputMethodManager.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
-        } else {
-            inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
-            clearFocus()
-        }
+        controller?.hide(insetsType)
+        clearFocus()
     }
 }

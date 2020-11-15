@@ -5,7 +5,6 @@ dependencies {
 	implementation deps.androidx.fragment
 	implementation deps.androidx.livedata
 	implementation deps.androidx.viewmodel
-	implementation deps.androidx.lifecycleExt
 	implementation deps.androidx.constraintlayout
 	implementation deps.androidx.recyclerview
 

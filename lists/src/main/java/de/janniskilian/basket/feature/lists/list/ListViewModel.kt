@@ -49,13 +49,15 @@ class ListViewModel @ViewModelInject constructor(
 
     fun setAllListItemsChecked(isChecked: Boolean) {
         shoppingList.value?.let { list ->
-            viewModelScope.launch {
-                dataClient.shoppingListItem.setAllCheckedForShoppingList(list.id, isChecked)
-            }
+            if (!list.isEmpty) {
+                viewModelScope.launch {
+                    dataClient.shoppingListItem.setAllCheckedForShoppingList(list.id, isChecked)
+                }
 
-            _allListItemsSetIsChecked.setValue(
-                list.items.filter { it.isChecked != isChecked }
-            )
+                _allListItemsSetIsChecked.setValue(
+                    list.items.filter { it.isChecked != isChecked }
+                )
+            }
         }
     }
 
@@ -69,22 +71,26 @@ class ListViewModel @ViewModelInject constructor(
 
     fun removeAllListItems() {
         shoppingList.value?.let {
-            viewModelScope.launch {
-                dataClient.shoppingListItem.deleteAllForShoppingList(it.id)
-            }
+            if (!it.isEmpty) {
+                viewModelScope.launch {
+                    dataClient.shoppingListItem.deleteAllForShoppingList(it.id)
+                }
 
-            _listItemsRemoved.setValue(it.items)
+                _listItemsRemoved.setValue(it.items)
+            }
         }
     }
 
     fun removeAllCheckedListItems() {
         shoppingList.value?.let { list ->
-            viewModelScope.launch {
-                dataClient.shoppingListItem.deleteAllCheckedForShoppingList(list.id)
-            }
+            if (!list.isEmpty) {
+                viewModelScope.launch {
+                    dataClient.shoppingListItem.deleteAllCheckedForShoppingList(list.id)
+                }
 
-            val checkedListItems = list.items.filter { it.isChecked }
-            _listItemsRemoved.setValue(checkedListItems)
+                val checkedListItems = list.items.filter { it.isChecked }
+                _listItemsRemoved.setValue(checkedListItems)
+            }
         }
     }
 
