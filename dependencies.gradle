@@ -68,7 +68,7 @@ def androidTesting = [
 
 def plugins = [
         kotlin     : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
-        android    : "com.android.tools.build:gradle:7.0.0-alpha02",
+        android    : "com.android.tools.build:gradle:4.2.0-beta01",
         navSafeArgs: "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.nav",
         hilt       : "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt",
 ]
