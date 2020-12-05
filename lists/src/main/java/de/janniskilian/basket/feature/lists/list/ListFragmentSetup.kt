@@ -1,19 +1,23 @@
 package de.janniskilian.basket.feature.lists.list
 
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.extension.extern.keepScreenOn
 import de.janniskilian.basket.core.util.extension.extern.setupOverviewContainerTransformTransition
 import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
+import de.janniskilian.basket.feature.lists.lists.ShortcutController
 
 class ListFragmentSetup(
     private val fragment: ListFragment,
     private val args: ListFragmentArgs,
-    private val viewModel: ListViewModel
+    private val viewModel: ListViewModel,
+    private val shortcutController: ShortcutController
 ) {
 
     private val viewModelObserver = ListViewModelObserver(fragment, viewModel)
@@ -26,6 +30,16 @@ class ListFragmentSetup(
         setupWindow()
         setupRecyclerView()
         viewModelObserver.observe()
+
+        viewModel.shoppingList.observe(
+            fragment.viewLifecycleOwner,
+            object : Observer<ShoppingList> {
+                override fun onChanged(t: ShoppingList) {
+                    shortcutController.updateShoppingListShortcuts(t)
+                    viewModel.shoppingList.removeObserver(this)
+                }
+            }
+        )
     }
 
     private fun setupWindow() = with(fragment) {

@@ -1,11 +1,12 @@
 package de.janniskilian.basket.feature.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.datastore.DataStore
-import androidx.datastore.preferences.Preferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.R
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
     override fun onStart() {
         super.onStart()
 
-        if (intent?.action == getString(R.string.view_list_action)) {
+        if (intent?.action == Intent.ACTION_VIEW) {
             val shoppingListId = intent.getLongExtra(getString(R.string.key_shopping_list_id), -1)
             if (shoppingListId != -1L) {
                 findNavController().navigate(

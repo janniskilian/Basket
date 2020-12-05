@@ -2,8 +2,8 @@ package de.janniskilian.basket.feature.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.datastore.DataStore
-import androidx.datastore.preferences.Preferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.createDataStore
 import androidx.preference.PreferenceManager
 import dagger.Module

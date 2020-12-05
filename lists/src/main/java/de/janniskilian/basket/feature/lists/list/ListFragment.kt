@@ -19,6 +19,7 @@ import de.janniskilian.basket.core.util.extension.extern.keepScreenOn
 import de.janniskilian.basket.core.util.function.createUiListColor
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.databinding.ListFragmentBinding
+import de.janniskilian.basket.feature.lists.lists.ShortcutController
 import de.janniskilian.basket.feature.lists.sendShoppingList
 import javax.inject.Inject
 
@@ -30,8 +31,11 @@ class ListFragment : BaseFragment<ListFragmentBinding>() {
     private val viewModel: ListViewModel by viewModels()
 
     private val setup by lazy {
-        ListFragmentSetup(this, args, viewModel)
+        ListFragmentSetup(this, args, viewModel, shortcutController)
     }
+
+    @Inject
+    lateinit var shortcutController: ShortcutController
 
     @Inject
     lateinit var sharedPrefs: SharedPreferences

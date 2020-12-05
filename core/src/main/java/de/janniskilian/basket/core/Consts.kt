@@ -1,6 +1,6 @@
 package de.janniskilian.basket.core
 
-import androidx.datastore.preferences.preferencesKey
+import androidx.datastore.preferences.core.preferencesKey
 
 const val MIME_TYPE_TEXT_PLAIN = "text/plain"
 

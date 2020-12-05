@@ -1,6 +1,5 @@
 package de.janniskilian.basket.feature.lists.lists
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,6 @@ import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.databinding.ListsFragmentBinding
 import de.janniskilian.basket.feature.lists.sendShoppingList
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ListsFragment : BaseFragment<ListsFragmentBinding>() {
@@ -24,9 +22,6 @@ class ListsFragment : BaseFragment<ListsFragmentBinding>() {
     private val setup by lazy {
         ListsFragmentSetup(this, viewModel)
     }
-
-    @Inject
-    lateinit var shortcutController: ShortcutController
 
     val listsAdapter get() = binding.recyclerView.adapter as? ListsAdapter
 
@@ -77,10 +72,6 @@ class ListsFragment : BaseFragment<ListsFragmentBinding>() {
 
     fun navigateToList(shoppingListId: ShoppingListId) {
         findShoppingList(shoppingListId)?.let { shoppingList ->
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-                shortcutController.createShoppingListShortcut(shoppingList)
-            }
-
             navigate(
                 ListsFragmentDirections
                     .actionListsFragmentToListFragment(shoppingList.id.value)
