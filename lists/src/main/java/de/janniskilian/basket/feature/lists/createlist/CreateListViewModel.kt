@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
-import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
+import de.janniskilian.basket.core.util.android.viewmodel.DefaultMutableLiveData
+import de.janniskilian.basket.core.util.android.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

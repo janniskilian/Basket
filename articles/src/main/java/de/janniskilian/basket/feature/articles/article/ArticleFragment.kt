@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import de.janniskilian.basket.core.BaseFragment
-import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
+import de.janniskilian.basket.core.ui.fragments.BaseFragment
+import de.janniskilian.basket.core.util.android.maybe
 import de.janniskilian.basket.feature.articles.R
 import de.janniskilian.basket.feature.articles.databinding.ArticleFragmentBinding
 
@@ -25,7 +25,7 @@ class ArticleFragment : BaseFragment<ArticleFragmentBinding>() {
     override val useDefaultTransitions get() = false
 
     override val titleTextRes
-        get() = if (args.articleId.minusOneAsNull() == null) {
+        get() = if (args.articleId.maybe() == null) {
             R.string.create_article_title
         } else {
             R.string.edit_article_title

@@ -15,13 +15,13 @@ import androidx.datastore.preferences.core.edit
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.R
-import de.janniskilian.basket.core.BaseFragment
-import de.janniskilian.basket.core.KEY_DEFAULT_DATA_IMPORTED
+import de.janniskilian.basket.core.ui.fragments.BaseFragment
+import de.janniskilian.basket.core.util.KEY_DEFAULT_DATA_IMPORTED
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.data.DefaultDataImporter
 import de.janniskilian.basket.core.data.DefaultDataLoader
-import de.janniskilian.basket.core.util.extension.extern.getThemeColor
-import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
+import de.janniskilian.basket.core.util.android.getThemeColor
+import de.janniskilian.basket.core.util.android.viewmodel.DefaultMutableLiveData
 import de.janniskilian.basket.databinding.OnboardingFragmentBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -36,7 +36,7 @@ class OnboardingFragment : BaseFragment<OnboardingFragmentBinding>() {
     lateinit var sharedPrefs: SharedPreferences
 
     @Inject
-    lateinit var dataStore: DataStore<Preferences>
+    lateinit var preferencesDataStore: DataStore<Preferences>
 
     @Inject
     lateinit var dataClient: DataClient
@@ -104,7 +104,7 @@ class OnboardingFragment : BaseFragment<OnboardingFragmentBinding>() {
                 ).run()
 
                 launch(Dispatchers.Main) {
-                    dataStore.edit {
+                    preferencesDataStore.edit {
                         it[KEY_DEFAULT_DATA_IMPORTED] = true
                     }
 

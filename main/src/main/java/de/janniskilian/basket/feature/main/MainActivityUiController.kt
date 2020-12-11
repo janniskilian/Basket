@@ -7,8 +7,8 @@ import androidx.annotation.StringRes
 import androidx.core.view.updateLayoutParams
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import de.janniskilian.basket.R
-import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
-import de.janniskilian.basket.core.util.function.getLong
+import de.janniskilian.basket.core.util.android.getLong
+import de.janniskilian.basket.core.util.android.view.setSelectedImageState
 
 class MainActivityUiController(private val activity: MainActivity) {
 

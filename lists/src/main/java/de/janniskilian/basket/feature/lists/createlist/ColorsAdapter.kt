@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import de.janniskilian.basket.core.util.extension.extern.layoutInflater
-import de.janniskilian.basket.core.util.function.createTintColorFilter
-import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
+import de.janniskilian.basket.core.util.android.view.layoutInflater
+import de.janniskilian.basket.core.util.android.createTintColorFilter
+import de.janniskilian.basket.core.util.android.view.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.databinding.ColorItemBinding
 
 class ColorsAdapter : ListAdapter<ColorsAdapter.Item, ColorsAdapter.ViewHolder>(

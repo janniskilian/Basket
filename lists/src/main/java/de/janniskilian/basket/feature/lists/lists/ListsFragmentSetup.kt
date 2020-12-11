@@ -3,9 +3,8 @@ package de.janniskilian.basket.feature.lists.lists
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import de.janniskilian.basket.core.util.extension.extern.setupOverviewContainerTransformTransition
-import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
-import de.janniskilian.basket.core.util.recyclerview.ItemSpacingDecoration
+import de.janniskilian.basket.core.util.android.view.recyclerview.EndSpacingDecoration
+import de.janniskilian.basket.core.util.android.view.recyclerview.ItemSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
 
 class ListsFragmentSetup(

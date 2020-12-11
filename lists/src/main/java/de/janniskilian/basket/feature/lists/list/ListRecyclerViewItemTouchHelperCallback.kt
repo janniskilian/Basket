@@ -8,7 +8,7 @@ import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import de.janniskilian.basket.core.util.extension.extern.getThemeColor
+import de.janniskilian.basket.core.util.android.getThemeColor
 import de.janniskilian.basket.feature.lists.R
 import kotlin.math.min
 import kotlin.math.roundToInt

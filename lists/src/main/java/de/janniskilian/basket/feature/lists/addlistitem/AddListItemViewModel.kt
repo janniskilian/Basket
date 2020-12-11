@@ -10,7 +10,7 @@ import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.sortedByName
-import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
+import de.janniskilian.basket.core.util.android.viewmodel.DefaultMutableLiveData
 import kotlinx.coroutines.launch
 
 class AddListItemViewModel @ViewModelInject constructor(

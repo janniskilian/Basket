@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
+import de.janniskilian.basket.core.util.android.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 class ListItemOrderViewModel @ViewModelInject constructor(

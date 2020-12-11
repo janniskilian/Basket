@@ -60,7 +60,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_arrow_back_24"/>
 
-        <de.janniskilian.basket.core.view.EnhancedEditText
+        <de.janniskilian.basket.core.ui.view.EnhancedEditText
             android:id="@+id/searchBarEditText"
             android:layout_width="0dp"
             android:layout_height="match_parent"

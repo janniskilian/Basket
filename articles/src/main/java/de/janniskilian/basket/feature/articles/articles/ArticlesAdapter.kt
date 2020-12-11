@@ -4,9 +4,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.Article
-import de.janniskilian.basket.core.util.extension.extern.layoutInflater
-import de.janniskilian.basket.core.util.extension.extern.setContainerTransformTransitionName
-import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
+import de.janniskilian.basket.core.util.android.view.layoutInflater
+import de.janniskilian.basket.core.util.android.setContainerTransformTransitionName
+import de.janniskilian.basket.core.util.android.view.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.articles.R
 import de.janniskilian.basket.feature.articles.databinding.ArticleItemBinding
 

@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import de.janniskilian.basket.core.BaseFragment
+import de.janniskilian.basket.core.ui.fragments.BaseFragment
 import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
+import de.janniskilian.basket.core.util.android.maybe
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.databinding.CreateListFragmentBinding
 
@@ -24,7 +24,7 @@ class CreateListFragment : BaseFragment<CreateListFragmentBinding>() {
     }
 
     override val titleTextRes
-        get() = if (args.shoppingListId.minusOneAsNull() == null) {
+        get() = if (args.shoppingListId.maybe() == null) {
             R.string.create_list_title
         } else {
             R.string.edit_list_title
@@ -36,7 +36,7 @@ class CreateListFragment : BaseFragment<CreateListFragmentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         args.shoppingListId
-            .minusOneAsNull()
+            .maybe()
             ?.let {
                 viewModel.setShoppingListId(ShoppingListId(it))
             }

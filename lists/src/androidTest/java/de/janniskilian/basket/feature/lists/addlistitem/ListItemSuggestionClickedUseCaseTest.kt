@@ -75,8 +75,16 @@ class ListItemSuggestionClickedUseCaseTest {
     @Test
     @UiThreadTest
     fun removeListItem() = runBlocking {
-        val article1 = createListItemWithExistingArticle(ArticleId(1))
-        val article2 = createListItemWithExistingArticle(ArticleId(2))
+        val article1 = createListItemWithExistingArticle(
+            ArticleId(
+                1
+            )
+        )
+        val article2 = createListItemWithExistingArticle(
+            ArticleId(
+                2
+            )
+        )
         val article3 = createListItemWithNewArticle("New test article")
 
         assertEquals(3, getShoppingList().items.size)
@@ -127,7 +135,11 @@ class ListItemSuggestionClickedUseCaseTest {
     }
 
     private suspend fun createListItemWithNewArticle(articleName: String): Article {
-        val article = Article(ArticleId(0), articleName, null)
+        val article = Article(
+            ArticleId(0),
+            articleName,
+            null
+        )
         useCase.run(
             shoppingListId,
             ShoppingListItemSuggestion(

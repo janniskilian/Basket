@@ -1,7 +1,7 @@
 package de.janniskilian.basket.feature.categories.category
 
 import androidx.navigation.fragment.findNavController
-import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
+import de.janniskilian.basket.core.util.android.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.categories.R
 
 class CategoryViewModelObserver(

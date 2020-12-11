@@ -9,12 +9,11 @@ import androidx.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import de.janniskilian.basket.feature.lists.lists.ShortcutController
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
 class AndroidModule {
 
@@ -25,11 +24,13 @@ class AndroidModule {
 
     @Singleton
     @Provides
-    fun provideDefaultDataStore(@ApplicationContext context: Context): DataStore<Preferences> =
-        context.createDataStore(name = "default")
+    fun provideDefaultPreferencesDataStore(
+        @ApplicationContext context: Context
+    ): DataStore<Preferences> =
+        context.createDataStore(name = DEFAULT_PREFERENCES_DATA_STORE_NAME)
 
-    @Singleton
-    @Provides
-    fun provideShortcutController(@ApplicationContext context: Context): ShortcutController =
-        ShortcutController(context)
+    companion object {
+
+        private const val DEFAULT_PREFERENCES_DATA_STORE_NAME = "default"
+    }
 }

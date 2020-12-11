@@ -7,8 +7,8 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
 import de.janniskilian.basket.core.data.DataClient
-import de.janniskilian.basket.core.navigationcontainer.DefaultSearchBarViewModel
-import de.janniskilian.basket.core.navigationcontainer.SearchBarViewModel
+import de.janniskilian.basket.core.ui.navigation.DefaultSearchBarViewModel
+import de.janniskilian.basket.core.ui.navigation.SearchBarViewModel
 import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.util.sortedByName
 

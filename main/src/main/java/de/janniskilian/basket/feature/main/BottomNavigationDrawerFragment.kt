@@ -9,8 +9,8 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import de.janniskilian.basket.R
-import de.janniskilian.basket.core.BaseBottomSheetDialogFragment
-import de.janniskilian.basket.core.BaseFragment
+import de.janniskilian.basket.core.ui.fragments.BaseBottomSheetDialogFragment
+import de.janniskilian.basket.core.ui.fragments.BaseFragment
 import de.janniskilian.basket.databinding.BottomNavigationDrawerDialogBinding
 
 class BottomNavigationDrawerFragment :

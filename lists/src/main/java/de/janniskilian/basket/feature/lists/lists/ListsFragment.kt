@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import de.janniskilian.basket.core.BaseFragment
-import de.janniskilian.basket.core.ResultCode
+import de.janniskilian.basket.core.ui.fragments.BaseFragment
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListId
+import de.janniskilian.basket.core.ui.navigation.ResultCode
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.databinding.ListsFragmentBinding
 import de.janniskilian.basket.feature.lists.sendShoppingList

@@ -4,11 +4,11 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
-import de.janniskilian.basket.core.CategoriesAdapter
+import de.janniskilian.basket.core.feature.categories.CategoriesAdapter
 import de.janniskilian.basket.core.type.domain.Category
-import de.janniskilian.basket.core.util.extension.extern.hideKeyboard
-import de.janniskilian.basket.core.util.function.getLong
-import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
+import de.janniskilian.basket.core.util.android.getLong
+import de.janniskilian.basket.core.util.android.hideKeyboard
+import de.janniskilian.basket.core.util.android.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.articles.R
 import de.janniskilian.basket.feature.articles.article.ArticleFragmentMode.EDIT
 

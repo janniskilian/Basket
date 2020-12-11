@@ -10,9 +10,10 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.R
-import de.janniskilian.basket.core.BaseFragment
-import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
-import de.janniskilian.basket.core.navigationcontainer.NavigationContainerProvider
+import de.janniskilian.basket.core.ui.fragments.BaseFragment
+import de.janniskilian.basket.core.ui.navigation.NavigationContainer
+import de.janniskilian.basket.core.ui.navigation.NavigationContainerProvider
+import de.janniskilian.basket.core.util.android.getLongExtraOrNull
 import de.janniskilian.basket.databinding.MainActivityBinding
 import de.janniskilian.basket.feature.lists.list.ListFragmentArgs
 import javax.inject.Inject
@@ -21,7 +22,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), NavigationContainerProvider {
 
     @Inject
-    lateinit var dataStore: DataStore<Preferences>
+    lateinit var preferencesDataStore: DataStore<Preferences>
 
     lateinit var binding: MainActivityBinding
         private set
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
     private val uiController = MainActivityUiController(this)
 
     private val setup by lazy {
-        MainActivitySetup(this, uiController, dataStore)
+        MainActivitySetup(this, uiController, preferencesDataStore)
     }
 
     val navHostFragment
@@ -54,13 +55,14 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
         super.onStart()
 
         if (intent?.action == Intent.ACTION_VIEW) {
-            val shoppingListId = intent.getLongExtra(getString(R.string.key_shopping_list_id), -1)
-            if (shoppingListId != -1L) {
-                findNavController().navigate(
-                    R.id.listFragment,
-                    ListFragmentArgs(shoppingListId).toBundle()
-                )
-            }
+            intent
+                .getLongExtraOrNull(getString(R.string.key_shopping_list_id))
+                ?.let {
+                    findNavController().navigate(
+                        R.id.listFragment,
+                        ListFragmentArgs(it).toBundle()
+                    )
+                }
 
             intent?.action = null
         }

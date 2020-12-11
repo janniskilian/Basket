@@ -4,13 +4,13 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import de.janniskilian.basket.core.CategoriesAdapter
+import de.janniskilian.basket.core.feature.categories.CategoriesAdapter
 import de.janniskilian.basket.core.type.domain.ArticleId
-import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
-import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
-import de.janniskilian.basket.core.util.extension.extern.onDone
-import de.janniskilian.basket.core.util.extension.extern.setupDetailContainerTransformTransition
-import de.janniskilian.basket.core.util.extension.extern.toggleSoftKeyboard
+import de.janniskilian.basket.core.util.android.maybe
+import de.janniskilian.basket.core.util.android.view.doOnTextChanged
+import de.janniskilian.basket.core.util.android.view.onDone
+import de.janniskilian.basket.core.util.android.setupDetailContainerTransformTransition
+import de.janniskilian.basket.core.util.android.view.toggleSoftKeyboard
 import de.janniskilian.basket.feature.articles.R
 
 class ArticleFragmentSetup(
@@ -20,7 +20,7 @@ class ArticleFragmentSetup(
 ) {
 
     private val articleId = args.articleId
-        .minusOneAsNull()
+        .maybe()
         ?.let(::ArticleId)
 
     private val viewModelObserver = ArticleViewModelObserver(fragment, viewModel)

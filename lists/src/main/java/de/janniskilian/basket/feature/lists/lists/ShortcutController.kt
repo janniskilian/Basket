@@ -7,9 +7,8 @@ import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import de.janniskilian.basket.core.type.domain.ShoppingList
-import de.janniskilian.basket.core.util.function.getInt
+import de.janniskilian.basket.core.util.android.getInt
 import de.janniskilian.basket.feature.lists.R
-import timber.log.Timber
 import kotlin.math.min
 
 class ShortcutController(private val context: Context) {

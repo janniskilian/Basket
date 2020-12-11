@@ -1,7 +1,7 @@
 package de.janniskilian.basket.feature.lists.addlistitem
 
-import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
-import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
+import de.janniskilian.basket.core.util.android.view.setSelectedImageState
+import de.janniskilian.basket.core.util.android.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.lists.R
 
 class AddListItemViewModelObserver(

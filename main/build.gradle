@@ -13,7 +13,6 @@ dependencies {
     implementation deps.androidx.livedata
     implementation deps.androidx.viewmodel
     implementation deps.androidx.constraintlayout
-    implementation deps.androidx.recyclerview
     implementation deps.androidx.preference
     implementation deps.androidx.roomRuntime
     implementation deps.androidx.roomKtx

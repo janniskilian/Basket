@@ -1,22 +1,24 @@
 package de.janniskilian.basket.feature.main
 
+import android.content.Context
+import android.content.Intent
+import android.speech.RecognizerIntent
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import de.janniskilian.basket.R
-import de.janniskilian.basket.core.REQ_SPEECH_INPUT
-import de.janniskilian.basket.core.navigationcontainer.NavigationContainer
-import de.janniskilian.basket.core.navigationcontainer.SearchBarViewModel
-import de.janniskilian.basket.core.util.WeakRef
-import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
-import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
-import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
-import de.janniskilian.basket.core.util.extension.extern.toggleSoftKeyboard
-import de.janniskilian.basket.core.util.function.createSpeechInputIntent
-import de.janniskilian.basket.core.util.function.getLong
-import de.janniskilian.basket.core.util.weakRef
+import de.janniskilian.basket.core.ui.navigation.NavigationContainer
+import de.janniskilian.basket.core.ui.navigation.SearchBarViewModel
+import de.janniskilian.basket.core.util.android.view.doOnTextChanged
+import de.janniskilian.basket.core.util.android.hasHardwareKeyboard
+import de.janniskilian.basket.core.util.android.view.setSelectedImageState
+import de.janniskilian.basket.core.util.android.view.toggleSoftKeyboard
+import de.janniskilian.basket.core.util.android.createSpeechInputIntent
+import de.janniskilian.basket.core.util.android.getLong
+import java.lang.ref.WeakReference
 
 class NavigationContainerImpl(private val activity: MainActivity) : NavigationContainer {
 
@@ -25,10 +27,10 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
 
     override fun attachSearchBar(viewModel: SearchBarViewModel) {
         val fragment = activity.currentFragment ?: return
-        val viewModelWeakRef = viewModel.weakRef()
+        val viewModelWeakRef = WeakReference(viewModel)
 
         observeSearchBarViewModel(viewModel, fragment)
-        setupSearchBarListeners(fragment.weakRef(), viewModelWeakRef)
+        setupSearchBarListeners(WeakReference(fragment), viewModelWeakRef)
     }
 
     private fun observeSearchBarViewModel(
@@ -40,31 +42,57 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
     }
 
     private fun setupSearchBarListeners(
-        fragmentWeakRef: WeakRef<Fragment>,
-        viewModelWeakRef: WeakRef<SearchBarViewModel>
+        fragmentWeakRef: WeakReference<Fragment>,
+        viewModelWeakRef: WeakReference<SearchBarViewModel>
     ) = with(activity.binding) {
         searchBarBackButton.setOnClickListener {
-            viewModelWeakRef()?.setSearchBarVisible(false)
+            viewModelWeakRef
+                .get()
+                ?.setSearchBarVisible(false)
         }
 
         searchBarSpeechInputButton.setOnClickListener {
-            if (viewModelWeakRef()?.searchBarInput?.value.isNullOrEmpty()) {
-                fragmentWeakRef()?.startActivityForResult(
-                    createSpeechInputIntent(),
-                    REQ_SPEECH_INPUT
-                )
+            if (viewModelWeakRef.get()?.searchBarInput?.value.isNullOrEmpty()) {
+                fragmentWeakRef
+                    .get()
+                    ?.registerForActivityResult(
+                        object : ActivityResultContract<Unit, String?>() {
+                            override fun createIntent(context: Context, input: Unit?): Intent =
+                                createSpeechInputIntent()
+
+                            override fun parseResult(
+                                resultCode: Int,
+                                intent: Intent?
+                            ): String? =
+                                intent
+                                    ?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                                    ?.firstOrNull()
+                        }
+                    ) {
+                        if (it != null) {
+                            viewModelWeakRef
+                                .get()
+                                ?.setSearchBarInput(it)
+                        }
+                    }
             } else {
-                viewModelWeakRef()?.setSearchBarInput("")
+                viewModelWeakRef
+                    .get()
+                    ?.setSearchBarInput("")
             }
         }
 
         searchBarEditText.doOnTextChanged {
-            viewModelWeakRef()?.setSearchBarInput(it)
+            viewModelWeakRef
+                .get()
+                ?.setSearchBarInput(it)
         }
 
         if (!activity.hasHardwareKeyboard) {
             searchBarEditText.backPressedListener = {
-                viewModelWeakRef()?.setSearchBarVisible(false)
+                viewModelWeakRef
+                    .get()
+                    ?.setSearchBarVisible(false)
             }
         }
     }

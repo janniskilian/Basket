@@ -3,7 +3,7 @@ package de.janniskilian.basket.feature.groups
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import dagger.hilt.android.AndroidEntryPoint
-import de.janniskilian.basket.core.BaseFragment
+import de.janniskilian.basket.core.ui.fragments.BaseFragment
 import de.janniskilian.feature.groups.R
 import de.janniskilian.feature.groups.databinding.GroupsFragmentBinding
 

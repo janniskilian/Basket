@@ -6,7 +6,8 @@ dependencies {
     implementation deps.androidx.livedata
     implementation deps.androidx.viewmodel
     implementation deps.androidx.constraintlayout
-    implementation deps.androidx.recyclerview
 
     implementation deps.material
+
+    implementation project(path: ":core-feature")
 }

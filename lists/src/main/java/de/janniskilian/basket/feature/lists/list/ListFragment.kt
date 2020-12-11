@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.map
 import dagger.hilt.android.AndroidEntryPoint
-import de.janniskilian.basket.core.ActionMenuBottomSheetDialog
-import de.janniskilian.basket.core.BaseFragment
-import de.janniskilian.basket.core.NavGraphDirections
-import de.janniskilian.basket.core.ResultCode
+import de.janniskilian.basket.core.ui.fragments.ActionMenuBottomSheetDialog
+import de.janniskilian.basket.core.ui.fragments.BaseFragment
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
-import de.janniskilian.basket.core.util.extension.extern.createContainerTransformNavigatorExtras
-import de.janniskilian.basket.core.util.extension.extern.keepScreenOn
+import de.janniskilian.basket.core.ui.NavGraphDirections
+import de.janniskilian.basket.core.ui.navigation.ResultCode
+import de.janniskilian.basket.core.util.android.createContainerTransformNavigatorExtras
+import de.janniskilian.basket.core.util.android.keepScreenOn
 import de.janniskilian.basket.core.util.function.createUiListColor
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.databinding.ListFragmentBinding
@@ -34,8 +34,9 @@ class ListFragment : BaseFragment<ListFragmentBinding>() {
         ListFragmentSetup(this, args, viewModel, shortcutController)
     }
 
-    @Inject
-    lateinit var shortcutController: ShortcutController
+    private val shortcutController by lazy {
+        ShortcutController(requireContext())
+    }
 
     @Inject
     lateinit var sharedPrefs: SharedPreferences

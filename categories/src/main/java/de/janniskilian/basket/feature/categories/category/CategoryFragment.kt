@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import de.janniskilian.basket.core.BaseFragment
-import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
+import de.janniskilian.basket.core.ui.fragments.BaseFragment
+import de.janniskilian.basket.core.util.android.maybe
 import de.janniskilian.basket.feature.categories.R
 import de.janniskilian.basket.feature.categories.databinding.CategoryFragmentBinding
 
@@ -25,7 +25,7 @@ class CategoryFragment : BaseFragment<CategoryFragmentBinding>() {
     override val useDefaultTransitions get() = false
 
     override val titleTextRes
-        get() = if (args.categoryId.minusOneAsNull() == null) {
+        get() = if (args.categoryId.maybe() == null) {
             R.string.create_category_title
         } else {
             R.string.edit_category_title

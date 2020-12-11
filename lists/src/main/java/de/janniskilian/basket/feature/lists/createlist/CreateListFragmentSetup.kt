@@ -4,12 +4,12 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
-import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
-import de.janniskilian.basket.core.util.extension.extern.onDone
-import de.janniskilian.basket.core.util.extension.extern.toggleSoftKeyboard
-import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
-import de.janniskilian.basket.core.util.recyclerview.ItemSpacingDecoration
+import de.janniskilian.basket.core.util.android.maybe
+import de.janniskilian.basket.core.util.android.view.doOnTextChanged
+import de.janniskilian.basket.core.util.android.view.onDone
+import de.janniskilian.basket.core.util.android.view.toggleSoftKeyboard
+import de.janniskilian.basket.core.util.android.view.recyclerview.EndSpacingDecoration
+import de.janniskilian.basket.core.util.android.view.recyclerview.ItemSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
 
 class CreateListFragmentSetup(
@@ -19,7 +19,7 @@ class CreateListFragmentSetup(
 ) {
 
     private val shoppingListId = args.shoppingListId
-        .minusOneAsNull()
+        .maybe()
         ?.let(::ShoppingListId)
 
     private val viewModelObserver = CreateListViewModelObserver(fragment, viewModel)

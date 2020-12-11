@@ -4,9 +4,9 @@ import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListItem
-import de.janniskilian.basket.core.util.extension.extern.setScrollable
+import de.janniskilian.basket.core.util.android.view.setScrollable
 import de.janniskilian.basket.core.util.function.addToFront
-import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
+import de.janniskilian.basket.core.util.android.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.lists.R
 
 class ListViewModelObserver(

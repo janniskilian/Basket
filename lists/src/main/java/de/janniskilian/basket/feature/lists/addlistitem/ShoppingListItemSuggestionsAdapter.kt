@@ -5,9 +5,9 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import de.janniskilian.basket.core.util.extension.extern.layoutInflater
-import de.janniskilian.basket.core.util.extension.extern.setSelectedImageState
-import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
+import de.janniskilian.basket.core.util.android.view.layoutInflater
+import de.janniskilian.basket.core.util.android.view.setSelectedImageState
+import de.janniskilian.basket.core.util.android.view.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.databinding.ShoppingListItemSuggestionItemBinding
 

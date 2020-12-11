@@ -2,10 +2,10 @@ package de.janniskilian.basket.feature.categories.category
 
 import androidx.core.view.isVisible
 import de.janniskilian.basket.core.type.domain.CategoryId
-import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
-import de.janniskilian.basket.core.util.extension.extern.minusOneAsNull
-import de.janniskilian.basket.core.util.extension.extern.onDone
-import de.janniskilian.basket.core.util.extension.extern.setupDetailContainerTransformTransition
+import de.janniskilian.basket.core.util.android.maybe
+import de.janniskilian.basket.core.util.android.setupDetailContainerTransformTransition
+import de.janniskilian.basket.core.util.android.view.doOnTextChanged
+import de.janniskilian.basket.core.util.android.view.onDone
 import de.janniskilian.basket.feature.categories.R
 
 class CategoryFragmentSetup(
@@ -15,7 +15,7 @@ class CategoryFragmentSetup(
 ) {
 
     private val categoryId = args.categoryId
-        .minusOneAsNull()
+        .maybe()
         ?.let(::CategoryId)
 
     private val viewModelObserver = CategoryViewModelObserver(fragment, viewModel)

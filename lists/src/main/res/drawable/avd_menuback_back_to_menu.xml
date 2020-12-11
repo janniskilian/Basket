@@ -6,7 +6,7 @@
     <target android:name="backPath">
         <aapt:attr name="android:animation">
             <objectAnimator
-                android:duration="@integer/animation_duration_s"
+                android:duration="@integer/transition_duration"
                 android:interpolator="@android:interpolator/fast_out_slow_in"
                 android:propertyName="pathData"
                 android:valueFrom="@string/avd_path_back"
@@ -18,7 +18,7 @@
     <target android:name="menuBackGroup">
         <aapt:attr name="android:animation">
             <objectAnimator
-                android:duration="@integer/animation_duration_s"
+                android:duration="@integer/transition_duration"
                 android:interpolator="@android:interpolator/fast_out_slow_in"
                 android:propertyName="rotation"
                 android:valueFrom="0"

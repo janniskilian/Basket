@@ -1,0 +1,22 @@
+dependencies {
+    implementation deps.androidx.core
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.activity
+    implementation deps.androidx.fragment
+    implementation deps.androidx.livedata
+    implementation deps.androidx.viewmodel
+    implementation deps.androidx.constraintlayout
+    implementation deps.androidx.roomRuntime
+    implementation deps.androidx.roomKtx
+    implementation deps.androidx.preference
+    kapt deps.androidx.roomCompiler
+
+    implementation deps.material
+
+    debugImplementation deps.leakCanary
+
+    implementation project(path: ":core-data")
+    implementation project(path: ":core-type")
+    implementation project(path: ":core-ui")
+    implementation project(path: ":core-util")
+}

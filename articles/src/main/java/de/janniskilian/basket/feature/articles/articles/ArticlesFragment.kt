@@ -9,12 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import de.janniskilian.basket.core.BaseFragment
-import de.janniskilian.basket.core.REQ_SPEECH_INPUT
+import de.janniskilian.basket.core.ui.fragments.BaseFragment
 import de.janniskilian.basket.core.type.domain.Article
-import de.janniskilian.basket.core.util.extension.extern.createContainerTransformNavigatorExtras
-import de.janniskilian.basket.core.util.extension.extern.hasHardwareKeyboard
-import de.janniskilian.basket.core.util.function.getSpeechInputResult
+import de.janniskilian.basket.core.util.android.LONG_NOTHING
+import de.janniskilian.basket.core.util.android.REQ_SPEECH_INPUT
+import de.janniskilian.basket.core.util.android.createContainerTransformNavigatorExtras
+import de.janniskilian.basket.core.util.android.hasHardwareKeyboard
+import de.janniskilian.basket.core.util.android.getSpeechInputResult
 import de.janniskilian.basket.feature.articles.R
 import de.janniskilian.basket.feature.articles.databinding.ArticlesFragmentBinding
 
@@ -71,7 +72,7 @@ class ArticlesFragment : BaseFragment<ArticlesFragmentBinding>() {
         }
 
     override fun onFabClicked() {
-        navigate(ArticlesFragmentDirections.actionArticlesFragmentToArticleFragment(-1L))
+        navigate(ArticlesFragmentDirections.actionArticlesFragmentToArticleFragment(LONG_NOTHING))
     }
 
     fun navigateToArticle(position: Int, article: Article) {

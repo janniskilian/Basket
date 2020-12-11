@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.Article
-import de.janniskilian.basket.core.util.extension.extern.setupOverviewContainerTransformTransition
-import de.janniskilian.basket.core.util.recyclerview.EndSpacingDecoration
+import de.janniskilian.basket.core.util.android.setupOverviewContainerTransformTransition
+import de.janniskilian.basket.core.util.android.view.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.feature.articles.R
 
 class ArticlesFragmentSetup(

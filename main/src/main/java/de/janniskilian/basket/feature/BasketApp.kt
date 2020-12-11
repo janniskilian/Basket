@@ -3,9 +3,9 @@ package de.janniskilian.basket.feature
 import android.app.Application
 import android.content.SharedPreferences
 import dagger.hilt.android.HiltAndroidApp
-import de.janniskilian.basket.core.BuildConfig
-import de.janniskilian.basket.core.R
-import de.janniskilian.basket.core.util.function.setDayNightMode
+import de.janniskilian.basket.BuildConfig
+import de.janniskilian.basket.R
+import de.janniskilian.basket.core.util.android.setDayNightMode
 import timber.log.Timber
 import javax.inject.Inject
 

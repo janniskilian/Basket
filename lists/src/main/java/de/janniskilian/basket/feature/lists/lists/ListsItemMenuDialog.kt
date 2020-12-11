@@ -2,11 +2,11 @@ package de.janniskilian.basket.feature.lists.lists
 
 import android.os.Parcelable
 import androidx.navigation.fragment.navArgs
-import de.janniskilian.basket.core.MenuBottomSheetDialog
-import de.janniskilian.basket.core.ResultCode
-import de.janniskilian.basket.core.setResult
+import de.janniskilian.basket.core.ui.fragments.MenuBottomSheetDialog
+import de.janniskilian.basket.core.ui.navigation.ResultCode
+import de.janniskilian.basket.core.ui.navigation.setResult
 import de.janniskilian.basket.feature.lists.R
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 class ListsItemMenuDialog : MenuBottomSheetDialog() {
 

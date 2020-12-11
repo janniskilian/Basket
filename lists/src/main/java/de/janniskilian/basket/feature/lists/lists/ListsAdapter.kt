@@ -5,9 +5,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.core.util.extension.extern.layoutInflater
-import de.janniskilian.basket.core.util.extension.extern.setContainerTransformTransitionName
-import de.janniskilian.basket.core.util.recyclerview.GenericDiffItemCallback
+import de.janniskilian.basket.core.util.android.view.layoutInflater
+import de.janniskilian.basket.core.util.android.setContainerTransformTransitionName
+import de.janniskilian.basket.core.util.android.view.recyclerview.GenericDiffItemCallback
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.databinding.ShoppingListItemBinding
 

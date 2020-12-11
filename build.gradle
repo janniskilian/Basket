@@ -1,6 +1,12 @@
 buildscript {
     apply from: "util.gradle"
     apply from: "dependencies.gradle"
+    ext {
+        versions.kotlin = '1.4.20'
+        versions.kotlin = '1.4.20'
+        versions.kotlin = '1.4.20'
+        versions.kotlin = '1.4.20'
+    }
 
     addRepos(repositories)
     dependencies {
@@ -54,10 +60,10 @@ subprojects {
                 keyPassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
                 storeFile file(System.getenv("HOME") + "/keystores/basket_keystore.jks")
                 storePassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
-                enableV1Signing true
-                enableV2Signing true
-                enableV3Signing true
-                enableV4Signing true
+//                enableV1Signing true
+  //              enableV2Signing true
+                //enableV3Signing true
+                //enableV4Signing true
             }
         }
 
@@ -133,8 +139,11 @@ subprojects {
         kaptAndroidTest deps.androidTesting.hiltCompiler
         androidTestImplementation deps.androidTesting.barista
 
-        if (name != "core") {
-            implementation project(path: ":core")
+        if (!name.startsWith("core")) {
+            implementation project(path: ":core-data")
+            implementation project(path: ":core-type")
+            implementation project(path: ":core-ui")
+            implementation project(path: ":core-util")
         }
     }
 

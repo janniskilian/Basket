@@ -9,11 +9,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
-import de.janniskilian.basket.core.BaseFragment
-import de.janniskilian.basket.core.REQ_SPEECH_INPUT
-import de.janniskilian.basket.core.util.extension.extern.getThemeColor
-import de.janniskilian.basket.core.util.function.getSpeechInputResult
-import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
+import de.janniskilian.basket.core.ui.fragments.BaseFragment
+import de.janniskilian.basket.core.util.android.REQ_SPEECH_INPUT
+import de.janniskilian.basket.core.util.android.getSpeechInputResult
+import de.janniskilian.basket.core.util.android.getThemeColor
+import de.janniskilian.basket.core.util.android.viewmodel.DefaultMutableLiveData
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.databinding.AddListItemFragmentBinding
 

@@ -19,12 +19,29 @@ import kotlin.test.assertEquals
 
 class GetSuggestionsUseCaseTest {
 
-    private val bananas = Article(ArticleId(1), "Bananas", Category(CategoryId(1), "Produce"))
-    private val apples = Article(ArticleId(2), "Apples", Category(CategoryId(1), "Produce"))
+    private val bananas = Article(
+        ArticleId(1),
+        "Bananas",
+        Category(
+            CategoryId(1),
+            "Produce"
+        )
+    )
+    private val apples = Article(
+        ArticleId(2),
+        "Apples",
+        Category(
+            CategoryId(1),
+            "Produce"
+        )
+    )
     private val clementines = Article(
         ArticleId(3),
         "Clementines",
-        Category(CategoryId(1), "Produce")
+        Category(
+            CategoryId(1),
+            "Produce"
+        )
     )
 
     private val articleDataClientResult = flowOf(
@@ -77,7 +94,11 @@ class GetSuggestionsUseCaseTest {
     fun createArticleSuggestion() = runBlocking {
         assertEquals(
             ShoppingListItemSuggestion(
-                Article(ArticleId(0), "apple", null),
+                Article(
+                    ArticleId(
+                        0
+                    ), "apple", null
+                ),
                 isExistingListItem = false,
                 isExistingArticle = false
             ),
@@ -108,7 +129,11 @@ class GetSuggestionsUseCaseTest {
         assertEquals(
             listOf(
                 ShoppingListItemSuggestion(
-                    Article(ArticleId(0), "a", null),
+                    Article(
+                        ArticleId(
+                            0
+                        ), "a", null
+                    ),
                     isExistingListItem = false,
                     isExistingArticle = false,
                     quantity = formatedQuantity

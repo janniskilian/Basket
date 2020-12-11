@@ -3,8 +3,8 @@ package de.janniskilian.basket.feature.lists.createlist
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.core.util.extension.extern.centerItem
-import de.janniskilian.basket.core.util.viewmodel.ViewModelObserver
+import de.janniskilian.basket.core.util.android.view.recyclerview.centerItem
+import de.janniskilian.basket.core.util.android.viewmodel.ViewModelObserver
 import de.janniskilian.basket.feature.lists.R
 
 class CreateListViewModelObserver(

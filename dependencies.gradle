@@ -1,5 +1,5 @@
 def versions = [
-        kotlin      : "1.4.20",
+        kotlin      : "1.4.21",
         coroutines  : "1.4.2",
         lifecycle   : "2.3.0-beta01",
         nav         : "2.3.2",
@@ -27,8 +27,7 @@ def androidx = [
         roomKtx         : "androidx.room:room-ktx:$versions.room",
         roomCompiler    : "androidx.room:room-compiler:$versions.room",
         constraintlayout: "androidx.constraintlayout:constraintlayout:2.0.4",
-        recyclerview    : "androidx.recyclerview:recyclerview:1.2.0-beta01",
-        datastorePref  : "androidx.datastore:datastore-preferences:1.0.0-alpha05",
+        datastorePref   : "androidx.datastore:datastore-preferences:1.0.0-alpha05",
         preference      : "androidx.preference:preference-ktx:1.1.1"
 ]
 
@@ -68,7 +67,7 @@ def androidTesting = [
 
 def plugins = [
         kotlin     : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
-        android    : "com.android.tools.build:gradle:4.2.0-beta01",
+        android    : "com.android.tools.build:gradle:4.1.1",
         navSafeArgs: "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.nav",
         hilt       : "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt",
 ]

@@ -10,8 +10,8 @@ import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.ArticleId
 import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.util.function.addToFront
-import de.janniskilian.basket.core.util.viewmodel.DefaultMutableLiveData
-import de.janniskilian.basket.core.util.viewmodel.SingleLiveEvent
+import de.janniskilian.basket.core.util.android.viewmodel.DefaultMutableLiveData
+import de.janniskilian.basket.core.util.android.viewmodel.SingleLiveEvent
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 

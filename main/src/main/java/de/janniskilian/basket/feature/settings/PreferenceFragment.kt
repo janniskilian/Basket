@@ -10,8 +10,8 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.R
-import de.janniskilian.basket.core.util.function.getBoolean
-import de.janniskilian.basket.core.util.function.setDayNightMode
+import de.janniskilian.basket.core.util.android.getBoolean
+import de.janniskilian.basket.core.util.android.setDayNightMode
 import javax.inject.Inject
 
 @AndroidEntryPoint

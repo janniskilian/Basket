@@ -17,10 +17,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import de.janniskilian.basket.R
-import de.janniskilian.basket.core.BaseFragment
-import de.janniskilian.basket.core.KEY_DEFAULT_DATA_IMPORTED
-import de.janniskilian.basket.core.util.extension.extern.getThemeDimen
-import de.janniskilian.basket.core.util.function.getLong
+import de.janniskilian.basket.core.ui.fragments.BaseFragment
+import de.janniskilian.basket.core.util.KEY_DEFAULT_DATA_IMPORTED
+import de.janniskilian.basket.core.util.android.getLong
+import de.janniskilian.basket.core.util.android.getThemeDimen
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 class MainActivitySetup(
     private val activity: MainActivity,
     private val uiController: MainActivityUiController,
-    private val dataStore: DataStore<Preferences>
+    private val preferencesDataStore: DataStore<Preferences>
 ) {
 
     fun run(savedInstanceState: Bundle?) = with(activity) {
@@ -79,7 +79,7 @@ class MainActivitySetup(
     }
 
     private fun setupOnboarding(savedInstanceState: Bundle?) = activity.lifecycleScope.launch {
-        dataStore
+        preferencesDataStore
             .data
             .map { it[KEY_DEFAULT_DATA_IMPORTED] }
             .collect {

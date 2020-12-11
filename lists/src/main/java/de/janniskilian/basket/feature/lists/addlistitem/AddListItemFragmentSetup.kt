@@ -5,12 +5,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
-import de.janniskilian.basket.core.REQ_SPEECH_INPUT
 import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.core.util.extension.extern.doOnTextChanged
-import de.janniskilian.basket.core.util.extension.extern.onDone
-import de.janniskilian.basket.core.util.extension.extern.toggleSoftKeyboard
-import de.janniskilian.basket.core.util.function.createSpeechInputIntent
+import de.janniskilian.basket.core.util.android.REQ_SPEECH_INPUT
+import de.janniskilian.basket.core.util.android.view.doOnTextChanged
+import de.janniskilian.basket.core.util.android.view.onDone
+import de.janniskilian.basket.core.util.android.view.toggleSoftKeyboard
+import de.janniskilian.basket.core.util.android.createSpeechInputIntent
 
 class AddListItemFragmentSetup(
     private val fragment: AddListItemFragment,

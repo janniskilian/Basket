@@ -3,7 +3,7 @@ package de.janniskilian.basket.feature.helpandfeedback
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import de.janniskilian.basket.R
-import de.janniskilian.basket.core.BaseFragment
+import de.janniskilian.basket.core.ui.fragments.BaseFragment
 import de.janniskilian.basket.databinding.HelpAndFeedbackFragmentBinding
 
 class HelpAndFeedbackFragment : BaseFragment<HelpAndFeedbackFragmentBinding>() {
