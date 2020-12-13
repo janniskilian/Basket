@@ -26,7 +26,7 @@ abstract class MenuBottomSheetDialog :
 
             setNavigationItemSelectedListener {
                 onMenuItemSelected(it.itemId)
-                findNavController().popBackStack()
+                dismiss()
 
                 true
             }

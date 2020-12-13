@@ -6,14 +6,8 @@ dependencies {
     implementation deps.androidx.livedata
     implementation deps.androidx.viewmodel
     implementation deps.androidx.constraintlayout
-    implementation deps.androidx.roomRuntime
-    implementation deps.androidx.roomKtx
-    implementation deps.androidx.preference
-    kapt deps.androidx.roomCompiler
 
     implementation deps.material
-
-    debugImplementation deps.leakCanary
 
     implementation project(path: ":core-data")
     implementation project(path: ":core-type")

@@ -1,12 +1,6 @@
 buildscript {
     apply from: "util.gradle"
     apply from: "dependencies.gradle"
-    ext {
-        versions.kotlin = '1.4.20'
-        versions.kotlin = '1.4.20'
-        versions.kotlin = '1.4.20'
-        versions.kotlin = '1.4.20'
-    }
 
     addRepos(repositories)
     dependencies {
@@ -141,6 +135,7 @@ subprojects {
 
         if (!name.startsWith("core")) {
             implementation project(path: ":core-data")
+            implementation project(path: ":core-feature")
             implementation project(path: ":core-type")
             implementation project(path: ":core-ui")
             implementation project(path: ":core-util")
