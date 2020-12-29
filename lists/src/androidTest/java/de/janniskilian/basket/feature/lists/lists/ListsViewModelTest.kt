@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.test.createTestDataClient
 import de.janniskilian.basket.core.type.domain.ShoppingListId
+import de.janniskilian.basket.core.util.android.getOrAwaitValue
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -51,7 +52,7 @@ class ListsViewModelTest {
 
     @Test
     @UiThreadTest
-    fun deleteAndRestoreList() = runBlocking {
+    fun deleteAndRestoreList(): Unit = runBlocking {
         val id1 = dataClient.shoppingList.create("Test", Color.RED, true)
         viewModel.shoppingLists
             .getOrAwaitValue()

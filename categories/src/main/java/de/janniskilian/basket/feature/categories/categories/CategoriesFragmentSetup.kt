@@ -9,6 +9,7 @@ import de.janniskilian.basket.core.type.domain.Category
 import de.janniskilian.basket.core.util.android.setupOverviewContainerTransformTransition
 import de.janniskilian.basket.core.util.android.view.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.feature.categories.R
+import de.janniskilian.basket.feature.categories.databinding.CategoriesFragmentBinding
 
 class CategoriesFragmentSetup(
     private val fragment: CategoriesFragment,
@@ -21,7 +22,7 @@ class CategoriesFragmentSetup(
     fun run() {
         fragment.setupOverviewContainerTransformTransition(fragment.binding.recyclerView)
 
-        setupRecyclerView()
+        fragment.binding.setupRecyclerView()
 
         categoriesAdapter?.clickListener = ::categoryClicked
 
@@ -30,19 +31,21 @@ class CategoriesFragmentSetup(
         fragment.navigationContainer.attachSearchBar(viewModel)
     }
 
-    private fun setupRecyclerView() = with(fragment.binding.recyclerView) {
-        setHasFixedSize(true)
-        layoutManager = LinearLayoutManager(context)
-        adapter = CategoriesAdapter()
-        (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
-        addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-        addItemDecoration(
-            EndSpacingDecoration(
-                0,
-                resources.getDimensionPixelSize(R.dimen.fab_spacing),
-                RecyclerView.VERTICAL
+    private fun CategoriesFragmentBinding.setupRecyclerView() {
+        with(recyclerView) {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            adapter = CategoriesAdapter()
+            (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+            addItemDecoration(
+                EndSpacingDecoration(
+                    0,
+                    resources.getDimensionPixelSize(R.dimen.fab_spacing),
+                    RecyclerView.VERTICAL
+                )
             )
-        )
+        }
     }
 
     private fun renderRecyclerView(categories: List<Category>) {

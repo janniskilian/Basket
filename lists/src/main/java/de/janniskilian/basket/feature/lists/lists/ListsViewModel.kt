@@ -8,13 +8,15 @@ import androidx.lifecycle.viewModelScope
 import de.janniskilian.basket.core.data.DataClient
 import de.janniskilian.basket.core.type.domain.ShoppingList
 import de.janniskilian.basket.core.type.domain.ShoppingListId
-import de.janniskilian.basket.core.util.sortedByName
 import de.janniskilian.basket.core.util.android.viewmodel.SingleLiveEvent
+import de.janniskilian.basket.core.util.sortedByName
+import de.janniskilian.basket.feature.lists.ShortcutController
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class ListsViewModel @ViewModelInject constructor(
-    private val dataClient: DataClient
+    private val dataClient: DataClient,
+    private val shortcutController: ShortcutController
 ) : ViewModel() {
 
     private var _shoppingListDeleted = SingleLiveEvent<ShoppingList>()
@@ -34,6 +36,8 @@ class ListsViewModel @ViewModelInject constructor(
             ?.find { it.id == shoppingListId }
             ?.let {
                 viewModelScope.launch { dataClient.shoppingList.delete(it.id) }
+                shortcutController.removeShoppingListShortcut(it)
+
                 _shoppingListDeleted.setValue(it)
             }
     }

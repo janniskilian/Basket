@@ -5,8 +5,10 @@
     <string name="edit_item_button_desc">Edit item</string>
     <string name="shopping_list_name_error">The list needs a name</string>
     <string name="checked_items_group">Checked items</string>
-    <string name="list_item_removed_snackbar">%1$s removed</string>
-    <string name="list_items_removed_snackbar">%1$d items removed</string>
+    <plurals name="list_item_removed_snackbar">
+        <item quantity="one">%1$s removed</item>
+        <item quantity="other">%1$s items removed</item>
+    </plurals>
     <string name="all_list_items_checked_snackbar">All items checked</string>
     <string name="all_list_items_unchecked_snackbar">All items unchecked</string>
 

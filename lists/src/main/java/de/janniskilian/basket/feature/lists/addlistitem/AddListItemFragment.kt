@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import de.janniskilian.basket.core.ui.fragments.BaseFragment
 import de.janniskilian.basket.core.util.android.REQ_SPEECH_INPUT
+import de.janniskilian.basket.core.util.android.SpeechInputResultContract
 import de.janniskilian.basket.core.util.android.getSpeechInputResult
 import de.janniskilian.basket.core.util.android.getThemeColor
 import de.janniskilian.basket.core.util.android.viewmodel.DefaultMutableLiveData
@@ -30,6 +31,12 @@ class AddListItemFragment : BaseFragment<AddListItemFragmentBinding>() {
 
     val suggestionsAdapter
         get() = binding.recyclerView.adapter as? ShoppingListItemSuggestionsAdapter
+
+    val speechInputLauncher = registerForActivityResult(SpeechInputResultContract()) {
+        if (it != null) {
+            viewModel.setInput(it)
+        }
+    }
 
     override val appBarColor by lazy {
         DefaultMutableLiveData(requireContext().getThemeColor(R.attr.colorSurface))

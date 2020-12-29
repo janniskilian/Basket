@@ -11,7 +11,7 @@ import de.janniskilian.basket.core.util.android.keepScreenOn
 import de.janniskilian.basket.core.util.android.setupOverviewContainerTransformTransition
 import de.janniskilian.basket.core.util.android.view.recyclerview.EndSpacingDecoration
 import de.janniskilian.basket.feature.lists.R
-import de.janniskilian.basket.feature.lists.lists.ShortcutController
+import de.janniskilian.basket.feature.lists.ShortcutController
 
 class ListFragmentSetup(
     private val fragment: ListFragment,

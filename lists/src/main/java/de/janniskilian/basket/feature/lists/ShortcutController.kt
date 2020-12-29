@@ -1,4 +1,4 @@
-package de.janniskilian.basket.feature.lists.lists
+package de.janniskilian.basket.feature.lists
 
 import android.content.ComponentName
 import android.content.Context
@@ -7,8 +7,8 @@ import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import de.janniskilian.basket.core.type.domain.ShoppingList
+import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.android.getInt
-import de.janniskilian.basket.feature.lists.R
 import kotlin.math.min
 
 class ShortcutController(private val context: Context) {
@@ -23,7 +23,7 @@ class ShortcutController(private val context: Context) {
             .getDynamicShortcuts(context)
             .filter { it.id.startsWith(SHORTCUT_ID_PREFIX) }
 
-        val newShortcutId = SHORTCUT_ID_PREFIX + shoppingList.id.value.toString()
+        val newShortcutId = createShortcutId(shoppingList.id)
 
         if (currentShortcuts.none { it.id == newShortcutId }) {
             val n = (currentShortcuts.size + 1 - maxShoppingListShortcuts).coerceAtLeast(0)
@@ -35,6 +35,13 @@ class ShortcutController(private val context: Context) {
             val newShortcut = createShoppingListShortcuts(newShortcutId, shoppingList)
             ShortcutManagerCompat.addDynamicShortcuts(context, listOf(newShortcut))
         }
+    }
+
+    fun removeShoppingListShortcut(shoppingList: ShoppingList) {
+        ShortcutManagerCompat.removeDynamicShortcuts(
+            context,
+            listOf(createShortcutId(shoppingList.id))
+        )
     }
 
     private fun createShoppingListShortcuts(
@@ -63,6 +70,9 @@ class ShortcutController(private val context: Context) {
             )
             .build()
     }
+
+    private fun createShortcutId(shoppingListId: ShoppingListId) =
+        SHORTCUT_ID_PREFIX + shoppingListId.value.toString()
 
     companion object {
 

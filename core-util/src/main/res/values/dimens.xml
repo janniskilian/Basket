@@ -18,9 +18,6 @@
     <dimen name="lead_image_size">96dp</dimen>
     <dimen name="empty_text_max_width">320dp</dimen>
 
-    <dimen name="drag_handle_width">@dimen/four</dimen>
-    <dimen name="drag_handle_height">@dimen/half</dimen>
-
     <dimen name="fab_spacing">@dimen/five</dimen>
 
 </resources>

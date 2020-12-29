@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import de.janniskilian.basket.core.feature.categories.CategoriesAdapter
 import de.janniskilian.basket.core.type.domain.ArticleId
 import de.janniskilian.basket.core.util.android.maybe
+import de.janniskilian.basket.core.util.android.setupDetailContainerTransformTransition
 import de.janniskilian.basket.core.util.android.view.doOnTextChanged
 import de.janniskilian.basket.core.util.android.view.onDone
-import de.janniskilian.basket.core.util.android.setupDetailContainerTransformTransition
 import de.janniskilian.basket.core.util.android.view.toggleSoftKeyboard
 import de.janniskilian.basket.feature.articles.R
+import de.janniskilian.basket.feature.articles.databinding.ArticleFragmentBinding
 
 class ArticleFragmentSetup(
     private val fragment: ArticleFragment,
@@ -19,7 +20,8 @@ class ArticleFragmentSetup(
     private val viewModel: ArticleViewModel
 ) {
 
-    private val articleId = args.articleId
+    private val articleId = args
+        .articleId
         .maybe()
         ?.let(::ArticleId)
 
@@ -29,15 +31,18 @@ class ArticleFragmentSetup(
         articleId?.let(viewModel::setArticleId)
 
         fragment.setupDetailContainerTransformTransition()
-        setupButtons()
-        setupNameEditText()
-        setupCategoryEditText()
-        setupCategoriesRecyclerView()
+
+        with(fragment.binding) {
+            setupButtons()
+            setupNameEditText()
+            setupCategoryEditText()
+            setupCategoriesRecyclerView()
+        }
 
         viewModelObserver.observe()
     }
 
-    private fun setupButtons() = with(fragment.binding) {
+    private fun ArticleFragmentBinding.setupButtons() {
         deleteButton.isVisible = articleId != null
         deleteButton.setOnClickListener { viewModel.deleteButtonClicked() }
 
@@ -50,7 +55,7 @@ class ArticleFragmentSetup(
         submitButton.setOnClickListener { viewModel.submitButtonClicked() }
     }
 
-    private fun setupNameEditText() = with(fragment.binding) {
+    private fun ArticleFragmentBinding.setupNameEditText() {
         nameEditText.doOnTextChanged(viewModel::setName)
         nameEditText.onDone(viewModel::submitButtonClicked)
 
@@ -59,24 +64,24 @@ class ArticleFragmentSetup(
         }
     }
 
-    private fun setupCategoryEditText() = with(fragment.binding) {
+    private fun ArticleFragmentBinding.setupCategoryEditText() {
         categoryEditText.setText(R.string.category_default)
         categoryEditText.setOnClickListener { viewModel.editCategoryClicked() }
     }
 
-    private fun setupCategoriesRecyclerView() = with(fragment) {
+    private fun ArticleFragmentBinding.setupCategoriesRecyclerView() {
         val categoriesAdapter = CategoriesAdapter()
 
-        with(binding.recyclerView) {
+        with(recyclerView) {
             layoutManager = LinearLayoutManager(
-                requireContext(),
+                context,
                 RecyclerView.VERTICAL,
                 false
             )
             adapter = categoriesAdapter
             addItemDecoration(
                 DividerItemDecoration(
-                    requireContext(),
+                    context,
                     DividerItemDecoration.VERTICAL
                 )
             )

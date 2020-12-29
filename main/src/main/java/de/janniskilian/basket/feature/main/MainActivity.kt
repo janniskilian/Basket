@@ -54,18 +54,13 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
     override fun onStart() {
         super.onStart()
 
-        if (intent?.action == Intent.ACTION_VIEW) {
-            intent
-                .getLongExtraOrNull(getString(R.string.key_shopping_list_id))
-                ?.let {
-                    findNavController().navigate(
-                        R.id.listFragment,
-                        ListFragmentArgs(it).toBundle()
-                    )
-                }
+        handleViewListAction(intent)
+    }
 
-            intent?.action = null
-        }
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+
+        handleViewListAction(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -92,4 +87,19 @@ class MainActivity : AppCompatActivity(), NavigationContainerProvider {
     }
 
     fun findNavController() = navHostFragment.findNavController()
+
+    private fun handleViewListAction(intent: Intent?) {
+        if (intent?.action == Intent.ACTION_VIEW) {
+            intent
+                .getLongExtraOrNull(getString(R.string.key_shopping_list_id))
+                ?.let {
+                    findNavController().navigate(
+                        R.id.listFragment,
+                        ListFragmentArgs(it).toBundle()
+                    )
+                }
+
+            intent.action = null
+        }
+    }
 }

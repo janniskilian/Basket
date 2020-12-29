@@ -93,17 +93,17 @@ class ListViewModelObserver(
 
     private fun listItemsRemovedObserver(removedListItems: List<ShoppingListItem>) =
         with(fragment) {
-            val snackbarText = if (removedListItems.size == 1) {
-                getString(
-                    R.string.list_item_removed_snackbar,
-                    removedListItems.first().name
-                )
+            val placeholderText = if (removedListItems.size == 1) {
+                removedListItems.first().name
             } else {
-                getString(
-                    R.string.list_items_removed_snackbar,
-                    removedListItems.size
-                )
+                removedListItems.size.toString()
             }
+
+            val snackbarText = resources.getQuantityString(
+                R.plurals.list_item_removed_snackbar,
+                removedListItems.size,
+                placeholderText
+            )
 
             showSnackbar(snackbarText) {
                 viewModel.undoRemoveListItems()

@@ -1,26 +1,32 @@
 package de.janniskilian.basket.feature.main
 
-import android.content.Context
-import android.content.Intent
-import android.speech.RecognizerIntent
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import de.janniskilian.basket.R
 import de.janniskilian.basket.core.ui.navigation.NavigationContainer
 import de.janniskilian.basket.core.ui.navigation.SearchBarViewModel
-import de.janniskilian.basket.core.util.android.view.doOnTextChanged
+import de.janniskilian.basket.core.util.android.SpeechInputResultContract
+import de.janniskilian.basket.core.util.android.getLong
 import de.janniskilian.basket.core.util.android.hasHardwareKeyboard
+import de.janniskilian.basket.core.util.android.view.doOnTextChanged
 import de.janniskilian.basket.core.util.android.view.setSelectedImageState
 import de.janniskilian.basket.core.util.android.view.toggleSoftKeyboard
-import de.janniskilian.basket.core.util.android.createSpeechInputIntent
-import de.janniskilian.basket.core.util.android.getLong
 import java.lang.ref.WeakReference
 
 class NavigationContainerImpl(private val activity: MainActivity) : NavigationContainer {
+
+    private var searchBarViewModel: WeakReference<SearchBarViewModel>? = null
+
+    private val speechInputLauncher =
+        activity.registerForActivityResult(SpeechInputResultContract()) {
+            if (it != null) {
+                searchBarViewModel
+                    ?.get()
+                    ?.setSearchBarInput(it)
+            }
+        }
 
     override val fab: ExtendedFloatingActionButton
         get() = activity.binding.fab
@@ -30,7 +36,7 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
         val viewModelWeakRef = WeakReference(viewModel)
 
         observeSearchBarViewModel(viewModel, fragment)
-        setupSearchBarListeners(WeakReference(fragment), viewModelWeakRef)
+        setupSearchBarListeners(viewModelWeakRef)
     }
 
     private fun observeSearchBarViewModel(
@@ -41,61 +47,40 @@ class NavigationContainerImpl(private val activity: MainActivity) : NavigationCo
         viewModel.searchBarInput.observe(lifecycleOwner, ::searchBarInputObserver)
     }
 
-    private fun setupSearchBarListeners(
-        fragmentWeakRef: WeakReference<Fragment>,
-        viewModelWeakRef: WeakReference<SearchBarViewModel>
-    ) = with(activity.binding) {
-        searchBarBackButton.setOnClickListener {
-            viewModelWeakRef
-                .get()
-                ?.setSearchBarVisible(false)
-        }
+    private fun setupSearchBarListeners(viewModelWeakRef: WeakReference<SearchBarViewModel>) =
+        with(activity.binding) {
+            searchBarViewModel = viewModelWeakRef
 
-        searchBarSpeechInputButton.setOnClickListener {
-            if (viewModelWeakRef.get()?.searchBarInput?.value.isNullOrEmpty()) {
-                fragmentWeakRef
-                    .get()
-                    ?.registerForActivityResult(
-                        object : ActivityResultContract<Unit, String?>() {
-                            override fun createIntent(context: Context, input: Unit?): Intent =
-                                createSpeechInputIntent()
-
-                            override fun parseResult(
-                                resultCode: Int,
-                                intent: Intent?
-                            ): String? =
-                                intent
-                                    ?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                                    ?.firstOrNull()
-                        }
-                    ) {
-                        if (it != null) {
-                            viewModelWeakRef
-                                .get()
-                                ?.setSearchBarInput(it)
-                        }
-                    }
-            } else {
-                viewModelWeakRef
-                    .get()
-                    ?.setSearchBarInput("")
-            }
-        }
-
-        searchBarEditText.doOnTextChanged {
-            viewModelWeakRef
-                .get()
-                ?.setSearchBarInput(it)
-        }
-
-        if (!activity.hasHardwareKeyboard) {
-            searchBarEditText.backPressedListener = {
+            searchBarBackButton.setOnClickListener {
                 viewModelWeakRef
                     .get()
                     ?.setSearchBarVisible(false)
             }
+
+            searchBarSpeechInputButton.setOnClickListener {
+                if (viewModelWeakRef.get()?.searchBarInput?.value.isNullOrEmpty()) {
+                    speechInputLauncher.launch(Unit)
+                } else {
+                    viewModelWeakRef
+                        .get()
+                        ?.setSearchBarInput("")
+                }
+            }
+
+            searchBarEditText.doOnTextChanged {
+                viewModelWeakRef
+                    .get()
+                    ?.setSearchBarInput(it)
+            }
+
+            if (!activity.hasHardwareKeyboard) {
+                searchBarEditText.backPressedListener = {
+                    viewModelWeakRef
+                        .get()
+                        ?.setSearchBarVisible(false)
+                }
+            }
         }
-    }
 
     private fun toggleSearchBar(isVisible: Boolean) = with(activity.binding) {
         if (searchBarContainer.isVisible == isVisible) return@with

@@ -13,6 +13,7 @@ import de.janniskilian.basket.core.ui.navigation.ResultCode
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.databinding.ListsFragmentBinding
 import de.janniskilian.basket.feature.lists.sendShoppingList
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ListsFragment : BaseFragment<ListsFragmentBinding>() {

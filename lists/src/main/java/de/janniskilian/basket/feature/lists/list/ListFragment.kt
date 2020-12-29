@@ -19,7 +19,7 @@ import de.janniskilian.basket.core.util.android.keepScreenOn
 import de.janniskilian.basket.core.util.function.createUiListColor
 import de.janniskilian.basket.feature.lists.R
 import de.janniskilian.basket.feature.lists.databinding.ListFragmentBinding
-import de.janniskilian.basket.feature.lists.lists.ShortcutController
+import de.janniskilian.basket.feature.lists.ShortcutController
 import de.janniskilian.basket.feature.lists.sendShoppingList
 import javax.inject.Inject
 

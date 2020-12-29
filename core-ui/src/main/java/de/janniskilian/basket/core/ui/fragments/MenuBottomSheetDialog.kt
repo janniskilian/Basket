@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.annotation.MenuRes
-import androidx.navigation.fragment.findNavController
 import de.janniskilian.basket.core.ui.databinding.MenuBottomSheetDialogBinding
 
 abstract class MenuBottomSheetDialog :

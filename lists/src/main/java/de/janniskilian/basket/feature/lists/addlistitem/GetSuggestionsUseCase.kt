@@ -7,7 +7,6 @@ import de.janniskilian.basket.core.type.domain.ShoppingListId
 import de.janniskilian.basket.core.util.function.addToFront
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.util.*
 
 class GetSuggestionsUseCase(private val dataClient: DataClient) {
 
@@ -38,8 +37,7 @@ class GetSuggestionsUseCase(private val dataClient: DataClient) {
 
             val exactMatchExists = lazy {
                 result.any {
-                    it.article.name.toLowerCase(Locale.ROOT) ==
-                            parsedInput.name.toLowerCase(Locale.ROOT)
+                    it.article.name.equals(parsedInput.name, ignoreCase = true)
                 }
             }
 

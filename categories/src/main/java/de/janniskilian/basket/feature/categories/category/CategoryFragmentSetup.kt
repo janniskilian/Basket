@@ -7,6 +7,7 @@ import de.janniskilian.basket.core.util.android.setupDetailContainerTransformTra
 import de.janniskilian.basket.core.util.android.view.doOnTextChanged
 import de.janniskilian.basket.core.util.android.view.onDone
 import de.janniskilian.basket.feature.categories.R
+import de.janniskilian.basket.feature.categories.databinding.CategoryFragmentBinding
 
 class CategoryFragmentSetup(
     private val fragment: CategoryFragment,
@@ -14,7 +15,8 @@ class CategoryFragmentSetup(
     private val viewModel: CategoryViewModel
 ) {
 
-    private val categoryId = args.categoryId
+    private val categoryId = args
+        .categoryId
         .maybe()
         ?.let(::CategoryId)
 
@@ -24,14 +26,17 @@ class CategoryFragmentSetup(
         categoryId?.let(viewModel::setCategoryId)
 
         fragment.setupDetailContainerTransformTransition()
-        setupButtons()
-        setClickListeners()
-        setupNameEditText()
+
+        with(fragment.binding) {
+            setupButtons()
+            setClickListeners()
+            setupNameEditText()
+        }
 
         viewModelObserver.observe()
     }
 
-    private fun setupButtons() = with(fragment.binding) {
+    private fun CategoryFragmentBinding.setupButtons() {
         deleteButton.isVisible = categoryId != null
 
         val buttonTextRes = if (categoryId == null) {
@@ -42,14 +47,14 @@ class CategoryFragmentSetup(
         submitButton.setText(buttonTextRes)
     }
 
-    private fun setClickListeners() = with(fragment.binding) {
+    private fun CategoryFragmentBinding.setClickListeners() {
         nameEditText.onDone(viewModel::submitButtonClicked)
         submitButton.setOnClickListener { viewModel.submitButtonClicked() }
         deleteButton.setOnClickListener { viewModel.deleteButtonClicked() }
         submitButton.setOnClickListener { viewModel.submitButtonClicked() }
     }
 
-    private fun setupNameEditText() = with(fragment.binding) {
+    private fun CategoryFragmentBinding.setupNameEditText() {
         nameEditText.doOnTextChanged(viewModel::setName)
     }
 }

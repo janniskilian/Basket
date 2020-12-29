@@ -61,7 +61,7 @@
                     android:id="@+id/categoryEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:editable="false"
+                    android:inputType="none"
                     android:focusable="false"
                     android:hint="@string/article_category_hint"
                     android:singleLine="true"/>

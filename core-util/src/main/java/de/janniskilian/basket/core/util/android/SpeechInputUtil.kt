@@ -1,7 +1,9 @@
 package de.janniskilian.basket.core.util.android
 
+import android.content.Context
 import android.content.Intent
 import android.speech.RecognizerIntent
+import androidx.activity.result.contract.ActivityResultContract
 import java.util.*
 
 fun createSpeechInputIntent(): Intent =
@@ -20,5 +22,16 @@ fun getSpeechInputResult(data: Intent?): String? =
     data
         ?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
         ?.firstOrNull()
+
+class SpeechInputResultContract : ActivityResultContract<Unit, String?>() {
+
+    override fun createIntent(context: Context, input: Unit?): Intent =
+        createSpeechInputIntent()
+
+    override fun parseResult(resultCode: Int, intent: Intent?): String? =
+        intent
+            ?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            ?.firstOrNull()
+}
 
 const val REQ_SPEECH_INPUT = 101
